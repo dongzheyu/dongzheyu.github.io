@@ -3,60 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft工具下载</title>
+    <title>Minecraft-Toos - 便捷我的世界工具箱</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
             background-color: #f0f0f0;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 60px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-
-        .download-link {
-            display: inline-block;
-            padding: 12px 24px;
+        header {
             background-color: #4CAF50;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav a {
             color: white;
             text-decoration: none;
-            border-radius: 4px;
+            margin-left: 30px;
             font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            transition: color 0.3s;
         }
 
-        .download-link:hover {
-            background-color: #45a049;
+        nav a:hover {
+            color: #e0e0e0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .subtitle {
+            color: #333;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .author {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            top: 0;
+        }
+
+        .download-btn:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-title {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+            color: #999;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 替换这里的图片路径为你的实际图片地址 -->
-        <img src="logo.png" alt="Minecraft工具宣传图">
-        
-        <p><a href="https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe" 
-              class="download-link" 
-              target="_blank" 
-              rel="noopener noreferrer">
-            立即下载
-        </a></p>
+    <header>
+        <div class="title">Minecraft-Toos</div>
+        <nav>
+            <a href="#">下载</a>
+            <a href="#">关于</a>
+            <a href="https://github.com/dongzheyu/Minecraft-Toos">Github</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="subtitle">一个便捷好用的我的世界工具箱</div>
+        <div class="author">by bilibili我是dongle</div>
+        <a href="https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe" 
+           class="download-btn"
+           download>立即下载</a>
     </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-title">功能齐全</div>
+            <div class="feature-desc">集成多种实用工具，满足各种游戏需求</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-title">启动迅速</div>
+            <div class="feature-desc">优化启动流程，秒开你的游戏世界</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-title">开源免费</div>
+            <div class="feature-desc">完全开源代码，永久免费使用</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-title">安全无毒</div>
+            <div class="feature-desc">通过安全认证，无任何恶意代码</div>
+        </div>
+    </div>
+
+    <footer>
+        JetCPP©2024-2025 保留所有权利
+    </footer>
 </body>
 </html>
