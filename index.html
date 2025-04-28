@@ -5,81 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft工具下载</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: #f0f0f0;
         }
 
         .container {
-            text-align: center;
-            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
             background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        .image-container {
-            max-width: 400px;
-            margin: 0 auto 2rem;
-        }
-
-        .image-container img {
-            width: 100%;
+        img {
+            max-width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
         }
 
-        h1 {
-            color: #1a73e8;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            color: #5f6368;
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .download-btn {
+        .download-link {
             display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: #1a73e8;
+            padding: 12px 24px;
+            background-color: #4CAF50;
             color: white;
             text-decoration: none;
-            border-radius: 24px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
 
-        .download-btn:hover {
-            background-color: #1557b0;
+        .download-link:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 图片区域（请替换为您的图片URL或路径） -->
-        <div class="image-container">
-            <img src="https://example.com/your-image.jpg" alt="Minecraft工具截图">
-        </div>
-
-        <h1>Minecraft 实用工具</h1>
-        <p>高效管理你的Minecraft世界，支持最新版本，安全稳定无广告</p>
-
-        <!-- 下载链接 -->
-        <a href="https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe" 
-           class="download-btn">立即下载</a>
+        <!-- 替换这里的图片路径为你的实际图片地址 -->
+        <img src="logo.png" alt="Minecraft工具宣传图">
+        
+        <p><a href="https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe" 
+              class="download-link" 
+              target="_blank" 
+              rel="noopener noreferrer">
+            立即下载
+        </a></p>
     </div>
 </body>
 </html>
