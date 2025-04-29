@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>关于 - Minecraft-Toos</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>关于 | Minecraft Toos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 复用index.html的CSS样式 */
+    </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Minecraft-Toos Logo" class="logo">
-    <nav>
-      <a href="index.html">首页</a>
-      <a href="download.html">下载</a>
-      <a href="about.html">关于</a>
-      <a href="https://github.com/dongzheyu/Minecraft-Toos?tab=readme-ov-file#minecraft-toos%E7%AE%80%E8%A6%81" target="_blank">Github</a>
-    </nav>
-  </header>
+    <!-- 导航栏 -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo">
+            <h1>Minecraft Toos</h1>
+        </div>
+        
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="download.html">下载</a>
+            <a id="github-link" href="https://github.com/dongzheyu/Minecraft-Toos/" 
+               target="_blank" 
+               rel="noopener noreferrer">Github</a>
+        </nav>
+    </header>
 
-  <main>
-    <h1>Minecraft-Toos 自述文件</h1>
-    <p><strong>Minecraft 工具简要</strong></p>
-    <p>这是我 2024 年 7 月开发的一个项目，从 1.0 版本一直到 6.1 版本，作者开发用了非常多的时间。</p>
-    <p>本人最初是用 VS (Microsoft Visual Studio) 开发，但是因为电脑出现了某些问题导致 VS 无法进行更新、安装操作。后来用破解工具破解了 Clion，以后就用了 Clion。</p>
-    <p>本项目原名为“我的世界双版本启动器”，后改名为 Minecraft Toos。</p>
-    <p>记得去我的 B 站主页: <a href="https://space.bilibili.com/3546730880567808" target="_blank">https://space.bilibili.com/3546730880567808</a> 点个赞哦~~~</p>
-  </main>
+    <main style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+        <section style="margin-top: 3rem;">
+            <h2>项目简介</h2>
+            <p>这是我2024年7月开发的一个项目，从1.0版本一直到6.1版本，作者开发用了非常多的时间。</p>
+            <p>最初用的是VS(Microsoft Visual Studio)开发，后来因电脑问题改用破解Clion开发。</p>
+            <p>本项目原名为我的世界双版本启动器，后改名为Minecraft Toos。</p>
+            
+            <h3>B站主页：</h3>
+            <p><a href="https://space.bilibili.com/3546730880567808" target="_blank">点个赞哦~~~</a></p>
+        </section>
+    </main>
 
-  <footer>
-    <p>&copy; JetCPP 2024-2025 保留所有权利</p>
-  </footer>
+    <footer style="text-align: center; padding: 2rem; background: #f3f4f6; margin-top: 3rem;">
+        <p>JetCPP©2024-2025 保留所有权利</p>
+    </footer>
 </body>
 </html>
