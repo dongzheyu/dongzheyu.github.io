@@ -1,50 +1,132 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minecraft-Toos</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Minecraft Toos - 我的世界工具箱</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 基础样式 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo-container img {
+            width: 40px;
+            height: 40px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        nav a#github-link {
+            text-decoration: underline red;
+        }
+
+        /* 下载按钮样式 */
+        .download-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #2563eb;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Minecraft-Toos Logo" class="logo">
-    <nav>
-      <a href="index.html">首页</a>
-      <a href="download.html">下载</a>
-      <a href="about.html">关于</a>
-      <a href="https://github.com/dongzheyu/Minecraft-Toos?tab=readme-ov-file#minecraft-toos%E7%AE%80%E8%A6%81" target="_blank">Github</a>
-    </nav>
-  </header>
+    <!-- 导航栏 -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo">
+            <h1>Minecraft Toos</h1>
+        </div>
+        
+        <nav>
+            <a href="download.html">下载</a>
+            <a href="about.html">关于</a>
+            <a id="github-link" href="https://github.com/dongzheyu/Minecraft-Toos/" 
+               target="_blank" 
+               rel="noopener noreferrer">Github</a>
+        </nav>
+    </header>
 
-  <main>
-    <h1>Minecraft-Toos 一个便捷好用的我的世界工具箱</h1>
-    <button class="download-button" onclick="window.location.href='https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe'">
-      立即下载
-    </button>
-    
-    <div class="features">
-      <div class="feature">
-        <h2>功能齐全</h2>
-        <p>主文件<=300MB，却有12项大板块</p>
-      </div>
-      <div class="feature">
-        <h2>启动迅速</h2>
-        <p>只需要2秒即可快速启动，无需多余的等待</p>
-      </div>
-      <div class="feature">
-        <h2>开源免费</h2>
-        <p>本工具箱已在GitHub开源，无需支付多余费用</p>
-      </div>
-      <div class="feature">
-        <h2>安全无毒</h2>
-        <p>本软件所有板块以及主程序已经过杀毒软件检测无任何病毒</p>
-      </div>
-    </div>
-  </main>
+    <!-- 主要内容 -->
+    <main style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+        <h2>立即下载</h2>
+        <a href="https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe"
+           class="download-btn"
+           download>立即下载</a>
+        
+        <section id="features" style="margin-top: 3rem;">
+            <h3>核心优势</h3>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+                <div style="flex: 1 1 28%;">
+                    <h4>功能齐全</h4>
+                    <p>主文件不超过300MB，却包含12项大板块功能。</p>
+                </div>
+                <div style="flex: 1 1 28%;">
+                    <h4>启动迅速</h4>
+                    <p>仅需2秒即可快速启动，无需多余等待。</p>
+                </div>
+                <div style="flex: 1 1 28%;">
+                    <h4>开源免费</h4>
+                    <p>已在GitHub上开源，无需支付任何费用。</p>
+                </div>
+                <div style="flex: 1 1 28%;">
+                    <h4>安全无毒</h4>
+                    <p>所有板块及主程序已通过杀毒软件检测。</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <footer>
-    <p>&copy; JetCPP 2024-2025 保留所有权利</p>
-  </footer>
+    <footer style="text-align: center; padding: 2rem; background: #f3f4f6; margin-top: 3rem;">
+        <p>JetCPP©2024-2025 保留所有权利</p>
+    </footer>
 </body>
 </html>
