@@ -5,9 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>下载 - Minecraft-Toos</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    // 页面切换淡入动画
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('fade-in');
+    });
+
+    // 自动加载动画
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </head>
-<body>
-  <header>
+<body class="fade-in">
+  <header class="fade-in">
     <img src="logo.png" alt="Minecraft-Toos Logo" class="logo">
     <nav>
       <a href="index.html">首页</a>
@@ -17,7 +36,7 @@
     </nav>
   </header>
 
-  <main>
+  <main class="fade-in">
     <h1>最新版本下载</h1>
     <p>当前版本：<strong>v6.4.0</strong></p>
     <button class="download-button" onclick="window.location.href='https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe'">
@@ -25,7 +44,7 @@
     </button>
 
     <h2 style="margin-top: 2rem;">历史版本</h2>
-    <ul style="list-style: none; padding: 0;">
+    <ul style="list-style: none; padding: 0;" class="fade-in">
       <li><a href="#">v6.3.0</a></li>
       <li><a href="#">v6.2.0</a></li>
       <li><a href="#">v6.1.0</a></li>
