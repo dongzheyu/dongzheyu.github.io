@@ -1,109 +1,50 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft-Toos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background: linear-gradient(to right, #33cc33, #99ff99);
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .logo {
-            width: 200px;
-            height: auto;
-        }
-        nav {
-            margin-left: auto;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-        main {
-            text-align: center;
-            padding: 20px;
-        }
-        .download-button {
-            background-color: #337ab7;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .features {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 40px;
-        }
-        .feature {
-            text-align: center;
-            border-right: 1px solid #ccc;
-            padding: 0 20px;
-        }
-        .feature:last-child {
-            border-right: none;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minecraft-Toos</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <img src="https://github.com/dongzheyu/dongzheyu.github.io/raw/main/logo.png" alt="Minecraft-Toos Logo" class="logo">
-        <nav>
-            <a href="#download">下载</a>
-            <a href="#about">关于</a>
-            <a href="https://github.com/dongzheyu/Minecraft-Toos?tab=readme-ov-file#minecraft-toos%E7%AE%80%E8%A6%81">Github</a>
-        </nav>
-    </header>
-    <main>
-        <h1>Minecraft-Toos 一个便捷好用的我的世界工具箱</h1>
-        <button class="download-button" onclick="window.location.href='https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe'">立即下载</button>
-        <div class="features">
-            <div class="feature">
-                <h2>功能齐全</h2>
-                <p>主文件<=300MB，却有12项大板块</p>
-            </div>
-            <div class="feature">
-                <h2>启动迅速</h2>
-                <p>只需要2秒即可快速启动，无需多余的等待</p>
-            </div>
-            <div class="feature">
-                <h2>开源免费</h2>
-                <p>本工具箱已在GitHub开源，无需支付多余费用</p>
-            </div>
-            <div class="feature">
-                <h2>安全无毒</h2>
-                <p>本软件所有板块以及主程序已经过杀毒软件检测无任何病毒</p>
-            </div>
-        </div>
-    </main>
-    <footer id="about">
-        <p>Minecraft-Toos自述文件</p>
-        <p>Minecraft 工具简要</p>
-        <p>这是我2024年7月开发的一个项目，从1.0版本一直到6.1版本，作者开发用了非常多的时间</p>
-        <p>本人最初是用VS(Microsoft Visual Studio)开发，但是因为电脑出现了某些问题导致VS无法进行更新、安装操作。后来用破解工具破解了Clion，以后就用了Clion。</p>
-        <p>本项目原名为我的世界双版本启动器，后改名为Minecraft Toos</p>
-        <p>记得去我的B站主页: <a href="https://space.bilibili.com/3546730880567808">https://space.bilibili.com/3546730880567808</a> 点个赞哦~~~</p>
-        <p>JetCPP©2024-2025保留所有权利</p>
-    </footer>
+  <header>
+    <img src="https://github.com/dongzheyu/dongzheyu.github.io/raw/main/logo.png" alt="Logo" class="logo" />
+    <nav>
+      <a href="index.html">首页</a>
+      <a href="download.html">下载</a>
+      <a href="about.html">关于</a>
+      <a href="https://github.com/dongzheyu/Minecraft-Toos?tab=readme-ov-file#minecraft-toos%E7%AE%80%E8%A6%81" target="_blank">Github</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Minecraft-Toos 一个便捷好用的我的世界工具箱</h1>
+    <button class="download-button" onclick="window.location.href='https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe'">
+      立即下载
+    </button>
+    
+    <div class="features">
+      <div class="feature">
+        <h2>功能齐全</h2>
+        <p>主文件<=300MB，却有12项大板块</p>
+      </div>
+      <div class="feature">
+        <h2>启动迅速</h2>
+        <p>只需要2秒即可快速启动，无需多余的等待</p>
+      </div>
+      <div class="feature">
+        <h2>开源免费</h2>
+        <p>本工具箱已在GitHub开源，无需支付多余费用</p>
+      </div>
+      <div class="feature">
+        <h2>安全无毒</h2>
+        <p>本软件所有板块以及主程序已经过杀毒软件检测无任何病毒</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; JetCPP 2024-2025 保留所有权利</p>
+  </footer>
 </body>
 </html>
