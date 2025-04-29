@@ -5,28 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Minecraft-Toos</title>
   <link rel="stylesheet" href="style.css" />
-  <script>
-    // 页面切换淡入动画
-    window.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('fade-in');
-    });
-
-    // 自动加载动画
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => {
-      observer.observe(el);
-    });
-  </script>
 </head>
-<body class="fade-in">
-  <header class="fade-in">
+<body>
+  <header>
     <img src="logo.png" alt="Minecraft-Toos Logo" class="logo">
     <nav>
       <a href="index.html">首页</a>
@@ -36,13 +17,13 @@
     </nav>
   </header>
 
-  <main class="fade-in">
+  <main>
     <h1>Minecraft-Toos 一个便捷好用的我的世界工具箱</h1>
     <button class="download-button" onclick="window.location.href='https://github.com/dongzheyu/Minecraft-Toos/releases/download/6.4.0/Minecraft-Toos.Setup.exe'">
       立即下载
     </button>
     
-    <div class="features fade-in">
+    <div class="features">
       <div class="feature">
         <h2>功能齐全</h2>
         <p>主文件<=300MB，却有12项大板块</p>
