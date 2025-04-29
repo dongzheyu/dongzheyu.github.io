@@ -6,17 +6,54 @@
     <title>关于 | Minecraft Toos</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* 复用index.html的CSS样式 */
+        @import url('index.html');
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #10b981;
+            top: 0; bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .container {
+            padding: 1rem 35px;
+            position: relative;
+            background: #ccfbf1;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            top: 0;
+            background: #10b981;
+            border-radius: 50%;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
     <header>
         <div class="logo-container">
             <img src="logo.png" alt="Logo">
             <h1>Minecraft Toos</h1>
         </div>
-        
         <nav>
             <a href="index.html">首页</a>
             <a href="download.html">下载</a>
@@ -35,10 +72,18 @@
             
             <h3>B站主页：</h3>
             <p><a href="https://space.bilibili.com/3546730880567808" target="_blank">点个赞哦~~~</a></p>
+            
+            <h3 style="margin-top: 3rem;">开发历程</h3>
+            <div class="timeline">
+                <div class="container"><h4>2024.07</h4><p>项目立项，完成基础框架搭建</p></div>
+                <div class="container"><h4>2024.07</h4><p>首次发布1.0版本</p></div>
+                <div class="container"><h4>2024.12</h4><p>首次发布于GitHub，版本为4.0.0</p></div>
+                <div class="container"><h4>2025.04</h4><p>v6.4.0 正式版发布</p></div>
+            </div>
         </section>
     </main>
 
-    <footer style="text-align: center; padding: 2rem; background: #f3f4f6; margin-top: 3rem;">
+    <footer style="text-align: center; padding: 2rem; background: #ecfdf5; margin-top: 3rem;">
         <p>JetCPP©2024-2025 保留所有权利</p>
     </footer>
 </body>
