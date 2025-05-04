@@ -1,24 +1,105 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于我们 | JetCPP 工作室</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <a href="index.html">首页</a>
-        <a href="projects.html">所有项目</a>
-        <a href="about.html">关于我们</a>
-    </nav>
+/* 基础样式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <main class="about">
-        <h2>关于我们</h2>
-        <div class="construction">
-            <p>当前页面正在施工中</p>
-            <p>敬请期待详细介绍！</p>
-        </div>
-    </main>
-</body>
-</html>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #6d28d9, #4f46e5);
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* 导航栏 */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    z-index: 1000;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.navbar a {
+    margin: 0 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.navbar a:hover {
+    color: #f97316;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* 主体内容 */
+.hero, .projects, .about {
+    padding: 10rem 2rem 4rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(45deg, #6d28d9, #4f46e5);
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* 项目卡片 */
+.projects {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 关于我们 */
+.about .construction {
+    margin-top: 4rem;
+    font-size: 1.5rem;
+    color: #f8fafc;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
