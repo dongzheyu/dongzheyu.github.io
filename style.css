@@ -1,8 +1,8 @@
-<!-- style.css -->
 :root {
-    --primary-color: #2a2a2a;
+    --primary-color: #1a1a1a;
     --accent-color: #00ff9d;
-    --gradient-angle: 135deg;
+    --text-color: #ffffff;
+    --nav-height: 60px;
 }
 
 * {
@@ -13,73 +13,53 @@
 }
 
 body {
-    background: linear-gradient(var(--gradient-angle), #1a1a1a, #2d2d2d);
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
     min-height: 100vh;
-    color: white;
+    color: var(--text-color);
     line-height: 1.6;
+    padding-top: var(--nav-height);
 }
 
-.logo-container {
-    position: relative;
-    height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    max-width: 300px;
-    width: 60%;
-    opacity: 0;
-    animation: logoEntrance 1.5s ease-out forwards;
-}
-
-@keyframes logoEntrance {
-    0% {
-        opacity: 0;
-        transform: translateY(-20%) scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
+/* 导航栏 */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 1rem;
+    height: var(--nav-height);
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-links {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    gap: 3rem;
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-links a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 1.1rem;
-    position: relative;
     padding: 0.5rem 1rem;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
     bottom: -3px;
-    left: 50%;
+    left: 0;
     width: 0;
     height: 2px;
     background: var(--accent-color);
-    transition: all 0.3s ease;
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -88,13 +68,39 @@ nav {
 
 .nav-links a:hover::after {
     width: 100%;
-    left: 0;
+}
+
+/* 公共内容区域 */
+.logo-container {
+    height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    max-width: 400px;
+    width: 50%;
+    opacity: 0;
+    animation: logoEntrance 1.5s ease-out forwards;
+}
+
+@keyframes logoEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-20%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .content {
-    padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
 }
 
 .slogan {
@@ -120,14 +126,13 @@ nav {
     background: rgba(255, 255, 255, 0.05);
     padding: 2rem;
     border-radius: 15px;
-    margin: 1.5rem 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 2rem 0;
     backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .github-link {
@@ -136,33 +141,54 @@ nav {
     gap: 0.5rem;
     color: var(--accent-color);
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--accent-color);
-    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 30px;
+    margin-top: 1rem;
     transition: all 0.3s ease;
 }
 
 .github-link:hover {
     background: rgba(0, 255, 157, 0.1);
-    padding: 0.5rem 1.5rem;
+    letter-spacing: 1px;
 }
 
+/* 响应式设计 */
 @media (max-width: 768px) {
     .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+        padding: 0.5rem;
     }
 
     .logo {
-        width: 80%;
+        width: 70%;
     }
 
     .slogan {
-        font-size: 1.8rem;
+        font-size: 2rem;
+        padding: 0 1rem;
     }
 
     .content {
-        padding: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+
+    .slogan {
+        font-size: 1.5rem;
     }
 }
