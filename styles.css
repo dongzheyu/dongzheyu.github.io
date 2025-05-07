@@ -1,115 +1,168 @@
-/* 基础样式 */
+<!-- style.css -->
+:root {
+    --primary-color: #2a2a2a;
+    --accent-color: #00ff9d;
+    --gradient-angle: 135deg;
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #6d28d9, #4f46e5);
-    color: #fff;
+    background: linear-gradient(var(--gradient-angle), #1a1a1a, #2d2d2d);
+    min-height: 100vh;
+    color: white;
     line-height: 1.6;
 }
 
-/* 导航栏 */
-.navbar {
+.logo-container {
+    position: relative;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    max-width: 300px;
+    width: 60%;
+    opacity: 0;
+    animation: logoEntrance 1.5s ease-out forwards;
+}
+
+@keyframes logoEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-20%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.nav-links {
     display: flex;
     justify-content: center;
-    padding: 1rem 0;
-    z-index: 1000;
-    animation: fadeIn 1s ease-in-out;
+    gap: 2rem;
+    list-style: none;
 }
 
-.navbar a {
-    margin: 0 1.5rem;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s, text-shadow 0.3s;
-}
-
-.navbar a:hover {
-    color: #f97316;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-/* 主体内容 */
-.hero, .projects, .about {
-    padding: 10rem 2rem 4rem;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    background: linear-gradient(45deg, #6d28d9, #4f46e5);
+.nav-links a {
     color: white;
-    border-radius: 12px;
     text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
 }
 
-.btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: all 0.3s ease;
 }
 
-/* 项目卡片 */
-.projects {
-    max-width: 800px;
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.content {
+    padding: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.project-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 2rem;
-    margin: 2rem auto;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    animation: fadeInUp 1s ease-in-out;
+.slogan {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    opacity: 0;
+    animation: slideUp 1s ease-out 0.5s forwards;
 }
 
-.project-card h3 {
-    margin-bottom: 1rem;
-}
-
-.construction {
-    margin-top: 4rem;
-    font-size: 1.5rem;
-    color: #f8fafc;
-}
-
-/* 动画 */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeInUp {
+@keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.github-link:hover {
+    background: rgba(0, 255, 157, 0.1);
+    padding: 0.5rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .logo {
+        width: 80%;
+    }
+
+    .slogan {
+        font-size: 1.8rem;
+    }
+
+    .content {
+        padding: 1rem;
     }
 }
