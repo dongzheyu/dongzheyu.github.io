@@ -192,3 +192,38 @@ nav {
         font-size: 1.5rem;
     }
 }
+/* 新增左上角Logo样式 */
+.alt-layout .logo-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    height: auto;
+    z-index: 1001;
+    animation: none;
+}
+
+.alt-layout .logo {
+    width: 120px;
+    opacity: 1;
+    animation: none;
+}
+
+/* 调整内容区域位置 */
+.alt-layout .content {
+    padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+    .alt-layout .logo-container {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .alt-layout .logo {
+        width: 80px;
+    }
+    
+    .alt-layout .content {
+        padding-top: 60px;
+    }
+}
