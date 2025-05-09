@@ -20,7 +20,6 @@ body {
     padding-top: var(--nav-height);
 }
 
-/* 导航栏 */
 nav {
     position: fixed;
     top: 0;
@@ -70,16 +69,16 @@ nav {
     width: 100%;
 }
 
-/* 公共内容区域 */
-.logo-container {
+/* 主页特殊样式 */
+.index-layout .logo-container {
     height: calc(100vh - var(--nav-height));
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.logo {
-    max-width: 400px;
+.index-layout .logo {
+    max-width: 250px;
     width: 50%;
     opacity: 0;
     animation: logoEntrance 1.5s ease-out forwards;
@@ -135,6 +134,13 @@ nav {
     transform: translateY(-5px);
 }
 
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
 .github-link {
     display: inline-flex;
     align-items: center;
@@ -144,7 +150,6 @@ nav {
     padding: 0.8rem 1.5rem;
     border: 2px solid var(--accent-color);
     border-radius: 30px;
-    margin-top: 1rem;
     transition: all 0.3s ease;
 }
 
@@ -153,7 +158,25 @@ nav {
     letter-spacing: 1px;
 }
 
-/* 响应式设计 */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent-color);
+    color: #1a1a1a !important;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    background: rgba(0, 255, 157, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+}
+
 @media (max-width: 768px) {
     .nav-links {
         gap: 1.5rem;
@@ -165,7 +188,7 @@ nav {
         padding: 0.5rem;
     }
 
-    .logo {
+    .index-layout .logo {
         width: 70%;
     }
 
@@ -190,40 +213,5 @@ nav {
 
     .slogan {
         font-size: 1.5rem;
-    }
-}
-/* 新增左上角Logo样式 */
-.alt-layout .logo-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    height: auto;
-    z-index: 1001;
-    animation: none;
-}
-
-.alt-layout .logo {
-    width: 120px;
-    opacity: 1;
-    animation: none;
-}
-
-/* 调整内容区域位置 */
-.alt-layout .content {
-    padding-top: 80px;
-}
-
-@media (max-width: 768px) {
-    .alt-layout .logo-container {
-        top: 10px;
-        left: 10px;
-    }
-    
-    .alt-layout .logo {
-        width: 80px;
-    }
-    
-    .alt-layout .content {
-        padding-top: 60px;
     }
 }
