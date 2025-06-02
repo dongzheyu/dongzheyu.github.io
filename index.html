@@ -7,6 +7,8 @@
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
+<!-- 通过复选框控制通知显示状态 -->
+
 <body class="index-layout">
     <nav>
         <ul class="nav-links">
@@ -21,22 +23,30 @@
             <img src="logo.png" alt="JetCPP Logo" class="logo">
         </a>
     </div>
-
     <div class="content">
-        <h1 class="slogan">代码重塑世界 · 创新驱动未来</h1>
-
-        <div class="project-card">
-            <h2>最新资讯</h2>
-            <h3><span style="color: #00FF00; ">[置项]</span>1.欢迎来到JetCPP工作室，探索编程的无限可能！</h3>
-            <h3><span style="color: #00FF00; ">[置项]</span>2.Minecraft-Toos默认登录账户：User     默认密码：12345678</h3>
-            <h3><span style="color: #00FF00; ">[置项]</span>3.Minecraft-Toos登录账户可进行自定义，关注并私信作者，点击<a href="https://space.bilibili.com/3546730880567808">此处</a>前往，申请时请准备以下材料：<br>&emsp;&emsp;&emsp;&emsp;①登录用户名（可以是中文）<br>&emsp;&emsp;&emsp;&emsp;②登录密码（字母、数字、符号）<br>&emsp;&emsp;&emsp;&emsp;③登录提示（可自定义文本）</h3>
-            <h3>4.Jetbrains Crack已发行，<a href="https://dongzheyu.github.io/projects.html">去看看</a></h3>
-            <h3>5.Minecraft-Toos已6.5.2发布，<a href="https://dongzheyu.github.io/projects.html#:~:text=%E6%88%91%E4%BB%AC%E7%9A%84%E9%A1%B9%E7%9B%AE-,Minecraft%2DTools,-%E4%B8%80%E6%AC%BE%E5%8A%9F%E8%83%BD">点击前往</a></h3>
-            <div class="button-group">
-                <a href="projects.html" class="download-btn">
-                    🚀 查看我们的项目
-                </a>
+        <input checked class="hidden-check" id="notification-toggle" type="checkbox">
+        <div class="notification-container">
+            <div class="notification-card">
+                <label class="close-btn" for="notification-toggle">&times;</label>
+                <div class="notification-content">
+                    <h3>📢最新资讯</h3>
+                    <p><span style="color: #00FF00; ">[置项]</span>1.欢迎来到JetCPP工作室，探索编程的无限可能！</p>
+                    <p><span style="color: #00FF00; ">[置项]</span>2.Minecraft-Toos默认登录账户：User     默认密码：12345678</p>
+                    <p>4.Jetbrains Crack已发行，<a href="https://dongzheyu.github.io/projects.html">去看看</a></p>
+                    <p>5.Minecraft-Toos v6.5.2已发布，<a href="https://dongzheyu.github.io/projects.html#:~:text=%E6%88%91%E4%BB%AC%E7%9A%84%E9%A1%B9%E7%9B%AE-,Minecraft%2DTools,-%E4%B8%80%E6%AC%BE%E5%8A%9F%E8%83%BD">点击前往</a></p>
+                </div>
+                <div class="notification-buttons">
+                    <a class="download-btn" href="projects.html">
+                        🚀 查看我们的项目
+                    </a>
+                </div>
             </div>
+        </div>
+        <h1><span style="color: #ffffff; ">代码重塑世界 · 创新驱动未来</span></h1>
+        <div class="project-card">
+            <h2>此页面需要填充，请沙雕网友们投稿😁</h2>
+            <p>自己摸鱼有点无聊，请大家和我一起摸鱼打CS2！</p>
+            <p>Steam好友代码：1885300469</p>
         </div>
     </div>
 </body>
