@@ -9,15 +9,15 @@
 </head>
 <body class="alt-layout">
 <nav>
-    <ul class="nav-links">
+    <ul class="desktop-nav-links">
         <li><a href="index.html">主页</a></li>
         <li><a href="about.html">关于</a></li>
-        <li><a href="projects.html">项目</a></li>
+        <li><a class="active" href="projects.html">项目</a></li>
     </ul>
 </nav>
 
 <div class="logo-container">
-    <a href="index.html"> <!-- 新增链接 -->
+    <a aria-label="返回首页" href="index.html">
         <img alt="Minecraft-Toos Logo" class="logo" src="Minecraft-Toos_logo.png">
     </a>
 </div>
@@ -27,7 +27,7 @@
     <div class="project-card">
         <h2>一款功能齐全的我的世界工具箱</h2>
         <p>🚀 当前版本: v6.5.2 | 下载量: 15k+</p>
-        <div class="button-group">
+        <div aria-label="操作按钮" class="button-group" role="group">
             <a class="github-link"
                href="https://github.com/dongzheyu/Minecraft-Toos/"
                rel="noopener"
@@ -37,12 +37,12 @@
             <a class="download-btn"
                download
                href="https://files.zohopublic.com.cn/public/workdrive-public/download/9kwj7cc540a12607d445ea08ed3e34f81c7d1?x-cli-msg=%7B%22linkId%22%3A%221GumWstougF-35NGn%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D">
-                ⬇️ 下载安装包(仅支持X64的Windows10＆Windows11)
+                ⬇️ Windows 安装包
             </a>
             <a class="download-btn"
                download
                href="https://files.zohopublic.com.cn/public/workdrive-public/download/9kwj7397fa05b414d418db8dca902836e2778?x-cli-msg=%7B%22linkId%22%3A%221GumWstoq6E-35NGn%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D">
-                🛜 下载.NET运行库(可选，当运行出现问题时)
+                🛜 .NET运行库
             </a>
             <a class="download-btn"
                href="https://dongzheyu.github.io/Minecraft-Toos_Help.html"

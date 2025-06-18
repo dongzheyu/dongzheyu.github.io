@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>博客 | JetCPP</title>
+    <link href="logo.png" rel="icon" type="image/png">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="alt-layout">
+    <nav>
+        <ul class="desktop-nav-links">
+            <!-- ... existing code ... -->
+            <li><a class="active" href="blog.html">博客</a></li>
+        </ul>
+    </nav>
+
+    <div class="logo-container">
+        <a href="index.html">
+            <img alt="JetCPP Logo" class="logo" src="logo.png">
+        </a>
+    </div>
+
+    <div class="content">
+        <div class="blog-container">
+            <!-- 左侧导航栏 -->
+            <aside class="blog-sidebar">
+                <h3>文章目录</h3>
+                <ul>
+                    <li><a href="#article1">C++性能优化实践</a></li>
+                </ul>
+            </aside>
+            
+            <!-- 右侧内容区域（Markdown风格） -->
+            <main class="blog-content markdown-body">
+                <article id="article1">
+                    <h1>C++性能优化实践</h1>
+                    <p>在开发高性能工具时，我们采用了多种优化技术...</p>
+                    
+                    <h2>内存管理优化</h2>
+                    <p>使用自定义内存池减少系统调用：</p>
+                    <pre><code>class MemoryPool {
+public:
+    void* allocate(size_t size);
+    void deallocate(void* ptr);
+};</code></pre>
+                    
+                    <h2>并发处理</h2>
+                    <ul>
+                        <li>无锁数据结构</li>
+                        <li>线程局部存储</li>
+                        <li>异步I/O优化</li>
+                    </ul>
+                </article>
+                
+                <!-- 更多文章... -->
+            </main>
+        </div>
+    </div>
+</body>
+</html>
