@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>博客 | JetCPP</title>
+    <title>C++入门指北 | JetCPP</title>
     <link href="logo.png" rel="icon" type="image/png">
     <link href="style.css" rel="stylesheet">
 </head>
 <body class="alt-layout">
     <nav>
         <ul class="desktop-nav-links">
-            <!-- ... existing code ... -->
-            <li><a class="active" href="blog.html">博客</a></li>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="projects.html">项目</a></li>
+            <li><a class="active" href="CPP.html">C++入门指北</a></li>
         </ul>
     </nav>
 
@@ -25,9 +27,11 @@
         <div class="blog-container">
             <!-- 左侧导航栏 -->
             <aside class="blog-sidebar">
-                <h3>文章</h3>
+                <h3>章节</h3>
                 <ul>
-                    <li><a href="#article1">C++入门指北</a></li>
+                    <li><a href="#article1">准备工作</a></li>
+                    <li><a href="#article2">基础语法介绍</a></li>
+                    <li><a href="#article3">简单程序</a></li>
                 </ul>
             </aside>
             
@@ -35,7 +39,29 @@
             <main class="blog-content markdown-body">
                 <article id="article1">
                     <h1>C++入门指北</h1>
-                    <p>首先你需要了解C++的基本语法和数据结构。</p>
+                    <p>这篇文档将为您从入门到熟练学习C++</p>
+                    <h2>准备工作</h2>
+                    <p>C++是一个编译型语言，需要编译器才能运行。</p>
+                    <p>这里我们使用Jetbains CLion，这是最常用的C++编译器。</p>
+                    <p>首先下载Clion安装包，附件里有。打开安装包，选择安装位置，然后点击下一步，把添加到PATH环境变量打开，其他默认，选择安装。</p>
+                    <p>安装完成后，打开Clion，会有一个欢迎界面，点击开始使用，会有一个注册向导，选择免费就行（如果你需要用到code with me，请转移到本网站的项目页下载JetBrains Crack破解）</p>
+                    <p>注册完成后，新建一个项目，语法选择C++20，点击创建</p>
+                    <p>这样我们就可以开始编写C++程序了</p>
+                    <p>后续工作（可选）:</p>
+                    <p>由于Clion附带的MinGW版本比较老，我们需要安装一个新版本的MinGW编译器。</p>
+                    <p>首先，下载msys2并安装，附件里有下载链接</p>
+                    <p>打开msys2的MinGW64终端，先输入pacman -Syu更新一下包</p>
+                    <p>更新完成后，再输入pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb安装最新版GCC和GDB</p>
+                    <p>安装完成后，打开Clion设置，选择构建、执行、部署，选择工具链，路径选择你安装msys2里的MinGW64路径</p>
+                    <p>这样，我们就可以使用新的GCC和GDB了</p>
+                    <p>附件：</p>
+                    <ul class="desktop-nav-links">
+                        <li><a  href="https://www.jetbrains.com.cn/clion/download/?section=windows" rel="noopener noreferrer" target="_blank">CLion下载地址</a></li>
+                        <li><a  download href="https://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/x86_64/msys2-x86_64-20250221.exe">msys2下载地址</a></li>
+                        <li><a  download href="https://github.whrstudio.top/https://github.com/msys2/msys2-installer/releases/download/2025-02-21/msys2-x86_64-20250221.exe">msys2下载地址（备用）</a></li>
+                    </ul>
+                </article>
+                <article id="article2">
                     <h2>基础语法介绍</h2>
                     <h3>1.数据类型：int,float,double,char,bool,string,long long</h3>
                     <p>首先是整数类型，整数类型有int和long long。</p>
@@ -105,7 +131,7 @@
                     <code>
                         int i=0;<br>
                         while(i<10){<br>
-                            i++;<br>
+                        i++;<br>
                         }
                     </code>
                     <p>这个while循环，条件为i<10，每次循环结束后，都会更新i为i+1。</p>
@@ -117,7 +143,7 @@
                     <p>来看个例子：</p>
                     <code>
                         if(i<10){<br>
-                            cout<<"i小于10"<< endl ;<br>
+                        cout<<"i小于10"<< endl ;<br>
                         }
                     </code>
                     <p>这个if判断，条件为i<10，如果i小于10，则输出"i小于10"。</p>
@@ -127,9 +153,9 @@
                     <p>来看个例子：</p>
                     <code>
                         if(i<10){<br>
-                            cout<<"i小于10"<< endl;<br>
+                        cout<<"i小于10"<< endl;<br>
                         } else{<br>
-                            cout<<"i大于等于10"<< endl;<br>
+                        cout<<"i大于等于10"<< endl;<br>
                         }
                     </code>
                     <p>这个else判断，条件为i<10，如果i小于10，则输出"i小于10"，否则输出"i大于等于10"。</p>
@@ -139,18 +165,72 @@
                     <p>来看个例子：</p>
                     <code>
                         switch(i){<br>
-                            case 1:<br>
-                                cout<<"i等于1"<< endl;<br>
-                                break;<br>
-                            case 2:<br>
-                                cout<<"i等于2"<< endl;<br>
-                                break;<br>
-                            default:<br>
-                                cout<<"
+                        case 1:<br>
+                        cout<<"i等于1"<< endl;<br>
+                        break;<br>
+                        case 2:<br>
+                        cout<<"i等于2"<< endl;<br>
+                        break;<br>
+                        default:<br>
+                        cout<<"
                         }
                     </code>
                     <p>这个switch判断，表达式为i，case为1和2，如果i等于1，则输出"i等于1"，如果i等于2，则输出"i等于2"，否则输出"i不等于1和2"。</p>
-                    <p>以上就是C++的运算符、数据类型、变量、常量、运算符、二进制换算、循环、判断。</p>
+                    <h2>数组</h2>
+                    <p>C++中的数组有int[]、char[]、float[]、double[]、string[]。<</p>
+                    <p>数组的格式为：数据类型 数组名[数组大小]</p>
+                    <p>来看个例子：</p>
+                    <code>
+                        int a[10];<br>
+                        char b[10];<br>
+                        float c[10];<br>
+                        double d[10];<br>
+                        string e[10];
+                    </code>
+                    <p>这个例子，定义了10个int、char、float、double、string类型的数组。</p>
+                    <p>数组的访问：</p>
+                    <p>数组的访问格式为：数组名[索引]</p>
+                    <p>还有vector数组，vector数组的格式为：vector&lt;数据类型&gt; 数组名;</p>
+                    <p>来看个例子：</p>
+                    <code>
+                        vector&lt;int&gt; a;<br>
+                        vector&lt;char&gt; b;<br>
+                        vector&lt;float&gt; c;<br>
+                        vector&lt;double&gt; d;<br>
+                        vector&lt;string&gt; e;
+                    </code>
+                    <p>这个例子，定义了10个int、char、float、double、string类型的vector数组。</p>
+                    <p>vector数组的访问：</p>
+                    <p>vector数组的访问格式为：数组名[索引]</p>
+                    <h3>以上就是C++的运算符、数据类型、变量、常量、运算符、二进制换算、循环、判断、数组。</h3>
+                </article>
+                <article id="article3">
+                    <h2>简单程序</h2>
+                    <p>现在，我们了解了C++的基础知识，我们可以开始编写简单的程序了。</p>
+                    <h3>你好世界</h3>
+                    <p>你好世界是一个简单的程序，它是所有编程的第一个程序，它的功能是输出"Hello World!"。</p>
+                    <p>创建一个名为hello.cpp的文件。</p>
+                    <p>来了解一下c++程序的结构：</p>
+                    <p>头文件</p>
+                    <p>引用命名空间</p>
+                    <p>其他函数（可选）</p>
+                    <p>主函数</p>
+                    <p>头文件的格式为：#include &lt;头文件名&gt;</p>
+                    <p>引用命名空间的格式为：using namespace &lt;命名空间名&gt;</p>
+                    <p>主函数的格式为：int main(){}</p>
+                    <p>(PS:补充一下，cin是输入函数，cout是输出函数)</p>
+                    <p>知道这些，我们开始编写程序。</p>
+                    <code>
+                        #include &lt;iostream&gt;<br>
+                        using namespace std;<br>
+                        int main(){<br>
+                        cout<<"Hello World!"<< endl;<br>
+                        return 0;<br>
+                        }
+                    </code>
+                    <p>(PS:iostream是c++标准库，用于输入输出。std是c++标准库的命名空间。输出标识符直接输入标识符名，其他需要加双引号)</p>
+                    <p>这个程序，输出"Hello World!"。</p>
+                    <p>现在，你就正式入门了！</p>
                 </article>
                 <!-- 更多文章... -->
             </main>

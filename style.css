@@ -419,10 +419,15 @@ body {
 }
 
 .blog-sidebar {
-    flex: 0 0 200px;
+    position: fixed; /* 添加固定定位 */
+    top: var(--nav-height); /* 从导航栏下方开始 */
+    height: calc(100vh - var(--nav-height)); /* 高度为视口高度减去导航栏高度 */
+    overflow-y: auto; /* 允许内容滚动 */
+    width: 200px; /* 固定宽度 */
     padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
+    z-index: 999; /* 确保在导航栏下方 */
 }
 
 .blog-sidebar ul {
@@ -441,6 +446,25 @@ body {
 
 .blog-content {
     flex: 1;
+    margin-left: 220px; /* 添加左边距避免内容被侧边栏遮挡 */
+}
+
+/* 响应式调整 - 移动端重置固定定位 */
+@media (max-width: 768px) {
+    .blog-container {
+        flex-direction: column;
+    }
+    
+    .blog-sidebar {
+        position: static; /* 移动端恢复静态定位 */
+        width: 100%; /* 全宽度 */
+        height: auto; /* 自动高度 */
+        margin-bottom: 1rem; /* 添加底部间距 */
+    }
+    
+    .blog-content {
+        margin-left: 0; /* 移除左边距 */
+    }
 }
 
 /* Markdown风格内容样式 */
@@ -509,17 +533,6 @@ body {
 
 .markdown-body a:hover {
     text-decoration: underline;
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .blog-container {
-        flex-direction: column;
-    }
-    
-    .blog-sidebar {
-        flex: 0 0 auto;
-    }
 }
 
 /*<!--_          _      ____   ____    ____
