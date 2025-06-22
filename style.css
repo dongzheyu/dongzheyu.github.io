@@ -97,7 +97,7 @@ nav {
 }
 
 .index-layout .logo {
-    max-width: 400px; /* 恢复原始尺寸 */
+    max-width: 800px; /* 恢复原始尺寸 */
     width: 50%;
     opacity: 0;
     animation: logoEntrance 1.5s ease-out forwards;
@@ -506,12 +506,14 @@ body {
     list-style-type: disc;
 }
 
+/* 增强代码块样式 */
 .markdown-body code {
     font-family: Consolas, Monaco, 'Andale Mono', monospace;
     background-color: rgba(110, 118, 129, 0.4);
     padding: 0.2em 0.4em;
     border-radius: 6px;
     font-size: 85%;
+    color: #e6edf3; /* 增加代码文本颜色 */
 }
 
 .markdown-body pre {
@@ -519,11 +521,58 @@ body {
     border-radius: 6px;
     padding: 16px;
     overflow: auto;
+    position: relative;
+    border-left: 4px solid var(--accent-color); /* 左侧高亮条 */
 }
 
+/* 添加C++语法高亮颜色 */
 .markdown-body pre code {
     background: none;
     padding: 0;
+    display: block;
+    color: #e6edf3; /* 默认文本颜色 */
+}
+
+/* C++关键字 */
+.markdown-body pre code .keyword {
+    color: #569cd6; /* 蓝色 */
+    font-weight: bold;
+}
+
+/* 数据类型 */
+.markdown-body pre code .type {
+    color: #4ec9b0; /* 青色 */
+}
+
+/* 字符串 */
+.markdown-body pre code .string {
+    color: #ce9178; /* 橙色 */
+}
+
+/* 数字 */
+.markdown-body pre code .number {
+    color: #b5cea8; /* 浅绿色 */
+}
+
+/* 注释 */
+.markdown-body pre code .comment {
+    color: #6a9955; /* 绿色 */
+    font-style: italic;
+}
+
+/* 预处理指令 */
+.markdown-body pre code .preprocessor {
+    color: #c586c0; /* 紫色 */
+}
+
+/* 运算符 */
+.markdown-body pre code .operator {
+    color: #d4d4d4; /* 浅灰色 */
+}
+
+/* 库函数 */
+.markdown-body pre code .library {
+    color: #dcdcaa; /* 浅黄色 */
 }
 
 .markdown-body a {
