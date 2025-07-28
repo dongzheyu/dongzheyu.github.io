@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Jetbrains Crack</title>
-    <link href="java.png" rel="icon" type="image/png">
+    <link href="logo.png" rel="icon" type="image/png">
     <link href="style.css" rel="stylesheet">
 </head>
 <body class="alt-layout">
@@ -15,13 +15,13 @@
         <li><a class="active" href="projects.html">项目</a></li>
         <li><a href="CPP.html">C++入门指北</a></li>
     </ul>
+    <button class="nav-toggle" onclick="toggleNav()">
+        <span>开关</span>
+    </button>
 </nav>
-
-<div class="logo-container">
-    <a href="index.html"> <!-- 新增链接 -->
-        <img alt="Java Logo" class="logo" src="java.png">
-    </a>
-</div>
+<button class="nav-toggle" onclick="toggleNav()">
+    <span>开关</span>
+</button>
 <div class="content">
     <h1 class="slogan">Jetbrains Crack</h1>
 <div class="project-card">
@@ -55,5 +55,42 @@
     </div>
 </div>
 </div>
+<script>
+    // 访问量统计功能
+    function updateVisitCount() {
+        // 获取当前页面标识
+        const page = window.location.pathname.split('/').pop() || 'index.html';
+
+        // 从localStorage获取当前访问数据
+        let visitData = localStorage.getItem('visitData');
+        visitData = visitData ? JSON.parse(visitData) : {};
+
+        // 初始化或更新当前页面访问次数
+        if (!visitData[page]) {
+            visitData[page] = 0;
+        }
+        visitData[page]++;
+
+        // 保存回localStorage
+        localStorage.setItem('visitData', JSON.stringify(visitData));
+
+        // 在页面上显示访问次数
+        const visitCountElement = document.createElement('div');
+        visitCountElement.className = 'visit-count';
+        visitCountElement.innerHTML = `<p>页面访问量: <span id="visit-count">${visitData[page]}</span></p>`;
+
+        // 将访问量显示添加到页面底部
+        document.querySelector('.content').appendChild(visitCountElement);
+    }
+
+    // 页面加载完成后执行统计
+    document.addEventListener('DOMContentLoaded', function() {
+        updateVisitCount();
+    });
+
+    function toggleNav() {
+        document.body.classList.toggle('nav-hidden');
+    }
+</script>
 </body>
 </html>

@@ -7,8 +7,6 @@
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- 通过复选框控制通知显示状态 -->
-
 <body class="index-layout">
     <nav>
         <ul class="desktop-nav-links">
@@ -17,32 +15,16 @@
             <li><a href="projects.html">项目</a></li>
             <li><a href="CPP.html">C++入门指北</a></li>
         </ul>
+        <button class="nav-toggle" onclick="toggleNav()">
+            <span>开关</span>
+        </button>
     </nav>
-
-    <div class="logo-container">
-        <a href="index.html"> <!-- 新增链接 -->
-            <img src="logo.png" alt="JetCPP Logo" class="logo">
-        </a>
-    </div>
+    
+    <button class="nav-toggle" onclick="toggleNav()">
+        <span>开关</span>
+    </button>
+    
     <div class="content">
-        <input checked class="hidden-check" id="notification-toggle" type="checkbox">
-        <div class="notification-container">
-            <div class="notification-card">
-                <label class="close-btn" for="notification-toggle">&times;</label>
-                <div class="notification-content">
-                    <h3>📢最新资讯</h3>
-                    <p><span style="color: #00FF00; ">[置项]</span>1.欢迎来到JetCPP工作室，探索编程的无限可能！</p>
-                    <p><span style="color: #00FF00; ">[置项]</span>2.Minecraft-Toos默认登录账户：User     默认密码：12345678</p>
-                    <p><span style="color: #00FF00; ">[置项]</span>3.Minecraft-Toos登录账户和密码可自定义，如需自定义可在<a href="https://space.bilibili.com/3546730880567808" target="_blank">B站</a>私信作者添加</p>
-                    <p>5.Minecraft-Toos v6.6.0已发布，<a href="Minecraft-Toos.html">点击前往</a></p>
-                </div>
-                <div class="notification-buttons">
-                    <a class="download-btn" href="projects.html">
-                        🚀 查看我们的项目
-                    </a>
-                </div>
-            </div>
-        </div>
         <h1><span style="color: #ffffff; ">代码重塑世界 · 创新驱动未来</span></h1>
         <div class="project-card">
             <!-- 增强工作室介绍 -->
@@ -73,6 +55,43 @@
             </div>
         </div>
     </div>
+    <script>
+        // 访问量统计功能
+        function updateVisitCount() {
+            // 获取当前页面标识
+            const page = window.location.pathname.split('/').pop() || 'index.html';
+            
+            // 从localStorage获取当前访问数据
+            let visitData = localStorage.getItem('visitData');
+            visitData = visitData ? JSON.parse(visitData) : {};
+            
+            // 初始化或更新当前页面访问次数
+            if (!visitData[page]) {
+                visitData[page] = 0;
+            }
+            visitData[page]++;
+            
+            // 保存回localStorage
+            localStorage.setItem('visitData', JSON.stringify(visitData));
+            
+            // 在页面上显示访问次数
+            const visitCountElement = document.createElement('div');
+            visitCountElement.className = 'visit-count';
+            visitCountElement.innerHTML = `<p>页面访问量: <span id="visit-count">${visitData[page]}</span></p>`;
+            
+            // 将访问量显示添加到页面底部
+            document.querySelector('.content').appendChild(visitCountElement);
+        }
+        
+        // 页面加载完成后执行统计
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVisitCount();
+        });
+        
+        function toggleNav() {
+            document.body.classList.toggle('nav-hidden');
+        }
+    </script>
 </body>
 </html>
 <!--  _          _      ____   ____    ____

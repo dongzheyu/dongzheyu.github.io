@@ -15,13 +15,13 @@
             <li><a href="projects.html">项目</a></li>
             <li><a class="active" href="CPP.html">C++入门指北</a></li>
         </ul>
+        <button class="nav-toggle" onclick="toggleNav()">
+            <span>开关</span>
+        </button>
     </nav>
-
-    <div class="logo-container">
-        <a href="index.html">
-            <img alt="JetCPP Logo" class="logo" src="logo.png">
-        </a>
-    </div>
+    <button class="nav-toggle" onclick="toggleNav()">
+        <span>开关</span>
+    </button>
 
     <div class="content">
         <div class="blog-container">
@@ -40,6 +40,7 @@
             
             <!-- 右侧内容区域（Markdown风格） -->
             <main class="blog-content markdown-body">
+                <div class="project-card">
                 <article id="article1">
                     <h1>C++入门指北</h1>
                     <p>这篇文档将为您从入门到熟练学习C++</p>
@@ -424,8 +425,46 @@ struct 结构体名{
                     <h2></h2>
                 </article>
                 <!-- 更多文章... -->
+                </div>
             </main>
         </div>
     </div>
+    <script>
+        // 访问量统计功能
+        function updateVisitCount() {
+            // 获取当前页面标识
+            const page = window.location.pathname.split('/').pop() || 'index.html';
+
+            // 从localStorage获取当前访问数据
+            let visitData = localStorage.getItem('visitData');
+            visitData = visitData ? JSON.parse(visitData) : {};
+
+            // 初始化或更新当前页面访问次数
+            if (!visitData[page]) {
+                visitData[page] = 0;
+            }
+            visitData[page]++;
+
+            // 保存回localStorage
+            localStorage.setItem('visitData', JSON.stringify(visitData));
+
+            // 在页面上显示访问次数
+            const visitCountElement = document.createElement('div');
+            visitCountElement.className = 'visit-count';
+            visitCountElement.innerHTML = `<p>页面访问量: <span id="visit-count">${visitData[page]}</span></p>`;
+
+            // 将访问量显示添加到页面底部
+            document.querySelector('.content').appendChild(visitCountElement);
+        }
+
+        // 页面加载完成后执行统计
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVisitCount();
+        });
+
+        function toggleNav() {
+            document.body.classList.toggle('nav-hidden');
+        }
+    </script>
 </body>
 </html>
