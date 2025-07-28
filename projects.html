@@ -15,47 +15,64 @@
             <li><a class="active" href="projects.html">项目</a></li>
             <li><a href="CPP.html">C++入门指北</a></li>
         </ul>
-        <button class="nav-toggle" id="navToggle">↑</button>
     </nav>
-    
-    <button class="nav-show" id="navShow">↓</button>
+
+    <div class="logo-container">
+        <a href="index.html"> <!-- 新增链接 -->
+            <img src="logo.png" alt="JetCPP Logo" class="logo">
+        </a>
+    </div>
 
     <div class="content">
         <h1>我们的项目</h1>
-        <div class="project-zs">
-            <h3 style="text-align: center;">Minecraft-Toos</h3>
-            <p style="text-align: center;"><span style="color: red;">很抱歉，当前项目开发已停止，感谢大家的支持!</span></p>
-            <p style="text-align: center;">一款功能齐全的我的世界工具箱</p>
-            <p style="text-align: center;">当前版本:6.6.0</p>
-            <a href="Minecraft-Toos.html" class="download-btn" >👁️‍🗨️去围观</a>
-        </div>
-        <div class="project-zs">
-            <h3 style="text-align: center;">Jetbrains-Crack</h3>
-            <p style="text-align: center;">一键破解JetBrains全家桶软件，无需付费(禁止用于商业用途)</p><p style="text-align: center;">当前版本:1.0</p>
-            <a href="Jetbrains-Crack.html" class="download-btn" >👁️‍🗨️去围观</a>
-        </div>
-        <div class="project-zs">
-            <h3 style="text-align: center;">dongzheyu.github.io</h3>
-            <p style="text-align: center;">一个基于GitHub Pages的网站，用于展示工作室项目及c++学习</p>
-            <a href="https://dongzheyu.github.io" class="download-btn" >👁️‍🗨️去围观</a>
-        </div>
+
+        <div class="project-card">
+            <h2>Minecraft-Tools</h2>
+            <p>Minecraft 一站式工具箱</p>
+            <p>🚀 当前版本: v6.6.0 | 下载量: 15k+</p>
+
+            <div class="button-group">
+                <a href="https://github.com/dongzheyu/Minecraft-Toos/"
+                   class="github-link"
+                   target="_blank"
+                   rel="noopener">
+                   GitHub仓库
+                </a>
+                <a href="Minecraft-Toos.html"
+                   class="download-btn"
+                   rel="noopener"
+                   target="_blank">
+                    👁️立刻查看
+                </a>
+            </div>
     </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.getElementById('navToggle');
-            const navShow = document.getElementById('navShow');
-            const body = document.body;
-            
-            navToggle.addEventListener('click', function() {
-                body.classList.add('nav-hidden');
-            });
-            
-            navShow.addEventListener('click', function() {
-                body.classList.remove('nav-hidden');
-            });
-        });
-    </script>
+        <div class="project-card">
+            <div>
+                <h2>Jetbrains Crack</h2>
+                <p>一键破解JetBrains全家桶软件，无需付费(禁止用于商业用途)</p>
+                <p>🚀 当前版本: 长期稳定版</p>
+                <div class="button-group">
+                    <a>
+                        <a href="https://github.com/dongzheyu/jetbrains-Crack"
+                           class="github-link"
+                           target="_blank"
+                           rel="noopener">
+                            GitHub仓库
+                        </a>
+                    </a>
+                    <a>
+                        <a href="Jetbrains-Crack.html"
+                           class="download-btn"
+                           rel="noopener"
+                           target="_blank">
+                            👁️立刻查看
+                        </a>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+            </div>
 </body>
 </html>
 <!--  _          _      ____   ____    ____

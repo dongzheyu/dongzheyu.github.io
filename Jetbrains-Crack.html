@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>JetBrains-Crack</title>
+    <title>Jetbrains Crack</title>
     <link href="java.png" rel="icon" type="image/png">
     <link href="style.css" rel="stylesheet">
 </head>
@@ -14,53 +14,46 @@
         <li><a href="about.html">关于</a></li>
         <li><a class="active" href="projects.html">项目</a></li>
         <li><a href="CPP.html">C++入门指北</a></li>
-        <button class="nav-toggle" id="navToggle">↑</button>
     </ul>
 </nav>
-<button class="nav-show" id="navShow">↓</button>
+
+<div class="logo-container">
+    <a href="index.html"> <!-- 新增链接 -->
+        <img alt="Java Logo" class="logo" src="java.png">
+    </a>
+</div>
 <div class="content">
-    <div class="project-card">
-        <div>
-            <h1>JetBrains-Crack</h1>
-            <h2>一键破解JetBrains全家桶软件，无需付费(禁止用于商业用途)</h2>
-            <p>🚀 当前版本: 1.0</p>
-            <div class="button-group">
+    <h1 class="slogan">Jetbrains Crack</h1>
+<div class="project-card">
+    <div>
+        <h2>一键破解JetBrains全家桶软件，无需付费(禁止用于商业用途)</h2>
+        <p>🚀 当前版本: 长期稳定不更新版</p>
+        <div class="button-group">
+            <a>
                 <a class="github-link"
                    href="https://github.com/dongzheyu/jetbrains-Crack"
                    rel="noopener"
                    target="_blank">
                     GitHub仓库
                 </a>
+            </a>
+            <a>
                 <a class="download-btn"
                    download
                    href="https://github.com/dongzheyu/Jetbrains-Crack/releases/download/1/jatbrains.crack.zip">
                     ⬇️ 下载破解工具
                 </a>
-            </div>
-            <div class="update-log">
-                <h3>更新日志：</h3>
-                <ul>
-                    <li>首个版本，不涉及日志</li>
-                </ul>
-            </div>
-
+            </a>
         </div>
+        <div class="update-log">
+            <h3>更新日志v长期稳定不更新版</h3>
+            <ul>
+                <li>首个版本，不涉及日志</li>
+            </ul>
+        </div>
+
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const navToggle = document.getElementById('navToggle');
-        const navShow = document.getElementById('navShow');
-        const body = document.body;
-
-        navToggle.addEventListener('click', function() {
-            body.classList.add('nav-hidden');
-        });
-
-        navShow.addEventListener('click', function() {
-            body.classList.remove('nav-hidden');
-        });
-    });
-</script>
+</div>
 </body>
 </html>

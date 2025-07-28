@@ -17,16 +17,33 @@
             <li><a href="projects.html">项目</a></li>
             <li><a href="CPP.html">C++入门指北</a></li>
         </ul>
-        <button class="nav-toggle" id="navToggle">↑</button>
     </nav>
-    
-    <button class="nav-show" id="navShow">↓</button>
+
+    <div class="logo-container">
+        <a href="index.html"> <!-- 新增链接 -->
+            <img src="logo.png" alt="JetCPP Logo" class="logo">
+        </a>
+    </div>
     <div class="content">
-        <h1 style="text-align: center;"><span style="color: #ffffff; ">代码重塑世界 · 创新驱动未来<br>JetCPP Studio欢迎您</span></h1>
-        <!-- 添加访问量统计 -->
-        <div style="margin-top: 1rem; text-align: center; font-size: 1.1rem;">
-            <p>今日访问量: <strong><span id="visitCount">加载中...</span></strong></p>
+        <input checked class="hidden-check" id="notification-toggle" type="checkbox">
+        <div class="notification-container">
+            <div class="notification-card">
+                <label class="close-btn" for="notification-toggle">&times;</label>
+                <div class="notification-content">
+                    <h3>📢最新资讯</h3>
+                    <p><span style="color: #00FF00; ">[置项]</span>1.欢迎来到JetCPP工作室，探索编程的无限可能！</p>
+                    <p><span style="color: #00FF00; ">[置项]</span>2.Minecraft-Toos默认登录账户：User     默认密码：12345678</p>
+                    <p><span style="color: #00FF00; ">[置项]</span>3.Minecraft-Toos登录账户和密码可自定义，如需自定义可在<a href="https://space.bilibili.com/3546730880567808" target="_blank">B站</a>私信作者添加</p>
+                    <p>5.Minecraft-Toos v6.6.0已发布，<a href="Minecraft-Toos.html">点击前往</a></p>
+                </div>
+                <div class="notification-buttons">
+                    <a class="download-btn" href="projects.html">
+                        🚀 查看我们的项目
+                    </a>
+                </div>
+            </div>
         </div>
+        <h1><span style="color: #ffffff; ">代码重塑世界 · 创新驱动未来</span></h1>
         <div class="project-card">
             <!-- 增强工作室介绍 -->
             <h2>关于 JetCPP 工作室</h2>
@@ -48,8 +65,6 @@
             <p>🚀 <strong>持续创新</strong>：探索前沿技术，不断突破边界，挑战技术极限</p>
             <p>🤝 <strong>协作共赢</strong>：团队协作高于个人英雄主义，共享成功与成长</p>
             
-
-            
             <div style="margin-top: 2rem; text-align: center;">
                 <p>期待你的加入，一起创造有趣的数字世界！</p>
                 <a class="download-btn" href="about.html" style="display: inline-block; margin-top: 1rem;">
@@ -58,47 +73,6 @@
             </div>
         </div>
     </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.getElementById('navToggle');
-            const navShow = document.getElementById('navShow');
-            const body = document.body;
-            
-            navToggle.addEventListener('click', function() {
-                body.classList.add('nav-hidden');
-            });
-            
-            navShow.addEventListener('click', function() {
-                body.classList.remove('nav-hidden');
-            });
-            
-            // 访问量统计功能 - 每日00:00刷新
-            function updateVisitCount() {
-                // 获取今天的日期字符串 (YYYY-MM-DD)
-                const today = new Date().toLocaleDateString('zh-CN').replace(/\//g, '-');
-                const visitData = JSON.parse(localStorage.getItem('visitData') || '{}');
-                
-                // 如果没有日期记录或者日期不匹配，则重置计数
-                if (!visitData.date || visitData.date !== today) {
-                    visitData.date = today;
-                    visitData.count = 0;
-                }
-                
-                // 增加访问计数
-                visitData.count = (visitData.count || 0) + 1;
-                
-                // 保存到localStorage
-                localStorage.setItem('visitData', JSON.stringify(visitData));
-                
-                // 更新页面显示
-                document.getElementById('visitCount').textContent = visitData.count;
-            }
-            
-            // 页面加载时更新访问量
-            updateVisitCount();
-        });
-    </script>
 </body>
 </html>
 <!--  _          _      ____   ____    ____

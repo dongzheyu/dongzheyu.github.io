@@ -15,10 +15,14 @@
             <li><a href="projects.html">项目</a></li>
             <li><a href="CPP.html">C++入门指北</a></li>
         </ul>
-        <button class="nav-toggle" id="navToggle">↑</button>
     </nav>
 
-    <button class="nav-show" id="navShow">↓</button>
+    <div class="logo-container">
+        <a href="index.html"> <!-- 新增链接 -->
+            <img src="logo.png" alt="JetCPP Logo" class="logo">
+        </a>
+    </div>
+
     <div class="content">
         <div class="project-card" >
             <h1>🚀 JetCPP 工作室</h1>
@@ -75,20 +79,5 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.getElementById('navToggle');
-            const navShow = document.getElementById('navShow');
-            const body = document.body;
-
-            navToggle.addEventListener('click', function() {
-                body.classList.add('nav-hidden');
-            });
-
-            navShow.addEventListener('click', function() {
-                body.classList.remove('nav-hidden');
-            });
-        });
-    </script>
 </body>
 </html>

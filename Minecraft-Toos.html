@@ -15,12 +15,17 @@
         <li><a class="active" href="projects.html">项目</a></li>
         <li><a href="CPP.html">C++入门指北</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle">↑</button>
 </nav>
-<button class="nav-show" id="navShow">↓</button>
+
+<div class="logo-container">
+    <a aria-label="返回首页" href="index.html">
+        <img alt="Minecraft-Toos Logo" class="logo" src="Minecraft-Toos_logo.png">
+    </a>
+</div>
 <div class="content">
+    <h1 class="slogan">Minecraft-Toos</h1>
+
     <div class="project-card">
-        <h1>Minecraft-Toos</h1>
         <h2>一款功能齐全的我的世界工具箱</h2>
         <p>🚀 当前版本: v6.6.0 | 下载量: 15k+</p>
         <p>很抱歉，当前项目开发已停止，感谢大家的支持</p>
@@ -68,20 +73,5 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const navToggle = document.getElementById('navToggle');
-        const navShow = document.getElementById('navShow');
-        const body = document.body;
-
-        navToggle.addEventListener('click', function() {
-            body.classList.add('nav-hidden');
-        });
-
-        navShow.addEventListener('click', function() {
-            body.classList.remove('nav-hidden');
-        });
-    });
-</script>
 </body>
 </html>
