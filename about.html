@@ -15,12 +15,9 @@
             <li><a href="projects.html">项目</a></li>
             <li><a href="CPP.html">C++入门指北</a></li>
         </ul>
-        <button class="nav-toggle" onclick="toggleNav()">
-            <span>开关</span>
-        </button>
     </nav>
     <button class="nav-toggle" onclick="toggleNav()">
-        <span>开关</span>
+        <span>↑</span>
     </button>
 
     <div class="content">
@@ -114,6 +111,13 @@
 
         function toggleNav() {
             document.body.classList.toggle('nav-hidden');
+            // 更新按钮箭头方向
+            const toggleBtn = document.querySelector('.nav-toggle span');
+            if (document.body.classList.contains('nav-hidden')) {
+                toggleBtn.textContent = '↓';
+            } else {
+                toggleBtn.textContent = '↑';
+            }
         }
     </script>
 </body>

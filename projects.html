@@ -15,22 +15,19 @@
             <li><a class="active" href="projects.html">项目</a></li>
             <li><a href="CPP.html">C++入门指北</a></li>
         </ul>
-        <button class="nav-toggle" onclick="toggleNav()">
-            <span>↑</span>
-        </button>
     </nav>
-    
-    <button class="nav-toggle-down" onclick="toggleNav()">
-        <span>↓</span>
+    <button class="nav-toggle" onclick="toggleNav()">
+        <span>↑</span>
     </button>
     
+    
     <div class="content">
-        <h1>我们的项目</h1>
+        <h1 style="text-align: center;">我们的项目</h1>
 
         <div class="project-zs">
             <h2>Minecraft-Tools</h2>
             <p>Minecraft 一站式工具箱</p>
-            <p>🚀 当前版本: v6.6.0 | 下载量: 15k+</p>
+            <p>🚀 当前版本: v6.6.0</p>
 
             <div class="button-group">
                 <a href="https://github.com/dongzheyu/Minecraft-Toos/"
@@ -109,6 +106,13 @@
         
         function toggleNav() {
             document.body.classList.toggle('nav-hidden');
+            // 更新按钮箭头方向
+            const toggleBtn = document.querySelector('.nav-toggle span');
+            if (document.body.classList.contains('nav-hidden')) {
+                toggleBtn.textContent = '↓';
+            } else {
+                toggleBtn.textContent = '↑';
+            }
         }
     </script>
 </body>
