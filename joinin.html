@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加入我们 | JetCPP</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 特殊的左上角导航样式 */
+        .joinin-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+        }
+        
+        .joinin-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .joinin-nav a:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        .joinin-content {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .reasons, .roles, .contact {
+            margin-bottom: 2rem;
+        }
+        
+        .reason-item, .role-item {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .role-item h3 {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body class="alt-layout">
+    <!-- 特殊的左上角导航 -->
+    <div class="joinin-nav">
+        <a href="index.html">← 返回首页</a>
+    </div>
+
+    <div class="content joinin-content">
+        <h1 style="text-align: center;">加入 JetCPP 工作室</h1>
+        
+        <div class="project-card">
+            <h2>为什么加入我们？</h2>
+            <p>JetCPP工作室是一个由热爱编程的年轻人组成的开源技术团队。我们专注于开发高质量的软件工具和编程教程，致力于为开发者社区创造价值。</p>
+        </div>
+        
+        <div class="reasons">
+            <div class="reason-item">
+                <h3>🚀 技术成长</h3>
+                <p>与优秀的同龄人一起工作，快速提升编程技能，接触前沿技术</p>
+            </div>
+            
+            <div class="reason-item">
+                <h3>🤝 团队协作</h3>
+                <p>体验真实的团队开发流程，学习项目管理和协作技巧</p>
+            </div>
+            
+            <div class="reason-item">
+                <h3>🏆 实际成果</h3>
+                <p>参与真实项目开发，积累作品集，为未来学习和工作加分</p>
+            </div>
+            
+            <div class="reason-item">
+                <h3>💡 创新实践</h3>
+                <p>将创意变为现实，用代码解决实际问题，创造有价值的产品</p>
+            </div>
+        </div>
+        
+        <div class="roles">
+            <h2>我们正在寻找</h2>
+            
+            <div class="role-item">
+                <h3>💻 开发工程师</h3>
+                <p>负责软件开发、功能实现和代码优化。要求熟悉至少一种编程语言（C++/Python/JavaScript等）</p>
+            </div>
+            
+            <div class="role-item">
+                <h3>🎨 UI/UX设计师</h3>
+                <p>负责产品界面设计和用户体验优化。要求有审美能力，熟悉设计工具</p>
+            </div>
+            
+            <div classdiv class="role-item">
+                <h3>📝 技术文档工程师</h3>
+                <p>负责编写和维护技术文档、教程和帮助手册。要求表达能力强，逻辑清晰</p>
+            </div>
+            
+            <div class="role-item">
+                <h3>📊 产品经理</h3>
+                <p>负责需求分析、功能规划和项目进度管理。要求有产品思维和沟通协调能力</p>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <div class="project-card">
+                <h2>如何加入？</h2>
+                <p>如果你对我们的项目感兴趣，欢迎通过以下方式联系我们：</p>
+                <ul>
+                    <li>📧 发送邮件至: <strong>youmao2023@outlook.com</strong></li>
+                    <li>🌐 在GitHub上提交Issue或Pull Request</li>
+                </ul>
+                <p>请在联系时简单介绍自己，包括技术背景和感兴趣的领域。我们期待你的加入！</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 访问量统计功能
+        function updateVisitCount() {
+            // 获取当前页面标识
+            const page = window.location.pathname.split('/').pop() || 'index.html';
+
+            // 从localStorage获取当前访问数据
+            let visitData = localStorage.getItem('visitData');
+            visitData = visitData ? JSON.parse(visitData) : {};
+
+            // 初始化或更新当前页面访问次数
+            if (!visitData[page]) {
+                visitData[page] = 0;
+            }
+            visitData[page]++;
+
+            // 保存回localStorage
+            localStorage.setItem('visitData', JSON.stringify(visitData));
+
+            // 在页面上显示访问次数
+            const visitCountElement = document.createElement('div');
+            visitCountElement.className = 'visit-count';
+            visitCountElement.innerHTML = `<p>页面访问量: <span id="visit-count">${visitData[page]}</span></p>`;
+
+            // 将访问量显示添加到页面底部
+            document.querySelector('.content').appendChild(visitCountElement);
+        }
+
+        // 页面加载完成后执行统计
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVisitCount();
+        });
+    </script>
+</body>
+</html>
