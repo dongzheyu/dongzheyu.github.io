@@ -13,7 +13,7 @@
 }
 
 body {
-    background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('wallpeper.jpg') no-repeat center center fixed;
+    background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('https://gitee.com/jetcpp/dongzheyu.github.io/raw/main/wallpeper.jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     color: var(--text-color);
@@ -736,29 +736,4 @@ nav {
 .visit-count span {
     font-weight: bold;
     color: var(--accent-color);
-}
-
-/* 新增：加入我们页面特殊样式 */
-.joinin-nav {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-}
-
-.joinin-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--accent-color);
-    border-radius: 30px;
-    transition: all 0.3s ease;
-}
-
-.joinin-nav a:hover {
-    background: var(--accent-color);
-    color: var(--primary-color);
-    transform: scale(1.05);
 }

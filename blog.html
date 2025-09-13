@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客|JetCPP</title>
-    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="icon" href="https://gitee.com/jetcpp/dongzheyu.github.io/raw/main/logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="index-layout">
@@ -14,7 +14,6 @@
         <li><a href="about.html">关于</a></li>
         <li><a href="projects.html">项目</a></li>
         <li><a class="active" href="blog.html">博客</a></li>
-        <li><a href="joinin.html">加入我们</a></li>
     </ul>
 </nav>
 <button class="nav-toggle" onclick="toggleNav()">
@@ -30,18 +29,24 @@
         <p>适合人群: C++初学者</p>
         <a class="download-btn" href="blog/CPP.html" target="_blank">去阅读</a>
     </div>
+    <div class="project-zs">
+        <h3>Jetbrains Crack使用指南</h3>
+        <p>阅读时间:约1~5分钟</p>
+        <p>适合人群: Jetbrains用户</p>
+        <a class="download-btn" href="blog/Jetbrains.html" target="_blank">去阅读</a>
+    </div>
 </div>
 <script>
     // 访问量统计功能
     function updateVisitCount() {
         // 获取当前页面标识
-        const page = window.location.pathname.split('/').pop() || 'index.html';
+        // 初始化或更新当前页面访问次数
 
         // 从localStorage获取当前访问数据
         let visitData = localStorage.getItem('visitData');
         visitData = visitData ? JSON.parse(visitData) : {};
 
-        // 初始化或更新当前页面访问次数
+        // 初始��或更新当前页面访问次数
         if (!visitData[page]) {
             visitData[page] = 0;
         }

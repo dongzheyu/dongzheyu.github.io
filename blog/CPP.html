@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>C++入门指北 | JetCPP</title>
-    <link href="../logo.png" rel="icon" type="image/png">
+    <link href="https://gitee.com/jetcpp/dongzheyu.github.io/raw/main/logo.png" rel="icon" type="image/png">
     <link href="../style.css" rel="stylesheet">
 </head>
 <body class="alt-layout">
@@ -57,9 +57,9 @@
                     <p>这样，我们就可以使用新的GCC和GDB了</p>
                     <p>附件：</p>
                     <ul class="desktop-nav-links">
-                        <li><a  href="https://www.jetbrains.com.cn/clion/download/?section=windows" rel="noopener noreferrer" target="_blank">CLion下载地址</a></li>
-                        <li><a  download href="https://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/x86_64/msys2-x86_64-20250221.exe">msys2下载地址</a></li>
-                        <li><a  download href="https://github.whrstudio.top/https://github.com/msys2/msys2-installer/releases/download/2025-02-21/msys2-x86_64-20250221.exe">msys2下载地址（备用）</a></li>
+                        <li><a href="https://www.jetbrains.com.cn/clion/download/?section=windows" rel="noopener noreferrer" target="_blank">CLion下载地址</a></li>
+                        <li><a download href="https://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/x86_64/msys2-x86_64-20250221.exe">msys2下载地址</a></li>
+                        <li><a download href="https://github.whrstudio.top/https://github.com/msys2/msys2-installer/releases/download/2025-02-21/msys2-x86_64-20250221.exe">msys2下载地址（备用）</a></li>
                     </ul>
                 </article>
                 <article id="article2">
@@ -67,13 +67,11 @@
                     <h3>1.数据类型：int,float,double,char,bool,string,long long</h3>
                     <p>首先是整数类型，整数类型有int和long long。</p>
                     <p>int的字节大小为4字节，long long的字节大小为8字节。</p>
-                    <p>所以，int可以存的值范围是-2^31到2^31-1。long long可以存-2^63到2^63-1。</p>
+                    <p>所以，int可以存的值范围是-2^31到2^31-1。long long��以存-2^63到2^63-1。</p>
                     <p>long long存的数字比int大，所以long long可以存更多的数。</p>
                     <p>float和double都是浮点数类型，double的字节大小为8字节，float的字节大小为4字节。</p>
                     <p>double可以存更多的数，但是float只能存小数。</p>
-                    <p>char是字符类型，字节大小为1字节。定义要用单引号<br>如：<code>
-                        char a='a';
-                    </code></p>
+                    <p>char是字符类型，字节大小为1字节。定义要用单引号<br>如：<code>char a='a';</code></p>
                     <p>bool是布尔类型，字节大小为1字节。用于判断是否，0为否，1为是，或者true和false。</p>
                     <p>例如：<code>bool n=true;</code>或者<code>bool n=1</code></p>
                     <p>string是字符串类型，字节大小为字符串的长度。</p>
@@ -83,7 +81,7 @@
                     <p>标识符必须以字母开头，后面可以有数字，下划线，不能有特殊字符。</p>
                     <p>例如：<code>int a;</code></p>
                     <p>标识符的大小写敏感，所以a和A是两个不同的变量。</p>
-                    <h3>3.运算符</h3>
+                    <h3>3.运���符</h3>
                     <p>运算符是C++中的符号，用于计算。</p>
                     <p>运算符有：++ -- + - * / % < > <= >= == != && || & | ^ !</p>
                     <p>我来解释一下：</p>
@@ -121,20 +119,16 @@
                     <p>条件就是循环结束的条件，如果条件为真，则循环继续，否则循环结束。</p>
                     <p>更新就是你前面初始化的变量，每次循环结束后，都会更新这个变量。可以用++、--、+=、-=、*=、/=来更新变量。</p>
                     <p>来看个例子：</p>
-                    <code>
-                        for(int i=0;i<10;i++)
-                    </code>
+                    <pre><code class="language-cpp">for(int i=0;i&lt;10;i++)</code></pre>
                     <p>这个for循环，初始化i为0，条件为i<10，更新i为i+1。</p>
                     <p>while循环:</p>
                     <p>while循环的格式为：while(条件)</p>
                     <p>while循环和for循环一样，也是循环，但是while循环不需要初始化，也不需要更新。(PS:如果需要更新的话你可以直接定义一个变量在while循环里面来更新)</p>
                     <p>来看个例子：</p>
-                    <code>
-                        int i=0;<br>
-                        while(i<10){<br>
-                        i++;<br>
-                        }
-                    </code>
+                    <pre><code class="language-cpp">int i=0;
+while(i&lt;10){
+    i++;
+}</code></pre>
                     <p>这个while循环，条件为i<10，每次循环结束后，都会更新i为i+1。</p>
                     <h3>6.判断</h3>
                     <p>C++中的判断有if，else，switch。</p>
@@ -142,68 +136,58 @@
                     <p>if判断的格式为：if(条件)</p>
                     <p>if判断只有条件，如果条件为真，则执行if后面的代码，否则不执行。</p>
                     <p>来看个例子：</p>
-                    <code>
-                        if(i<10){<br>
-                        cout<<"i小于10"<< endl ;<br>
-                        }
-                    </code>
+                    <pre><code class="language-cpp">if(i&lt;10){
+    cout&lt;&lt;"i小于10"&lt;&lt; endl ;
+}</code></pre>
                     <p>这个if判断，条件为i<10，如果i小于10，则输出"i小于10"。</p>
                     <p>else判断:</p>
                     <p>else判断的格式为：if(条件){} else{}</p>
                     <p>else判断和if判断一样，但是else判断只有else，如果if判断条件为假，则执行else后面的代码，否则不执行。</p>
                     <p>来看个例子：</p>
-                    <code>
-                        if(i<10){<br>
-                        cout<<"i小于10"<< endl;<br>
-                        } else{<br>
-                        cout<<"i大于等于10"<< endl;<br>
-                        }
-                    </code>
+                    <pre><code class="language-cpp">if(i&lt;10){
+    cout&lt;&lt;"i小于10"&lt;&lt; endl;
+} else{
+    cout&lt;&lt;"i大于等于10"&lt;&lt; endl;
+}</code></pre>
                     <p>这个else判断，条件为i<10，如果i小于10，则输出"i小于10"，否则输出"i大于等于10"。</p>
                     <p>switch判断:</p>
                     <p>switch判断的格式为：switch(表达式)</p>
                     <p>switch判断和if判断一样，但是switch判断有多个case，case表示一个条件，如果case满足，则执行case后面的代码，否则继续执行下一个case。</p>
                     <p>来看个例子：</p>
-                    <code>
-                        switch(i){<br>
-                        case 1:<br>
-                        cout<<"i等于1"<< endl;<br>
-                        break;<br>
-                        case 2:<br>
-                        cout<<"i等于2"<< endl;<br>
-                        break;<br>
-                        default:<br>
-                        cout<<"
-                        }
-                    </code>
+                    <pre><code class="language-cpp">switch(i){
+    case 1:
+        cout&lt;&lt;"i等于1"&lt;&lt; endl;
+        break;
+    case 2:
+        cout&lt;&lt;"i等于2"&lt;&lt; endl;
+        break;
+    default:
+        cout&lt;&lt;"i不等于1和2"&lt;&lt; endl;
+}</code></pre>
                     <p>这个switch判断，表达式为i，case为1和2，如果i等于1，则输出"i等于1"，如果i等于2，则输出"i等于2"，否则输出"i不等于1和2"。</p>
                     <h2>数组</h2>
                     <p>C++中的数组有int[]、char[]、float[]、double[]、string[]。<</p>
                     <p>数组的格式为：数据类型 数组名[数组大小]</p>
                     <p>来看个例子：</p>
-                    <code>
-                        int a[10];<br>
-                        char b[10];<br>
-                        float c[10];<br>
-                        double d[10];<br>
-                        string e[10];
-                    </code>
+                    <pre><code class="language-cpp">int a[10];
+char b[10];
+float c[10];
+double d[10];
+string e[10];</code></pre>
                     <p>这个例子，定义了10个int、char、float、double、string类型的数组。</p>
                     <p>数组的访问：</p>
                     <p>数组的访问格式为：数组名[索引]</p>
                     <p>还有vector数组，vector数组的格式为：vector&lt;数据类型&gt; 数组名;</p>
                     <p>来看个例子：</p>
-                    <code>
-                        vector&lt;int&gt; a;<br>
-                        vector&lt;char&gt; b;<br>
-                        vector&lt;float&gt; c;<br>
-                        vector&lt;double&gt; d;<br>
-                        vector&lt;string&gt; e;
-                    </code>
+                    <pre><code class="language-cpp">vector&lt;int&gt; a;
+vector&lt;char&gt; b;
+vector&lt;float&gt; c;
+vector&lt;double&gt; d;
+vector&lt;string&gt; e;</code></pre>
                     <p>这个例子，定义了10个int、char、float、double、string类型的vector数组。</p>
                     <p>vector数组的访问：</p>
                     <p>vector数组的访问格式为：数组名[索引]</p>
-                    <h3>以上就是C++的运算符、数据类型、变量、常量、运算符、二进制换算、循环、判断、数组。</h3>
+                    <h3>以上就是C++的运算符、数据类型、变量、常量、运算符、二���制换算、循环、判断、数组。</h3>
                 </article>
                 <article id="article3">
                     <h2>简单程序</h2>
@@ -221,14 +205,12 @@
                     <p>主函数的格式为：int main(){}</p>
                     <p>(PS:补充一下，cin是输入函数，cout是输出函数)</p>
                     <p>知道这些，我们开始编写程序。</p>
-                    <code>
-                        #include &lt;iostream&gt;<br>
-                        using namespace std;<br>
-                        int main(){<br>
-                        cout<<"Hello World!"<< endl;<br>
-                        return 0;<br>
-                        }
-                    </code>
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    cout&lt;&lt;"Hello World!"&lt;&lt; endl;
+    return 0;
+}</code></pre>
                     <p>(PS:iostream是c++标准库，用于输入输出。std是c++标准库的命名空间。输出标识符直接输入标识符名，其他需要加双引号)</p>
                     <p>这个程序，输出"Hello World!"。</p>
                 </article>
@@ -278,8 +260,7 @@
 25</pre>
                     <ul class="desktop-nav-links"><li><a href="https://ybt.ssoier.cn/problem_show.php?pid=1007">提交链接</a></li></ul>
                     <h3>计算(a+b)/c的值</h3>
-                    <pre>
-                        【题目描述】
+                    <pre>【题目描述】
 给定3个整数a、b、c，计算表达式a+bc的值。
 
 【输入】
@@ -291,134 +272,117 @@
 【输入样例】
 1 1 3
 【输出样例】
-0
-                    </pre>
+0</pre>
                 </article>
                 <article id="article5">
                     <h2>函数</h2>
                     <p>函数, 函数是C++的基础，函数的格式为：</p>
-                    <pre><code>
-返回值类型 函数名(参数列表){
-函数体
-return 返回值;
-}
-                    </code>
-                    </pre>
-                    <p>函数的参数列表为函数的参数，参数列表为空时，参数列表为()。</p>
+                    <pre><code class="language-cpp">返回值类型 函数名(参数列表){
+    函数体
+    return 返回值;
+}</code></pre>
+                    <p>函数的参数列表为函数的参数��参数列表为空时，参数列表为()。</p>
                     <p>函数的返回值类型为函数的返回值类型，返回值类型为void时，返回值类型为()。</p>
                     <p>返回值类型可以为int、char、float、double、string、bool、void等。</p>
                     <p>我们可以在函数中定义变量，变量的作用域为函数内。这是局部变量</p>
                     <p>函数的调用格式为：函数名(参数列表)</p>
                     <p>了解了这些后，我们就可以开始编写函数了。</p>
                     <p>简单a+b示例:</p>
-                    <pre class="cpp">
-                        #include &lt;iostream&gt;
-                        using namespace std;
-                        int add(int a, int b){
-                            return a+b;
-                        }
-                        int main(){
-                            int a, b;
-                            cin>>a>>b;
-                            cout<< add(a, b)<< endl;
-                            return 0;
-                        }
-                    </pre>
+                    <pre class="cpp"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+int add(int a, int b){
+    return a+b;
+}
+int main(){
+    int a, b;
+    cin&gt;&gt;a&gt;&gt;b;
+    cout&lt;&lt; add(a, b)&lt;&lt; endl;
+    return 0;
+}</code></pre>
                 </article>
                 <article id="article6">
                     <h2>结构体</h2>
                     <p>结构体, 结构体是C++的基础，结构体的格式为：</p>
-                    <pre><code>
-struct 结构体名{
+                    <pre><code class="language-cpp">struct 结构体名{
     成员变量1;
     成员变量2;
     ...
-}
-                    </code>
-                    </pre>
+}</code></pre>
                     <p>结构体的成员变量为结构体的成员变量，成员变量为变量。</p>
                     <p>我们可以在结构体中定义变量，变量的作用域为结构体内。这是局部变量</p>
                     <p>结构体的调用格式为：结构体名.成员变量名</p>
                     <p>了解了这些后，我们就可以开始编写结构体了。</p>
                     <p>简单结构体示例:</p>
-                    <pre class="cpp">
-                        #include &lt;iostream&gt;
-                        using namespace std;
-                        struct Person{
-                            string name;
-                            int age;
-                            double height;
-                        }
-                        int main(){
-                            Person person;
-                            cin>>person.name>>person.age>>person.height;
-                            cout<< person.name<< " "<< person.age<< " "<< person.height<< endl;
+                    <pre class="cpp"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct Person{
+    string name;
+    int age;
+    double height;
+}
+int main(){
+    Person person;
+    cin&gt;&gt;person.name&gt;&gt;person.age&gt;&gt;person.height;
+    cout&lt;&lt; person.name&lt;&lt; " "&lt;&lt; person.age&lt;&lt; " "&lt;&lt; person.height&lt;&lt; endl;
 
-                        }
-                    </pre>
+}</code></pre>
                     <p>结构体也可以嵌套结构体。</p>
                     <p>嵌套结构体示例:</p>
-                    <pre class="cpp">
-                        #include &lt;iostream&gt;
-                        using namespace std;
-                        struct Person{
-                            string name;
-                            int age;
-                            double height;
-                        }
-                        struct Student{
-                            Person person;
-                            int grade;
-                        }
-                        int main(){
-                            Student student;
-                            cin>>student.person.name>>student.person.age>>student.person.height>>student.grade;
-                            cout<< student.person.name<< " "<< student.person.age<< " "<< student.person.height<< " "<< student.grade<< endl;
+                    <pre class="cpp"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct Person{
+    string name;
+    int age;
+    double height;
+}
+struct Student{
+    Person person;
+    int grade;
+}
+int main(){
+    Student student;
+    cin&gt;&gt;student.person.name&gt;&gt;student.person.age&gt;&gt;student.person.height&gt;&gt;student.grade;
+    cout&lt;&lt; student.person.name&lt;&lt; " "&lt;&lt; student.person.age&lt;&lt; " "&lt;&lt; student.person.height&lt;&lt; " "&lt;&lt; student.grade&lt;&lt; endl;
 
-                        }
-                    </pre>
+}</code></pre>
                     <p>结构体也可以定义数组。</p>
                     <p>结构体数组的调用格式为：结构体名[数组索引]</p>
                     <p>了解了这些后，我们就可以开始编写结构体数组了。</p>
                     <p>简单结构体数组示例:</p>
-                    <pre class="cpp">
-                        #include &lt;iostream&gt;
-                        using namespace std;
-                        struct Person{
-                            string name;
-                            int age;
-                            double height;
-                        }
-                        int main(){
-                            Person person[10];
-                            for(int i=0; i&lt;10; i++){
-                                cin>>person[i].name>>person[i].age>>person[i].height;
-                            }
-                            for(int i=0; i&lt;10; i++){
-                                cout<< person[i].name<< " "<< person[i].age<< " "<< person[i].height<< endl;
-                            }
-                        }
-                    </pre>
+                    <pre class="cpp"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct Person{
+    string name;
+    int age;
+    double height;
+}
+int main(){
+    Person person[10];
+    for(int i=0; i&lt;10; i++){
+        cin&gt;&gt;person[i].name&gt;&gt;person[i].age&gt;&gt;person[i].height;
+    }
+    for(int i=0; i&lt;10; i++){
+        cout&lt;&lt; person[i].name&lt;&lt; " "&lt;&lt; person[i].age&lt;&lt; " "&lt;&lt; person[i].height&lt;&lt; endl;
+    }
+}</code></pre>
                     <p>结构体也可以定义指针。</p>
                     <p>结构体指针的调用格式为：结构体名*指针名</p>
                     <p>了解了这些后，我们就可以开始编写结构体指针了。</p>
                     <p>简单结构体指针示例:</p>
-                    <pre class="cpp">
-                        #include &lt;iostream&gt;
-                        using namespace std;
-                        struct Person{
-                            string name;
-                            int age;
-                            double height;
-                        }
-                        int main(){
-                            Person *person;
-                            person = new Person;
-                            cin>>person->name>>person->age>>person->height;
-                            cout<< person->name<< " "<< person->age<< " "<< person->height<< endl;
-                            delete person;
-                        }
-                    </pre>
+                    <pre class="cpp"><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct Person{
+    string name;
+    int age;
+    double height;
+}
+int main(){
+    Person *person;
+    person = new Person;
+    cin&gt;&gt;person-&gt;name&gt;&gt;person-&gt;age&gt;&gt;person-&gt;height;
+    cout&lt;&lt; person-&gt;name&lt;&lt; " "&lt;&lt; person-&gt;age&lt;&lt; " "&lt;&lt; person-&gt;height&lt;&lt; endl;
+    delete person;
+}</code></pre>
                     <h2></h2>
                 </article>
                 <!-- 更多文章... -->
@@ -426,7 +390,28 @@ struct 结构体名{
             </main>
         </div>
     </div>
+    
     <script>
+        // 添加Markdown代码高亮功能
+        function highlightCode() {
+            const codeBlocks = document.querySelectorAll('pre code');
+            codeBlocks.forEach(block => {
+                const language = block.className.replace('language-', '');
+                if (language === 'cpp') {
+                    // 为C++代码添加语法高亮类
+                    block.innerHTML = block.innerHTML
+                        .replace(/\b(int|char|float|double|bool|void|struct|return|if|else|switch|case|break|default|for|while|do|using|namespace|include|#define|#include)\b/g, '<span class="keyword">$1</span>')
+                        .replace(/\b(cin|cout|endl)\b/g, '<span class="library">$1</span>')
+                        .replace(/\b(true|false)\b/g, '<span class="keyword">$1</span>')
+                        .replace(/(\d+)/g, '<span class="number">$1</span>')
+                        .replace(/(".*?")/g, '<span class="string">$1</span>')
+                        .replace(/('.*?')/g, '<span class="string">$1</span>')
+                        .replace(/(\/\/.*$)/gm, '<span class="comment">$1</span>')
+                        .replace(/(#\w+)/g, '<span class="preprocessor">$1</span>');
+                }
+            });
+        }
+
         // 访问量统计功能
         function updateVisitCount() {
             // 获取当前页面标识
@@ -454,9 +439,10 @@ struct 结构体名{
             document.querySelector('.content').appendChild(visitCountElement);
         }
 
-        // 页面加载完成后执行统计
+        // 页面加载完成后执行统计和代码高亮
         document.addEventListener('DOMContentLoaded', function() {
             updateVisitCount();
+            highlightCode();
         });
 
         function toggleNav() {
