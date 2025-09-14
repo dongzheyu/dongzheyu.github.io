@@ -1,6 +1,9 @@
 # JetCPP 工作室网站
 
 欢迎来到 JetCPP 工作室的官方网站！我们是一群热爱编程的开发者，致力于打造高质量的开源项目和编程教程。
+```
+注意主链接更换为:https://jetcpp.rth1.xyz/index.html，但http://dongzheyu.github.io/仍可用作为备用链接
+```
 
 ## 🚀 关于我们
 
