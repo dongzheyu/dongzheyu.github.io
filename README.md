@@ -1,9 +1,10 @@
 # JetCPP 工作室网站
 
 欢迎来到 JetCPP 工作室的官方网站！我们是一群热爱编程的开发者，致力于打造高质量的开源项目和编程教程。
+
 ---
 
-*花9.9在拼夕夕上买了个域名，现在终于可以摆脱热铁盒和GitHub的束缚了！而且已受cloudflare保护。  新域名为:[https://jetcpp.dpdns.org/](https://jetcpp.dpdns.org/)
+* 花9.9在拼夕夕上买了个域名，现在终于可以摆脱热铁盒和GitHub的束缚了！而且已受cloudflare保护。  新域名为:[https://jetcpp.dpdns.org/](https://jetcpp.dpdns.org/)
 
 ---
 
