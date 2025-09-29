@@ -1,0 +1,18 @@
+# Dependencies
+/build/node_modules
+/node_modules
+
+# Build outputs
+/dist
+/.vitepress/dist
+
+# Logs
+*.log
+
+# IDE files
+.vscode
+.idea
+
+# System files
+.DS_Store
+Thumbs.db
