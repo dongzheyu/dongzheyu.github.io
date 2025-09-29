@@ -1,35 +1,41 @@
-# JetCPP Studio Website
+# JetCPP Studio 网站
 
-个人网站与博客，基于 VitePress 构建的技术博客和项目展示平台。
+欢迎访问 JetCPP Studio！我们是一个由热爱编程的小学生和中学生组成的团队，专注于 C++ 开发和技术分享。这个网站是我们技术博客和项目展示的平台。
 
-## 🚀 项目概述
+## 🚀 关于我们
 
-JetCPP Studio 是一个专注于 C++ 开发和技术分享的个人网站，包含技术博客、项目展示和个人简介等内容。
+JetCPP工作室成立于2024年7月，致力于开发高效实用的软件工具。我们的使命是通过简洁高效的代码解决实际问题，让技术更贴近生活，赋能每一位用户。
 
-## 📁 项目结构
+### 🌟 团队文化
 
-```
-dongzheyu.github.io/
-├── index.html          # 首页
-├── about.html          # 关于页面
-├── blog.html          # 博客首页
-├── projects.html      # 项目展示页
-├── assets/            # 静态资源目录
-│   ├── *.js          # JavaScript 文件
-│   ├── *.css         # 样式文件
-│   ├── *.woff2       # 字体文件
-│   └── chunks/       # 代码分割块
-├── blog/              # 博客文章目录
-│   ├── CPP.html      # C++ 相关文章
-│   └── Jetbrains.html # Jetbrains 相关文章
-├── .git/              # Git 版本控制
-├── .idea/             # IDE 配置文件
-├── hashmap.json       # 文件哈希映射
-├── vp-icons.css       # VitePress 图标样式
-└── LICENSE            # 许可证文件
-```
+- **开放协作**：共享知识，共同成长，互相支持
+- **持续学习**：紧跟技术前沿，不断提升编程技能
+- **用户至上**：从用户需求出发，打造真正有价值的工具
 
-## 🛠️ 技术栈
+## 🧰 项目展示
+
+### Minecraft-Tools
+
+Minecraft 一站式工具箱，当前版本 v6.6.0，已累计超过15,000次下载。
+
+主要特性：
+- 🚀 极速启动：在老旧电脑上仅需5秒完成启动
+- 🐎 一键安装：简化安装流程，新手也能轻松完成
+- 🛡️ 安全可靠：无捆绑软件、无后台进程、无数据收集
+- 🧰 功能全面：精选实用组件，覆盖各类使用场景
+
+### Jetbrains Crack
+
+一键破解JetBrains全家桶软件，仅供学习和研究使用，禁止用于商业用途。
+
+## 📚 技术博客
+
+我们分享各种技术文章，帮助开发者学习和成长：
+
+1. **C++编程入门指南** - 适合初学者，阅读时间约20-30分钟
+2. **Jetbrains Crack使用指南** - 工具使用教程，阅读时间约1-5分钟
+
+## 🛠️ 技术架构
 
 - **前端框架**: VitePress v1.6.4
 - **构建工具**: Vite
@@ -37,22 +43,9 @@ dongzheyu.github.io/
 - **字体**: Inter 字体家族
 - **部署**: GitHub Pages / Gitee Pages
 
-## 📚 内容分类
+## 🚀 快速开始
 
-### 博客文章
-- **C++ 开发**: C++ 编程技巧和最佳实践
-- **Jetbrains**: IDE 使用技巧和插件开发
-- **Minecraft 工具**: Minecraft 相关开发工具
-- **技术分享**: 其他技术主题分享
-
-### 项目展示
-- 个人开发的项目案例
-- 开源项目贡献
-- 技术实验和原型
-
-## 🚀 本地开发
-
-由于项目使用 VitePress，本地开发需要安装依赖：
+要在本地运行和开发网站：
 
 ```bash
 # 安装依赖（如果 package.json 存在）
@@ -65,51 +58,29 @@ npm run dev
 npm run build
 ```
 
-## 🌐 部署
+## 🌐 访问网站
 
-项目部署到 GitHub Pages 或 Gitee Pages：
+您可以通过以下地址访问我们的网站：
 
-```bash
-# 构建项目
-npm run build
+[https://jetcpp.dpdns.org](https://jetcpp.dpdns.org)
 
-# 部署到 GitHub Pages
-npm run deploy
-```
+## 📈 未来规划
 
-## 📝 内容管理
-
-网站内容通过 Markdown 文件管理，主要包含：
-
-- `index.md` - 首页内容
-- `about.md` - 关于页面内容  
-- `blog.md` - 博客首页
-- `projects.md` - 项目页面
-- 各分类博客文章 Markdown 文件
-
-## 🔧 自定义配置
-
-VitePress 配置位于主题配置中，支持：
-
-- 暗色/亮色主题切换
-- 响应式设计
-- 自定义导航栏
-- 社交媒体链接
-- 搜索功能
-
-## 📄 许可证
-
-项目采用 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
+2025年我们将推出跨平台开发框架，支持Windows、Linux和移动端，为开发者提供一体化解决方案。
 
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request 来改进网站内容和功能。
 
-## 📞 联系
+## 📞 联系我们
 
 - GitHub: [dongzheyu](https://github.com/dongzheyu)
 - Gitee: [jetcpp](https://gitee.com/jetcpp)
+- 哔哩哔哩: [JetCPP官方账号](https://space.bilibili.com/3546730880567808?spm_id_from=333.1007.0.0)
+- 赞助支持: [爱发电](https://afdian.com/a/JetCPP)
 
 ---
 
 *© 2024-2025 JetCPP Studio. 代码重塑世界 · 创新驱动未来*
+
+*所有软件永久免费，无广告无订阅，坚持由爱好者为爱好者开发的初心。
