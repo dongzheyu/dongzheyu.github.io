@@ -1,7 +1,6 @@
 # JetCPP Studio Website
 
-个人网站与博客，基于 VitePress 构建的技术博客和项目展示平台。  
-* *网址:https://jetcpp.dpdns.org/*
+个人网站与博客，基于 VitePress 构建的技术博客和项目展示平台。
 
 ## 🚀 项目概述
 
