@@ -40,5 +40,10 @@ features:
   - icon: 🌐
     title: 跨平台支持
     details: 所有项目均支持Windows、Linux、macOS等主流平台，提供良好的跨平台兼容性。
-
+  - icon: 💖
+    title: 支持一下
+    details: 如果喜欢我们，可以给个
+    theme: alt
+    text: Stars
+    link: https://github.com/dongzheyu/dongzheyu.github.io
 ---

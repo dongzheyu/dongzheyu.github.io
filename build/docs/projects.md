@@ -9,7 +9,7 @@
 ### 链接
 
 - [GitHub仓库](https://github.com/dongzheyu/Minecraft-Toos/)
-- [👁️ 立刻查看](Minecraft-Toos.md)
+- [👁️ 立刻查看](project/Minecraft-Toos.md)
 
 ## Jetbrains Crack
 
@@ -20,4 +20,12 @@
 ### 链接
 
 - [GitHub仓库](https://github.com/dongzheyu/jetbrains-Crack)
-- [👁️ 立刻查看](Jetbrains-Crack.md)
+- [👁️ 立刻查看](project/Jetbrains-Crack.md)
+
+## GoodMinecraft
+**一个优化Minecraft玩法和体验的整合包**
+🚀 **当前版本**: 1.0(游戏版本：1.21.8)
+### 链接
+
+- [modrinth](https://modrinth.com/project/kMXeIiJj)
+- [👁️ 立刻查看](project/goodminecraft.md)
