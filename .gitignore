@@ -15,4 +15,5 @@
 
 # System files
 .DS_Store
-Thumbs.db
+Thumbs.dbbuild/
+build/docs/.vitepress/dist
