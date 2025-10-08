@@ -1,9 +1,10 @@
 # GoodMinecraft
 ## 一款可以优化你的游戏体验的Minecraft整合包!
 🚀 **当前版本**: v1.2.0（随游戏和mod更新）
-📗 **本整合包正在modrinth审核中……**
+📗 **本整合包正在bbsmc审核中……**
 ### 下载链接
  - [modrinth](https://modrinth.com/project/kMXeIiJj)
+ - [bbsmc(暂时无法访问)](https://bbsmc.net/modpack/goodm/moderation)
 ### 更新日志 1.2.0
 **Chinese**
 #### 更新mod:
