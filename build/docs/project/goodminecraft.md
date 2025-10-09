@@ -4,6 +4,7 @@
 ### 下载链接
  - [modrinth](https://modrinth.com/project/kMXeIiJj)
  - [bbsmc](https://bbsmc.net/modpack/goodm/moderation)
+ - [Wiki](goodminecraftwiki.md)
 ### 更新日志 1.3.0
 #### Chinese
 ##### 更新mod和整合包
