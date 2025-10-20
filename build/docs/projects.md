@@ -38,3 +38,11 @@
 - [Gitee](https://gitee.com/jetcpp/github-clone)
 - [Github](https://github.com/dongzheyu/github-clone)
 - [👁️ 立刻查看](project/Github-Clone.md)
+
+## English Listen - 英语听写练习程序
+**英语听写练习程序**
+🚀 **当前版本**: permanent version1.0
+### 链接
+- [Gitee](https://gitee.com/jetcpp/english_-listen/)
+- [Github](https://github.com/dongzheyu/English_Listen)
+- [👁️ 立刻查看](project/Englis-Lesten.md)
