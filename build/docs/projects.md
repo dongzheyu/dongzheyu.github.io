@@ -24,9 +24,17 @@
 
 ## GoodMinecraft
 **一个优化Minecraft玩法和体验的整合包**
-🚀 **当前版本**: 1.3。0(游戏版本：1.21.8)
+🚀 **当前版本**: 1.3.0(游戏版本：1.21.8)
 ### 链接
 
 - [modrinth](https://modrinth.com/project/kMXeIiJj)
 - [bbsmc](https://bbsmc.net/modpack/goodm/moderation)
 - [👁️ 立刻查看](project/goodminecraft.md)
+
+## Github-Clone
+**一款可以批量克隆某个GitHub用户的所有公开仓库的软件!**
+🚀 **当前版本**: v1.0.0
+### 链接
+- [Gitee](https://gitee.com/jetcpp/github-clone)
+- [Github](https://github.com/dongzheyu/github-clone)
+- [👁️ 立刻查看](project/Github-Clone.md)
