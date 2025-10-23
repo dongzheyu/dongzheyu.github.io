@@ -1,14 +1,38 @@
-# English Listen - 英语听写练习程序
+---
+layout: project
+hero:
+  name: "English Listen"
+  text: "英语听写练习程序"
+  tagline: 基于C++和Qt6开发的英语听写练习工具，支持CLI命令行版本和GUI图形界面版本
+  actions:
+    - theme: brand
+      text: Gitee
+      link: https://gitee.com/jetcpp/english_-listen/
+    - theme: alt
+      text: Github
+      link: https://github.com/dongzheyu/English_Listen
+    - theme: alt
+      text: 下载QT版本
+      link: https://gh-proxy.com/https://github.com/dongzheyu/English_Listen/releases/download/1.0.0/QtEnglishListen.exe
 
-一个基于C++和Qt6开发的英语听写练习工具，支持CLI命令行版本和GUI图形界面版本。
+features:
+  - icon: 🔄
+    title: 双版本支持
+    details: CLI命令行版本和Qt6图形界面版本，满足不同使用需求
+  - icon: 📚
+    title: 词库管理
+    details: 添加、删除、清空单词，支持从文件导入和导出
+  - icon: 🔊
+    title: 听写测试
+    details: 自动朗读单词，支持间隔时间设置
+  - icon: 🎨
+    title: 主题切换
+    details: 支持浅色和深色主题，自动适配Windows系统主题
+  - icon: 🎯
+    title: Windows TTS集成
+    details: 使用Windows SAPI进行文本朗读
 
-## 功能特性
-
-- 双版本支持：CLI命令行版本和Qt6图形界面版本
-- 词库管理：添加、删除、清空单词，支持从文件导入和导出
-- 听写测试：自动朗读单词，支持间隔时间设置
-- 主题切换：支持浅色和深色主题，自动适配Windows系统主题
-- Windows TTS集成：使用Windows SAPI进行文本朗读
+---
 
 ## 界面预览
 
@@ -92,10 +116,4 @@ MIT License
 
 JetCPP Studio
 
-
-# 请再创建一个文本文档并和本程序放在同一目录中，便于写入词库。
-
-# 链接:
- - [Gitee](https://gitee.com/jetcpp/english_-listen/)
- - [Github](https://github.com/dongzheyu/English_Listen)
- - [下载链接（QT），CLi请到Gitee或Github自取](https://gh-proxy.com/https://github.com/dongzheyu/English_Listen/releases/download/1.0.0/QtEnglishListen.exe)
+> 请再创建一个文本文档并和本程序放在同一目录中，便于写入词库。
