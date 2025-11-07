@@ -1,1 +1,0 @@
-import{_ as a,c as r,o as t,ae as o}from"./chunks/framework.Bi6zybwU.js";const b=JSON.parse('{"title":"我们的项目","description":"","frontmatter":{},"headers":[],"relativePath":"projects.md","filePath":"projects.md"}'),i={name:"projects.md"};function n(l,e,h,s,c,d){return t(),r("div",null,[...e[0]||(e[0]=[o("",23)])])}const g=a(i,[["render",n]]);export{b as __pageData,g as default};
