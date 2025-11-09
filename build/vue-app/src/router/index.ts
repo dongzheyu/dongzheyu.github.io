@@ -69,6 +69,11 @@ const router = createRouter({
       name: 'project-minecraft-toos-help',
       component: () => import('../views/project/MinecraftToosHelpView.vue'),
     },
+    {
+      path: '/redirect',
+      name: 'redirect',
+      component: () => import('../views/RedirectView.vue'),
+    },
   ],
 })
 

@@ -45,6 +45,9 @@ onMounted(() => {
             <li class="nav-item">
               <RouterLink to="/about" class="nav-link">关于我们</RouterLink>
             </li>
+            <li class="nav-item">
+              <RouterLink to="/redirect" class="nav-link">文海拾贝</RouterLink>
+            </li>
           </ul>
           
           <div class="dropdown">
