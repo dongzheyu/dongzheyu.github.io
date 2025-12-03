@@ -101,7 +101,7 @@ onMounted(() => {
                 <i class="bi bi-play-circle fs-4"></i>
               </a>
             </div>
-            <p class="text-muted mb-0">© 2024 JetCPP Studio. All rights reserved.</p>
+            <p class="text-muted mb-0">© 2025 JetCPP Studio. All rights reserved.</p>
           </div>
         </div>
       </div>

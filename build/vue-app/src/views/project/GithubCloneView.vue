@@ -14,7 +14,10 @@
           
           <div class="project-content">
             <h2>项目简介</h2>
-            <p>Github-Clone是一个强大的GitHub仓库批量克隆工具，支持批量下载和管理GitHub项目。该工具特别适合开发者需要同时管理多个开源项目或进行代码分析的场景。</p>
+            <p>作为一个热爱开源技术的学生，我经常需要研究和学习各种开源项目。为了更方便地管理这些项目，我开发了Github-Clone工具，可以批量下载和管理GitHub项目。这个工具特别适合学习和研究多个开源项目，提高学习效率。</p>
+            
+            <h2>开发背景</h2>
+            <p>在学习编程的过程中，我经常需要研究不同的开源项目来提升自己的技能。手动一个个克隆仓库非常耗时，所以我决定开发这个工具来自动化这个过程。通过这个项目，我不仅解决了实际问题，还学习了Python的多线程和网络编程。</p>
             
             <h2>主要功能</h2>
             <ul>
@@ -22,10 +25,10 @@
               <li><strong>智能过滤</strong>：可以根据语言、星标数、更新时间等条件筛选仓库</li>
               <li><strong>进度显示</strong>：实时显示克隆进度和状态</li>
               <li><strong>断点续传</strong>：支持中断后继续克隆</li>
-              <li><strong>组织管理</strong>：按用户或组织自动分类存储</li>
+              <li><strong>分类管理</strong>：按用户或组织自动分类存储</li>
             </ul>
             
-            <h2>技术特点</h2>
+            <h2>技术学习</h2>
             <h3>核心技术栈</h3>
             <ul>
               <li><strong>Python 3.8+</strong>：主要开发语言</li>
@@ -34,7 +37,7 @@
               <li><strong>多线程</strong>：提高克隆效率</li>
             </ul>
             
-            <h3>架构设计</h3>
+            <h3>项目结构</h3>
             <pre><code>├── github_clone/
 │   ├── __init__.py
 │   ├── api.py          # GitHub API交互
@@ -51,81 +54,80 @@
             <pre><code># 克隆单个用户的所有仓库
 python github_clone.py --user dongzheyu
 
-# 克隆组织的仓库
-python github_clone.py --org jetcpp
-
 # 按语言筛选
 python github_clone.py --user dongzheyu --language python
 
 # 限制克隆数量
 python github_clone.py --user dongzheyu --limit 10</code></pre>
             
-            <h3>高级选项</h3>
-            <pre><code># 只克隆有特定星标的仓库
-python github_clone.py --user dongzheyu --min-stars 100
+            <h3>学习模式</h3>
+            <pre><code># 只克隆有特定星标的仓库（适合研究高质量项目）
+python github_clone.py --user dongzheyu --min-stars 50
 
-# 排除fork仓库
+# 排除fork仓库（只关注原创项目）
 python github_clone.py --user dongzheyu --no-forks
 
 # 指定保存目录
-python github_clone.py --user dongzheyu --output ./repos</code></pre>
+python github_clone.py --user dongzheyu --output ./study-projects</code></pre>
             
             <h2>配置文件</h2>
             <p>支持通过配置文件自定义设置：</p>
             <pre><code>{
     "github_token": "your_token_here",
     "default_output": "./github_repos",
-    "max_concurrent": 5,
+    "max_concurrent": 3,
     "timeout": 30,
-    "exclude_patterns": ["*.exe", "*.dll"]
+    "exclude_patterns": ["*.exe", "*.dll"],
+    "study_mode": true
 }</code></pre>
             
-            <h2>性能优化</h2>
+            <h2>学习心得</h2>
             <h3>并发控制</h3>
             <ul>
-              <li>使用线程池控制并发数量</li>
-              <li>智能限速避免API限制</li>
-              <li>缓存API响应减少请求</li>
+              <li>学习了线程池的使用方法</li>
+              <li>理解了API限速的重要性</li>
+              <li>掌握了缓存机制的实现</li>
             </ul>
             
-            <h3>内存优化</h3>
+            <h3>编程技能提升</h3>
             <ul>
-              <li>流式处理大仓库</li>
-              <li>及时释放不需要的资源</li>
-              <li>使用生成器减少内存占用</li>
+              <li>Python多线程编程</li>
+              <li>网络请求处理</li>
+              <li>错误处理和异常管理</li>
+              <li>命令行参数解析</li>
             </ul>
             
-            <h2>常见问题</h2>
+            <h2>遇到的挑战</h2>
             <h3>API限制</h3>
-            <p>GitHub API有访问频率限制，建议：</p>
+            <p>GitHub API有访问频率限制，我通过以下方式解决：</p>
             <ul>
               <li>使用Personal Access Token提高限制</li>
               <li>合理设置并发数量</li>
               <li>实现指数退避重试机制</li>
             </ul>
             
-            <h3>网络问题</h3>
+            <h3>学习收获</h3>
             <ul>
               <li>支持代理配置</li>
               <li>自动重试失败的请求</li>
               <li>超时设置和错误处理</li>
             </ul>
             
-            <h2>开发计划</h2>
+            <h2>未来计划</h2>
             <ul>
               <li>[ ] 支持GitLab等其他平台</li>
               <li>[ ] 添加图形界面</li>
-              <li>[ ] 实现仓库更新功能</li>
-              <li>[ ] 添加仓库分析功能</li>
+              <li>[ ] 实现仓库分析功能</li>
+              <li>[ ] 添加学习笔记功能</li>
             </ul>
             
-            <h2>贡献指南</h2>
-            <p>欢迎提交Issue和Pull Request！</p>
+            <h2>学习建议</h2>
+            <p>如果你也想学习如何开发类似工具：</p>
             <ul>
-              <li>Fork项目</li>
-              <li>创建功能分支</li>
-              <li>提交更改</li>
-              <li>发起Pull Request</li>
+              <li>从简单的命令行工具开始</li>
+              <li>学习Python的网络编程</li>
+              <li>了解GitHub API的使用</li>
+              <li>实践多线程编程</li>
             </ul>
           </div>
           

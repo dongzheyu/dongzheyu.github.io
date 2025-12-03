@@ -1,8 +1,9 @@
 {
-  "name": "vue-app",
-  "version": "0.0.0",
+  "name": "dongle-website",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "description": "dongle的个人技术博客网站",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },

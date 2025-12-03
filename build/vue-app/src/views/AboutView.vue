@@ -6,18 +6,18 @@
         <div class="row align-items-center">
           <div class="col-lg-8">
             <h1 class="display-4 fw-bold mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
-              关于 JetCPP Studio
+              关于我 - dongle
             </h1>
             <p class="lead text-white-50 mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.2s">
               代码重塑世界 · 创新驱动未来
             </p>
             <p class="text-white-50 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.4s">
-              我们是一支专注于C++编程、算法与创新技术的开发团队，致力于提供高质量的技术解决方案和开源项目。
+              一个热爱编程的小学生，专注于创造实用的软件工具，让技术更贴近生活。
             </p>
           </div>
           <div class="col-lg-4">
             <div class="hero-illustration animate-float" :class="{ 'visible': isVisible }" style="animation-delay: 0.6s">
-              <i class="bi bi-people-fill display-1 text-white-25"></i>
+              <i class="bi bi-person-fill display-1 text-white-25"></i>
             </div>
           </div>
         </div>
@@ -50,10 +50,10 @@
       <div class="container">
         <div class="text-center mb-5">
           <h2 class="display-5 fw-bold mb-3 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.8s">
-            联系我们
+            联系我
           </h2>
           <p class="lead text-muted animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1s">
-            欢迎通过以下方式与我们取得联系
+            欢迎通过以下方式与我取得联系
           </p>
         </div>
         
@@ -72,7 +72,7 @@
                 <i class="bi bi-play-circle me-2"></i> 哔哩哔哩
               </a>
               <a href="https://afdian.com/a/JetCPP" target="_blank" class="btn btn-primary btn-animate">
-                <i class="bi bi-heart me-2"></i> 赞助我们
+                <i class="bi bi-heart me-2"></i> 赞助支持
               </a>
             </div>
           </div>
@@ -91,20 +91,20 @@ const { isVisible } = useAnimations()
 const values = ref([
   {
     icon: 'bi bi-lightning-charge',
-    title: '使命',
-    description: '通过技术创新和开源协作，推动编程技术的发展，为开发者社区贡献价值。',
+    title: '编程哲学',
+    description: '简单就是美 - 我坚信好的工具应该让用户感到轻松，而不是增加负担。',
     color: '#FF6B6B'
   },
   {
     icon: 'bi bi-gear',
-    title: '技术栈',
-    description: '专注于C++核心开发，同时涉及Python、JavaScript等多种技术栈，提供全方位的技术支持。',
+    title: '技术专长',
+    description: '专注于C++开发，同时涉及前端技术、Python等多种技术栈，致力于创造实用工具。',
     color: '#4ECDC4'
   },
   {
     icon: 'bi bi-people',
-    title: '团队',
-    description: '由经验丰富的开发者组成，拥有多年项目开发经验，致力于技术创新和知识分享。',
+    title: '持续学习',
+    description: '编程路上不断学习，每次解决问题都是一次进步，从用户需求出发开发项目。',
     color: '#45B7D1'
   }
 ])

@@ -6,10 +6,10 @@
         <div class="row align-items-center">
           <div class="col-lg-8">
             <h1 class="display-4 fw-bold mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
-              技术博客
+              我的技术博客
             </h1>
             <p class="lead text-white-50 mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.2s">
-              分享技术见解，记录开发历程，探索编程世界
+              记录编程历程，分享开发心得，探索技术世界
             </p>
           </div>
           <div class="col-lg-4">
@@ -34,7 +34,7 @@
               <div class="card-body p-4">
                 <div class="blog-header mb-3">
                   <div class="blog-category-badge mb-2" :style="`background-color: ${post.color}20; color: ${post.color}`">
-                    <i class="bi bi-tag-fill me-1"></i>技术分享
+                    <i class="bi bi-tag-fill me-1"></i>{{ post.category }}
                   </div>
                   <h5 class="card-title fw-bold">{{ post.title }}</h5>
                 </div>
@@ -68,21 +68,23 @@ const { isVisible } = useAnimations()
 const blogPosts = ref([
   {
     id: 1,
-    title: 'C++高性能编程技巧',
-    excerpt: '分享一些实用的C++性能优化技巧，包括内存管理、算法优化等方面的经验总结。',
+    title: 'C++编程学习心得',
+    excerpt: '分享我在学习C++编程过程中的体会和经验，记录从入门到进阶的历程。',
     date: '2024-01-15',
-    author: 'JetCPP Team',
+    author: 'dongle',
     link: '/blog/cpp',
-    color: '#FF6B6B'
+    color: '#FF6B6B',
+    category: '编程学习'
   },
   {
     id: 2,
-    title: 'JetBrains IDE使用技巧',
-    excerpt: '详细介绍JetBrains系列IDE的高级功能和实用技巧，提升开发效率。',
+    title: 'Minecraft工具开发故事',
+    excerpt: '讲述我开发Minecraft工具的初衷、过程和收获，分享如何解决开发中的难题。',
     date: '2024-01-10',
-    author: 'JetCPP Team',
+    author: 'dongle',
     link: '/blog/jetbrains',
-    color: '#4ECDC4'
+    color: '#4ECDC4',
+    category: '项目分享'
   }
 ])
 </script>

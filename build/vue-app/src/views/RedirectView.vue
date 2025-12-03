@@ -25,7 +25,7 @@ onMounted(() => {
   setTimeout(() => {
     window.open('https://dongle.dpdns.org', '_blank')
     // 如果需要关闭当前标签页，可以取消下面的注释
-    // window.close()
+    window.close()
   }, 3000)
 })
 </script>

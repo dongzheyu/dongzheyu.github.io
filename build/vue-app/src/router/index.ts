@@ -40,11 +40,6 @@ const router = createRouter({
       component: () => import('../views/project/GithubCloneView.vue'),
     },
     {
-      path: '/project/minecraft-toos',
-      name: 'project-minecraft-toos',
-      component: () => import('../views/project/MinecraftToosView.vue'),
-    },
-    {
       path: '/project/jetbrains-crack',
       name: 'project-jetbrains-crack',
       component: () => import('../views/project/JetbrainsCrackView.vue'),
@@ -53,21 +48,6 @@ const router = createRouter({
       path: '/project/english-listen',
       name: 'project-english-listen',
       component: () => import('../views/project/EnglishListenView.vue'),
-    },
-    {
-      path: '/project/goodminecraft',
-      name: 'project-goodminecraft',
-      component: () => import('../views/project/GoodMinecraftView.vue'),
-    },
-    {
-      path: '/project/goodminecraftwiki',
-      name: 'project-goodminecraftwiki',
-      component: () => import('../views/project/GoodMinecraftWikiView.vue'),
-    },
-    {
-      path: '/project/minecraft-toos-help',
-      name: 'project-minecraft-toos-help',
-      component: () => import('../views/project/MinecraftToosHelpView.vue'),
     },
     {
       path: '/redirect',

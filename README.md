@@ -1,90 +1,141 @@
-# JetCPP Studio 网站
+# 👋 嗨，我是dongle！
 
-欢迎访问 JetCPP Studio！我们是一个由热爱编程的小学生和中学生组成的团队，专注于 C++ 开发和技术分享。这个网站是我们技术博客和项目展示的平台。
-
-## 🚀 关于我们
-
-JetCPP工作室成立于2024年7月，致力于开发高效实用的软件工具。我们的使命是通过简洁高效的代码解决实际问题，让技术更贴近生活，赋能每一位用户。
-
-### 🌟 团队文化
-
-- **开放协作**：共享知识，共同成长，互相支持
-- **持续学习**：紧跟技术前沿，不断提升编程技能
-- **用户至上**：从用户需求出发，打造真正有价值的工具
-
-## 🧰 项目展示
-
-### Minecraft-Tools
-
-Minecraft 一站式工具箱，当前版本 v6.6.0，已累计超过15,000次下载。
-
-主要特性：
-- 🚀 极速启动：在老旧电脑上仅需5秒完成启动
-- 🐎 一键安装：简化安装流程，新手也能轻松完成
-- 🛡️ 安全可靠：无捆绑软件、无后台进程、无数据收集
-- 🧰 功能全面：精选实用组件，覆盖各类使用场景
-
-### Jetbrains Crack
-
-一键破解JetBrains全家桶软件，仅供学习和研究使用，禁止用于商业用途。
-
-## 📚 技术博客
-
-我们分享各种技术文章，帮助开发者学习和成长：
-
-1. **C++编程入门指南** - 适合初学者，阅读时间约20-30分钟
-2. **Jetbrains Crack使用指南** - 工具使用教程，阅读时间约1-5分钟
-
-## 🛠️ 技术架构
-
-- **前端框架**: VitePress v1.6.4
-- **构建工具**: Vite
-- **样式**: CSS with VitePress 主题
-- **字体**: 自定义本地字体 (fonts.ttf)
-- **部署**: GitHub Pages / Gitee Pages
-
-## 📁 构建配置
-
-VitePress 配置位于 [build/docs/.vitepress/config.js]，其中包含了自定义字体的配置。
-
-## 🚀 快速开始
-
-要在本地运行和开发网站：
-
-```bash
-# 安装依赖（如果 package.json 存在）
-npm install
-
-# 启动开发服务器
-npm run dev
-
-# 构建生产版本
-npm run build
-```
-
-## 🌐 访问网站
-
-您可以通过以下地址访问我们的网站：
-
-[https://jetcpp.dpdns.org](https://jetcpp.dpdns.org)
-
-## 📈 未来规划
-
-2025年我们将推出跨平台开发框架，支持Windows、Linux和移动端，为开发者提供一体化解决方案。
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request 来改进网站内容和功能。
-
-## 📞 联系我们
-
-- GitHub: [dongzheyu](https://github.com/dongzheyu)
-- Gitee: [jetcpp](https://gitee.com/jetcpp)
-- 哔哩哔哩: [JetCPP官方账号](https://space.bilibili.com/3546730880567808?spm_id_from=333.1007.0.0)
-- 赞助支持: [爱发电](https://afdian.com/a/JetCPP)
+> *"用代码重塑世界，用创新驱动未来"*   
+一个热爱编程的小学生，专注于创造实用的软件工具，让技术更贴近生活。
 
 ---
 
-*© 2024-2025 JetCPP Studio. 代码重塑世界 · 创新驱动未来*
+## 🎮 我的技术世界
 
-*所有软件永久免费，无广告无订阅，坚持由爱好者为爱好者开发的初心。
+### Minecraft 是我的游乐场 🎯
+
+我是一个狂热的 Minecraft 玩家，同时也是一个工具开发者！我创建了一系列 Minecraft 相关的工具，帮助玩家们更好地享受游戏：
+
+- **[Minecraft-ToolsII](https://github.com/dongzheyu/Minecraft-ToolsII)** - 现代化的 Minecraft 管理工具，支持 Java 版和基岩版，告别复杂的配置！
+- **[Minecraft-Toos](https://github.com/dongzheyu/Minecraft-Toos)** - C++ 编写的多功能工具包，一键管理启动器和游戏环境
+- **[GoodMinecraft](https://github.com/dongzheyu/GoodMinecraft)** - 高性能的 Minecraft 整合包，优化游戏体验，让每台电脑都能流畅运行
+
+**为什么做这些？** 因为我曾经也是个被复杂配置困扰的玩家，所以想用技术让游戏变得更简单、更有趣！
+
+### 🛠️ 实用工具开发者
+
+除了游戏工具，我还开发了一些实用的系统工具：
+
+- **[MinGW-win64-GCC-install](https://github.com/dongzheyu/MinGW-win64-GCC-install)** - 一键安装 Windows 上的 GCC 编译器，让 C++ 开发变得更简单
+- **[JetCPPWebsite](https://github.com/dongzheyu/JetCPPWebsite)** - 我的技术博客网站，分享编程经验和项目故事
+
+### 🌐 网站与文档
+
+- **[dongzheyu.github.io](https://github.com/dongzheyu/dongzheyu.github.io)** - 我的个人主页
+- **[Office-Tool-docs](https://github.com/dongzheyu/Office-Tool-docs)** - 文档项目，帮助更多人学习技术
+
+---
+
+## 🎯 我的编程哲学
+
+**简单就是美** - 我坚信好的工具应该让用户感到轻松，而不是增加负担。
+
+**从用户出发** - 每个项目都是因为我自己遇到了问题，然后想出了解决方案。
+
+**持续学习** - 编程路上我还在不断学习，每次解决问题都是一次进步。
+
+---
+
+## 📊 我的技能栈
+
+```
+🎮 游戏开发: Minecraft Modding | C++ | Java
+🛠️ 系统工具: Windows 开发 | 环境配置 | 自动化
+🌐 前端技术: HTML | CSS | JavaScript | VitePress
+📚 学习方法: 实践驱动 | 问题导向 | 持续迭代
+```
+
+---
+
+## 🌟 项目亮点
+
+### 最让我自豪的项目
+
+**Minecraft-ToolsII** 是我目前最用心的作品，因为它：
+- 解决了玩家们的实际痛点
+- 采用了现代化的界面设计
+- 支持正版游戏体验
+- 完全开源，让每个人都能受益
+
+### 最有成就感的技术
+
+用 C++ 开发 **MinGW 安装器**，让新手也能轻松搭建开发环境，这让我感受到了代码的力量！
+
+---
+
+## 📈 成长轨迹
+
+**2024年** - 开始系统学习编程，从简单的脚本开始
+**2025年** - 发布第一个正式项目 Minecraft-Toos
+**现在** - 专注于完善现有项目，学习更多技术
+
+---
+
+## 🤝 合作与交流
+
+我很乐意和其他开发者交流想法，也欢迎对以下方向的合作：
+- Minecraft 工具开发
+- 实用的系统工具
+- 教育类编程项目
+
+### 找到我
+
+- **GitHub**: [@dongzheyu](https://github.com/dongzheyu)
+- **Gitee**: [JetCPP](https://gitee.com/jetcpp) 
+- **B站**: [JetCPP官方账号](https://space.bilibili.com/3546730880567808)
+
+---
+
+## 🎉 一些有趣的事实
+- 最喜欢在 Minecraft 里建造红石机械
+- 梦想是开发一个属于自己的游戏引擎
+- 正在努力学习更多的编程语言
+
+---
+
+## 📚 正在学习
+
+- **算法与数据结构** - 打好编程基础
+- **网络编程** - 让程序能够互相交流
+
+---
+
+## 🌱 未来计划
+
+### 短期目标
+- 完善 Minecraft-ToolsII 的功能
+- 学习更多前端技术
+- 尝试开发一些小游戏
+
+### 长期愿景
+- 创建一个完整的游戏开发工具链
+- 开发教育类编程工具
+- 帮助更多小朋友学习编程
+
+---
+
+## 📊 GitHub 统计
+
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=dongzheyu&show_icons=true&theme=radical)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=dongzheyu&layout=compact&theme=radical)
+
+---
+
+## 💡 最后想说
+
+编程对我来说不只是写代码，更是创造价值的过程。
+
+每个项目都是一个小故事，记录着我的成长轨迹。
+
+**感谢你的关注！** 希望我的项目能给你带来一些启发或帮助 😊
+
+---
+
+*"代码改变世界，梦想驱动未来"*   
+*— dongle*
