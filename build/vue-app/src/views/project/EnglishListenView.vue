@@ -8,7 +8,7 @@
             <div class="text-muted mb-3">
               <span class="badge bg-primary me-2">教育</span>
               <span class="badge bg-success me-2">开源</span>
-              <span class="badge bg-info">Python</span>
+              <span class="badge bg-info">C++\QT</span>
             </div>
           </header>
           

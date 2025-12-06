@@ -69,10 +69,10 @@ const projects = ref([
   },
   {
     id: 2,
-    title: 'Minecraft-Toos',
+    title: 'Minecraft-Tools',
     description: '我的世界工具箱，功能齐全的Minecraft工具集，支持启动器管理和基岩版操作',
     category: '游戏工具',
-    link: '/project/minecraft-toos',
+    link: '/project/minecraft-tools',
     color: '#4ECDC4'
   },
   {
@@ -91,30 +91,7 @@ const projects = ref([
     link: '/project/english-listen',
     color: '#96CEB4'
   },
-  {
-    id: 5,
-    title: 'GoodMinecraft',
-    description: '我的世界优化整合包，集性能优化、视觉增强、实用工具于一体的超强整合包',
-    category: '游戏工具',
-    link: '/project/goodminecraft',
-    color: '#FFEAA7'
-  },
-  {
-    id: 6,
-    title: 'GoodMinecraftWiki',
-    description: 'GoodM整合包Wiki文档，包含详细的模组列表、安装指南和使用说明',
-    category: '知识库',
-    link: '/project/goodminecraftwiki',
-    color: '#DDA0DD'
-  },
-  {
-    id: 7,
-    title: 'Minecraft-Toos_Help',
-    description: 'Minecraft-Toos使用手册，包含核心功能指南和常见问题解答',
-    category: '帮助文档',
-    link: '/project/minecraft-toos-help',
-    color: '#FFB6C1'
-  }
+  
 ])
 </script>
 

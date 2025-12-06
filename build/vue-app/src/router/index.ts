@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import * as path from "node:path";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,12 @@ const router = createRouter({
       name: 'project-english-listen',
       component: () => import('../views/project/EnglishListenView.vue'),
     },
+    {
+      path: '/project/minecraft-tools',
+      name: 'project-minecraft-tools',
+      component: () => import('../views/project/minecrafttools.vue'),
+    },
+      
     {
       path: '/redirect',
       name: 'redirect',
