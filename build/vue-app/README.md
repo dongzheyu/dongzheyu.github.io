@@ -1,42 +1,182 @@
-# vue-app
+# JetCPP Studio 个人技术博客网站
 
-This template should help get you started developing with Vue 3 in Vite.
+这是一个基于 Vue 3 + TypeScript + Vite 构建的个人技术博客网站，展示 JetCPP Studio 的技术项目、博客文章和个人信息。
 
-## Recommended IDE Setup
+## 项目特点
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- 🚀 **现代技术栈**: Vue 3 + TypeScript + Vite
+- 🎨 **响应式设计**: 使用 Bootstrap 5 构建的现代化 UI
+- 🌙 **深色模式**: 支持系统主题跟随和手动切换
+- 📱 **移动端适配**: 完全响应式布局
+- 📝 **博客系统**: 技术文章展示和分类
+- 🛠️ **项目展示**: 个人项目详细介绍
+- 🔗 **路由导航**: Vue Router 实现页面路由
 
-## Recommended Browser Setup
+## 技术栈
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- **前端框架**: Vue 3 + Composition API
+- **开发语言**: TypeScript
+- **构建工具**: Vite
+- **UI 框架**: Bootstrap 5 + Bootstrap Icons
+- **路由管理**: Vue Router 4
+- **状态管理**: Vue 3 响应式系统
+- **代码检查**: Vue TSC
 
-## Type Support for `.vue` Imports in TS
+## 项目结构
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+```
+src/
+├── assets/           # 静态资源
+│   ├── animations.css
+│   ├── base.css
+│   ├── logo.svg
+│   └── main.css
+├── components/       # 公共组件
+│   ├── HelloWorld.vue
+│   ├── TheWelcome.vue
+│   ├── WelcomeItem.vue
+│   └── icons/
+├── composables/      # 组合式函数
+│   └── useAnimations.ts
+├── router/           # 路由配置
+│   └── index.ts
+└── views/            # 页面视图
+    ├── HomeView.vue      # 首页
+    ├── AboutView.vue     # 关于页面
+    ├── BlogView.vue      # 博客列表
+    ├── ProjectsView.vue  # 项目列表
+    ├── RedirectView.vue  # 重定向页面
+    ├── blog/             # 博客文章页面
+    │   ├── CPPView.vue
+    │   └── JetbrainsView.vue
+    └── project/          # 项目详情页面
+        ├── GithubCloneView.vue
+        ├── JetbrainsCrackView.vue
+        ├── EnglishListenView.vue
+        ├── minecrafttools.vue
+        └── goodminecraft.vue
+```
 
-## Customize configuration
+## 页面路由
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- `/` - 首页
+- `/projects` - 项目列表
+- `/blog` - 博客列表
+- `/blog/cpp` - C++ 相关博客
+- `/blog/jetbrains` - JetBrains 相关博客
+- `/about` - 关于页面
+- `/project/github-clone` - GitHub Clone 项目
+- `/project/jetbrains-crack` - JetBrains Crack 项目
+- `/project/english-listen` - 英语听力项目
+- `/project/minecraft-tools` - Minecraft 工具项目
+- `/project/goodminecraft` - GoodMinecraft 项目
+- `/redirect` - 重定向页面
 
-## Project Setup
+## 开发环境配置
 
-```sh
+### 前置要求
+
+- Node.js 20.19.0+ 或 22.12.0+
+- npm 或 yarn
+
+### 安装依赖
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 开发服务器
 
-```sh
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+开发服务器将在 `http://localhost:3000` 启动。
 
-```sh
+### 构建生产版本
+
+```bash
 npm run build
 ```
+
+构建产物将生成在 `dist/` 目录中。
+
+### 预览生产版本
+
+```bash
+npm run preview
+```
+
+### 类型检查
+
+```bash
+npm run type-check
+```
+
+### 部署构建
+
+```bash
+npm run build:deploy
+```
+
+此命令会构建项目并复制文件到根目录。
+
+## 功能特性
+
+### 深色模式
+- 支持系统主题检测
+- 手动切换深色/浅色模式
+- 主题设置本地存储
+
+### 响应式导航栏
+- 移动端汉堡菜单
+- 固定顶部导航
+- 品牌 Logo 展示
+
+### 项目展示
+- 项目卡片布局
+- 技术栈标签
+- 项目描述和链接
+
+### 博客系统
+- 文章分类
+- 文章详情页面
+- 技术标签系统
+
+## 配置说明
+
+### Vite 配置
+- 开发服务器端口：3000
+- 路径别名：`@` 指向 `src/`
+- 支持主机访问
+
+### 依赖说明
+- **核心依赖**: Vue 3, Vue Router, Bootstrap 5
+- **开发依赖**: TypeScript, Vite, Vue TSC
+- **图标库**: Bootstrap Icons
+
+## 部署
+
+1. 运行构建命令：
+   ```bash
+   npm run build
+   ```
+
+2. 构建产物位于 `dist/` 目录
+
+3. 可以使用 `npm run build:deploy` 进行部署构建，该命令会：
+   - 运行类型检查
+   - 构建项目
+   - 复制文件到根目录
+
+## 许可证
+
+本项目基于 MIT 许可证开源。
+
+## 作者
+
+JetCPP Studio - 个人技术博客和项目展示网站
+
+---
+
+**注意**: 这是一个个人项目，主要用于展示技术能力和项目经验。所有内容均为个人创作，遵循开源协议。
