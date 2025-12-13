@@ -132,6 +132,7 @@ html, body {
 
 main {
   flex: 1;
+  padding-top: 70px; /* 避免导航栏遮挡内容 */
 }
 
 .navbar-brand {

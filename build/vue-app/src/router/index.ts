@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+// @ts-ignore
+// @ts-ignore
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -54,7 +56,12 @@ const router = createRouter({
       name: 'project-minecraft-tools',
       component: () => import('../views/project/minecrafttools.vue'),
     },
-      
+
+    {
+      path: '/project/goodminecraft',
+      name: 'project-goodminecraft',
+      component: () => import("../views/project/goodminecraft.vue"),
+    },
     {
       path: '/redirect',
       name: 'redirect',

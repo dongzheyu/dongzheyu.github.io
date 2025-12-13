@@ -91,6 +91,14 @@ const projects = ref([
     link: '/project/english-listen',
     color: '#96CEB4'
   },
+  {
+    id: 5,
+    title: 'GoodMinecraft',
+    description: 'Minecraft游戏整合包',
+    category: '游戏',
+    link: '/project/goodMinecraft',
+    color: '#FF6B6B'
+  }
   
 ])
 </script>
