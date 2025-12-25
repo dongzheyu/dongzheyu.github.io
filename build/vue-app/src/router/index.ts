@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-// @ts-ignore
-// @ts-ignore
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -16,21 +14,13 @@ const router = createRouter({
       name: 'projects',
       component: () => import('../views/ProjectsView.vue'),
     },
-    {
+        {
       path: '/blog',
       name: 'blog',
       component: () => import('../views/BlogView.vue'),
     },
-    {
-      path: '/blog/cpp',
-      name: 'blog-cpp',
-      component: () => import('../views/blog/CPPView.vue'),
-    },
-    {
-      path: '/blog/jetbrains',
-      name: 'blog-jetbrains',
-      component: () => import('../views/blog/JetbrainsView.vue'),
-    },
+    
+
     {
       path: '/about',
       name: 'about',
@@ -67,6 +57,7 @@ const router = createRouter({
       name: 'redirect',
       component: () => import('../views/RedirectView.vue'),
     },
+    
   ],
 })
 

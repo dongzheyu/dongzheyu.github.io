@@ -46,9 +46,9 @@
                       <i class="bi bi-person me-1 ms-2"></i>{{ post.author }}
                     </small>
                   </div>
-                  <router-link :to="post.link" class="btn btn-outline-primary btn-sm btn-animate">
+                                    <a :href="post.link" class="btn btn-outline-primary btn-sm btn-animate" target="_blank">
                     阅读全文 <i class="bi bi-arrow-right ms-1"></i>
-                  </router-link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -63,30 +63,22 @@
 import { ref, onMounted } from 'vue'
 import { useAnimations } from '@/composables/useAnimations'
 
-const { isVisible } = useAnimations()
-
+// 博客文章数据
 const blogPosts = ref([
   {
     id: 1,
-    title: 'C++编程学习心得',
-    excerpt: '分享我在学习C++编程过程中的体会和经验，记录从入门到进阶的历程。',
-    date: '2024-01-15',
-    author: 'dongle',
-    link: '/blog/cpp',
+    title: 'C++完全入门指南：从Hello World到结构体',
+    excerpt: '这是一篇详细的C++入门指南，从最基础的Hello World程序开始，逐步讲解变量、数据类型、控制流、函数、指针到结构体等核心概念，适合初学者系统学习C++编程。',
+    date: '2025-12-24',
+    author: 'JetCPP Team',
+    link: '/blog/cpp-guide.html', // 指向VitePress构建的博客页面
     color: '#FF6B6B',
-    category: '编程学习'
-  },
-  {
-    id: 2,
-    title: 'Minecraft工具开发故事',
-    excerpt: '讲述我开发Minecraft工具的初衷、过程和收获，分享如何解决开发中的难题。',
-    date: '2024-01-10',
-    author: 'dongle',
-    link: '/blog/jetbrains',
-    color: '#4ECDC4',
-    category: '项目分享'
+    category: '编程教程'
   }
 ])
+
+// 动画效果
+const { isVisible } = useAnimations()
 </script>
 
 <style scoped>
@@ -111,6 +103,15 @@ const blogPosts = ref([
     radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
   animation: bgAnimation 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 .hero-illustration {

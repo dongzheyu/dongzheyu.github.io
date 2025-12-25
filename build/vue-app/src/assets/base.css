@@ -50,6 +50,19 @@
   }
 }
 
+/* 定义自定义字体，如果无法加载则使用默认字体 */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts.ttf') format('truetype');
+  font-display: swap; /* 立即显示默认字体，然后替换为自定义字体 */
+}
+
+@font-face {
+  font-family: 'PingFangSC';
+  src: url('/PingFangSC-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -58,6 +71,7 @@
   font-weight: normal;
 }
 
+/* 默认字体设置为微软雅黑 */
 body {
   min-height: 100vh;
   color: var(--color-text);
@@ -67,6 +81,10 @@ body {
     background-color 0.5s;
   line-height: 1.6;
   font-family:
+    'Microsoft YaHei',
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'WenQuanYi Micro Hei',
     Inter,
     -apple-system,
     BlinkMacSystemFont,
@@ -83,4 +101,30 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 当应用Jetbrains Mono字体时 */
+.font-jetbrains {
+  font-family:
+    'CustomFont',
+    'JetBrains Mono',
+    'CustomFont',
+    ui-monospace,
+    'Cascadia Code',
+    'Source Code Pro',
+    Menlo,
+    Consolas,
+    'DejaVu Sans Mono',
+    monospace !important;
+}
+
+/* 当应用苹方SC字体时 */
+.font-pingfang {
+  font-family:
+    'PingFangSC',
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'WenQuanYi Micro Hei',
+    sans-serif !important;
 }

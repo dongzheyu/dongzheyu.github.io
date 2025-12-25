@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "C++编程学习心得",
+    "excerpt": "分享我在学习C++编程过程中的体会和经验，记录从入门到进阶的历程。",
+    "date": "2024-01-15",
+    "author": "dongle",
+    "link": "/blog/cpp",
+    "color": "#FF6B6B",
+    "category": "编程学习"
+  },
+  {
+    "id": 2,
+    "title": "Minecraft工具开发故事",
+    "excerpt": "讲述我开发Minecraft工具的初衷、过程和收获，分享如何解决开发中的难题。",
+    "date": "2024-01-10",
+    "author": "dongle",
+    "link": "/blog/jetbrains",
+    "color": "#4ECDC4",
+    "category": "项目分享"
+  },
+  {
+    "id": 3,
+    "title": "Good",
+    "excerpt": "Good",
+    "date": "2025-12-15",
+    "author": "dongle",
+    "link": "/blog/good",
+    "color": "#F8C471",
+    "category": "技术分享"
+  }
+]

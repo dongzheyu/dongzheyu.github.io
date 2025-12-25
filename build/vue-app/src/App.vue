@@ -1,13 +1,53 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 const isDarkMode = ref(false)
+const currentFont = ref('default') // default, jetbrains, pingfang
 
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value
   document.body.setAttribute('data-bs-theme', isDarkMode.value ? 'dark' : 'light')
+  localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light')
 }
+
+// 字体切换逻辑
+const changeFont = (fontType: string) => {
+  currentFont.value = fontType
+  
+  // 移除之前的字体类
+  document.body.classList.remove('font-jetbrains', 'font-pingfang')
+  
+  // 根据选择的字体添加相应的类
+  if (fontType === 'jetbrains') {
+    document.body.classList.add('font-jetbrains')
+  } else if (fontType === 'pingfang') {
+    document.body.classList.add('font-pingfang')
+  }
+  
+  // 保存用户选择的字体设置
+  localStorage.setItem('fontType', fontType)
+}
+
+// 监听路由变化，为博客页面添加特殊类
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const updateAppClass = () => {
+  // 移除之前的类
+  document.getElementById('app')?.classList.remove('blog-content-app')
+  
+  // 检查当前路由是否为博客页面
+  if (route.path.startsWith('/blog/')) {
+    document.getElementById('app')?.classList.add('blog-content-app')
+  }
+}
+
+// 监听路由变化
+watch(() => route.path, () => {
+  updateAppClass()
+}, { immediate: true })
 
 onMounted(() => {
   const savedTheme = localStorage.getItem('theme')
@@ -15,11 +55,20 @@ onMounted(() => {
     isDarkMode.value = true
     document.body.setAttribute('data-bs-theme', 'dark')
   }
+  
+  // 恢复用户之前选择的字体设置
+  const savedFont = localStorage.getItem('fontType')
+  if (savedFont) {
+    changeFont(savedFont)
+  }
+  
+  // 初始化应用类
+  updateAppClass()
 })
 </script>
 
 <template>
-  <div>
+  <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
       <div class="container">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
@@ -49,6 +98,23 @@ onMounted(() => {
               <RouterLink to="/redirect" class="nav-link">文海拾贝</RouterLink>
             </li>
           </ul>
+          
+          <div class="dropdown me-2">
+            <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              <i class="bi bi-fonts me-1"></i> 字体
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" @click.prevent="changeFont('default')">
+                <i :class="currentFont === 'default' ? 'bi bi-check me-2' : 'me-4'"></i> 默认字体
+              </a></li>
+              <li><a class="dropdown-item" href="#" @click.prevent="changeFont('jetbrains')">
+                <i :class="currentFont === 'jetbrains' ? 'bi bi-check me-2' : 'me-4'"></i> JetBrains Mono
+              </a></li>
+              <li><a class="dropdown-item" href="#" @click.prevent="changeFont('pingfang')">
+                <i :class="currentFont === 'pingfang' ? 'bi bi-check me-2' : 'me-4'"></i> 苹方SC
+              </a></li>
+            </ul>
+          </div>
           
           <div class="dropdown">
             <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
@@ -121,7 +187,8 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "CustomFont", Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Microsoft YaHei", "CustomFont", Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  scroll-padding-top: 60px; /* 确保页面滚动时顶部内容不会被导航栏遮挡 */
 }
 
 #app {
@@ -132,7 +199,17 @@ html, body {
 
 main {
   flex: 1;
-  padding-top: 70px; /* 避免导航栏遮挡内容 */
+  padding-top: 60px; /* 确保内容不会被固定导航栏遮挡 */
+}
+
+/* 为锚点链接添加滚动边距，确保不会被固定导航栏遮挡 */
+:target {
+  scroll-margin-top: 60px;
+}
+
+/* 如果页面中有ID的元素，确保它们不会被导航栏遮挡 */
+[id] {
+  scroll-margin-top: 60px;
 }
 
 .navbar-brand {
