@@ -1,10 +1,14 @@
 ---
-layout: home
-title: JetCPP Studio - 首页
+layout: false
 ---
 
-# 欢迎来到 JetCPP Studio
+<script setup>
+import { onMounted } from 'vue'
 
-## 博客文章
+// 在客户端挂载后重定向到 Vue 应用的博客列表页面
+onMounted(() => {
+  window.location.href = '/blog'
+})
+</script>
 
-- [C++完全入门指南：从Hello World到结构体](./cpp-guide)
+<meta http-equiv="refresh" content="0; url=/blog">
