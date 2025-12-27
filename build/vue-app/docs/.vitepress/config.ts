@@ -9,7 +9,7 @@ export default defineConfig({
   lang: 'zh-CN', // 设置语言为中文
   themeConfig: {
     nav: [
-      { text: '博客首页', link: '/' },
+      { text: '博客首页', link: '../' }, // 返回到上级目录，即 Vue 应用的 /blog 路径
       { text: 'C++ Guide', link: '/cpp-guide' }
     ],
     sidebar: [
