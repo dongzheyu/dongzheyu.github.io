@@ -9,12 +9,11 @@ export default defineConfig({
   lang: 'zh-CN', // 设置语言为中文
   themeConfig: {
     nav: [
-      { text: '网站首页', link: '../' }, // 返回到上级目录，即 Vue 应用的 /blog 路径
-      { text: 'C++ Guide', link: '/cpp-guide' }
+      { text: '博客首页', link: '../' }, 
+      { text: '网站首页', link: 'https://jetcpp.dpdns.org/' },
     ],
     sidebar: [
       {
-        text: 'C++ Guide',
         items: [
           { text: 'C++完全入门指南', link: '/cpp-guide' }
         ]
