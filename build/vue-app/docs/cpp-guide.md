@@ -1,11 +1,64 @@
 # C++完全入门指南：从Hello World到结构体
 
-**发布日期：** 2025-12-24 · **作者：** JetCPP Team
+**更新日期：** 2025-12-28 · **作者：** JetCPP Team
 
 ## 引言
 
 C++是一门强大的编程语言，它结合了高级编程特性和底层系统编程能力。从1983年由Bjarne Stroustrup发明至今，C++已经广泛应用于系统软件、游戏开发、嵌入式系统、高性能计算等领域。本指南将带你从零开始，逐步学习C++编程。
 
+## 0.环境准备
+
+C++是一门编译型语言，所以需要一个编译器。
+这里推荐使用MinGW+Clion编译器，也可以使用微软VS编译器
+### 0.1.MinGW+Clion
+
+首先下载MSYS2用来安装MinGW, [清华大学镜像站直链下载](https://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/msys2-x86_64-latest.exe)。
+下载安装后，打开**msys终端**，先把镜像站更换一下，这里是bash的命令，直接输入  
+````
+   # 1. 修改 MSYS 软件源
+sed -i '1i Server = https://mirrors.huaweicloud.com/msys2/msys/$arch/' /etc/pacman.d/mirrorlist.msys
+
+# 2. 修改 MinGW64 软件源
+sed -i '1i Server = https://mirrors.huaweicloud.com/msys2/mingw/x86_64/' /etc/pacman.d/mirrorlist.mingw64
+
+# 3. 修改 MinGW32 软件源
+sed -i '1i Server = https://mirrors.huaweicloud.com/msys2/mingw/i686/' /etc/pacman.d/mirrorlist.mingw32
+
+# 4. 刷新软件包数据库
+pacman -Sy
+````
+然后关闭终端打开**MinGW64终端**
+运行一下bash命令:
+````
+pacman -S --needed --noconfirm mingw-w64-x86_64-toolchain mingw-w64-x86_64-ninja
+````
+然后会让你选择，直接默认，全选y等待安装
+安装完成后，在cmd执行:
+````
+gcc -v
+````
+如果输出类似于：
+````
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=D:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
+Target: x86_64-w64-mingw32
+Configured with: ../gcc-15.2.0/configure --prefix=/mingw64 --with-local-prefix=/mingw64/local --with-native-system-header-dir=/mingw64/include --libexecdir=/mingw64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/mingw64 --with-mpfr=/mingw64 --with-mpc=/mingw64 --with-isl=/mingw64 --with-pkgversion='Rev8, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 15.2.0 (Rev8, Built by MSYS2 project)
+````
+就说明安装成功了
+接下来下载Clion, 打开Clion[下载页面](https://www.jetbrains.com.cn/clion/download/?section=windows)单击下载，然后正常流程安装。
+安装后，打开clion，如果弹出订阅，选非商业使用（如果你有需要，请支持Clion[购买](https://www.jetbrains.com.cn/clion/buy/?section=personal&billing=monthly)）
+然后单击左下角齿轮图标，单击设置，选择构建、执行、部署，再选择工具链，把工具集的路径改为刚才执行gcc -v里的COLLECT_LTO_WRAPPER=D:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe前面的例如我是D:/msys64/mingw64就改成这个
+>这样就MinGW+Clion的配置就完成了
+### 0.2. VS的配置
+首先打开VS的[官网](https://visualstudio.microsoft.com/zh-hans/downloads/)，选择Community版本下载，打开安装程序，选择版本安装，主页选择工作负载为C++桌面开发，然后直接开始安装就好了
+>这样VS的配置就完成了
+
+`不过我觉得MinGW+Clion会占用空间少一点，大概9GB，而VS2026至少得40GB`
+#### 这样我们开发的环境就准备好了，开启你的编码之旅吧!🙃
 ## 1. Hello World程序详解
 
 学习任何编程语言的第一步都是编写Hello World程序。这不仅是传统，更是检查开发环境是否配置正确的有效方法。让我们从一个简单的C++程序开始：
