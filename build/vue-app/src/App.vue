@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 
-const isDarkMode = ref(false)
 const currentFont = ref('default') // default, jetbrains, pingfang
 
-const toggleDarkMode = () => {
-  isDarkMode.value = !isDarkMode.value
-  document.body.setAttribute('data-bs-theme', isDarkMode.value ? 'dark' : 'light')
-  localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light')
+// 鼠标跟随光点
+const cursorDot = ref<HTMLElement | null>(null)
+
+const handleLinkHover = () => {
+  cursorDot.value?.classList.add('hover')
+}
+
+const handleLinkLeave = () => {
+  cursorDot.value?.classList.remove('hover')
 }
 
 // 字体切换逻辑
@@ -21,8 +25,15 @@ const changeFont = (fontType: string) => {
   // 根据选择的字体添加相应的类
   if (fontType === 'jetbrains') {
     document.body.classList.add('font-jetbrains')
+    // 设置 JetBrains Mono 字体为 /public/fonts.ttf
+    document.body.style.setProperty('--font-mono', '/public/fonts.ttf, "JetBrains Mono", "Cascadia Code", "Source Code Pro", ui-monospace, Menlo, Consolas, monospace')
   } else if (fontType === 'pingfang') {
     document.body.classList.add('font-pingfang')
+    // 重置为默认字体
+    document.body.style.removeProperty('--font-mono')
+  } else {
+    // 重置为默认字体
+    document.body.style.removeProperty('--font-mono')
   }
   
   // 保存用户选择的字体设置
@@ -50,12 +61,23 @@ watch(() => route.path, () => {
 }, { immediate: true })
 
 onMounted(() => {
-  const savedTheme = localStorage.getItem('theme')
-  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    isDarkMode.value = true
-    document.body.setAttribute('data-bs-theme', 'dark')
-  }
+  // 直接跟随鼠标，无延迟
+  document.addEventListener('mousemove', (e) => {
+    if (cursorDot.value) {
+      cursorDot.value.style.left = e.clientX + 'px'
+      cursorDot.value.style.top = e.clientY + 'px'
+    }
+  })
+
+  // 添加鼠标移动事件
+  document.addEventListener('mousemove', handleMouseMove)
   
+  // 链接悬停效果
+  document.querySelectorAll('a, button, .btn, .nav-link').forEach(el => {
+    el.addEventListener('mouseenter', handleLinkHover)
+    el.addEventListener('mouseleave', handleLinkLeave)
+  })
+
   // 恢复用户之前选择的字体设置
   const savedFont = localStorage.getItem('fontType')
   if (savedFont) {
@@ -65,11 +87,21 @@ onMounted(() => {
   // 初始化应用类
   updateAppClass()
 })
+
+onUnmounted(() => {
+  document.querySelectorAll('a, button, .btn, .nav-link').forEach(el => {
+    el.removeEventListener('mouseenter', handleLinkHover)
+    el.removeEventListener('mouseleave', handleLinkLeave)
+  })
+})
 </script>
 
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+    <!-- 鼠标跟随光点 -->
+    <div ref="cursorDot" class="cursor-dot"></div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
       <div class="container">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
           <img src="/logo.png" alt="JetCPP Logo" width="40" height="40" class="me-2 rounded-circle">
@@ -136,10 +168,6 @@ onMounted(() => {
           <a href="https://afdian.com/a/JetCPP" target="_blank" class="btn btn-outline-warning ms-2">
             <i class="bi bi-heart me-1"></i> 赞助一下
           </a>
-          
-          <button @click="toggleDarkMode" class="btn btn-outline-secondary ms-2">
-            <i :class="isDarkMode ? 'bi bi-sun' : 'bi bi-moon'"></i>
-          </button>
         </div>
       </div>
     </nav>
@@ -148,7 +176,7 @@ onMounted(() => {
       <RouterView />
     </main>
     
-    <footer class="bg-dark text-light py-4 mt-5">
+    <footer class="py-4 mt-5">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -157,13 +185,13 @@ onMounted(() => {
           </div>
           <div class="col-md-6 text-md-end">
             <div class="mb-3">
-              <a href="https://github.com/dongzheyu" class="text-light me-3" target="_blank">
+              <a href="https://github.com/dongzheyu" class="me-3" target="_blank">
                 <i class="bi bi-github fs-4"></i>
               </a>
-              <a href="https://gitee.com/jetcpp" class="text-light me-3" target="_blank">
+              <a href="https://gitee.com/jetcpp" class="me-3" target="_blank">
                 <i class="bi bi-git fs-4"></i>
               </a>
-              <a href="https://space.bilibili.com/3546730880567808" class="text-light" target="_blank">
+              <a href="https://space.bilibili.com/3546730880567808" target="_blank">
                 <i class="bi bi-play-circle fs-4"></i>
               </a>
             </div>
@@ -175,20 +203,13 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
-@font-face {
-  font-family: "CustomFont";
-  src: url("/fonts.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
+<style scoped>
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Microsoft YaHei", "CustomFont", Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  scroll-padding-top: 60px; /* 确保页面滚动时顶部内容不会被导航栏遮挡 */
+  font-family: var(--font-sans);
+  scroll-padding-top: 80px;
 }
 
 #app {
@@ -199,60 +220,28 @@ html, body {
 
 main {
   flex: 1;
-  padding-top: 60px; /* 确保内容不会被固定导航栏遮挡 */
+  padding-top: 0;
 }
 
-/* 为锚点链接添加滚动边距，确保不会被固定导航栏遮挡 */
 :target {
-  scroll-margin-top: 60px;
+  scroll-margin-top: 80px;
 }
 
-/* 如果页面中有ID的元素，确保它们不会被导航栏遮挡 */
 [id] {
-  scroll-margin-top: 60px;
+  scroll-margin-top: 80px;
 }
 
-.navbar-brand {
-  font-family: "CustomFont", sans-serif;
+footer {
+  background: var(--color-bg-mute);
+  border-top: 1px solid var(--color-border);
 }
 
-.nav-link.router-link-active {
-  color: rgba(255, 255, 255, 0.75) !important;
-  font-weight: 500;
+footer a {
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
 }
 
-.nav-link:hover {
-  color: rgba(255, 255, 255, 1) !important;
-}
-
-[data-bs-theme="dark"] .navbar {
-  background-color: #212529 !important;
-}
-
-[data-bs-theme="dark"] .card {
-  background-color: #2d3748;
-  border-color: #4a5568;
-}
-
-[data-bs-theme="dark"] .card-body {
-  color: #e2e8f0;
-}
-
-[data-bs-theme="dark"] .text-muted {
-  color: #a0aec0 !important;
-}
-
-@media (max-width: 991.98px) {
-  .navbar-nav {
-    padding: 1rem 0;
-  }
-  
-  .navbar-nav .nav-item {
-    margin-bottom: 0.5rem;
-  }
-  
-  .dropdown, .btn {
-    margin-top: 0.5rem;
-  }
+footer a:hover {
+  color: var(--color-primary);
 }
 </style>

@@ -192,14 +192,4 @@ python github_clone.py --user dongzheyu --output ./study-projects</code></pre>
 .project-content li {
   margin-bottom: 0.5rem;
 }
-
-[data-bs-theme="dark"] .project-content pre {
-  background-color: #2d3748;
-  border-color: #4a5568;
-}
-
-[data-bs-theme="dark"] .project-content code {
-  background-color: #4a5568;
-  color: #e2e8f0;
-}
 </style>

@@ -46,13 +46,13 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact-section py-5 bg-light">
+    <section class="contact-section py-5">
       <div class="container">
         <div class="text-center mb-5">
           <h2 class="display-5 fw-bold mb-3 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.8s">
             联系我
           </h2>
-          <p class="lead text-muted animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1s">
+          <p class="lead animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1s">
             欢迎通过以下方式与我取得联系
           </p>
         </div>
@@ -62,10 +62,10 @@
             <div class="contact-links d-flex justify-content-center gap-3 flex-wrap animate-slide-up" 
                  :class="{ 'visible': isVisible }" 
                  style="animation-delay: 1.2s">
-              <a href="https://github.com/dongzheyu" target="_blank" class="btn btn-outline-dark btn-animate">
+              <a href="https://github.com/dongzheyu" target="_blank" class="btn btn-outline btn-animate">
                 <i class="bi bi-github me-2"></i> GitHub
               </a>
-              <a href="https://gitee.com/jetcpp" target="_blank" class="btn btn-outline-dark btn-animate">
+              <a href="https://gitee.com/jetcpp" target="_blank" class="btn btn-outline btn-animate">
                 <i class="bi bi-git me-2"></i> Gitee
               </a>
               <a href="https://space.bilibili.com/3546730880567808" target="_blank" class="btn btn-outline-dark btn-animate">
@@ -187,19 +187,5 @@ const values = ref([
     width: 100%;
     max-width: 280px;
   }
-}
-
-/* 深色主题 */
-[data-bs-theme="dark"] .contact-section {
-  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-}
-
-[data-bs-theme="dark"] .value-card {
-  background: #2d3748;
-  color: #e2e8f0;
-}
-
-[data-bs-theme="dark"] .value-card .card-text {
-  color: #a0aec0;
 }
 </style>

@@ -91,9 +91,4 @@ h2 {
 p {
   opacity: 0.9;
 }
-
-[data-bs-theme="dark"] .redirect-page {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  color: #fff;
-}
 </style>
