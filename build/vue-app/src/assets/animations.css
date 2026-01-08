@@ -188,7 +188,7 @@
 /* 按钮动画 */
 .btn-animate {
   transition: all 0.3s ease;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   position: relative;
   overflow: hidden;
 }

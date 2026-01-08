@@ -37,7 +37,7 @@
                   <i :class="value.icon + ' fs-1'"></i>
                 </div>
                 <h5 class="card-title fw-bold mb-3">{{ value.title }}</h5>
-                <p class="card-text text-muted">{{ value.description }}</p>
+                <p class="card-text">{{ value.description }}</p>
               </div>
             </div>
           </div>
@@ -110,82 +110,4 @@ const values = ref([
 ])
 </script>
 
-<style scoped>
-.about-page {
-  min-height: 100vh;
-}
 
-.about-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.about-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
-  animation: bgAnimation 20s ease-in-out infinite alternate;
-}
-
-.hero-illustration {
-  text-align: center;
-  padding: 2rem;
-}
-
-.value-card {
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.value-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  transition: transform 0.3s ease;
-}
-
-.value-card:hover .value-icon {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.contact-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.contact-links .btn {
-  border-radius: 50px;
-  min-width: 140px;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .about-hero .display-4 {
-    font-size: 2.5rem;
-  }
-  
-  .hero-illustration {
-    margin-top: 2rem;
-  }
-  
-  .contact-links {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .contact-links .btn {
-    width: 100%;
-    max-width: 280px;
-  }
-}
-</style>

@@ -5,18 +5,26 @@
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
   --gradient-warning: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);
-  --gradient-dark: linear-gradient(135deg, #232526 0%, #414345 100%);
+  --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   --gradient-light: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
 
+  /* ========== 现代化渐变配色 ========== */
+  --gradient-cosmic: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  --gradient-ocean: linear-gradient(135deg, #0ba360 0%, #3cba92 50%, #30cfd0 100%);
+  --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --gradient-aurora: linear-gradient(135deg, #00c6ff 0%, #0072ff 50%, #00c6ff 100%);
+  --gradient-midnight: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+  --gradient-rainbow: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+
   /* ========== 深色主题配色 ========== */
-  --color-bg: #0f172a;
+  --color-bg: #0a0a14;
   --color-bg-soft: #1e293b;
   --color-bg-mute: #334155;
   --color-bg-card: #1e293b;
 
-  --color-text: #f8fafc;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted: #94a3b8;
+  --color-text: #ffffff;
+  --color-text-secondary: #e2e8f0;
+  --color-text-muted: #cbd5e1;
 
   --color-border: #334155;
   --color-border-hover: #475569;
@@ -93,7 +101,10 @@ html {
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-bg);
+  background:
+    radial-gradient(ellipse at top, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(240, 147, 251, 0.08) 0%, transparent 50%),
+    var(--color-bg);
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.7;
@@ -111,6 +122,10 @@ body {
 }
 
 .text-dark {
+  color: var(--color-text) !important;
+}
+
+.text-white {
   color: var(--color-text) !important;
 }
 
@@ -177,6 +192,7 @@ a:hover {
   border-radius: var(--radius-lg);
   padding: 24px;
   transition: all var(--transition-base);
+  color: var(--color-text);
 }
 
 .card:hover {
@@ -207,9 +223,11 @@ li:hover,
   background-color: var(--color-bg-soft);
 }
 
-/* ========== 图片悬停效果 ========== img,
+/* ========== 图片悬停效果 ========== */
+img,
 .img-fluid {
   transition: all var(--transition-base);
+  border-radius: var(--radius-md);
 }
 
 img:hover,
@@ -265,6 +283,7 @@ img:hover,
   border-radius: var(--radius-lg);
   padding: 24px;
   transition: all var(--transition-base);
+  color: var(--color-text);
 }
 
 .card-hover:hover {
