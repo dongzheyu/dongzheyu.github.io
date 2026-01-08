@@ -104,8 +104,8 @@ onUnmounted(() => {
     <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
       <div class="container">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
-          <img src="/logo.png" alt="JetCPP Logo" width="40" height="40" class="me-2 rounded-circle">
-          <span class="fw-bold">JetCPP Studio</span>
+          <img src="/logo.png" alt="dongle Logo" width="40" height="40" class="me-2 rounded-circle">
+          <span class="fw-bold">dongle</span>
         </RouterLink>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -124,7 +124,7 @@ onUnmounted(() => {
               <RouterLink to="/blog" class="nav-link">博客</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/about" class="nav-link">关于我们</RouterLink>
+              <RouterLink to="/about" class="nav-link">关于我</RouterLink>
             </li>
             <li class="nav-item">
               <RouterLink to="/redirect" class="nav-link">文海拾贝</RouterLink>
@@ -150,7 +150,7 @@ onUnmounted(() => {
           
           <div class="dropdown">
             <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              关注我们
+              关注我
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="https://github.com/dongzheyu" target="_blank">
@@ -180,7 +180,7 @@ onUnmounted(() => {
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h5>JetCPP Studio</h5>
+            <h5>dongle</h5>
             <p class="text-muted">代码重塑世界 · 创新驱动未来</p>
           </div>
           <div class="col-md-6 text-md-end">
@@ -195,7 +195,7 @@ onUnmounted(() => {
                 <i class="bi bi-play-circle fs-4"></i>
               </a>
             </div>
-            <p class="text-muted mb-0">© 2025 JetCPP Studio. All rights reserved.</p>
+            <p class="text-muted mb-0">© 2025 dongle. All rights reserved.</p>
           </div>
         </div>
       </div>

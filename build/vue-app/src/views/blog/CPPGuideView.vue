@@ -21,7 +21,7 @@
             <h2>1. Hello World程序详解</h2>
             <p>
               学习任何编程语言的第一步都是编写Hello World程序。这不仅是传统，更是
-              检查开发环境是否配置正确的有效方法。让我们从一个简单的C++程序开始：
+              检查开发环境是否配置正确的有效方法。让我从一个简单的C++程序开始：
             </p>
             
             <pre><code class="language-cpp">#include &lt;iostream&gt;

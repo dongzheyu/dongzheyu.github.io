@@ -17,3 +17,7 @@
 .DS_Store
 Thumbs.dbbuild/
 build/docs/.vitepress/dist
+
+
+#Other
+复制构建产物.bat

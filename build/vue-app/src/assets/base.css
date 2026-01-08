@@ -68,6 +68,7 @@
 
   /* ========== 间距 ========== */
   --section-gap: 120px;
+  --max-content-width: 1200px;
   --container-padding: 24px;
 }
 
@@ -95,7 +96,8 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 90px;
+  font-size: 15px;
 }
 
 body {
@@ -106,8 +108,8 @@ body {
     radial-gradient(ellipse at bottom right, rgba(240, 147, 251, 0.08) 0%, transparent 50%),
     var(--color-bg);
   font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
