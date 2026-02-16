@@ -108,30 +108,42 @@ English Listen 是一款专为英语学习者设计的智能听写软件。基�
 - **Gitee**: [https://gitee.com/jetcpp/english_-listen](https://gitee.com/jetcpp/english_-listen)
 
 ### 项目信息
-- **许可证**: [MIT License](./LICENSE)
 - **问题反馈**: [GitHub Issues](https://github.com/dongzheyu/English_Listen/issues)
 - **功能建议**: [GitHub Discussions](https://github.com/dongzheyu/English_Listen/discussions)
 
 ## 下载地址
 
 ### 最新版本
-- **版本号**: v2.4.0
+- **版本号**: v2.5.0
 - **发布日期**: 2026-02-16
-- **下载链接**: [点击下载](https://gitee.com/jetcpp/english_-listen/releases/download/2.4.0/EnglishListenSetup.exe)
+- **下载链接**: [点击下载](https://gitee.com/jetcpp/english_-listen/releases/download/2.5.0/EnglishListenSetup.exe)
 - **文件大小**: 15.2MB
-- **校验码**: SHA256:`9ac156c96733c9ff363ab4c44d5931f0c7e5f1b2c698e8fbd19b9f2d54033665`
+- **校验码**: SHA256:`b04afcb75473d31fe04eb6e539bfb6997994cd617002b63933acadeeb9880bb7`
 
 ### 版本说明
 此版本完成了所有TODO清单中计划的功能，包括快捷键支持、学习进度可视化、改进的临时词库机制、用户账户系统、数据加密和隐私设置等，是功能最完善的稳定版本。
 
 ## 更新记录
-
+### v2.5.0 (2026-02-16)
+- ✅ 完成了v2.5版本开发计划中的所有功能
+- ✅ 核心功能增强：
+  - ✅ 实现了词库分组管理功能，支持创建、编辑、删除词库分组
+  - ✅ 增强了词库导入导出功能，支持CSV、Excel等常见格式
+  - ✅ 完善了学习进度统计功能，添加了可视化图表展示学习数据
+  - ✅ 实现了词库搜索筛选功能，提供快速查找和分类筛选功能
+- ✅ 体验优化：
+  - ✅ 优化了界面交互体验，添加了按钮悬停效果和过渡动画
+  - ✅ 完善了错误处理机制，增强了程序稳定性和错误提示
+  - ✅ 优化了程序性能，提高了词库加载速度和响应速度
+- ✅ 发布准备：
+  - ✅ 进行了全面测试，确保功能正常运行
+  - ✅ 更新了项目文档，完善了功能说明和使用指南
 ### v2.4.0 (2026-02-16)
 - ✅ 完成所有TODO清单中计划的功能
 - ✅ 实现完整的用户体验改进清单
-  - 添加快捷键支持（空格键重复朗读、方向键切换单词等）
-  - 实现学习进度可视化功能，以图表形式展示学习进度和趋势
-  - 改进临时词库机制，无需手动创建词库即可开始听写
+  - ✅ 添加快捷键支持（空格键重复朗读、方向键切换单词等）
+  - ✅ 实现学习进度可视化功能，以图表形式展示学习进度和趋势
+  - ✅改进临时词库机制，无需手动创建词库即可开始听写
 - ✅ 增强界面动画效果，添加更多流畅的过渡动画
 - ✅ 实现用户账户系统，支持创建个人账户管理学习数据
 - ✅ 添加数据加密功能，对敏感用户数据进行加密存储
@@ -164,34 +176,6 @@ English Listen 是一款专为英语学习者设计的智能听写软件。基�
 - 修复Flite语音引擎无效库引用问题，移除CMakeLists.txt中对flite库的无效链接
 - 优化项目构建配置，提高构建效率和稳定性
 - 更新版本信息至v2.3.0
-
-查看更多历史版本 → [完整更新记录](./update.md)
-
-## 开发计划
-
-### 即将发布 (v2.5)
-- [ ] **词库分组管理** - 支持创建、编辑、删除词库分组
-- [ ] **词库导入导出** - 支持CSV、Excel等常见格式
-- [ ] **学习进度统计** - 添加可视化图表展示学习数据
-- [ ] **词库搜索筛选** - 提供快速查找和分类筛选功能
-- [ ] **界面交互优化** - 改善用户体验和操作流畅度
-- [ ] **错误处理完善** - 增强程序稳定性和错误提示
-- [ ] **性能优化** - 提升程序运行效率
-
-### 开发状态
-- **当前版本**: v2.4.0
-- **开发分支**: [develop](https://github.com/jetcpp-studio/english-listen/tree/develop)
-
-## 联系方式
-
-### 开发团队
-- **团队名称**: JetCPP Studio
-- **官方网站**: [https://jetcpp.dpdns.org](https://jetcpp.dpdns.org)
-- **联系邮箱**: contact@jetcpp.org
-
-### 社区支持
-- **技术讨论**: [GitHub Discussions](https://github.com/jetcpp-studio/english-listen/discussions)
-- **问题反馈**: [GitHub Issues](https://github.com/jetcpp-studio/english-listen/issues)
 
 ---
 
