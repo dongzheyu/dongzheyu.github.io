@@ -27,32 +27,6 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
-      path: '/project/github-clone',
-      name: 'project-github-clone',
-      component: () => import('../views/project/GithubCloneView.vue'),
-    },
-    {
-      path: '/project/jetbrains-crack',
-      name: 'project-jetbrains-crack',
-      component: () => import('../views/project/JetbrainsCrackView.vue'),
-    },
-    {
-      path: '/project/english-listen',
-      name: 'project-english-listen',
-      component: () => import('../views/project/EnglishListenView.vue'),
-    },
-    {
-      path: '/project/minecraft-tools',
-      name: 'project-minecraft-tools',
-      component: () => import('../views/project/minecrafttools.vue'),
-    },
-
-    {
-      path: '/project/goodminecraft',
-      name: 'project-goodminecraft',
-      component: () => import("../views/project/goodminecraft.vue"),
-    },
-    {
       path: '/redirect',
       name: 'redirect',
       component: () => import('../views/RedirectView.vue'),

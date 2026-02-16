@@ -102,7 +102,7 @@ onUnmounted(() => {
     <div ref="cursorDot" class="cursor-dot"></div>
     
     <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
-      <div class="container">
+      <div class="container-fluid px-4">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
           <img src="/logo.png" alt="dongle Logo" width="40" height="40" class="me-2 rounded-circle">
           <span class="fw-bold">dongle</span>
@@ -125,9 +125,6 @@ onUnmounted(() => {
             </li>
             <li class="nav-item">
               <RouterLink to="/about" class="nav-link">关于我</RouterLink>
-            </li>
-            <li class="nav-item">
-              <RouterLink to="/redirect" class="nav-link">文海拾贝</RouterLink>
             </li>
           </ul>
           
@@ -177,7 +174,7 @@ onUnmounted(() => {
     </main>
     
     <footer class="py-4 mt-5">
-      <div class="container">
+      <div class="container-fluid px-4">
         <div class="row">
           <div class="col-md-6">
             <h5>dongle</h5>

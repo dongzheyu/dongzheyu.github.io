@@ -53,7 +53,7 @@ onMounted(() => {
   <!-- Hero Section -->
   <section class="hero-section position-relative overflow-hidden">
     <div class="hero-bg-animation"></div>
-    <div class="container position-relative z-2">
+    <div class="container-fluid position-relative z-2">
       <div class="row align-items-center min-vh-100">
         <div class="col-lg-6">
           <div class="hero-content">
@@ -108,7 +108,7 @@ onMounted(() => {
 
   <!-- Features Section -->
   <section class="features-section py-5">
-    <div class="container">
+    <div class="container-fluid">
       <div class="text-center mb-5">
         <h2 class="display-5 fw-bold mb-3 animate-fade-in" :class="{ 'visible': isVisible }">我的专长</h2>
         <p class="lead text-muted animate-fade-in" :class="{ 'visible': isVisible }" style="animation-delay: 0.2s">
@@ -139,7 +139,7 @@ onMounted(() => {
 
   <!-- CTA Section -->
   <section class="cta-section py-5 bg-primary text-white">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row align-items-center">
         <div class="col-lg-8">
           <h2 class="display-5 fw-bold mb-3">准备好探索编程的无限可能了吗？</h2>

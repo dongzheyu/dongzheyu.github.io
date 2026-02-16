@@ -2,7 +2,7 @@
   <div class="blog-page">
     <!-- Hero Section -->
     <section class="blog-hero bg-primary text-white py-5 mb-5">
-      <div class="container">
+      <div class="container-fluid px-4">
         <div class="row align-items-center">
           <div class="col-lg-8">
             <h1 class="display-4 fw-bold mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
@@ -23,9 +23,9 @@
 
     <!-- Blog Posts -->
     <section class="blog-section py-5">
-      <div class="container">
+      <div class="container-fluid px-5">
         <div class="row">
-          <div class="col-lg-8 mx-auto">
+          <div class="col-12">
             <div class="blog-post card mb-4 border-0 shadow-sm card-hover animate-slide-up" 
                  v-for="(post, index) in blogPosts" 
                  :key="post.id"
@@ -46,7 +46,7 @@
                       <i class="bi bi-person me-1 ms-2"></i>{{ post.author }}
                     </small>
                   </div>
-                                    <a :href="post.link" class="btn btn-outline-primary btn-sm btn-animate" target="_blank">
+                  <a :href="post.link" class="btn btn-outline-primary btn-sm btn-animate" target="_blank">
                     阅读全文 <i class="bi bi-arrow-right ms-1"></i>
                   </a>
                 </div>

@@ -16,6 +16,34 @@
   width: 100%;
 }
 
+/* ========== 全宽容器 ========== */
+.container-fluid {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 5% !important;
+  padding-right: 5% !important;
+}
+
+/* 强制projects-page占满100%宽度 */
+.projects-page .container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  .projects-page .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 /* ========== 主内容区域 ========== */
 main {
   flex: 1;
@@ -687,6 +715,10 @@ footer a:hover .bi {
 /* ========== ProjectsView 页面样式 ========== */
 .projects-page {
   min-height: 100vh;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .projects-hero {
@@ -694,6 +726,8 @@ footer a:hover .bi {
   padding: 80px 0 100px;
   position: relative;
   overflow: hidden;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .projects-hero::before {
@@ -714,6 +748,8 @@ footer a:hover .bi {
 
 .projects-section {
   padding: 60px 0 100px;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .project-card {

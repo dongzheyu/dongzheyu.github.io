@@ -2,7 +2,7 @@
   <div class="about-page">
     <!-- Hero Section -->
     <section class="about-hero bg-primary text-white py-5 mb-5">
-      <div class="container">
+      <div class="container-fluid px-4">
         <div class="row align-items-center">
           <div class="col-lg-8">
             <h1 class="display-4 fw-bold mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
@@ -26,7 +26,7 @@
 
     <!-- Values Section -->
     <section class="values-section py-5">
-      <div class="container">
+      <div class="container-fluid px-5">
         <div class="row g-4">
           <div class="col-md-4" v-for="(value, index) in values" :key="index">
             <div class="value-card card h-100 border-0 shadow-sm card-hover animate-slide-up" 
@@ -47,7 +47,7 @@
 
     <!-- Contact Section -->
     <section class="contact-section py-5">
-      <div class="container">
+      <div class="container-fluid px-5">
         <div class="text-center mb-5">
           <h2 class="display-5 fw-bold mb-3 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.8s">
             联系我
