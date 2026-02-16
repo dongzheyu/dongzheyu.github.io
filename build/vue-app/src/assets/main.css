@@ -2,7 +2,8 @@
 
 /* ========== 应用布局 ========== */
 #app {
-  max-width: 100%;
+  width: 100%;
+  max-width: 100vw;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -20,8 +21,8 @@
 .container-fluid {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 5% !important;
-  padding-right: 5% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 /* 强制projects-page占满100%宽度 */
@@ -32,6 +33,15 @@
   max-width: 100% !important;
 }
 
+/* 桌面端容器调整 */
+@media (min-width: 992px) {
+  .container-fluid {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}
+
+/* 移动端容器调整 */
 @media (max-width: 768px) {
   .container-fluid {
     padding-left: 20px !important;
@@ -49,6 +59,7 @@ main {
   flex: 1;
   padding: 90px var(--container-padding) 30px var(--container-padding);
   min-height: calc(100vh - 120px);
+  width: 100%;
 }
 
 /* ========== 导航栏样式 ========== */
