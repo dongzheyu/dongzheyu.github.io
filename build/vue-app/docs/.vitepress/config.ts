@@ -15,7 +15,9 @@ export default defineConfig({
     sidebar: [
       {
         items: [
-          { text: 'C++完全入门指南', link: '/cpp-guide' }
+          { text: 'C++完全入门指南', link: '/cpp-guide' },
+          { text:'C#从入门到精通', link:'/csharp-guide'},
+          { text: 'XAML从入门到精通', link: '/xaml-guide' }
         ]
       }
     ]

@@ -13,6 +13,12 @@ hero:
     - theme: alt
       text: C++完全入门指南：从Hello World到结构体
       link: /cpp-guide
+    - theme: alt
+      text: C#从入门到精通
+      link: /csharp-guide
+    - theme: alt
+      text: XAML从入门到精通
+      link: /xaml-guide
 
 features:
   - title: C++ 指南
