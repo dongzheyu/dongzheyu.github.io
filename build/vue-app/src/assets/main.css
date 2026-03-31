@@ -206,6 +206,34 @@ main {
   color: #1a1410 !important;
 }
 
+/* 减少动画按钮 */
+.motion-toggle-btn {
+  width: 38px;
+  height: 38px;
+  padding: 0 !important;
+  border-radius: var(--radius-sm) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-secondary) !important;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.motion-toggle-btn:hover {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  background: rgba(255, 140, 66, 0.08) !important;
+}
+
+.motion-toggle-btn.motion-active {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  background: rgba(255, 140, 66, 0.15) !important;
+}
+
 /* 主题切换按钮样式 */
 .theme-toggle-btn {
   width: 38px;
@@ -482,13 +510,13 @@ footer a:hover .bi {
 }
 
 .value-card:hover {
-  transform: translateY(-8px) rotate(-1deg);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-xl), var(--shadow-warm);
   border-color: var(--color-primary);
 }
 
 .value-card:hover .value-icon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.1);
 }
 
 .values-section {
@@ -557,7 +585,9 @@ footer a:hover .bi {
     radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.12) 0%, transparent 35%),
     radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.1) 0%, transparent 35%),
     radial-gradient(circle at 50% 50%, rgba(255, 186, 8, 0.04) 0%, transparent 45%);
+  opacity: 0.8;
   animation: heroGlow 25s var(--ease-smooth) infinite;
+  will-change: opacity;
 }
 
 .hero-bg-animation {
@@ -567,6 +597,7 @@ footer a:hover .bi {
     radial-gradient(circle at 20% 80%, rgba(255, 140, 66, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(244, 140, 6, 0.06) 0%, transparent 50%);
   animation: bgPulse 20s var(--ease-smooth) infinite alternate;
+  will-change: opacity;
 }
 
 /* Hero Logo — 旋转+光晕 */
@@ -735,7 +766,7 @@ footer a:hover .bi {
 }
 
 .feature-card:hover {
-  transform: translateY(-8px) rotate(-0.5deg) !important;
+  transform: translateY(-8px) !important;
   box-shadow: var(--shadow-xl), var(--shadow-warm);
   border-color: var(--color-primary);
 }
@@ -757,7 +788,7 @@ footer a:hover .bi {
 }
 
 .feature-card:hover .feature-icon {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.1);
 }
 
 /* 箭头指示器 */
@@ -802,7 +833,6 @@ footer a:hover .bi {
   width: 80%;
   height: 200%;
   background: radial-gradient(circle, rgba(255, 186, 8, 0.08) 0%, transparent 60%);
-  animation: slowRotate 50s linear infinite;
 }
 
 .cta-section .btn-light {
@@ -829,15 +859,8 @@ footer a:hover .bi {
 }
 
 @keyframes heroGlow {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25%      { transform: translate(3%, 3%) rotate(1deg); }
-  50%      { transform: translate(0, 6%) rotate(0deg); }
-  75%      { transform: translate(-3%, 3%) rotate(-1deg); }
-}
-
-@keyframes slowRotate {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
 }
 
 /* ==========================================================
@@ -963,7 +986,7 @@ footer a:hover .bi {
 }
 
 .project-card:hover {
-  transform: translateY(-8px) rotate(-0.3deg);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-xl), var(--shadow-warm);
   border-color: var(--color-primary);
 }
@@ -984,7 +1007,7 @@ footer a:hover .bi {
 }
 
 .project-card:hover .project-icon {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.1);
 }
 
 .badge {

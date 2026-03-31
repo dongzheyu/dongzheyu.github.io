@@ -11,19 +11,26 @@ hero:
       text: 查看所有项目
       link: /english-listen
     - theme: alt
-      text: English Listen - 英语听写训练工具
+      text: English Listen WinUI - 现代化英语听写训练
+      link: /english-listen-winui
+    - theme: alt
+      text: English Listen (Qt6) - 英语听写训练工具
       link: /english-listen
 
 features:
-  - title: English Listen
-    icon: 🎯
-    details: 专业英语听写训练工具，基于C++和Qt6开发的现代化听写软件，智能词库管理、个性化训练控制、学习进度追踪
+  - title: English Listen WinUI
+    icon: >-
+      &#x1F3AF;
+    details: 基于 WinUI 3 + C# + C++ 混合开发的现代化英语听写训练工具，MVVM架构，Mica材质，百度翻译集成
+    link: /english-listen-winui
+  - title: English Listen (Qt6)
+    icon: >-
+      &#x1F4D6;
+    details: 专业英语听写训练工具，基于C++和Qt6开发的现代化听写软件，智能词库管理、个性化训练控制
     link: /english-listen
-  - title: 教育软件
-    icon: 📚
-    details: 专注于开发提升学习效率的工具软件，让学习变得更简单、更有趣
   - title: 开源精神
-    icon: 🌟
+    icon: >-
+      &#x2B50;
     details: 所有项目遵循开源理念，欢迎社区参与和贡献，共同完善项目
 
 ---

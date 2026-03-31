@@ -65,15 +65,15 @@
   --glow-warm:      0 0 30px rgba(244, 140, 6, 0.25);
   --glow-subtle:    0 0 15px rgba(255, 186, 8, 0.15);
 
-  /* ---- 阴影系统 ---- */
+  /* ---- 阴影系统（简化以提升渲染性能） ---- */
   --shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.6);
-  --shadow-sm:  0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg:  0 12px 36px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-xl:  0 24px 56px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-sm:  0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg:  0 12px 36px rgba(0, 0, 0, 0.6);
+  --shadow-xl:  0 24px 56px rgba(0, 0, 0, 0.7);
   --shadow-glow: 0 0 40px rgba(255, 140, 66, 0.2);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.03);
-  --shadow-warm: 0 8px 30px rgba(255, 140, 66, 0.15), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-warm: 0 8px 30px rgba(255, 140, 66, 0.15);
 
   /* ---- 玻璃态 ---- */
   --glass-bg:     rgba(26, 24, 20, 0.75);
@@ -133,13 +133,13 @@
   --glow-subtle:    0 0 15px rgba(244, 140, 6, 0.08);
 
   --shadow-xs:  0 1px 2px rgba(44, 36, 24, 0.06);
-  --shadow-sm:  0 2px 8px rgba(44, 36, 24, 0.08), 0 1px 3px rgba(44, 36, 24, 0.04);
-  --shadow-md:  0 4px 16px rgba(44, 36, 24, 0.1), 0 2px 6px rgba(44, 36, 24, 0.06);
-  --shadow-lg:  0 12px 36px rgba(44, 36, 24, 0.12), 0 4px 12px rgba(44, 36, 24, 0.08);
-  --shadow-xl:  0 24px 56px rgba(44, 36, 24, 0.15), 0 8px 24px rgba(44, 36, 24, 0.1);
+  --shadow-sm:  0 2px 8px rgba(44, 36, 24, 0.08);
+  --shadow-md:  0 4px 16px rgba(44, 36, 24, 0.1);
+  --shadow-lg:  0 12px 36px rgba(44, 36, 24, 0.12);
+  --shadow-xl:  0 24px 56px rgba(44, 36, 24, 0.15);
   --shadow-glow: 0 0 40px rgba(232, 93, 4, 0.1);
-  --shadow-card: 0 4px 20px rgba(44, 36, 24, 0.07), inset 0 1px 0 rgba(255,255,255,0.8);
-  --shadow-warm: 0 8px 30px rgba(232, 93, 4, 0.08), 0 4px 12px rgba(44, 36, 24, 0.06);
+  --shadow-card: 0 4px 20px rgba(44, 36, 24, 0.07);
+  --shadow-warm: 0 8px 30px rgba(232, 93, 4, 0.08);
 
   --glass-bg:     rgba(250, 247, 242, 0.8);
   --glass-border: rgba(232, 93, 4, 0.1);
@@ -227,18 +227,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 噪点纹理叠加层 */
+/* ========== 噪点纹理叠加层 ========== */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: var(--noise-opacity);
+  opacity: 0.04;
   background-image: var(--noise-texture);
   background-repeat: repeat;
   background-size: 256px 256px;
   mix-blend-mode: overlay;
+  will-change: auto;
 }
 
 /* 深色背景微光 */
@@ -256,34 +257,6 @@ body::before {
     radial-gradient(ellipse 80% 60% at 15% 25%, rgba(232, 93, 4, 0.04) 0%, transparent 60%),
     radial-gradient(ellipse 60% 80% at 85% 75%, rgba(244, 140, 6, 0.03) 0%, transparent 60%),
     var(--color-bg);
-}
-
-/* ========== 鼠标跟随光点（暖色余烬） ========== */
-.cursor-dot {
-  position: fixed;
-  width: 48px;
-  height: 48px;
-  background: var(--gradient-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  filter: blur(16px);
-  opacity: 0.3;
-  mix-blend-mode: screen;
-  will-change: transform;
-}
-
-[data-theme="light"] .cursor-dot {
-  mix-blend-mode: multiply;
-  opacity: 0.15;
-}
-
-.cursor-dot.hover {
-  width: 72px;
-  height: 72px;
-  opacity: 0.5;
-  filter: blur(10px);
 }
 
 /* ========== 链接 ========== */
@@ -441,27 +414,6 @@ a:hover {
     box-shadow var(--transition-base),
     border-color var(--transition-base);
 }
-
-/* Shimmer 暖光扫过 */
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(255, 140, 66, 0.06) 45%,
-    rgba(255, 186, 8, 0.04) 55%,
-    transparent 70%
-  );
-  pointer-events: none;
-  transition: left 0.8s var(--ease-out-expo);
-}
-
-.card:hover::after { left: 160%; }
 
 .card:hover {
   transform: translateY(-6px);
@@ -630,7 +582,7 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-/* ========== 主题切换过渡 ========== */
+/* ========== 主题切换过渡（轻量化） ========== */
 body,
 .navbar,
 .card,
@@ -639,9 +591,8 @@ body,
 .value-card,
 .btn,
 .dropdown-menu,
-footer,
-input, textarea, select {
-  transition-property: background-color, border-color, color, box-shadow, opacity;
-  transition-duration: 400ms;
+footer {
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: 200ms;
   transition-timing-function: var(--ease-out-expo);
 }

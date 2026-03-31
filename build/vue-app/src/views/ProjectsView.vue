@@ -61,6 +61,14 @@ const { isVisible } = useAnimations()
 
 const projects = ref([
   {
+    "id": 5,
+    "title": "English Listen WinUI",
+    "description": "现代化英语听写训练工具，基于WinUI 3 + C# + C++混合开发，MVVM架构，Mica材质，百度翻译集成",
+    "category": "教育",
+    "link": "/project/english-listen-winui.html",
+    "color": "#f48c06"
+  },
+  {
     "id": 4,
     "title": "English-Listen",
     "description": "专业英语听写训练工具，基于C++和Qt6开发的现代化听写软件",

@@ -35,22 +35,22 @@ const handleSystemThemeChange = () => {
 }
 mediaQuery.addEventListener('change', handleSystemThemeChange)
 
-// ---- 鼠标跟随光点 ----
-const cursorDot = ref<HTMLElement | null>(null)
+// ---- 减少动画开关 ----
+const reducedMotion = ref(false)
+const reducedMotionIcon = computed(() =>
+  reducedMotion.value ? 'bi bi-lightning-charge-fill' : 'bi bi-lightning-charge'
+)
 
-const handleMouseMove = (e: MouseEvent) => {
-  if (cursorDot.value) {
-    cursorDot.value.style.left = e.clientX + 'px'
-    cursorDot.value.style.top = e.clientY + 'px'
-  }
+const toggleReducedMotion = () => {
+  reducedMotion.value = !reducedMotion.value
+  document.documentElement.setAttribute('data-motion', reducedMotion.value ? 'reduced' : 'normal')
+  localStorage.setItem('reduced-motion', String(reducedMotion.value))
 }
-
-const handleLinkHover = () => cursorDot.value?.classList.add('hover')
-const handleLinkLeave = () => cursorDot.value?.classList.remove('hover')
 
 // ---- 按钮波纹效果 ----
 const addRipple = (e: MouseEvent) => {
-  const btn = (e.currentTarget as HTMLElement)
+  const btn = (e.target as HTMLElement).closest('.btn, .btn-animate') as HTMLElement
+  if (!btn) return
   const rect = btn.getBoundingClientRect()
   const x = ((e.clientX - rect.left) / rect.width) * 100
   const y = ((e.clientY - rect.top) / rect.height) * 100
@@ -70,42 +70,36 @@ watch(() => route.path, updateAppClass, { immediate: true })
 
 // ---- 生命周期 ----
 onMounted(() => {
-  document.addEventListener('mousemove', handleMouseMove)
-
-  document.querySelectorAll('a, button, .btn, .nav-link').forEach(el => {
-    el.addEventListener('mouseenter', handleLinkHover)
-    el.addEventListener('mouseleave', handleLinkLeave)
-    el.addEventListener('mousemove', addRipple)
-  })
+  // 按钮波纹事件委托
+  document.addEventListener('mousemove', addRipple)
 
   // 恢复主题设置
   const saved = localStorage.getItem('theme') as Theme | null
   if (saved) {
     currentTheme.value = saved
   } else {
-    // 首次访问，跟随系统
     currentTheme.value = 'system'
   }
   applyTheme(currentTheme.value)
+
+  // 恢复减少动画设置
+  const savedMotion = localStorage.getItem('reduced-motion')
+  if (savedMotion === 'true') {
+    reducedMotion.value = true
+    document.documentElement.setAttribute('data-motion', 'reduced')
+  }
 
   updateAppClass()
 })
 
 onUnmounted(() => {
   mediaQuery.removeEventListener('change', handleSystemThemeChange)
-  document.querySelectorAll('a, button, .btn, .nav-link').forEach(el => {
-    el.removeEventListener('mouseenter', handleLinkHover)
-    el.removeEventListener('mouseleave', handleLinkLeave)
-    el.removeEventListener('mousemove', addRipple)
-  })
+  document.removeEventListener('mousemove', addRipple)
 })
 </script>
 
 <template>
   <div id="app">
-    <!-- 鼠标跟随光点 -->
-    <div ref="cursorDot" class="cursor-dot"></div>
-
     <nav class="navbar navbar-expand-lg shadow-sm sticky-top">
       <div class="container-fluid px-4">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
@@ -134,6 +128,17 @@ onUnmounted(() => {
           </ul>
 
           <div class="d-flex align-items-center gap-2">
+            <!-- 减少动画按钮 -->
+            <button
+              class="motion-toggle-btn"
+              type="button"
+              :class="{ 'motion-active': reducedMotion }"
+              :title="reducedMotion ? '恢复动画' : '减少动画'"
+              @click="toggleReducedMotion"
+            >
+              <i :class="reducedMotionIcon"></i>
+            </button>
+
             <!-- 主题切换下拉菜单 -->
             <div class="dropdown">
               <button class="theme-toggle-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

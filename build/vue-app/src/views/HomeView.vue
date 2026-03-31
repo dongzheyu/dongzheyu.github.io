@@ -225,17 +225,19 @@ onMounted(() => {
   line-height: 1.2;
 }
 
-/* 滚动触发动画初始状态 */
+/* 滚动触发动画初始状态（GPU 加速） */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(24px);
+  will-change: opacity, transform;
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animate-on-scroll.visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 </style>

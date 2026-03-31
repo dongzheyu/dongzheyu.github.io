@@ -1,32 +1,32 @@
 /* ========================================================
-   🔥 炽炭主题 — 动画系统
-   弹性/过冲曲线，禁止 ease-in-out
+   🔥 炽炭主题 — 动画系统（性能优化版）
+   弹性/过冲曲线，GPU 加速，尊重 prefers-reduced-motion
    ======================================================== */
 
-/* ---- 入场动画 ---- */
+/* ---- 入场动画（全部用 translate3d 强制 GPU 合成） ---- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translate3d(0, 30px, 0) scale(0.97); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 @keyframes slideLeft {
-  from { opacity: 0; transform: translateX(-50px) rotate(-2deg); }
-  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+  from { opacity: 0; transform: translate3d(-50px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes slideRight {
-  from { opacity: 0; transform: translateX(50px) rotate(2deg); }
-  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+  from { opacity: 0; transform: translate3d(50px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale3d(0.85, 0.85, 1); }
+  to   { opacity: 1; transform: scale3d(1, 1, 1); }
 }
 
 @keyframes flipIn {
@@ -36,9 +36,9 @@
 
 /* ---- 循环动画 ---- */
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-10px) rotate(1.5deg); }
-  75%      { transform: translateY(-4px) rotate(-1deg); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25%      { transform: translate3d(0, -10px, 0); }
+  75%      { transform: translate3d(0, -4px, 0); }
 }
 
 @keyframes rotate {
@@ -47,13 +47,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%      { transform: scale(1.05); opacity: 0.6; }
+  0%, 100% { transform: scale3d(1, 1, 1); opacity: 1; }
+  50%      { transform: scale3d(1.05, 1.05, 1); opacity: 0.6; }
 }
 
 @keyframes bgAnimation {
-  0%   { opacity: 0.7; transform: scale(1); }
-  100% { opacity: 1;   transform: scale(1.08); }
+  0%   { opacity: 0.7; transform: scale3d(1, 1, 1); }
+  100% { opacity: 1;   transform: scale3d(1.08, 1.08, 1); }
 }
 
 @keyframes bgPulse {
@@ -67,20 +67,20 @@
 }
 
 @keyframes drift {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33%      { transform: translate(12px, -18px) rotate(3deg); }
-  66%      { transform: translate(-10px, -10px) rotate(-2deg); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33%      { transform: translate3d(12px, -18px, 0); }
+  66%      { transform: translate3d(-10px, -10px, 0); }
 }
 
 @keyframes ember {
   0%, 100% { box-shadow: 0 0 20px rgba(255, 140, 66, 0.2); }
-  50%      { box-shadow: 0 0 40px rgba(255, 140, 66, 0.4), 0 0 80px rgba(244, 140, 6, 0.1); }
+  50%      { box-shadow: 0 0 40px rgba(255, 140, 66, 0.4); }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-  20%, 40%, 60%, 80% { transform: translateX(4px); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate3d(-4px, 0, 0); }
+  20%, 40%, 60%, 80% { transform: translate3d(4px, 0, 0); }
 }
 
 @keyframes typewriter {
@@ -111,11 +111,13 @@
 .stagger-5 { animation-delay: 400ms; }
 .stagger-6 { animation-delay: 480ms; }
 
-/* ---- 卡片悬停（增强版） ---- */
+/* ---- 卡片悬停（GPU 加速） ---- */
 .card-hover {
-  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   position: relative;
+  will-change: transform;
 }
 
 .card-hover::before {
@@ -126,11 +128,11 @@
   background: var(--gradient-primary);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-10px) rotate(-0.5deg);
+  transform: translate3d(0, -10px, 0);
   box-shadow: var(--shadow-xl), var(--shadow-warm);
 }
 
@@ -138,13 +140,14 @@
   transform: scaleX(1);
 }
 
-/* ---- 按钮动画（有触感） ---- */
+/* ---- 按钮动画（GPU 加速） ---- */
 .btn-animate {
-  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
   border-radius: var(--radius-md);
   font-weight: 600;
   position: relative;
   overflow: hidden;
+  will-change: transform;
 }
 
 .btn-animate::before {
@@ -155,11 +158,12 @@
   border-radius: 50%;
   background: rgba(255, 140, 66, 0.15);
   transform: translate(-50%, -50%);
-  transition: width 500ms cubic-bezier(0.16, 1, 0.3, 1), height 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              height 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-animate:hover {
-  transform: translateY(-2px) scale(1.02);
+  transform: translate3d(0, -2px, 0);
   box-shadow: var(--shadow-warm);
 }
 
@@ -169,37 +173,39 @@
 }
 
 .btn-animate:active {
-  transform: scale(0.96) !important;
+  transform: scale3d(0.96, 0.96, 1) !important;
   transition-duration: 80ms;
 }
 
 /* ---- 图片悬停 ---- */
 .img-animate {
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
   border-radius: var(--radius-md);
+  will-change: transform;
 }
 
 .img-animate:hover {
-  transform: scale(1.04) rotate(-1deg);
+  transform: scale3d(1.04, 1.04, 1);
   box-shadow: var(--shadow-xl);
 }
 
 /* ---- 文字入场 ---- */
 .text-animate {
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .text-animate.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* ---- 3D 倾斜效果 ---- */
 .tilt-card {
   transform-style: preserve-3d;
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tilt-card:hover {
@@ -207,7 +213,7 @@
 }
 
 .tilt-card .tilt-inner {
-  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
   transform: translateZ(0);
 }
 
@@ -217,7 +223,7 @@
 
 /* ---- 磁性悬停按钮 ---- */
 .magnetic-btn {
-  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ---- 响应式动画 ---- */
@@ -228,15 +234,42 @@
   .animate-slide-right,
   .animate-scale-in,
   .animate-flip-in {
-    animation-duration: 0.4s;
+    animation-duration: 0.3s;
   }
 
   .card-hover:hover {
-    transform: translateY(-6px);
+    transform: translate3d(0, -6px, 0);
   }
 
   .btn-animate:hover {
-    transform: translateY(-1px);
+    transform: translate3d(0, -1px, 0);
+  }
+}
+
+/* ---- 尊重用户减少动画偏好（系统 + 手动开关） ---- */
+@media (prefers-reduced-motion: reduce),
+[data-motion="reduced"] {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-left,
+  .animate-slide-right,
+  .animate-scale-in,
+  .animate-flip-in,
+  .animate-float,
+  .animate-drift,
+  .animate-pulse,
+  .animate-ember,
+  .text-animate {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

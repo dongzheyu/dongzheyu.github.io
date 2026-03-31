@@ -15,15 +15,27 @@
 - **动画**: 全部用弹性/过冲曲线 (cubic-bezier过冲)
 - **风格**: 反主流、有触感、错位布局、左偏标题
 - **主题切换**: 深/浅/系统三档循环，localStorage 持久化
+- **减少动画**: 导航栏闪电按钮手动开关，data-motion="reduced" 属性，localStorage 持久化（key: reduced-motion）
+- **鼠标光点**: 已删除（原跟随鼠标的暖色余烬光晕）
 
 ## 页面结构
 - HomeView: Hero(左重右轻) + Features(错位卡片) + CTA(左文右按钮)
 - AboutView: Hero + Values卡片 + Contact链接
-- ProjectsView: Hero + 项目卡片网格
+- ProjectsView: Hero + 项目卡片网格（项目通过 `<a target="_blank">` 链接到 VitePress）
 - BlogView: Hero + 博客文章列表
-- EnglishListenView: 项目详情页
+- EnglishListenView: Qt6版本项目详情页（遗留，未被路由引用）
 - CPPGuideView: C++教程博客详情页
-- RedirectView: 外部跳转过渡页
+
+## VitePress 集成架构
+- **项目文档**: `project/` 目录，base=`/project/`，构建到 `public/project/`
+- **博客文档**: `docs/` 目录，base=`/blog/`，构建到 `public/blog/`
+- VitePress 与 Vue 独立构建，通过 `<a target="_blank">` 链接
+- 项目列表页 ProjectsView 中 link 字段指向 `/project/xxx.html`
+- 添加新项目：创建 .md → 更新 config.ts sidebar → 更新 index.md → 更新 ProjectsView → `npm run project:build`
+
+## 已有项目
+- English-Listen (Qt6): `project/english-listen.md`，color=#52b788
+- English Listen WinUI: `project/english-listen-winui.md`，color=#f48c06，C#+C++混合，WinUI3
 
 ## 文件结构
 - `src/assets/base.css` — 设计令牌、CSS变量、按钮/卡片/输入框系统

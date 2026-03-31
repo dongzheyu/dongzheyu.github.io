@@ -17,7 +17,7 @@
 .DS_Store
 Thumbs.dbbuild/
 build/docs/.vitepress/dist
-
+build\vue-app\.workbuddy
 
 #Other
 复制构建产物.bat
