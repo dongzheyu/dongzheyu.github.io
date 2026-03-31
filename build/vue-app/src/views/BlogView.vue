@@ -1,20 +1,20 @@
 <template>
   <div class="blog-page">
-    <!-- Hero Section -->
-    <section class="blog-hero bg-primary text-white py-5 mb-5">
+    <!-- Hero Section — 统一暖色渐变风格 -->
+    <section class="blog-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8">
-            <h1 class="display-4 fw-bold mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
+          <div class="col-lg-8" style="padding-left: 5%;">
+            <h1 class="blog-title mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
               我的技术博客
             </h1>
-            <p class="lead text-white-50 mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.2s">
+            <p class="blog-subtitle mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.2s">
               记录编程历程，分享开发心得，探索技术世界
             </p>
           </div>
           <div class="col-lg-4">
             <div class="hero-illustration animate-float" :class="{ 'visible': isVisible }" style="animation-delay: 0.4s">
-              <i class="bi bi-journal-text display-1 text-white-25"></i>
+              <i class="bi bi-journal-text display-1" style="color: var(--color-primary); opacity: 0.3;"></i>
             </div>
           </div>
         </div>
@@ -46,7 +46,8 @@
                       <i class="bi bi-person me-1 ms-2"></i>{{ post.author }}
                     </small>
                   </div>
-                  <a :href="post.link" class="btn btn-outline-primary btn-sm btn-animate" target="_blank">
+                  <a :href="post.link" class="btn btn-sm btn-animate" target="_blank"
+                     style="border: 1.5px solid var(--color-border); color: var(--color-text);">
                     阅读全文 <i class="bi bi-arrow-right ms-1"></i>
                   </a>
                 </div>
@@ -80,3 +81,19 @@ const blogPosts = ref([
 // 动画效果
 const { isVisible } = useAnimations()
 </script>
+
+<style scoped>
+.blog-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.02em;
+}
+
+.blog-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  max-width: 520px;
+  line-height: 1.7;
+}
+</style>

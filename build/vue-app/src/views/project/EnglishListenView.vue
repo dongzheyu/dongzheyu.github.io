@@ -5,10 +5,10 @@
         <article class="project-detail">
           <header class="mb-4">
             <h1 class="fw-bold">English-Listen</h1>
-            <div class="text-muted mb-3">
-              <span class="badge bg-primary me-2">教育</span>
-              <span class="badge bg-success me-2">开源</span>
-              <span class="badge bg-info">C++\QT</span>
+            <div class="mb-3">
+              <span class="badge me-2" style="background-color: rgba(82, 183, 136, 0.15); color: #52b788;">教育</span>
+              <span class="badge me-2" style="background-color: rgba(244, 140, 6, 0.15); color: #f48c06;">开源</span>
+              <span class="badge" style="background-color: rgba(255, 140, 66, 0.15); color: #ff8c42;">C++ / QT</span>
             </div>
           </header>
           
@@ -31,11 +31,13 @@
           <footer class="mt-5">
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <a href="https://github.com/dongzheyu/english-listen" target="_blank" class="btn btn-primary me-2">
+                <a href="https://github.com/dongzheyu/english-listen" target="_blank" class="btn btn-animate me-2"
+                   style="background: var(--gradient-primary); color: #fff;">
                   <i class="bi bi-github"></i> 查看源码
                 </a>
               </div>
-              <router-link to="/projects" class="btn btn-outline-secondary">
+              <router-link to="/projects" class="btn btn-animate"
+                           style="border: 1.5px solid var(--color-border); color: var(--color-text);">
                 <i class="bi bi-arrow-left"></i> 返回项目列表
               </router-link>
             </div>

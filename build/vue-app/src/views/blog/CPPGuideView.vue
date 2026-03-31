@@ -650,11 +650,12 @@ int main() {
           <footer class="mt-5">
             <div class="d-flex justify-content-between align-items-center">
               <div class="tags">
-                <span class="badge bg-primary me-1">C++</span>
-                <span class="badge bg-secondary me-1">教程</span>
-                <span class="badge bg-info">编程入门</span>
+                <span class="badge me-1" style="background-color: rgba(255, 140, 66, 0.15); color: #ff8c42;">C++</span>
+                <span class="badge me-1" style="background-color: rgba(244, 140, 6, 0.15); color: #f48c06;">教程</span>
+                <span class="badge" style="background-color: rgba(255, 186, 8, 0.15); color: #ffba08;">编程入门</span>
               </div>
-              <router-link to="/blog" class="btn btn-outline-primary">
+              <router-link to="/blog" class="btn btn-animate"
+                           style="border: 1.5px solid var(--color-border); color: var(--color-text);">
                 <i class="bi bi-arrow-left"></i> 返回博客列表
               </router-link>
             </div>

@@ -1,165 +1,119 @@
-/* 通用动画样式 */
+/* ========================================================
+   🔥 炽炭主题 — 动画系统
+   弹性/过冲曲线，禁止 ease-in-out
+   ======================================================== */
 
-/* 淡入动画 */
+/* ---- 入场动画 ---- */
 @keyframes fadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 滑入动画 */
 @keyframes slideUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(50px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* 滑入动画（从左） */
 @keyframes slideLeft {
-  from { 
-    opacity: 0; 
-    transform: translateX(-50px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
-  }
+  from { opacity: 0; transform: translateX(-50px) rotate(-2deg); }
+  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
 }
 
-/* 滑入动画（从右） */
 @keyframes slideRight {
-  from { 
-    opacity: 0; 
-    transform: translateX(50px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
-  }
+  from { opacity: 0; transform: translateX(50px) rotate(2deg); }
+  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
 }
 
-/* 缩放动画 */
 @keyframes scaleIn {
-  from { 
-    opacity: 0; 
-    transform: scale(0.8); 
-  }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
-  }
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-/* 浮动动画 */
+@keyframes flipIn {
+  from { opacity: 0; transform: perspective(600px) rotateY(-15deg); }
+  to   { opacity: 1; transform: perspective(600px) rotateY(0deg); }
+}
+
+/* ---- 循环动画 ---- */
 @keyframes float {
-  0% { 
-    transform: translateY(0px) rotate(0deg); 
-  }
-  100% { 
-    transform: translateY(-20px) rotate(10deg); 
-  }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-10px) rotate(1.5deg); }
+  75%      { transform: translateY(-4px) rotate(-1deg); }
 }
 
-/* 旋转动画 */
 @keyframes rotate {
-  0% { 
-    transform: rotate(0deg); 
-  }
-  100% { 
-    transform: rotate(360deg); 
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-/* 脉冲动画 */
 @keyframes pulse {
-  0% { 
-    transform: scale(1); 
-  }
-  50% { 
-    transform: scale(1.05); 
-  }
-  100% { 
-    transform: scale(1); 
-  }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.05); opacity: 0.6; }
 }
 
-/* 背景动画 */
 @keyframes bgAnimation {
-  0% { 
-    opacity: 0.7; 
-    transform: scale(1); 
-  }
-  100% { 
-    opacity: 1; 
-    transform: scale(1.1); 
-  }
+  0%   { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 1;   transform: scale(1.08); }
 }
 
-/* 滚动动画 */
+@keyframes bgPulse {
+  0%   { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
 @keyframes scroll {
-  0% { 
-    top: 8px; 
-    opacity: 1; 
-  }
-  100% { 
-    top: 20px; 
-    opacity: 0; 
-  }
+  0%   { top: 8px;  opacity: 1; }
+  100% { top: 20px; opacity: 0; }
 }
 
-/* 动画类 */
-.animate-fade-in {
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33%      { transform: translate(12px, -18px) rotate(3deg); }
+  66%      { transform: translate(-10px, -10px) rotate(-2deg); }
 }
 
-.animate-slide-up {
-  opacity: 0;
-  animation: slideUp 1s ease forwards;
+@keyframes ember {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 140, 66, 0.2); }
+  50%      { box-shadow: 0 0 40px rgba(255, 140, 66, 0.4), 0 0 80px rgba(244, 140, 6, 0.1); }
 }
 
-.animate-slide-left {
-  opacity: 0;
-  animation: slideLeft 1s ease forwards;
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
 }
 
-.animate-slide-right {
-  opacity: 0;
-  animation: slideRight 1s ease forwards;
+@keyframes typewriter {
+  from { width: 0; }
+  to   { width: 100%; }
 }
 
-.animate-scale-in {
-  opacity: 0;
-  animation: scaleIn 0.8s ease forwards;
-}
+/* ---- 动画类 ---- */
+.animate-fade-in    { opacity: 0; animation: fadeIn  0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-up   { opacity: 0; animation: slideUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-slide-left { opacity: 0; animation: slideLeft 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-slide-right{ opacity: 0; animation: slideRight 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-scale-in   { opacity: 0; animation: scaleIn  0.5s cubic-bezier(0.22, 1.2, 0.36, 1) forwards; }
+.animate-flip-in    { opacity: 0; animation: flipIn  0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-float      { animation: float 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-drift      { animation: drift 6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-pulse      { animation: pulse 2.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-ember      { animation: ember 3s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-shake      { animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
 
-.animate-float {
-  opacity: 0;
-  animation: fadeIn 1s ease forwards, float 3s ease-in-out infinite alternate;
-  animation-delay: 0s, 1s;
-}
+.visible { opacity: 1 !important; }
 
-.animate-pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
+/* ---- 交错延迟（错位入场） ---- */
+.stagger-1 { animation-delay: 80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+.stagger-4 { animation-delay: 320ms; }
+.stagger-5 { animation-delay: 400ms; }
+.stagger-6 { animation-delay: 480ms; }
 
-.visible {
-  opacity: 1 !important;
-}
-
-/* 卡片悬停效果 */
+/* ---- 卡片悬停（增强版） ---- */
 .card-hover {
-  transition: all 0.3s ease;
+  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
   position: relative;
 }
@@ -167,28 +121,28 @@
 .card-hover::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--bs-primary) 0%, var(--bs-info) 100%);
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
   transform: scaleX(0);
-  transition: transform 0.3s ease;
+  transform-origin: left;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px) rotate(-0.5deg);
+  box-shadow: var(--shadow-xl), var(--shadow-warm);
 }
 
 .card-hover:hover::before {
   transform: scaleX(1);
 }
 
-/* 按钮动画 */
+/* ---- 按钮动画（有触感） ---- */
 .btn-animate {
-  transition: all 0.3s ease;
-  border-radius: var(--radius-full);
+  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: var(--radius-md);
+  font-weight: 600;
   position: relative;
   overflow: hidden;
 }
@@ -196,19 +150,17 @@
 .btn-animate::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 140, 66, 0.15);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition: width 500ms cubic-bezier(0.16, 1, 0.3, 1), height 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-animate:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-warm);
 }
 
 .btn-animate:hover::before {
@@ -216,21 +168,27 @@
   height: 300px;
 }
 
-/* 图片动画 */
+.btn-animate:active {
+  transform: scale(0.96) !important;
+  transition-duration: 80ms;
+}
+
+/* ---- 图片悬停 ---- */
 .img-animate {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: var(--radius-md);
 }
 
 .img-animate:hover {
-  transform: scale(1.05) rotate(5deg);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transform: scale(1.04) rotate(-1deg);
+  box-shadow: var(--shadow-xl);
 }
 
-/* 文字动画 */
+/* ---- 文字入场 ---- */
 .text-animate {
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.6s ease;
+  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .text-animate.visible {
@@ -238,23 +196,56 @@
   transform: translateY(0);
 }
 
-/* 响应式动画延迟 */
+/* ---- 3D 倾斜效果 ---- */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tilt-card:hover {
+  box-shadow: var(--shadow-xl), var(--shadow-warm);
+}
+
+.tilt-card .tilt-inner {
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateZ(0);
+}
+
+.tilt-card:hover .tilt-inner {
+  transform: translateZ(20px);
+}
+
+/* ---- 磁性悬停按钮 ---- */
+.magnetic-btn {
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- 响应式动画 ---- */
 @media (max-width: 768px) {
   .animate-fade-in,
   .animate-slide-up,
   .animate-slide-left,
   .animate-slide-right,
-  .animate-scale-in {
-    animation-duration: 0.8s;
+  .animate-scale-in,
+  .animate-flip-in {
+    animation-duration: 0.4s;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-6px);
+  }
+
+  .btn-animate:hover {
+    transform: translateY(-1px);
   }
 }
 
-/* 深色主题适配 */
-[data-bs-theme="dark"] .card-hover {
-  background: #2d3748;
-  color: #e2e8f0;
+/* ---- 深色模式卡片 ---- */
+[data-theme="dark"] .card-hover {
+  background: var(--color-bg-card);
+  color: var(--color-text);
 }
 
-[data-bs-theme="dark"] .card-hover .card-text {
-  color: #a0aec0;
+[data-theme="dark"] .card-hover .card-text {
+  color: var(--color-text-secondary);
 }
