@@ -300,6 +300,43 @@ main {
   font-weight: 700;
 }
 
+/* 测试下拉菜单 */
+.tests-dropdown {
+  background: var(--color-bg-card, #1e1d19) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+  padding: 6px !important;
+  min-width: 200px;
+}
+
+.tests-dropdown .dropdown-item {
+  color: var(--color-text) !important;
+  border-radius: 6px !important;
+  padding: 9px 12px !important;
+  font-size: 0.9rem;
+  transition: all var(--transition-base);
+}
+
+.tests-dropdown .dropdown-item:hover {
+  background: rgba(255, 140, 66, 0.1) !important;
+  color: var(--color-primary) !important;
+}
+
+.tests-dropdown .dropdown-item i {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.tests-dropdown .dropdown-item:hover i {
+  color: var(--color-primary);
+}
+
+.tests-dropdown .dropdown-divider {
+  border-color: var(--color-border) !important;
+  margin: 4px 0 !important;
+}
+
 /* ========== 页脚 ========== */
 footer {
   background: var(--gradient-dark);

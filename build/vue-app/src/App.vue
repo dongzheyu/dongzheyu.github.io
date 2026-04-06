@@ -5,6 +5,8 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
+const isTestsRoute = computed(() => route.path.startsWith('/tests'))
+
 // ---- 主题系统 ----
 type Theme = 'dark' | 'light' | 'system'
 const currentTheme = ref<Theme>('system')
@@ -124,6 +126,41 @@ onUnmounted(() => {
             </li>
             <li class="nav-item">
               <RouterLink to="/about" class="nav-link">关于我</RouterLink>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                :class="{ 'active': isTestsRoute }"
+              >
+                测试
+              </a>
+              <ul class="dropdown-menu tests-dropdown">
+                <li>
+                  <RouterLink to="/tests/mbti" class="dropdown-item d-flex align-items-center gap-2">
+                    <i class="bi bi-diagram-3"></i> MBTI 人格测试
+                  </RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/tests/depression" class="dropdown-item d-flex align-items-center gap-2">
+                    <i class="bi bi-heart-pulse"></i> 抑郁症自评 PHQ-9
+                  </RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/tests/sunshine" class="dropdown-item d-flex align-items-center gap-2">
+                    <i class="bi bi-sun"></i> 阳光抑郁症测试
+                  </RouterLink>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <RouterLink to="/tests" class="dropdown-item d-flex align-items-center gap-2" style="font-size: 0.82rem; color: var(--color-text-muted)">
+                    <i class="bi bi-grid"></i> 全部测试
+                  </RouterLink>
+                </li>
+              </ul>
             </li>
           </ul>
 

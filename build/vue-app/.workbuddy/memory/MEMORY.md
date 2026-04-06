@@ -25,6 +25,10 @@
 - BlogView: Hero + 博客文章列表
 - EnglishListenView: Qt6版本项目详情页（遗留，未被路由引用）
 - CPPGuideView: C++教程博客详情页
+- TestsView: 心理测试汇总入口页（/tests）
+- MbtiView: MBTI 93题测试，16型完整分析（/tests/mbti）
+- DepressionView: PHQ-9抑郁症自评，5级结果+求助热线（/tests/depression）
+- SunshineDepressionView: 阳光抑郁症15题，4维度分析（/tests/sunshine）
 
 ## VitePress 集成架构
 - **项目文档**: `project/` 目录，base=`/project/`，构建到 `public/project/`
