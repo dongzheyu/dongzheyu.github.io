@@ -75,7 +75,7 @@ onMounted(() => {
       <div class="row align-items-center min-vh-100">
         <!-- 左侧：内容偏左上方 -->
         <div class="col-lg-7">
-          <div class="hero-content" style="padding-left: 4%;">
+          <div class="hero-content">
             <div class="logo-container mb-5" :class="{ 'animate-fade-in': isVisible }">
               <img src="/logo.png" alt="dongle Logo" class="hero-logo">
             </div>

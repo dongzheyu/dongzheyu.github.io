@@ -6,7 +6,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回测试列表
+              <i class="bi bi-arrow-left"></i> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">MBTI 人格测试</h1>
             <p class="test-hero-sub mb-2">迈尔斯-布里格斯类型指标 · 93 道题 · 约 15 分钟</p>
@@ -500,326 +500,51 @@ const mbtiProfiles: Record<string, any> = {
 </script>
 
 <style scoped>
+/* MBTI 测试主色调：炽橙 */
 .mbti-page {
   min-height: 100vh;
+  --test-accent: var(--color-primary);
+  --test-accent-rgb: 255, 140, 66;
 }
-
-.test-hero {
-  padding: 64px 0 40px;
-  background: var(--gradient-hero);
-  position: relative;
-  overflow: hidden;
-}
-
-.test-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--noise-texture);
-  opacity: var(--noise-opacity);
-  pointer-events: none;
-}
-
-.back-link {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.back-link:hover {
-  color: var(--color-primary);
-}
-
-.test-hero-title {
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 800;
-  color: var(--color-heading);
-  letter-spacing: -0.02em;
-}
-
-.test-hero-sub {
-  font-size: 0.95rem;
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-.test-hero-desc {
-  font-size: 0.92rem;
-  color: var(--color-text-secondary);
-  max-width: 560px;
-  line-height: 1.7;
-}
-
-.test-body {
-  padding: 48px 0 80px;
-}
+.test-hero-sub { color: var(--color-primary); }
 
 /* 进度条 */
-.progress-label, .progress-count {
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-}
+.progress-label, .progress-count { font-size: 0.82rem; color: var(--color-text-muted); }
+.progress-bar-wrap { height: 4px; background: var(--color-bg-mute); border-radius: 2px; overflow: hidden; max-width: 600px; }
+.progress-bar-fill { height: 100%; background: var(--gradient-primary); border-radius: 2px; transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-.progress-bar-wrap {
-  height: 4px;
-  background: var(--color-bg-mute);
-  border-radius: 2px;
-  overflow: hidden;
-  max-width: 600px;
-}
+/* 选项按钮（MBTI 用两个文字选项，非频率按钮） */
+.options-row { display: flex; flex-direction: column; gap: 8px; }
+.option-btn { background: var(--color-bg-soft); border: 1px solid var(--color-border); color: var(--color-text-secondary); padding: 10px 16px; border-radius: 7px; text-align: left; font-size: 0.88rem; cursor: pointer; transition: all 0.18s ease; }
+.option-btn:hover { border-color: var(--color-border-hover); color: var(--color-text); background: var(--color-bg-elevated); }
+.option-btn.selected { border-color: var(--color-primary); background: rgba(255,140,66,0.1); color: var(--color-primary); font-weight: 600; }
+.dimension-hint { font-size: 0.72rem; color: var(--color-text-muted); margin-top: 10px; }
 
-.progress-bar-fill {
-  height: 100%;
-  background: var(--gradient-primary);
-  border-radius: 2px;
-  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+/* 结果类型大卡片 */
+.result-type-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 14px; padding: 40px; text-align: center; }
+.result-type-badge { display: inline-block; font-size: 2.5rem; font-weight: 900; letter-spacing: 0.15em; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+.result-type-name { font-size: 1.6rem; font-weight: 800; color: var(--color-heading); margin-bottom: 6px; }
+.result-type-tagline { font-size: 0.95rem; color: var(--color-text-secondary); }
 
-/* 题目卡片 */
-.question-card {
-  max-width: 700px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 24px 28px;
-  transition: border-color 0.2s;
-  position: relative;
-}
+/* 维度比例条 */
+.dimension-scores { max-width: 480px; margin: 0 auto; }
+.dim-score-row { margin-bottom: 14px; }
+.dim-labels { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.dim-left, .dim-right { font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); letter-spacing: 0.05em; }
+.dim-left.dominant, .dim-right.dominant { color: var(--color-primary); }
+.dim-bar-wrap { height: 6px; background: var(--color-bg-mute); border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
+.dim-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1); }
+.dim-percent { font-size: 0.75rem; color: var(--color-text-muted); text-align: right; }
 
-.question-card.answered {
-  border-color: rgba(255, 140, 66, 0.25);
-}
-
-.question-number {
-  position: absolute;
-  top: -12px;
-  left: 20px;
-  background: var(--color-bg-mute);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-}
-
-.question-text {
-  font-size: 0.95rem;
-  color: var(--color-text);
-  margin-bottom: 16px;
-  line-height: 1.65;
-  font-weight: 500;
-}
-
-.options-row {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.option-btn {
-  background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-secondary);
-  padding: 10px 16px;
-  border-radius: 7px;
-  text-align: left;
-  font-size: 0.88rem;
-  cursor: pointer;
-  transition: all 0.18s ease;
-}
-
-.option-btn:hover {
-  border-color: var(--color-border-hover);
-  color: var(--color-text);
-  background: var(--color-bg-elevated);
-}
-
-.option-btn.selected {
-  border-color: var(--color-primary);
-  background: rgba(255, 140, 66, 0.1);
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-.dimension-hint {
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  margin-top: 10px;
-}
-
-.submit-section {
-  max-width: 700px;
-  padding-top: 16px;
-  border-top: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.submit-hint {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
-/* 结果 */
-.result-section {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.result-type-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  padding: 40px;
-  text-align: center;
-}
-
-.result-type-badge {
-  display: inline-block;
-  font-size: 2.5rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
-}
-
-.result-type-name {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--color-heading);
-  margin-bottom: 6px;
-}
-
-.result-type-tagline {
-  font-size: 0.95rem;
-  color: var(--color-text-secondary);
-}
-
-.dimension-scores {
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.dim-score-row {
-  margin-bottom: 14px;
-}
-
-.dim-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-.dim-left, .dim-right {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  letter-spacing: 0.05em;
-}
-
-.dim-left.dominant, .dim-right.dominant {
-  color: var(--color-primary);
-}
-
-.dim-bar-wrap {
-  height: 6px;
-  background: var(--color-bg-mute);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 4px;
-}
-
-.dim-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.dim-percent {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  text-align: right;
-}
-
-.result-detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-@media (max-width: 640px) {
-  .result-detail-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.result-block {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 22px 24px;
-}
-
-.result-block-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 10px;
-}
-
-.result-block-text {
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  margin: 0;
-}
-
-.result-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.result-list li {
-  font-size: 0.88rem;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  padding: 4px 0;
-  padding-left: 14px;
-  position: relative;
-}
-
-.result-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
-.result-disclaimer {
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  text-align: center;
-  padding: 16px 24px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: var(--color-bg-soft);
-  line-height: 1.65;
-}
-
-.mb-6 {
-  margin-bottom: 2rem;
-}
+/* 结果详情 */
+.result-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+@media (max-width: 640px) { .result-detail-grid { grid-template-columns: 1fr; } }
+.result-block { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 10px; padding: 22px 24px; }
+.result-block-title { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+.result-block-text { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7; margin: 0; }
+.result-list { list-style: none; padding: 0; margin: 0; }
+.result-list li { font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.6; padding: 4px 0 4px 14px; position: relative; }
+.result-list li::before { content: '—'; position: absolute; left: 0; color: var(--color-primary); font-weight: 700; }
+.result-disclaimer { font-size: 0.82rem; color: var(--color-text-muted); text-align: center; padding: 16px 24px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-bg-soft); line-height: 1.65; }
+.mb-6 { margin-bottom: 2rem; }
 </style>

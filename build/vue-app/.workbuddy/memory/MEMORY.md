@@ -25,10 +25,24 @@
 - BlogView: Hero + 博客文章列表
 - EnglishListenView: Qt6版本项目详情页（遗留，未被路由引用）
 - CPPGuideView: C++教程博客详情页
-- TestsView: 心理测试汇总入口页（/tests）
-- MbtiView: MBTI 93题测试，16型完整分析（/tests/mbti）
+- TestsView: 心理评估汇总入口页（/tests），包含16项标准化心理评估
+- MbtiView: MBTI 93题评估，16型完整分析（/tests/mbti）
 - DepressionView: PHQ-9抑郁症自评，5级结果+求助热线（/tests/depression）
 - SunshineDepressionView: 阳光抑郁症15题，4维度分析（/tests/sunshine）
+- AnxietyView: GAD-7焦虑症评估，7题（/tests/anxiety）
+- BipolarView: MDQ双相情感障碍评估，13题（/tests/bipolar）
+- PhobiaView: SPIN+特定恐惧症评估，22题（/tests/phobia）
+- PtsdView: PCL-5创伤后应激障碍评估，20题（/tests/ptsd）
+- OcdView: OCI-R强迫症评估，18题（/tests/ocd）
+- EatingView: EAT-26进食障碍评估，26题（/tests/eating）
+- SubstanceView: AUDIT+DAST-10物质使用障碍评估，20题（/tests/substance）
+- GamblingView: PGSI赌博障碍评估，9题（/tests/gambling）
+- GamingView: IGD-20游戏障碍评估，20题（/tests/gaming）
+- AdhdView: ASRS-v1.1 ADHD评估，18题（/tests/adhd）
+- AsdView: AQ-10自闭症谱系初筛，10题（/tests/asd）
+- BpdView: MSI-BPD边缘型人格障碍评估，10题（/tests/bpd）
+- SomaticView: PHQ-15躯体症状障碍评估，15题（/tests/somatic）
+- EmergencyView: 紧急求助页面，包含报警电话、急救电话、心理援助热线和自救指南（/emergency）
 
 ## VitePress 集成架构
 - **项目文档**: `project/` 目录，base=`/project/`，构建到 `public/project/`
@@ -52,3 +66,11 @@
 - 不喜欢蓝紫色系
 - 强调"反主流"设计美学
 - 要求所有页面配色风格一致
+- 导航栏中显示"心理评估"而非"测试"
+- 导航栏点击直接跳转到汇总页面，不使用下拉菜单
+- 所有测试页面的返回链接文本为"返回评估列表"
+- 测试卡片按钮显示"开始评估"而非"开始测试"
+- 避免在Vue文件中使用内联样式，应将样式统一放在CSS文件中
+- 已有的CSS类：`.text-left`（左对齐），`.freq-instruction`（测试说明），`.hero-content`（首页内容）
+- 动画延迟使用类：`.animate-delay-100` 到 `.animate-delay-800`（100ms到800ms）
+- 测试页面使用`.freq-instruction`类，已包含padding-left: 5%样式

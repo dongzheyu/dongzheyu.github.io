@@ -247,8 +247,7 @@
 }
 
 /* ---- 尊重用户减少动画偏好（系统 + 手动开关） ---- */
-@media (prefers-reduced-motion: reduce),
-[data-motion="reduced"] {
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -271,6 +270,29 @@
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+[data-motion="reduced"] .animate-fade-in,
+[data-motion="reduced"] .animate-slide-up,
+[data-motion="reduced"] .animate-slide-left,
+[data-motion="reduced"] .animate-slide-right,
+[data-motion="reduced"] .animate-scale-in,
+[data-motion="reduced"] .animate-flip-in,
+[data-motion="reduced"] .animate-float,
+[data-motion="reduced"] .animate-drift,
+[data-motion="reduced"] .animate-pulse,
+[data-motion="reduced"] .animate-ember,
+[data-motion="reduced"] .text-animate {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* ---- 深色模式卡片 ---- */

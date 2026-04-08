@@ -596,3 +596,51 @@ footer {
   transition-duration: 200ms;
   transition-timing-function: var(--ease-out-expo);
 }
+
+/* ========== 测试页面按钮颜色定义 ========== */
+.btn-test-mbti { background: linear-gradient(135deg, #ff6b35 0%, #e63946 100%); color: white !important; }
+.btn-test-depression { background: linear-gradient(135deg, #e63946 0%, #d90429 100%); color: white !important; }
+.btn-test-sunshine { background: linear-gradient(135deg, #ffb703 0%, #ff9f1c 100%); color: #1a1410 !important; }
+.btn-test-anxiety { background: linear-gradient(135deg, #ff9f1c 0%, #f48c06 100%); color: #1a1410 !important; }
+.btn-test-bipolar { background: linear-gradient(135deg, #7209b7 0%, #560bad 100%); color: white !important; }
+.btn-test-phobia { background: linear-gradient(135deg, #52b788 0%, #40916c 100%); color: white !important; }
+.btn-test-ptsd { background: linear-gradient(135deg, #9d0208 0%, #6a040f 100%); color: white !important; }
+.btn-test-ocd { background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%); color: white !important; }
+.btn-test-eating { background: linear-gradient(135deg, #8ac926 0%, #52b788 100%); color: #1a1410 !important; }
+.btn-test-substance { background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%); color: white !important; }
+.btn-test-gambling { background: linear-gradient(135deg, #6d4c41 0%, #5a3727 100%); color: white !important; }
+.btn-test-gaming { background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%); color: white !important; }
+.btn-test-adhd { background: linear-gradient(135deg, #f72585 0%, #7209b7 100%); color: white !important; }
+.btn-test-asd { background: linear-gradient(135deg, #4a4e69 0%, #22223b 100%); color: white !important; }
+.btn-test-bpd { background: linear-gradient(135deg, #9b5de5 0%, #7209b7 100%); color: white !important; }
+.btn-test-somatic { background: linear-gradient(135deg, #bc6c25 0%, #dda15e 100%); color: #1a1410 !important; }
+
+/* 提高测试页面按钮在深色主题下的可见性 */
+[data-theme="dark"] .btn-test-bipolar,
+[data-theme="dark"] .btn-test-ptsd,
+[data-theme="dark"] .btn-test-ocd,
+[data-theme="dark"] .btn-test-substance,
+[data-theme="dark"] .btn-test-gambling,
+[data-theme="dark"] .btn-test-somatic {
+  background: var(--gradient-primary) !important;
+  color: white !important;
+}
+
+/* 紧急求助页面自救方法深色文字修复 */
+[data-theme="dark"] .accordion-body {
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .accordion-body li,
+[data-theme="dark"] .accordion-body p {
+  color: var(--color-text) !important;
+}
+
+/* 提高深色主题下深色文字的对比度 */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .btn {
+  filter: brightness(1.1);
+}

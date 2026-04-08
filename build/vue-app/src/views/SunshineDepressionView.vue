@@ -6,7 +6,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回测试列表
+              <i class="bi bi-arrow-left"></i> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">阳光抑郁症测试</h1>
             <p class="test-hero-sub mb-2">微笑型抑郁筛查 · 15 道题 · 约 8 分钟</p>
@@ -297,109 +297,21 @@ const hotlines = [
 </script>
 
 <style scoped>
+/* 阳光抑郁症测试主色调：暖橙 */
 .sunshine-page {
   min-height: 100vh;
+  --test-accent: #f48c06;
+  --test-accent-rgb: 244, 140, 6;
 }
+.test-hero-sub { color: #f48c06; }
 
-.test-hero {
-  padding: 64px 0 40px;
-  background: var(--gradient-hero);
-  position: relative;
-  overflow: hidden;
-}
-
-.test-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--noise-texture);
-  opacity: var(--noise-opacity);
-  pointer-events: none;
-}
-
-.back-link {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.back-link:hover { color: var(--color-primary); }
-
-.test-hero-title {
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 800;
-  color: var(--color-heading);
-  letter-spacing: -0.02em;
-}
-
-.test-hero-sub {
-  font-size: 0.95rem;
-  color: #f48c06;
-  font-weight: 600;
-}
-
-.test-hero-desc {
-  font-size: 0.92rem;
-  color: var(--color-text-secondary);
-  max-width: 580px;
-  line-height: 1.75;
-}
-
-.test-body {
-  padding: 48px 0 80px;
-}
-
-.instruction {
-  font-size: 0.95rem;
-  color: var(--color-text-secondary);
-  font-style: italic;
-}
-
-.question-card {
-  max-width: 720px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 24px 28px;
-  position: relative;
-  transition: border-color 0.2s;
-}
-
-.question-card.answered {
-  border-color: rgba(244, 140, 6, 0.25);
-}
-
-.question-number {
-  position: absolute;
-  top: -12px;
-  left: 20px;
-  background: var(--color-bg-mute);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 4px;
-}
-
-.question-text {
-  font-size: 0.95rem;
-  color: var(--color-text);
-  margin-bottom: 16px;
-  line-height: 1.65;
-  font-weight: 500;
-}
-
+/* agree-btn 样式（5级量表，与公共 freq-btn 类似但标签不同） */
 .agree-options {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
 }
-
-@media (max-width: 600px) {
-  .agree-options { grid-template-columns: repeat(3, 1fr); }
-}
+@media (max-width: 600px) { .agree-options { grid-template-columns: repeat(3, 1fr); } }
 
 .agree-btn {
   display: flex;
@@ -413,306 +325,46 @@ const hotlines = [
   cursor: pointer;
   transition: all 0.18s ease;
 }
-
-.agree-btn:hover {
-  border-color: var(--color-border-hover);
-  background: var(--color-bg-elevated);
-}
-
-.agree-btn.selected {
-  border-color: #f48c06;
-  background: rgba(244, 140, 6, 0.1);
-}
-
-.agree-score {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--color-text-muted);
-}
-
+.agree-btn:hover { border-color: var(--color-border-hover); background: var(--color-bg-elevated); }
+.agree-btn.selected { border-color: #f48c06; background: rgba(244,140,6,0.1); }
+.agree-score { font-size: 1.1rem; font-weight: 800; color: var(--color-text-muted); }
 .agree-btn.selected .agree-score { color: #f48c06; }
-
-.agree-label {
-  font-size: 0.67rem;
-  color: var(--color-text-muted);
-  text-align: center;
-  line-height: 1.3;
-}
-
+.agree-label { font-size: 0.67rem; color: var(--color-text-muted); text-align: center; line-height: 1.3; }
 .agree-btn.selected .agree-label { color: var(--color-text-secondary); }
 
-.submit-section {
-  max-width: 720px;
-  padding-top: 16px;
-  border-top: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.submit-hint {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
-/* 结果 */
-.result-section { max-width: 820px; margin: 0 auto; }
-
-.score-card {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  padding: 36px 40px;
-}
-
-@media (max-width: 560px) {
-  .score-card { flex-direction: column; text-align: center; padding: 28px 20px; }
-}
-
-.score-visual { display: flex; flex-direction: column; align-items: center; gap: 12px; flex-shrink: 0; }
-
-.score-ring {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid var(--score-color, var(--color-primary));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.score-num {
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: var(--score-color, var(--color-primary));
-  line-height: 1;
-}
-
-.score-max { font-size: 0.75rem; color: var(--color-text-muted); }
-
-.score-bar-wrap {
-  width: 100px;
-  height: 4px;
-  background: var(--color-bg-mute);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.score-bar-fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.score-badge {
-  display: inline-block;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 6px 16px;
-  border-radius: 6px;
-  border: 1px solid transparent;
-}
-
-.score-desc {
-  font-size: 0.92rem;
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* 维度 */
-.section-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-heading);
-  margin-bottom: 16px;
-}
-
-.dimension-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-@media (max-width: 560px) {
-  .dimension-grid { grid-template-columns: 1fr; }
-}
-
-.dim-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 18px 20px;
-}
-
-.dim-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.dim-name {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.dim-score-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
+/* 维度卡片（sunshine专用，有颜色标签） */
+.dim-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 10px; padding: 18px 20px; }
+.dim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.dim-name { font-size: 0.85rem; font-weight: 700; color: var(--color-text); }
+.dim-score-badge { font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
 .dim-low  { background: rgba(82,183,136,0.15); color: #52b788; }
 .dim-mid  { background: rgba(244,140,6,0.15); color: #f48c06; }
 .dim-high { background: rgba(239,35,60,0.15); color: #ef233c; }
-
-.dim-bar-wrap {
-  height: 4px;
-  background: var(--color-bg-mute);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.dim-bar-fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
+.dim-bar-wrap { height: 4px; background: var(--color-bg-mute); border-radius: 2px; overflow: hidden; margin-bottom: 10px; }
+.dim-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1); }
 .dim-low.dim-bar-fill  { background: #52b788 !important; }
 .dim-mid.dim-bar-fill  { background: #f48c06 !important; }
 .dim-high.dim-bar-fill { background: #ef233c !important; }
+.dim-desc { font-size: 0.78rem; color: var(--color-text-muted); margin: 0; line-height: 1.5; }
 
-.dim-desc {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  margin: 0;
-  line-height: 1.5;
-}
-
-.detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-@media (max-width: 640px) { .detail-grid { grid-template-columns: 1fr; } }
-
-.detail-block {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 22px 24px;
-}
-
-.detail-block-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 10px;
-}
-
-.detail-block-text {
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  margin: 0;
-}
-
-.detail-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.detail-list li {
-  font-size: 0.88rem;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  padding: 4px 0 4px 14px;
-  position: relative;
-}
-
-.detail-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
-/* 热线 */
-.hotline-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
+/* 热线列表 */
+.hotline-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 @media (max-width: 640px) { .hotline-list { grid-template-columns: 1fr 1fr; } }
+.hotline-item { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.hotline-name { font-size: 0.78rem; color: var(--color-text-muted); }
+.hotline-num { font-size: 1rem; font-weight: 800; color: var(--color-primary); font-family: monospace; letter-spacing: 0.04em; }
 
-.hotline-item {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+/* 分数环（sunshine使用 score-ring 而非 score-circle） */
+.score-visual { display: flex; flex-direction: column; align-items: center; gap: 12px; flex-shrink: 0; }
+.score-ring { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--score-color, var(--color-primary)); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.score-max { font-size: 0.75rem; color: var(--color-text-muted); }
+.score-bar-wrap { width: 100px; height: 4px; background: var(--color-bg-mute); border-radius: 2px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1); }
+.score-badge { display: inline-block; font-size: 0.95rem; font-weight: 700; padding: 6px 16px; border-radius: 6px; border: 1px solid transparent; }
+.section-title { font-size: 1rem; font-weight: 700; color: var(--color-heading); margin-bottom: 16px; }
 
-.hotline-name {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-}
-
-.hotline-num {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  font-family: monospace;
-  letter-spacing: 0.04em;
-}
-
-/* 注意事项 */
-.notice-box {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  padding: 20px 24px;
-  background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-}
-
-.notice-icon {
-  font-size: 1.3rem;
-  color: var(--color-text-muted);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.notice-box strong {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  margin-bottom: 6px;
-}
-
-.notice-box p {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  line-height: 1.65;
-  margin: 0;
-}
+/* 注意事项框（使用 bg-soft 而非 accent 色） */
+.notice-box { display: flex; gap: 16px; align-items: flex-start; padding: 20px 24px; background: var(--color-bg-soft); border: 1px solid var(--color-border); border-radius: 10px; }
+.notice-box strong { display: block; font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 6px; }
+.notice-box p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.65; margin: 0; }
 </style>

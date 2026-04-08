@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 const isTestsRoute = computed(() => route.path.startsWith('/tests'))
+const isEmergencyRoute = computed(() => route.path === '/emergency')
 
 // ---- 主题系统 ----
 type Theme = 'dark' | 'light' | 'system'
@@ -127,40 +128,15 @@ onUnmounted(() => {
             <li class="nav-item">
               <RouterLink to="/about" class="nav-link">关于我</RouterLink>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                :class="{ 'active': isTestsRoute }"
-              >
-                测试
-              </a>
-              <ul class="dropdown-menu tests-dropdown">
-                <li>
-                  <RouterLink to="/tests/mbti" class="dropdown-item d-flex align-items-center gap-2">
-                    <i class="bi bi-diagram-3"></i> MBTI 人格测试
-                  </RouterLink>
-                </li>
-                <li>
-                  <RouterLink to="/tests/depression" class="dropdown-item d-flex align-items-center gap-2">
-                    <i class="bi bi-heart-pulse"></i> 抑郁症自评 PHQ-9
-                  </RouterLink>
-                </li>
-                <li>
-                  <RouterLink to="/tests/sunshine" class="dropdown-item d-flex align-items-center gap-2">
-                    <i class="bi bi-sun"></i> 阳光抑郁症测试
-                  </RouterLink>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                  <RouterLink to="/tests" class="dropdown-item d-flex align-items-center gap-2" style="font-size: 0.82rem; color: var(--color-text-muted)">
-                    <i class="bi bi-grid"></i> 全部测试
-                  </RouterLink>
-                </li>
-              </ul>
+            <li class="nav-item">
+              <RouterLink to="/tests" class="nav-link" :class="{ 'active': isTestsRoute }">
+                心理评估
+              </RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/emergency" class="nav-link" :class="{ 'active': isEmergencyRoute }">
+                紧急求助
+              </RouterLink>
             </li>
           </ul>
 
@@ -250,7 +226,7 @@ onUnmounted(() => {
                 <i class="bi bi-play-circle"></i>
               </a>
             </div>
-            <p class="text-muted mb-0">&copy; 2025 dongle. All rights reserved.</p>
+            <p class="text-muted mb-0">&copy; 2026 dongle. All rights reserved.</p>
           </div>
         </div>
 

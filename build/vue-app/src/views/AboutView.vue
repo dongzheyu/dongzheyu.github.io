@@ -4,7 +4,7 @@
     <section class="about-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
+          <div class="col-lg-8">
             <h1 class="about-title mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
               关于我 <span class="text-gradient">— dongle</span>
             </h1>

@@ -206,6 +206,17 @@ main {
   color: #1a1410 !important;
 }
 
+/* 深色主题下的特殊处理 */
+[data-theme="dark"] .navbar .btn-warning,
+:root .navbar .btn-warning {
+  color: #0f0e0c !important; /* 更深的颜色确保可读性 */
+}
+
+[data-theme="dark"] .navbar .btn-warning:hover,
+:root .navbar .btn-warning:hover {
+  color: #0f0e0c !important;
+}
+
 /* 减少动画按钮 */
 .motion-toggle-btn {
   width: 38px;
@@ -375,6 +386,544 @@ footer a {
   transition: all var(--transition-fast);
 }
 
+/* ========================================================
+   心理测试页面 — 公共样式
+   所有 *View.vue 测试页共用，不在 scoped 内重复写
+   ======================================================== */
+
+/* --- Hero 区域 --- */
+.test-hero {
+  padding: 64px 0 40px;
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+.test-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--noise-texture);
+  opacity: var(--noise-opacity);
+  pointer-events: none;
+}
+
+.back-link {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: var(--color-primary); }
+
+.test-hero-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.02em;
+}
+
+.test-hero-sub {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.test-hero-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* --- 题目区域 --- */
+.test-body { padding: 48px 0 80px; }
+
+.freq-instruction {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  padding-left: 5%;
+}
+
+.question-card {
+  max-width: 720px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 24px 28px;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.question-card.answered {
+  border-color: rgba(var(--test-accent-rgb, 255, 140, 66), 0.25);
+}
+
+.question-number {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--color-bg-mute);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 4px;
+}
+
+.question-text {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin-bottom: 16px;
+  line-height: 1.65;
+  font-weight: 500;
+}
+
+/* 4选项频率按钮 */
+.freq-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 540px) {
+  .freq-options { grid-template-columns: repeat(2, 1fr); }
+}
+
+.freq-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.freq-btn:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-bg-elevated);
+}
+
+.freq-btn.selected {
+  border-color: var(--test-accent, var(--color-primary));
+  background: rgba(var(--test-accent-rgb, 255, 140, 66), 0.1);
+}
+
+.freq-score {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+}
+
+.freq-btn.selected .freq-score {
+  color: var(--test-accent, var(--color-primary));
+}
+
+.freq-label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.freq-btn.selected .freq-label { color: var(--color-text-secondary); }
+
+/* 是/否 二选一按钮 */
+.yesno-options {
+  display: flex;
+  gap: 10px;
+}
+
+.yesno-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: all 0.18s ease;
+}
+
+.yesno-btn:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-bg-elevated);
+}
+
+.yesno-btn.selected {
+  border-color: var(--test-accent, var(--color-primary));
+  background: rgba(var(--test-accent-rgb, 255, 140, 66), 0.1);
+  color: var(--test-accent, var(--color-primary));
+}
+
+/* 5级李克特量表 */
+.likert-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .likert-options { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 提交按钮区 */
+.submit-section {
+  max-width: 720px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.submit-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* --- 结果区域 --- */
+.result-section { max-width: 800px; }
+
+.score-card {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 36px 40px;
+}
+
+@media (max-width: 540px) {
+  .score-card { flex-direction: column; padding: 28px 20px; }
+}
+
+.score-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--score-color, var(--color-primary));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.score-num {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--score-color, var(--color-primary));
+  line-height: 1;
+}
+
+.score-total { font-size: 0.75rem; color: var(--color-text-muted); }
+
+.score-level { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+
+.score-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* 各题得分回顾 */
+.review-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  margin-bottom: 16px;
+}
+
+.review-grid { display: flex; flex-direction: column; gap: 8px; }
+
+.review-item {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.review-q-num { font-size: 0.75rem; font-weight: 700; color: var(--color-text-muted); }
+.review-q-text { font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5; }
+
+.review-score {
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.review-score-num { font-weight: 700; }
+
+.score-none { color: var(--color-success, #52b788); }
+.score-low  { color: var(--color-warning, #f48c06); }
+.score-mid  { color: #ff8c42; }
+.score-high { color: var(--color-danger, #ef233c); }
+
+/* 分析卡片 */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) { .detail-grid { grid-template-columns: 1fr; } }
+
+.detail-block {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 22px 24px;
+}
+
+.detail-block-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+
+.detail-block-text {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.detail-list { list-style: none; padding: 0; margin: 0; }
+
+.detail-list li {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  padding: 4px 0 4px 14px;
+  position: relative;
+}
+
+.detail-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* 资源卡片 */
+.resources-intro {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 16px;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 720px) { .resources-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .resources-grid { grid-template-columns: 1fr; } }
+
+.resource-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.resource-name { font-size: 0.85rem; font-weight: 700; color: var(--color-heading); margin-bottom: 4px; }
+
+.resource-contact {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  font-family: monospace;
+  letter-spacing: 0.04em;
+}
+
+.resource-desc { font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.5; }
+
+/* 重要免责声明 */
+.important-notice {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 24px;
+  background: rgba(var(--test-accent-rgb, 255, 140, 66), 0.06);
+  border: 1px solid rgba(var(--test-accent-rgb, 255, 140, 66), 0.2);
+  border-radius: 10px;
+}
+
+.notice-icon {
+  font-size: 1.3rem;
+  color: var(--test-accent, var(--color-primary));
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.important-notice strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.important-notice p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* 维度分析卡片 */
+.dimension-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) { .dimension-grid { grid-template-columns: 1fr; } }
+
+.dimension-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+
+.dimension-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.dimension-bar-wrap {
+  height: 6px;
+  background: var(--color-bg-soft);
+  border-radius: 3px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.dimension-bar {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--test-accent, var(--color-primary));
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dimension-score {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.dimension-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 分组标题 */
+.section-group-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 32px 0 14px;
+  padding-left: 2px;
+  border-left: 3px solid var(--test-accent, var(--color-primary));
+  padding-left: 10px;
+}
+
+/* 测试汇总页卡片 */
+.tests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.test-entry-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s, transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.test-entry-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-3px);
+}
+
+.test-entry-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.test-entry-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  margin: 0;
+}
+
+.test-entry-meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.test-entry-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.test-entry-arrow {
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
 footer a:hover {
   color: var(--color-primary);
   transform: translateY(-2px);
@@ -432,6 +981,13 @@ footer a:hover .bi {
 .powered-badge--blue {
   background: #eff6ff;
   color: #1d4ed8;
+}
+
+/* 深色主题下的特殊处理 */
+[data-theme="dark"] .powered-badge--blue,
+:root .powered-badge--blue {
+  background: rgba(29, 78, 216, 0.15);
+  color: #a5b4fc; /* 更浅的蓝色确保在深色背景上可读 */
 }
 
 .powered-badge--orange {
@@ -649,6 +1205,11 @@ footer a:hover .bi {
 .hero-logo:hover {
   transform: rotate(-8deg) scale(1.08);
   box-shadow: var(--shadow-glow);
+}
+
+/* Hero内容 */
+.hero-content {
+  padding-left: 4%;
 }
 
 /* Hero 按钮 */
@@ -1273,6 +1834,395 @@ footer {
 .greetings h3 { font-size: 1.2rem; }
 .greetings h1, .greetings h3 { text-align: center; }
 
+.text-left { text-align: left !important; }
+
 @media (min-width: 1024px) {
   .greetings h1, .greetings h3 { text-align: left; }
+}
+
+/* ==========================================================
+   EmergencyView — 紧急求助页面样式
+   ========================================================== */
+.emergency-page {
+  min-height: 100vh;
+}
+
+/* Hero 区域样式 */
+.emergency-hero {
+  background: linear-gradient(135deg, rgba(239,35,60,0.15) 0%, rgba(217,4,41,0.08) 100%);
+  padding: 100px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(239,35,60,0.25) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.emergency-title {
+  color: #ef233c;
+  font-size: 3.5rem;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.emergency-subtitle {
+  color: rgba(239,35,60,0.8);
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.emergency-desc {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 区域通用样式 */
+.emergency-section, .selfhelp-section, .notice-section {
+  padding: 80px 0;
+}
+
+.section-title {
+  color: var(--color-text-primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}
+
+/* 紧急联系卡片样式 */
+.emergency-card {
+  background: var(--color-bg-card);
+  border-radius: 16px;
+  padding: 30px;
+  height: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 6px solid;
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.emergency-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, currentColor 0%, transparent 100%);
+  opacity: 0.3;
+}
+
+.police-card {
+  border-color: #2a6ecc;
+}
+
+.medical-card {
+  border-color: #ef233c;
+}
+
+.fire-card {
+  border-color: #f48c06;
+}
+
+.mental-card {
+  border-color: #7209b7;
+}
+
+.women-card {
+  border-color: #ff5d8f;
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: inherit;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--color-text-primary);
+}
+
+.phone-number {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.number-display {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: inherit;
+  line-height: 1;
+}
+
+.number-label {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.card-desc {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.card-tips {
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.card-tips strong {
+  color: var(--color-text-primary);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.card-tips ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.card-tips li {
+  margin-bottom: 4px;
+}
+
+.additional-numbers {
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.additional-number {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.additional-number:last-child {
+  border-bottom: none;
+}
+
+.add-number {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.add-label {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.call-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, currentColor 0%, rgba(0,0,0,0.1) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.call-btn:hover {
+  transform: scale(1.02);
+  color: white;
+}
+
+.police-card .call-btn {
+  background: linear-gradient(135deg, #2a6ecc 0%, #1a4e8c 100%);
+}
+
+.medical-card .call-btn {
+  background: linear-gradient(135deg, #ef233c 0%, #c91e37 100%);
+}
+
+.fire-card .call-btn {
+  background: linear-gradient(135deg, #f48c06 0%, #d87d05 100%);
+}
+
+.mental-card .call-btn {
+  background: linear-gradient(135deg, #7209b7 0%, #5a0891 100%);
+}
+
+.women-card .call-btn {
+  background: linear-gradient(135deg, #ff5d8f 0%, #ff4777 100%);
+}
+
+/* 自救指南样式 */
+.selfhelp-section {
+  background: linear-gradient(135deg, rgba(42,110,204,0.03) 0%, rgba(239,35,60,0.03) 100%);
+}
+
+.accordion-item {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px !important;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.accordion-button {
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  padding: 20px;
+  font-size: 1.1rem;
+  border: none;
+  box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-body {
+  padding: 25px;
+  color: var(--color-text-secondary);
+}
+
+/* 紧急求助页面深色主题文字修复 */
+[data-theme="dark"] .accordion-body {
+  color: var(--color-text) !important;
+}
+
+.accordion-body ol, .accordion-body ul {
+  padding-left: 20px;
+}
+
+.accordion-body li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.accordion-body strong {
+  color: var(--color-text-primary);
+}
+
+/* 注意事项样式 */
+.notice-card {
+  background: linear-gradient(135deg, rgba(244,140,6,0.1) 0%, rgba(232,93,4,0.05) 100%);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  border-left: 6px solid #f48c06;
+}
+
+.notice-title {
+  color: #f48c06;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.notice-item {
+  background: var(--color-bg-card);
+  border-radius: 12px;
+  padding: 25px;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.notice-item i {
+  font-size: 2rem;
+  color: #f48c06;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.notice-item h5 {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.notice-item p {
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================
+   深色主题下的测试按钮颜色修复
+   ========================================================== */
+
+/* 恐惧症测试按钮在深色主题下使用更浅的蓝绿色 */
+[data-theme="dark"] .btn-test-phobia,
+:root .btn-test-phobia {
+  --btn-color: #5acce6 !important; /* 替换原来的 #168aad */
+}
+
+/* 测试页面中的蓝绿色文本在深色主题下使用更浅的色调 */
+[data-theme="dark"] .test-entry-tag[style*="background"] {
+  background-color: rgba(22, 138, 173, 0.2) !important;
+}
+
+[data-theme="dark"] .test-entry-tag[style*="color"] {
+  color: #5acce6 !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .emergency-title {
+    font-size: 2.5rem;
+  }
+  
+  .emergency-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .number-display {
+    font-size: 2.2rem;
+  }
+  
+  .emergency-card {
+    padding: 20px;
+  }
 }

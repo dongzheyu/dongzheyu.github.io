@@ -70,7 +70,7 @@ const blogPosts = ref([
     id: 1,
     title: 'C++完全入门指南：从Hello World到结构体',
     excerpt: '这是一篇详细的C++入门指南，从最基础的Hello World程序开始，逐步讲解变量、数据类型、控制流、函数、指针到结构体等核心概念，适合初学者系统学习C++编程。',
-    date: '2025-12-24',
+    date: '2026-12-24',
     author: 'JetCPP Team',
     link: '/blog/cpp-guide.html', // 指向VitePress构建的博客页面
     color: '#FF6B6B',

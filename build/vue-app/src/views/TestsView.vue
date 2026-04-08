@@ -5,7 +5,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <h1 class="tests-title mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
-              心理测试 <span class="text-gradient">— 了解自己</span>
+              心理评估 <span class="text-gradient">— 了解自己</span>
             </h1>
             <p class="tests-subtitle mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.15s">
               基于标准量表，探索你的人格类型与心理状态
@@ -47,8 +47,9 @@
                   </div>
                 </div>
                 <div class="card-footer border-0 p-4 pt-0">
-                  <span class="btn btn-animate w-100 text-center" :style="`--btn-color: ${test.color}`">
-                    开始测试
+                  <span class="btn btn-animate w-100 text-center" :style="`--btn-color: ${test.color}`"
+                        :class="`btn-test-${test.id}`">
+                    开始评估
                   </span>
                 </div>
               </div>
@@ -115,6 +116,163 @@ const tests = ref([
     color: '#f48c06',
     questions: 15,
     minutes: 8
+  },
+  {
+    id: 'anxiety',
+    path: '/tests/anxiety',
+    title: '焦虑症自评测试',
+    description: '基于 GAD-7 广泛性焦虑量表，评估过去两周内的焦虑症状频率，共 7 个核心问题。',
+    icon: 'bi bi-shield-exclamation',
+    badge: 'GAD-7',
+    gradient: 'linear-gradient(135deg, rgba(244,140,6,0.15) 0%, rgba(232,93,4,0.08) 100%)',
+    color: '#f48c06',
+    questions: 7,
+    minutes: 3
+  },
+  {
+    id: 'bipolar',
+    path: '/tests/bipolar',
+    title: '双相情感障碍测试',
+    description: '心境障碍问卷（MDQ）筛查工具，评估躁狂/轻躁狂症状，共 13 个问题。',
+    icon: 'bi bi-arrow-up-down',
+    badge: 'MDQ',
+    gradient: 'linear-gradient(135deg, rgba(114,9,183,0.15) 0%, rgba(123,44,191,0.08) 100%)',
+    color: '#7209b7',
+    questions: 13,
+    minutes: 5
+  },
+  {
+    id: 'phobia',
+    path: '/tests/phobia',
+    title: '恐惧症综合测试',
+    description: '结合社交恐惧量表（SPIN）和特定恐惧症筛查，评估各类恐惧症状，共 22 题。',
+    icon: 'bi bi-emoji-dizzy',
+    badge: 'SPIN',
+    gradient: 'linear-gradient(135deg, rgba(22,138,173,0.15) 0%, rgba(32,156,192,0.08) 100%)',
+    color: '#168aad',
+    colorDark: '#5acce6', /* 深色主题下使用更浅的蓝绿色 */
+    questions: 22,
+    minutes: 7
+  },
+  {
+    id: 'ptsd',
+    path: '/tests/ptsd',
+    title: 'PTSD 自评测试',
+    description: '基于 PTSD 检查表（PCL-5），评估创伤后应激障碍症状，符合 DSM-5 标准，共 20 题。',
+    icon: 'bi bi-lightning',
+    badge: 'PCL-5',
+    gradient: 'linear-gradient(135deg, rgba(157,2,8,0.15) 0%, rgba(177,32,38,0.08) 100%)',
+    color: '#9d0208',
+    questions: 20,
+    minutes: 6
+  },
+  {
+    id: 'ocd',
+    path: '/tests/ocd',
+    title: '强迫症自评测试',
+    description: '强迫症状量表（OCI-R）评估强迫思维和行为，包含 18 个核心症状问题。',
+    icon: 'bi bi-arrow-repeat',
+    badge: 'OCI-R',
+    gradient: 'linear-gradient(135deg, rgba(58,12,163,0.15) 0%, rgba(88,42,193,0.08) 100%)',
+    color: '#3a0ca3',
+    questions: 18,
+    minutes: 5
+  },
+  {
+    id: 'eating',
+    path: '/tests/eating',
+    title: '进食障碍自评测试',
+    description: '进食态度测试（EAT-26）筛查厌食症、贪食症等进食障碍风险，共 26 题。',
+    icon: 'bi bi-heart-half',
+    badge: 'EAT-26',
+    gradient: 'linear-gradient(135deg, rgba(255,93,143,0.15) 0%, rgba(255,113,163,0.08) 100%)',
+    color: '#ff5d8f',
+    questions: 26,
+    minutes: 6
+  },
+  {
+    id: 'substance',
+    path: '/tests/substance',
+    title: '物质使用障碍测试',
+    description: '结合酒精使用障碍测试（AUDIT）和药物滥用筛查（DAST-10），共 20 题。',
+    icon: 'bi bi-droplet-half',
+    badge: 'AUDIT',
+    gradient: 'linear-gradient(135deg, rgba(232,93,4,0.15) 0%, rgba(242,113,24,0.08) 100%)',
+    color: '#e85d04',
+    questions: 20,
+    minutes: 5
+  },
+  {
+    id: 'gambling',
+    path: '/tests/gambling',
+    title: '赌博障碍自评测试',
+    description: '赌博问题严重性指数（PGSI）评估赌博问题严重程度，共 9 题。',
+    icon: 'bi bi-dice-6',
+    badge: 'PGSI',
+    gradient: 'linear-gradient(135deg, rgba(109,76,65,0.15) 0%, rgba(129,96,85,0.08) 100%)',
+    color: '#6d4c41',
+    questions: 9,
+    minutes: 3
+  },
+  {
+    id: 'gaming',
+    path: '/tests/gaming',
+    title: '游戏障碍自评测试',
+    description: '网络游戏障碍测试（IGD-20）根据 DSM-5 研究标准开发，共 20 题。',
+    icon: 'bi bi-controller',
+    badge: 'IGD-20',
+    gradient: 'linear-gradient(135deg, rgba(6,214,160,0.15) 0%, rgba(26,234,180,0.08) 100%)',
+    color: '#06d6a0',
+    questions: 20,
+    minutes: 6
+  },
+  {
+    id: 'adhd',
+    path: '/tests/adhd',
+    title: 'ADHD 自评测试',
+    description: '成人 ADHD 自评量表（ASRS-v1.1）根据 DSM-5 标准开发，共 18 题。',
+    icon: 'bi bi-lightning-charge',
+    badge: 'ASRS',
+    gradient: 'linear-gradient(135deg, rgba(255,209,102,0.15) 0%, rgba(255,229,122,0.08) 100%)',
+    color: '#ffd166',
+    questions: 18,
+    minutes: 5
+  },
+  {
+    id: 'asd',
+    path: '/tests/asd',
+    title: '自闭症谱系初筛',
+    description: '自闭症谱系商数（AQ-10）简短筛查工具，评估自闭症谱系特征，共 10 题。',
+    icon: 'bi bi-puzzle',
+    badge: 'AQ-10',
+    gradient: 'linear-gradient(135deg, rgba(76,201,240,0.15) 0%, rgba(96,221,255,0.08) 100%)',
+    color: '#4cc9f0',
+    questions: 10,
+    minutes: 3
+  },
+  {
+    id: 'bpd',
+    path: '/tests/bpd',
+    title: '边缘型人格障碍测试',
+    description: '边缘症状量表（MSI-BPD）筛查边缘型人格障碍风险，共 10 题。',
+    icon: 'bi bi-heartbreak',
+    badge: 'MSI-BPD',
+    gradient: 'linear-gradient(135deg, rgba(123,44,191,0.15) 0%, rgba(143,64,211,0.08) 100%)',
+    color: '#7b2cbf',
+    questions: 10,
+    minutes: 3
+  },
+  {
+    id: 'somatic',
+    path: '/tests/somatic',
+    title: '躯体症状障碍测试',
+    description: '躯体症状量表（PHQ-15）评估常见躯体症状严重程度，共 15 题。',
+    icon: 'bi bi-thermometer',
+    badge: 'PHQ-15',
+    gradient: 'linear-gradient(135deg, rgba(188,108,37,0.15) 0%, rgba(208,128,57,0.08) 100%)',
+    color: '#bc6c25',
+    questions: 15,
+    minutes: 4
   }
 ])
 </script>
