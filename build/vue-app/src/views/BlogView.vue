@@ -72,8 +72,28 @@ const blogPosts = ref([
     excerpt: '这是一篇详细的C++入门指南，从最基础的Hello World程序开始，逐步讲解变量、数据类型、控制流、函数、指针到结构体等核心概念，适合初学者系统学习C++编程。',
     date: '2026-12-24',
     author: 'JetCPP Team',
-    link: '/blog/cpp-guide.html', // 指向VitePress构建的博客页面
+    link: '/blog/cpp-guide.html',
     color: '#FF6B6B',
+    category: '编程教程'
+  },
+  {
+    id: 2,
+    title: 'C# 从入门到精通（零基础到进阶）',
+    excerpt: '一份全面的C#学习指南，涵盖从基础语法到高级特性的完整知识体系。包括变量、数据类型、控制流、方法、数组、面向对象编程、泛型、委托事件、LINQ查询和异步编程等核心内容，附带完整的学生管理系统实战项目。',
+    date: '2026-03-04',
+    author: 'JetCPP Team',
+    link: '/blog/csharp-guide.html',
+    color: '#9B59B6',
+    category: '编程教程'
+  },
+  {
+    id: 3,
+    title: 'XAML 从入门到精通（零基础到进阶）',
+    excerpt: 'WPF界面开发完全指南，从XAML基础语法到MVVM架构模式。涵盖布局系统、常用控件、资源管理、数据绑定、样式模板、动画系统和自定义控件等内容，最后通过一个完整的待办事项应用项目展示实战技巧。',
+    date: '2026-03-04',
+    author: 'JetCPP Team',
+    link: '/blog/xaml-guide.html',
+    color: '#3498DB',
     category: '编程教程'
   }
 ])
