@@ -11,5 +11,17 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <!-- Hash mode redirect for direct access to subpaths -->
+    <script>
+      (function() {
+        // 如果 URL 是 /xxx 而不是 /#/xxx，重定向
+        var path = window.location.pathname;
+        if (path !== '/' && !path.startsWith('/#/')) {
+          var search = window.location.search;
+          var hash = window.location.hash;
+          window.location.replace('/#' + path + search + hash);
+        }
+      })();
+    </script>
   </body>
 </html>
