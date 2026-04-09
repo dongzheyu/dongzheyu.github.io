@@ -14,7 +14,7 @@ C++是一门编译型语言，所以需要一个编译器。
 
 首先下载MSYS2用来安装MinGW, [清华大学镜像站直链下载](https://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/msys2-x86_64-latest.exe)。
 下载安装后，打开**msys终端**，先把镜像站更换一下，这里是bash的命令，直接输入  
-````
+```
    # 1. 修改 MSYS 软件源
 sed -i '1i Server = https://mirrors.huaweicloud.com/msys2/msys/$arch/' /etc/pacman.d/mirrorlist.msys
 
@@ -26,19 +26,19 @@ sed -i '1i Server = https://mirrors.huaweicloud.com/msys2/mingw/i686/' /etc/pacm
 
 # 4. 刷新软件包数据库
 pacman -Sy
-````
+```
 然后关闭终端打开**MinGW64终端**
 运行一下bash命令:
-````
+```
 pacman -S --needed --noconfirm mingw-w64-x86_64-toolchain mingw-w64-x86_64-ninja
-````
+```
 然后会让你选择，直接默认，全选y等待安装
 安装完成后，在cmd执行:
-````
+```
 gcc -v
-````
+```
 如果输出类似于：
-````
+```
 Using built-in specs.
 COLLECT_GCC=gcc
 COLLECT_LTO_WRAPPER=D:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
@@ -47,7 +47,7 @@ Configured with: ../gcc-15.2.0/configure --prefix=/mingw64 --with-local-prefix=/
 Thread model: posix
 Supported LTO compression algorithms: zlib zstd
 gcc version 15.2.0 (Rev8, Built by MSYS2 project)
-````
+```
 就说明安装成功了
 接下来下载Clion, 打开Clion[下载页面](https://www.jetbrains.com.cn/clion/download/?section=windows)单击下载，然后正常流程安装。
 安装后，打开clion，如果弹出订阅，选非商业使用（如果你有需要，请支持Clion[购买](https://www.jetbrains.com.cn/clion/buy/?section=personal&billing=monthly)）

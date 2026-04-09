@@ -107,6 +107,98 @@
             </div>
           </div>
 
+          <!-- 更多报警电话表格 -->
+          <div class="col-12">
+            <div class="emergency-table-card">
+              <h3 class="table-section-title">
+                <i class="bi bi-grid-3x3-gap me-2"></i>完整报警电话速查
+              </h3>
+
+              <!-- 核心报警 -->
+              <div class="phone-group">
+                <div class="phone-group-header">核心报警与救援</div>
+                <div class="phone-table">
+                  <div class="phone-row">
+                    <span class="phone-num police-num">110</span>
+                    <span class="phone-name">公安报警电话</span>
+                    <span class="phone-desc">受理刑事、治安案件，个人处于危难、需要紧急救助的情况</span>
+                  </div>
+                  <div class="phone-row">
+                    <span class="phone-num fire-num">119</span>
+                    <span class="phone-name">火警报警电话</span>
+                    <span class="phone-desc">受理火灾、爆炸、危险化学品泄漏等灾害事故的救援报警</span>
+                  </div>
+                  <div class="phone-row">
+                    <span class="phone-num medical-num">120</span>
+                    <span class="phone-name">医疗急救电话</span>
+                    <span class="phone-desc">受理突发疾病或事故伤害的紧急救援，全国统一</span>
+                  </div>
+                  <div class="phone-row">
+                    <span class="phone-num traffic-num">122</span>
+                    <span class="phone-name">交通事故报警</span>
+                    <span class="phone-desc">处理道路交通事故及相关报警</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 特殊情况 -->
+              <div class="phone-group">
+                <div class="phone-group-header">特殊情况报警方式</div>
+                <div class="phone-table">
+                  <div class="phone-row">
+                    <span class="phone-num special-num">12110</span>
+                    <span class="phone-name">短信报警号码</span>
+                    <span class="phone-desc">不便语音通话时使用（聋哑人士、身处危险环境等），需写清事由和具体地址</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 特定场景 -->
+              <div class="phone-group">
+                <div class="phone-group-header">特定场景专用</div>
+                <div class="phone-table">
+                  <div class="phone-row">
+                    <span class="phone-num water-num">12395</span>
+                    <span class="phone-name">水上遇险求救</span>
+                    <span class="phone-desc">船舶遇险、人员落水等水上突发事件，谐音"要岸上救我"</span>
+                  </div>
+                  <div class="phone-row">
+                    <span class="phone-num forest-num">12119</span>
+                    <span class="phone-name">森林火警报警</span>
+                    <span class="phone-desc">专门用于报告森林、草原火灾的报警电话</span>
+                  </div>
+                  <div class="phone-row">
+                    <span class="phone-num red-num">999</span>
+                    <span class="phone-name">红十字会急救台</span>
+                    <span class="phone-desc">部分城市提供的医疗急救电话，用于紧急救援</span>
+                  </div>
+                  <div class="phone-row">
+                    <span class="phone-num sos-num">112</span>
+                    <span class="phone-name">紧急呼叫中心</span>
+                    <span class="phone-desc">部分手机的紧急呼叫功能，某些情况下无SIM卡也可拨打</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 其他常用 -->
+              <div class="phone-group">
+                <div class="phone-group-header">其他常用服务</div>
+                <div class="phone-table">
+                  <div class="phone-row">
+                    <span class="phone-num service-num">12121</span>
+                    <span class="phone-name">天气预报</span>
+                    <span class="phone-desc">查询最新气象信息的电话</span>
+                  </div>
+                  <div class="phone-row">
+                    <span class="phone-num service-num">12117</span>
+                    <span class="phone-name">报时服务</span>
+                    <span class="phone-desc">提供准确的标准时间查询</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- 心理援助 -->
           <div class="col-lg-6">
             <div class="emergency-card mental-card">
