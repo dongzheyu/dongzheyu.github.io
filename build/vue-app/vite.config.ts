@@ -13,8 +13,8 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../../',
-    emptyOutDir: false,
+    outDir: 'dist',
+    emptyOutDir: true,
   },
   server: {
     host: 'localhost',
