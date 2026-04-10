@@ -4,10 +4,10 @@
    设计哲学：反主流、有触感、带灵魂
    ======================================================== */
 
-/* ========== 噪点纹理（内联 SVG data URI） ========== */
+/* ========== 噪点纹理（简化版 — 减少 octave 降低 GPU 负载） ========== */
 :root {
-  --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  --noise-opacity: 0.35;
+  --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  --noise-opacity: 0.25;
 }
 
 /* ========== 深色主题（默认） ========== */
@@ -78,11 +78,11 @@
   /* ---- 玻璃态 ---- */
   --glass-bg:     rgba(26, 24, 20, 0.75);
   --glass-border: rgba(255, 140, 66, 0.12);
-  --glass-blur:   blur(20px) saturate(180%);
+  --glass-blur:   blur(16px);
 
   /* ---- 导航栏 ---- */
   --navbar-bg:    rgba(15, 14, 12, 0.85);
-  --navbar-blur:  saturate(180%) blur(24px);
+  --navbar-blur:  blur(20px);
 }
 
 /* ========== 浅色主题 ========== */
@@ -143,10 +143,10 @@
 
   --glass-bg:     rgba(250, 247, 242, 0.8);
   --glass-border: rgba(232, 93, 4, 0.1);
-  --glass-blur:   blur(20px) saturate(180%);
+  --glass-blur:   blur(16px);
 
   --navbar-bg:    rgba(250, 247, 242, 0.88);
-  --navbar-blur:  saturate(180%) blur(24px);
+  --navbar-blur:  blur(20px);
 }
 
 /* ========== 字体定义 ========== */
@@ -212,7 +212,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
-  font-size: 15px;
+  font-size: 16px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -220,26 +220,44 @@ body {
   min-height: 100vh;
   color: var(--color-text);
   font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.7;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========== 噪点纹理叠加层 ========== */
+/* 大屏幕字体适配（2K+ 分辨率） */
+@media (min-width: 1920px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* 确保标题层级清晰 */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+  color: var(--color-heading);
+}
+
+/* ========== 噪点纹理叠加层（轻量版） ========== */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.03;
   background-image: var(--noise-texture);
   background-repeat: repeat;
   background-size: 256px 256px;
-  mix-blend-mode: overlay;
-  will-change: auto;
+  /* 移除 mix-blend-mode: overlay — Xe 核显合成开销大 */
 }
 
 /* 深色背景微光 */
@@ -325,8 +343,8 @@ a:hover {
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg), 0 0 30px rgba(255, 140, 66, 0.25);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), 0 0 16px rgba(255, 140, 66, 0.15);
 }
 
 /* 轮廓按钮 */
@@ -344,8 +362,7 @@ a:hover {
   border-color: var(--color-primary) !important;
   color: var(--color-primary) !important;
   background: rgba(255, 140, 66, 0.06) !important;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-warm);
+  transform: translateY(-1px);
 }
 
 /* 警告/赞助按钮 */
@@ -359,8 +376,8 @@ a:hover {
 
 .btn-warning:hover,
 .btn-outline-warning:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(255, 186, 8, 0.35);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
   color: #1a1410 !important;
 }
 
@@ -371,8 +388,8 @@ a:hover {
 }
 
 .btn-danger:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(239, 35, 60, 0.35);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* 浅色按钮 */
@@ -416,8 +433,8 @@ a:hover {
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-xl), var(--shadow-warm);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
   border-color: var(--color-border-hover);
 }
 
@@ -502,41 +519,49 @@ input:focus, textarea:focus, select:focus {
 .font-jetbrains { font-family: var(--font-mono) !important; }
 .font-pingfang  { font-family: 'PingFangSC', 'PingFang SC', sans-serif !important; }
 
-/* ========== 动画关键帧（弹性曲线） ========== */
+/* ========== 动画关键帧（统一 GPU 加速，弹性曲线） ========== */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(28px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translate3d(0, 30px, 0) scale(0.97); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-40px) rotate(-2deg); }
-  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+@keyframes slideLeft {
+  from { opacity: 0; transform: translate3d(-50px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(40px) rotate(2deg); }
-  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+@keyframes slideRight {
+  from { opacity: 0; transform: translate3d(50px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.88); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale3d(0.85, 0.85, 1); }
+  to   { opacity: 1; transform: scale3d(1, 1, 1); }
 }
 
+/* flipIn 移除（perspective + rotateY 在 Xe 核显上太贵，用 scaleIn 替代） */
+
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-8px) rotate(1deg); }
-  75%      { transform: translateY(-4px) rotate(-1deg); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25%      { transform: translate3d(0, -10px, 0); }
+  75%      { transform: translate3d(0, -4px, 0); }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.6; transform: scale(1.04); }
+  0%, 100% { transform: scale3d(1, 1, 1); opacity: 1; }
+  50%      { transform: scale3d(1.05, 1.05, 1); opacity: 0.6; }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33%      { transform: translate3d(12px, -18px, 0); }
+  66%      { transform: translate3d(-10px, -10px, 0); }
 }
 
 @keyframes ember-glow {
@@ -544,25 +569,33 @@ input:focus, textarea:focus, select:focus {
   50%       { box-shadow: var(--glow-primary); }
 }
 
-@keyframes drift {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33%      { transform: translate(10px, -15px) rotate(3deg); }
-  66%      { transform: translate(-8px, -8px) rotate(-2deg); }
+@keyframes bgPulse {
+  0%   { opacity: 0.8; }
+  100% { opacity: 1; }
 }
 
-/* ========== 动画类 ========== */
-.animate-fade-in  { opacity: 0; animation: fadeIn 0.6s var(--ease-out-expo) forwards; }
-.animate-slide-up { opacity: 0; animation: slideUp 0.7s var(--ease-out-back) forwards; }
-.animate-slide-left  { opacity: 0; animation: slideInLeft 0.7s var(--ease-out-back) forwards; }
-.animate-slide-right { opacity: 0; animation: slideInRight 0.7s var(--ease-out-back) forwards; }
-.animate-scale-in { opacity: 0; animation: scaleIn 0.5s var(--ease-spring) forwards; }
-.animate-float   { animation: float 4s var(--ease-smooth) infinite; }
-.animate-pulse   { animation: pulse 2.5s var(--ease-smooth) infinite; }
-.animate-glow    { animation: ember-glow 3s var(--ease-smooth) infinite; }
-.animate-drift   { animation: drift 6s var(--ease-smooth) infinite; }
+@keyframes shake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate3d(-4px, 0, 0); }
+  20%, 40%, 60%, 80% { transform: translate3d(4px, 0, 0); }
+}
+
+/* ========== 动画类（统一 GPU 加速 + 弹性曲线） ========== */
+.animate-fade-in    { opacity: 0; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-up   { opacity: 0; animation: slideUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-slide-left { opacity: 0; animation: slideLeft 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-slide-right{ opacity: 0; animation: slideRight 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-scale-in   { opacity: 0; animation: scaleIn 0.5s cubic-bezier(0.22, 1.2, 0.36, 1) forwards; }
+/* .animate-flip-in 已移除 — 使用 .animate-scale-in 替代（Xe 核显优化） */
+.animate-float      { animation: float 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-drift      { animation: drift 6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-pulse      { animation: pulse 2.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-ember      { animation: ember-glow 3s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+.animate-shake      { animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
 
 .visible { opacity: 1 !important; }
 
+/* 交错延迟 */
 .animate-delay-100 { animation-delay: 100ms; }
 .animate-delay-200 { animation-delay: 200ms; }
 .animate-delay-300 { animation-delay: 300ms; }
@@ -572,13 +605,214 @@ input:focus, textarea:focus, select:focus {
 .animate-delay-700 { animation-delay: 700ms; }
 .animate-delay-800 { animation-delay: 800ms; }
 
+/* ---- 卡片悬停（轻量版） ---- */
+.card-hover {
+  transition: transform 180ms var(--ease-out-expo),
+              box-shadow 180ms var(--ease-out-expo);
+  overflow: hidden;
+  position: relative;
+}
+
+.card-hover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover:hover {
+  transform: translate3d(0, -6px, 0);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-hover:hover::before {
+  transform: scaleX(1);
+}
+
+/* ---- 按钮动画（轻量版） ---- */
+.btn-animate {
+  transition: transform 180ms var(--ease-out-expo),
+              box-shadow 180ms var(--ease-out-expo);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-animate::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  border-radius: 50%;
+  background: rgba(255, 140, 66, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              height 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-animate:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: var(--shadow-warm);
+}
+
+.btn-animate:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-animate:active {
+  transform: scale3d(0.96, 0.96, 1) !important;
+  transition-duration: 80ms;
+}
+
+/* ---- 图片悬停（轻量版） ---- */
+.img-animate {
+  transition: transform 250ms var(--ease-out-expo);
+  border-radius: var(--radius-md);
+}
+
+.img-animate:hover {
+  transform: scale3d(1.04, 1.04, 1);
+  box-shadow: var(--shadow-xl);
+}
+
+/* ---- 文字入场 ---- */
+.text-animate {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.text-animate.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ---- 3D 倾斜效果（已移除 — Xe 核显性能优化） ---- */
+/* .tilt-card 需要 transform-style: preserve-3d + translateZ，太贵 */
+.tilt-card {
+  transition: transform 250ms var(--ease-out-expo),
+              box-shadow 250ms var(--ease-out-expo);
+}
+
+.tilt-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---- 磁性悬停按钮 ---- */
+.magnetic-btn {
+  transition: transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- 响应式动画 ---- */
 @media (max-width: 768px) {
   .animate-fade-in,
   .animate-slide-up,
   .animate-slide-left,
   .animate-slide-right,
-  .animate-scale-in {
-    animation-duration: 0.4s;
+  .animate-scale-in,
+  .animate-flip-in {
+    animation-duration: 0.3s;
+  }
+
+  .card-hover:hover {
+    transform: translate3d(0, -6px, 0);
+  }
+
+  .btn-animate:hover {
+    transform: translate3d(0, -1px, 0);
+  }
+}
+
+/* ---- 关闭动画模式（data-motion=\"off\" — 关照老显卡） ---- */
+/* 彻底杀掉所有动画和过渡效果，仅保留最基础的颜色/字重变化 */
+
+[data-motion="off"] {
+  /* 全局禁用 */
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 0 !important;
+    transition-duration: 0ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+    --transition-fast: 0s !important;
+    --transition-normal: 0s !important;
+    --transition-slow: 0s !important;
+    --ease-out-expo: linear !important;
+    --ease-smooth: linear !important;
+    --ease-bounce: linear !important;
+  }
+
+  /* 立即显示所有动画元素（不淡入、不滑入、不缩放） */
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-left,
+  .animate-slide-right,
+  .animate-scale-in,
+  .animate-float,
+  .animate-drift,
+  .animate-pulse,
+  .animate-ember,
+  .text-animate,
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* 卡片/按钮：移除位移 + 阴影动画，保留 hover 颜色变化（无过渡） */
+  .card:hover,
+  .card-hover:hover,
+  .feature-card:hover,
+  .project-card:hover,
+  .value-card:hover,
+  .emergency-card:hover,
+  .btn-primary:hover,
+  .btn-outline:hover,
+  .freq-btn.selected,
+  .yesno-btn.selected {
+    transform: none !important;
+  }
+
+  /* 浮动图标：彻底移除（老显卡不需要装饰） */
+  .floating-elements,
+  .floating-element {
+    display: none !important;
+  }
+
+  /* 噪点纹理：降低不透明度减少合成开销 */
+  body::before {
+    opacity: 0.015 !important;
+  }
+
+  /* 导航栏：去掉玻璃模糊（backdrop-filter 是性能杀手） */
+  .navbar {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Hero 背景：静态化（已无动画，这里保险兜底） */
+  .hero-section::before,
+  .hero-bg-animation,
+  .about-hero::before,
+  .projects-hero::before,
+  .blog-hero::before {
+    animation: none !important;
+  }
+}
+
+/* ---- 系统级 prefers-reduced-motion 兼容 ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -641,6 +875,7 @@ footer {
   color-scheme: dark;
 }
 
+/* 移除全局 filter:brightness — Xe 核显上每个按钮都触发光栅化 */
 [data-theme="dark"] .btn {
-  filter: brightness(1.1);
+  /* filter: brightness(1.1); 已移除 */
 }

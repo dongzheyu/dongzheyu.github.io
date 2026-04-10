@@ -401,6 +401,11 @@ const { isVisible } = useAnimations()
 </script>
 
 <style scoped>
+/* Hero 区 */
+.about-hero {
+  padding: 5rem 0 4rem 0;
+}
+
 .about-title {
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 800;
@@ -539,13 +544,45 @@ const { isVisible } = useAnimations()
   letter-spacing: -0.02em;
 }
 
-.tech-world-section,
-.philosophy-section,
-.skills-section,
-.highlights-section,
-.timeline-section,
-.learning-section,
-.closing-section {
+/* ===== 差异化留白节奏 ===== */
+/* 密集内容区域 — 更多呼吸空间 */
+.tech-world-section {
+  padding: 4rem 0 5rem 0;
+}
+
+.philosophy-section {
+  padding: 5rem 0;
+}
+
+.skills-section {
+  padding: 4rem 0;
+}
+
+.highlights-section {
+  padding: 5rem 0;
+}
+
+/* 轻量内容区域 — 紧凑不拖沓 */
+.timeline-section {
   padding: 3rem 0;
+}
+
+.learning-section {
+  padding: 3rem 0 4rem 0;
+}
+
+/* GitHub CTA — 中等间距 */
+.github-stats-section {
+  padding: 4rem 0;
+}
+
+/* 结束语 — 加重收尾感 */
+.closing-section {
+  padding: 5rem 0 6rem 0;
+}
+
+/* 联系区 — 充裕底部空间 */
+.contact-section {
+  padding: 4rem 0 6rem 0;
 }
 </style>

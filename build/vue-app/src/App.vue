@@ -38,7 +38,7 @@ const handleSystemThemeChange = () => {
 }
 mediaQuery.addEventListener('change', handleSystemThemeChange)
 
-// ---- 减少动画开关 ----
+// ---- 关闭动画开关 ----
 const reducedMotion = ref(false)
 const reducedMotionIcon = computed(() =>
   reducedMotion.value ? 'bi bi-lightning-charge-fill' : 'bi bi-lightning-charge'
@@ -46,7 +46,7 @@ const reducedMotionIcon = computed(() =>
 
 const toggleReducedMotion = () => {
   reducedMotion.value = !reducedMotion.value
-  document.documentElement.setAttribute('data-motion', reducedMotion.value ? 'reduced' : 'normal')
+  document.documentElement.setAttribute('data-motion', reducedMotion.value ? 'off' : '')
   localStorage.setItem('reduced-motion', String(reducedMotion.value))
 }
 
@@ -85,11 +85,11 @@ onMounted(() => {
   }
   applyTheme(currentTheme.value)
 
-  // 恢复减少动画设置
+  // 恢复关闭动画设置
   const savedMotion = localStorage.getItem('reduced-motion')
   if (savedMotion === 'true') {
     reducedMotion.value = true
-    document.documentElement.setAttribute('data-motion', 'reduced')
+    document.documentElement.setAttribute('data-motion', 'off')
   }
 
   updateAppClass()
@@ -146,7 +146,7 @@ onUnmounted(() => {
               class="motion-toggle-btn"
               type="button"
               :class="{ 'motion-active': reducedMotion }"
-              :title="reducedMotion ? '恢复动画' : '减少动画'"
+              :title="reducedMotion ? '恢复动画' : '关闭动画'"
               @click="toggleReducedMotion"
             >
               <i :class="reducedMotionIcon"></i>

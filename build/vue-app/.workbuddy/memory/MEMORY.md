@@ -12,14 +12,15 @@
 - **浅色**: `#faf7f2` 底 + `#e85d04` 主色
 - **禁止**: 蓝紫渐变、紫色/靛蓝色、居中对齐、emoji图标、ease-in-out
 - **背景**: 必须有噪点纹理 + 暖色径向渐变
-- **动画**: 全部用弹性/过冲曲线 (cubic-bezier过冲)
+- **动画**: 全部用弹性/过冲曲线 (cubic-bezier)，GPU 加速 (translate3d)，统一在 base.css
 - **风格**: 反主流、有触感、错位布局、左偏标题
+- **字体**: html 16px 基准 / body 15px，2K屏 17px / 4K屏 18px 自动放大
 - **主题切换**: 深/浅/系统三档循环，localStorage 持久化
-- **减少动画**: 导航栏闪电按钮手动开关，data-motion="reduced" 属性，localStorage 持久化（key: reduced-motion）
+- **减少动画**: 导航栏闪电按钮手动开关，data-motion="off" 属性，localStorage 持久化（key: reduced-motion）；启用后彻底关闭所有 animation/transition（仅保留颜色/字重基础反馈），同时移除 backdrop-filter 和噪点纹理合成开销
 - **鼠标光点**: 已删除（原跟随鼠标的暖色余烬光晕）
 
 ## 页面结构
-- HomeView: Hero(左重右轻) + Features(错位卡片) + CTA(左文右按钮)
+- HomeView: Hero(CSS Grid 1.2fr/0.8fr非对称) + Features(错位卡片 Grid) + CTA(左文右按钮Flex)
 - AboutView: Hero + Values卡片 + Contact链接
 - ProjectsView: Hero + 项目卡片网格（项目通过 `<a target="_blank">` 链接到 VitePress）
 - BlogView: Hero + 博客文章列表
@@ -56,11 +57,17 @@
 - English Listen WinUI: `project/english-listen-winui.md`，color=#f48c06，C#+C++混合，WinUI3
 
 ## 文件结构
-- `src/assets/base.css` — 设计令牌、CSS变量、按钮/卡片/输入框系统
+- `src/assets/base.css` — 设计令牌、CSS变量、按钮/卡片/输入框系统、统一 GPU 加速动画关键帧
 - `src/assets/main.css` — 布局、导航栏、各页面区域样式
-- `src/assets/animations.css` — 动画关键帧和动画工具类
 - `src/App.vue` — 导航栏、页脚、主题切换、鼠标光点
-- `src/composables/useAnimations.ts` — 动画 composable
+- `src/composables/useAnimations.ts` — 动画 composable（useAnimations/useScrollAnimation/useReducedMotion）
+
+## 动画系统（已重构 + Xe核显优化）
+- 所有动画关键帧统一在 base.css 中定义，使用 translate3d 强制 GPU 加速
+- 统一使用弹性/过冲曲线 cubic-bezier(0.16, 1, 0.3, 1) 和 cubic-bezier(0.34, 1.56, 0.64, 1)
+- 支持 prefers-reduced-motion 系统偏好和 data-motion="reduced" 手动开关
+- **Xe 核显优化**：移除所有 will-change 滥用、持续背景动画(heroGlow/bgPulse)、3D 效果(perspective/translateZ)、filter:brightness、mix-blend-mode:overlay、双重 box-shadow；backdrop-filter 简化为纯 blur
+- 已删除 src/assets/animations.css（内容已合并到 base.css）
 
 ## 用户偏好
 - 不喜欢蓝紫色系

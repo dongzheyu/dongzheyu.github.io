@@ -68,7 +68,9 @@ main {
    ========================================================== */
 .navbar {
   background: var(--navbar-bg) !important;
-  backdrop-filter: var(--navbar-blur);
+  /* backdrop-filter 简化为仅 blur — 移除 saturate(180%) */
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--color-border);
   border-radius: 0;
   padding: 0 0;
@@ -399,13 +401,9 @@ footer a {
   overflow: hidden;
 }
 
+/* Test Hero — 移除独立噪点纹理（body::before 已有全局纹理） */
 .test-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--noise-texture);
-  opacity: var(--noise-opacity);
-  pointer-events: none;
+  display: none;
 }
 
 .back-link {
@@ -492,27 +490,37 @@ footer a {
   .freq-options { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* 频率按钮 — 轻量版（移除 3D 阴影 + 光晕） */
 .freq-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 12px 8px;
+  padding: 14px 10px;
   background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 120ms ease;
 }
 
 .freq-btn:hover {
   border-color: var(--color-border-hover);
   background: var(--color-bg-elevated);
+  transform: scale(1.02);
+}
+
+.freq-btn:active {
+  transform: scale(0.98);
+  transition-duration: 60ms;
 }
 
 .freq-btn.selected {
   border-color: var(--test-accent, var(--color-primary));
-  background: rgba(var(--test-accent-rgb, 255, 140, 66), 0.1);
+  background: rgba(var(--test-accent-rgb, 255, 140, 66), 0.12);
 }
 
 .freq-score {
@@ -534,7 +542,7 @@ footer a {
 
 .freq-btn.selected .freq-label { color: var(--color-text-secondary); }
 
-/* 是/否 二选一按钮 */
+/* 是/否 二选一按钮 — 轻量版 */
 .yesno-options {
   display: flex;
   gap: 10px;
@@ -542,25 +550,34 @@ footer a {
 
 .yesno-btn {
   flex: 1;
-  padding: 10px 16px;
+  padding: 12px 20px;
   background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-text-secondary);
-  transition: all 0.18s ease;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 120ms ease;
 }
 
 .yesno-btn:hover {
   border-color: var(--color-border-hover);
   background: var(--color-bg-elevated);
+  transform: scale(1.02);
+}
+
+.yesno-btn:active {
+  transform: scale(0.98);
+  transition-duration: 60ms;
 }
 
 .yesno-btn.selected {
   border-color: var(--test-accent, var(--color-primary));
-  background: rgba(var(--test-accent-rgb, 255, 140, 66), 0.1);
+  background: rgba(var(--test-accent-rgb, 255, 140, 66), 0.12);
   color: var(--test-accent, var(--color-primary));
 }
 
@@ -1063,14 +1080,14 @@ footer a:hover .bi {
   padding: 100px 0 80px;
 }
 
+/* About Hero — 静态背景（移除动画） */
 .about-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 15% 85%, rgba(255, 140, 66, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(244, 140, 6, 0.08) 0%, transparent 40%);
-  animation: bgPulse 18s var(--ease-smooth) infinite alternate;
+    radial-gradient(circle at 15% 85%, rgba(255, 140, 66, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(244, 140, 6, 0.04) 0%, transparent 40%);
 }
 
 .about-hero .hero-illustration,
@@ -1103,8 +1120,8 @@ footer a:hover .bi {
 }
 
 .value-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl), var(--shadow-warm);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
   border-color: var(--color-primary);
 }
 
@@ -1123,13 +1140,13 @@ footer a:hover .bi {
   overflow: hidden;
 }
 
+/* Contact — 简化背景 */
 .contact-section::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 80%, rgba(255, 140, 66, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(244, 140, 6, 0.06) 0%, transparent 50%);
+    radial-gradient(circle at 30% 70%, rgba(255, 140, 66, 0.04) 0%, transparent 50%);
 }
 
 .contact-links .btn {
@@ -1144,8 +1161,7 @@ footer a:hover .bi {
   border-color: var(--color-primary);
   color: var(--color-primary) !important;
   background: rgba(255, 140, 66, 0.08);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-warm);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
@@ -1175,22 +1191,19 @@ footer a:hover .bi {
   width: 180%;
   height: 180%;
   background:
-    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.12) 0%, transparent 35%),
-    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.1) 0%, transparent 35%),
-    radial-gradient(circle at 50% 50%, rgba(255, 186, 8, 0.04) 0%, transparent 45%);
-  opacity: 0.8;
-  animation: heroGlow 25s var(--ease-smooth) infinite;
-  will-change: opacity;
+    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.08) 0%, transparent 35%),
+    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.06) 0%, transparent 35%);
+  opacity: 0.6;
+  /* 移除 animation: heroGlow — 180%x180% + 3层渐变 + opacity 动画太重 */
 }
 
+/* Hero 背景微光 — 静态渐变，移除动画 */
 .hero-bg-animation {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 80%, rgba(255, 140, 66, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(244, 140, 6, 0.06) 0%, transparent 50%);
-  animation: bgPulse 20s var(--ease-smooth) infinite alternate;
-  will-change: opacity;
+    radial-gradient(circle at 20% 80%, rgba(255, 140, 66, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(244, 140, 6, 0.04) 0%, transparent 50%);
 }
 
 /* Hero Logo — 旋转+光晕 */
@@ -1203,8 +1216,7 @@ footer a:hover .bi {
 }
 
 .hero-logo:hover {
-  transform: rotate(-8deg) scale(1.08);
-  box-shadow: var(--shadow-glow);
+  transform: rotate(-6deg) scale(1.05);
 }
 
 /* Hero内容 */
@@ -1260,22 +1272,16 @@ footer a:hover .bi {
 
 .floating-element {
   position: absolute;
-  animation: drift var(--duration, 5s) var(--ease-smooth) infinite alternate;
-  opacity: 0.3;
-  transition: all var(--transition-bounce);
+  animation: float 6s ease-in-out infinite alternate;
+  opacity: 0.18;
   color: var(--color-primary);
 }
 
 .floating-element:hover {
-  opacity: 0.8;
-  transform: scale(1.3) !important;
-  filter: drop-shadow(0 0 12px rgba(255, 140, 66, 0.5));
+  opacity: 0.6;
 }
 
-.floating-element:nth-child(1) { top: 5%;  left: 20%; animation-delay: 0s; }
-.floating-element:nth-child(2) { top: 30%; right: 15%; animation-delay: 0.8s; }
-.floating-element:nth-child(3) { bottom: 20%; left: 10%; animation-delay: 1.6s; }
-.floating-element:nth-child(4) { bottom: 5%;  right: 25%; animation-delay: 2.4s; }
+
 
 /* ==========================================================
    HomeView — Features Section
@@ -1364,8 +1370,8 @@ footer a:hover .bi {
 }
 
 .feature-card:hover {
-  transform: translateY(-8px) !important;
-  box-shadow: var(--shadow-xl), var(--shadow-warm);
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-lg);
   border-color: var(--color-primary);
 }
 
@@ -1443,23 +1449,14 @@ footer a:hover .bi {
 }
 
 .cta-section .btn-light:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-warm);
+  transform: translateY(-2px);
   border-color: var(--color-primary);
 }
 
 /* ==========================================================
-   关键帧动画
+   关键帧（已精简）
+   bgPulse / heroGlow 已移除 — Xe 核显优化
    ========================================================== */
-@keyframes bgPulse {
-  0%   { opacity: 0.7; transform: scale(1); }
-  100% { opacity: 1;   transform: scale(1.05); }
-}
-
-@keyframes heroGlow {
-  0%, 100% { opacity: 0.7; }
-  50%      { opacity: 1; }
-}
 
 /* ==========================================================
    HomeView Responsive
@@ -1539,14 +1536,14 @@ footer a:hover .bi {
   max-width: 100% !important;
 }
 
+/* Projects Hero — 静态背景 */
 .projects-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 80%, rgba(255, 140, 66, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(244, 140, 6, 0.08) 0%, transparent 50%);
-  animation: bgPulse 18s var(--ease-smooth) infinite alternate;
+    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.04) 0%, transparent 50%);
 }
 
 .projects-section {
@@ -1584,8 +1581,8 @@ footer a:hover .bi {
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl), var(--shadow-warm);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
   border-color: var(--color-primary);
 }
 
@@ -1643,14 +1640,14 @@ footer a:hover .bi {
   padding: 100px 0 80px;
 }
 
+/* Blog Hero — 静态背景 */
 .blog-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 80%, rgba(255, 140, 66, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(244, 140, 6, 0.08) 0%, transparent 50%);
-  animation: bgPulse 18s var(--ease-smooth) infinite alternate;
+    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.04) 0%, transparent 50%);
 }
 
 .blog-post {
@@ -1920,8 +1917,8 @@ footer {
 }
 
 .emergency-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
 .emergency-card::before {
