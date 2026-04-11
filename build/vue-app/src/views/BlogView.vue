@@ -83,7 +83,7 @@ const blogPosts = ref([
     date: '2026-03-04',
     author: 'JetCPP Team',
     link: '/blog/csharp-guide.html',
-    color: '#9B59B6',
+    color: '#dc2f02',
     category: '编程教程'
   },
   {
@@ -93,7 +93,7 @@ const blogPosts = ref([
     date: '2026-03-04',
     author: 'JetCPP Team',
     link: '/blog/xaml-guide.html',
-    color: '#3498DB',
+    color: '#52b788',
     category: '编程教程'
   }
 ])
