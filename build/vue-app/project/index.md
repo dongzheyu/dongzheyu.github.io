@@ -7,15 +7,15 @@ hero:
   text: "开源作品与技术实践"
   tagline: "探索创新项目，分享技术成果"
   actions:
-    - theme: brand
-      text: 查看所有项目
-      link: /english-listen
     - theme: alt
       text: English Listen WinUI - 现代化英语听写训练
       link: /english-listen-winui
     - theme: alt
       text: English Listen (Qt6) - 英语听写训练工具
       link: /english-listen
+    - theme: alt
+      text: SniShaper (Go)
+      link: /snishaper
 
 features:
   - title: English Listen WinUI

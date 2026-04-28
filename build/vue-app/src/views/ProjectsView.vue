@@ -61,7 +61,15 @@ const { isVisible } = useAnimations()
 
 const projects = ref([
   {
-    "id": 5,
+    "id": 1,
+    "title": "SniShaper",
+    "description": "基于 Go + Wails v3 的智能网络代理工具，集成 ECH 注入、TLS-RF 分片、QUIC 重建连接等先进技术",
+    "category": "网络",
+    "link": "/project/snishaper.html",
+    "color": "#00ADD8"
+  },
+  {
+    "id": 2,
     "title": "English Listen WinUI",
     "description": "现代化英语听写训练工具，基于WinUI 3 + C# + C++混合开发，MVVM架构，Mica材质，百度翻译集成",
     "category": "教育",
@@ -69,7 +77,7 @@ const projects = ref([
     "color": "#f48c06"
   },
   {
-    "id": 4,
+    "id": 3,
     "title": "English-Listen",
     "description": "专业英语听写训练工具，基于C++和Qt6开发的现代化听写软件",
     "category": "教育",

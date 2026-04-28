@@ -1714,7 +1714,7 @@ main {
   padding-top: 0;
 }
 
-::target { scroll-margin-top: 90px; }
+:target { scroll-margin-top: 90px; }
 [id] { scroll-margin-top: 90px; }
 
 footer {

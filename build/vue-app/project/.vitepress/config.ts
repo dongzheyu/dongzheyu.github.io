@@ -16,8 +16,9 @@ export default defineConfig({
     sidebar: [
       {
         items: [
-          { text: 'English Listen (Qt6) - 英语听写训练工具', link: '/english-listen' },
-          { text: 'English Listen WinUI - 现代化英语听写训练工具', link: '/english-listen-winui' }
+          { text: 'SniShaper - 智能网络代理工具', link: '/snishaper' },
+          { text: 'English Listen WinUI - 现代化英语听写训练工具', link: '/english-listen-winui' },
+          { text: 'English Listen (Qt6) - 英语听写训练工具', link: '/english-listen' }
         ]
       }
     ]
