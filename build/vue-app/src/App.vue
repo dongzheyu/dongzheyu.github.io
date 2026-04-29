@@ -2,6 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import BackToTop from './components/BackToTop.vue'
+import SearchModal from './components/SearchModal.vue'
 
 const route = useRoute()
 
@@ -50,6 +52,32 @@ const toggleReducedMotion = () => {
   localStorage.setItem('reduced-motion', String(reducedMotion.value))
 }
 
+// ---- 鼠标光晕效果 ----
+const mouseX = ref(0)
+const mouseY = ref(0)
+const glowElement = ref<HTMLElement | null>(null)
+
+const handleMouseMove = (e: MouseEvent) => {
+  if (reducedMotion.value || !glowElement.value) return
+  
+  // 使用 requestAnimationFrame 优化性能
+  requestAnimationFrame(() => {
+    mouseX.value = e.clientX
+    mouseY.value = e.clientY
+    
+    if (glowElement.value) {
+      glowElement.value.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`
+    }
+  })
+}
+
+// ---- 搜索功能 ----
+const searchModal = ref<any>(null)
+
+const openSearch = () => {
+  searchModal.value?.open()
+}
+
 // ---- 按钮波纹效果 ----
 const addRipple = (e: MouseEvent) => {
   const btn = (e.target as HTMLElement).closest('.btn, .btn-animate') as HTMLElement
@@ -73,8 +101,14 @@ watch(() => route.path, updateAppClass, { immediate: true })
 
 // ---- 生命周期 ----
 onMounted(() => {
+  // 鼠标移动事件
+  document.addEventListener('mousemove', handleMouseMove)
+  
   // 按钮波纹事件委托
   document.addEventListener('mousemove', addRipple)
+
+  // 键盘快捷键
+  document.addEventListener('keydown', handleKeydown)
 
   // 恢复主题设置
   const saved = localStorage.getItem('theme') as Theme | null
@@ -97,16 +131,53 @@ onMounted(() => {
 
 onUnmounted(() => {
   mediaQuery.removeEventListener('change', handleSystemThemeChange)
+  document.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mousemove', addRipple)
+  document.removeEventListener('keydown', handleKeydown)
 })
+
+// ---- 键盘快捷键处理 ----
+const handleKeydown = (e: KeyboardEvent) => {
+  // Ctrl/Cmd + K 打开搜索
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault()
+    openSearch()
+  }
+  // / 键打开搜索（当不在输入框中时）
+  if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
+    e.preventDefault()
+    openSearch()
+  }
+  // Esc 关闭搜索或模态框
+  if (e.key === 'Escape') {
+    searchModal.value?.close()
+  }
+  // Alt + Home 返回首页
+  if (e.altKey && e.key === 'Home') {
+    e.preventDefault()
+    router.push('/')
+  }
+  // Alt + ← 返回上一页
+  if (e.altKey && e.key === 'ArrowLeft') {
+    e.preventDefault()
+    router.back()
+  }
+}
 </script>
 
 <template>
   <div id="app">
+    <!-- 鼠标光晕效果 -->
+    <div 
+      ref="glowElement"
+      class="mouse-glow"
+      :style="{ opacity: reducedMotion ? 0 : 1 }"
+    ></div>
+    
     <nav class="navbar navbar-expand-lg shadow-sm sticky-top">
       <div class="container-fluid px-4">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
-          <img src="/logo.png" alt="dongle Logo" width="38" height="38" class="me-2">
+          <img v-lazy src="/logo.png" alt="dongle Logo" width="38" height="38" class="me-2">
           <span>dongle</span>
         </RouterLink>
 
@@ -141,6 +212,17 @@ onUnmounted(() => {
           </ul>
 
           <div class="d-flex align-items-center gap-2">
+            <!-- 搜索按钮 -->
+            <button
+              class="search-trigger-btn"
+              type="button"
+              @click="openSearch"
+              title="搜索 (Ctrl+K)"
+              aria-label="搜索"
+            >
+              <i class="bi bi-search"></i>
+            </button>
+
             <!-- 减少动画按钮 -->
             <button
               class="motion-toggle-btn"
@@ -204,7 +286,11 @@ onUnmounted(() => {
     </nav>
 
     <main>
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <transition name="page-fade" appear>
+          <component :is="Component" :key="$route.fullPath" />
+        </transition>
+      </router-view>
     </main>
 
     <footer class="py-4 mt-5">
@@ -251,5 +337,121 @@ onUnmounted(() => {
         </div>
       </div>
     </footer>
+
+    <!-- 回到顶部按钮 -->
+    <BackToTop />
+
+    <!-- 搜索模态框 -->
+    <SearchModal ref="searchModal" />
   </div>
 </template>
+
+<style scoped>
+/* 页面过渡动画 */
+.page-fade-enter-active {
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.page-fade-leave-active {
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+  position: absolute;
+  width: 100%;
+}
+
+.page-fade-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.page-fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+[data-motion="off"] .page-fade-enter-active,
+[data-motion="off"] .page-fade-leave-active {
+  transition: none;
+}
+
+[data-motion="off"] .page-fade-enter-from,
+[data-motion="off"] .page-fade-leave-to {
+  opacity: 1;
+  transform: none;
+}
+
+/* 搜索触发按钮 */
+.search-trigger-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.search-trigger-btn:hover {
+  background: rgba(255, 140, 66, 0.08);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+/* 鼠标光晕效果 */
+.mouse-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255, 140, 66, 0.15) 0%,
+    rgba(255, 140, 66, 0.08) 30%,
+    rgba(255, 140, 66, 0.03) 60%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+
+/* 深色主题下调整光晕颜色 */
+[data-theme="dark"] .mouse-glow {
+  background: radial-gradient(
+    circle,
+    rgba(255, 140, 66, 0.2) 0%,
+    rgba(255, 140, 66, 0.1) 30%,
+    rgba(255, 140, 66, 0.05) 60%,
+    transparent 70%
+  );
+}
+
+/* 关闭动画模式时隐藏光晕 */
+[data-motion="off"] .mouse-glow {
+  display: none;
+}
+
+/* 确保main内容在光晕之上 */
+main {
+  position: relative;
+  z-index: 1;
+}
+</style>

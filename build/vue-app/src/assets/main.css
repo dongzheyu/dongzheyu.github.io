@@ -166,7 +166,9 @@ main {
   align-items: center;
   gap: 10px;
   font-size: 14px;
-  transition: all var(--transition-fast);
+  /* 优化过渡性能 - 只动画必要属性 */
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast);
 }
 
 .dropdown-item:hover {
@@ -401,9 +403,43 @@ footer a {
   overflow: hidden;
 }
 
-/* Test Hero — 移除独立噪点纹理（body::before 已有全局纹理） */
+/* Test Hero — 光晕背景效果 */
 .test-hero::before {
-  display: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.06) 0%, transparent 50%);
+}
+
+/* Test Hero 底部渐变过渡 */
+.test-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(26, 20, 16, 0.15) 30%,
+    rgba(26, 20, 16, 0.5) 60%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] .test-hero::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    var(--color-bg) 100%
+  );
 }
 
 .back-link {
@@ -1080,14 +1116,43 @@ footer a:hover .bi {
   padding: 100px 0 80px;
 }
 
-/* About Hero — 静态背景（移除动画） */
+/* About Hero — 静态背景+光晕效果 */
 .about-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 15% 85%, rgba(255, 140, 66, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(244, 140, 6, 0.04) 0%, transparent 40%);
+    radial-gradient(circle at 15% 85%, rgba(255, 140, 66, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(244, 140, 6, 0.06) 0%, transparent 40%);
+}
+
+/* About Hero 底部渐变过渡 */
+.about-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(26, 20, 16, 0.15) 30%,
+    rgba(26, 20, 16, 0.5) 60%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] .about-hero::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    var(--color-bg) 100%
+  );
 }
 
 .about-hero .hero-illustration,
@@ -1195,6 +1260,35 @@ footer a:hover .bi {
     radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.06) 0%, transparent 35%);
   opacity: 0.6;
   /* 移除 animation: heroGlow — 180%x180% + 3层渐变 + opacity 动画太重 */
+}
+
+/* Hero 底部渐变过渡 - 更自然 */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(26, 20, 16, 0.15) 30%,
+    rgba(26, 20, 16, 0.5) 60%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] .hero-section::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    var(--color-bg) 100%
+  );
 }
 
 /* Hero 背景微光 — 静态渐变，移除动画 */
@@ -1558,14 +1652,43 @@ footer a:hover .bi {
   max-width: 100% !important;
 }
 
-/* Projects Hero — 静态背景 */
+/* Projects Hero — 静态背景 + 光晕效果 */
 .projects-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.04) 0%, transparent 50%);
+    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.06) 0%, transparent 50%);
+}
+
+/* Projects Hero 底部渐变过渡 */
+.projects-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(26, 20, 16, 0.15) 30%,
+    rgba(26, 20, 16, 0.5) 60%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] .projects-hero::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    var(--color-bg) 100%
+  );
 }
 
 .projects-section {
@@ -1662,14 +1785,43 @@ footer a:hover .bi {
   padding: 100px 0 80px;
 }
 
-/* Blog Hero — 静态背景 */
+/* Blog Hero — 静态背景 + 光晕效果 */
 .blog-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.04) 0%, transparent 50%);
+    radial-gradient(circle at 25% 75%, rgba(255, 140, 66, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(244, 140, 6, 0.06) 0%, transparent 50%);
+}
+
+/* Blog Hero 底部渐变过渡 */
+.blog-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(26, 20, 16, 0.15) 30%,
+    rgba(26, 20, 16, 0.5) 60%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] .blog-hero::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    var(--color-bg) 100%
+  );
 }
 
 .blog-post {

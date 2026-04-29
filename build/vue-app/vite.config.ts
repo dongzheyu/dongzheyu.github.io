@@ -38,6 +38,11 @@ export default defineConfig({
             if (id.includes('bootstrap')) {
               return 'bootstrap'
             }
+            // 将大型视图组件单独分包
+            if (id.includes('MbtiView') || id.includes('DepressionView') || 
+                id.includes('AnxietyView') || id.includes('EmergencyView')) {
+              return 'heavy-views'
+            }
           }
           // 显式返回 undefined 表示不分割
           return undefined
@@ -48,16 +53,21 @@ export default defineConfig({
     sourcemap: false,
     // 减少 chunk 大小警告阈值
     chunkSizeWarningLimit: 1000,
+    // 优化资源内联大小限制
+    assetsInlineLimit: 4096, // 4kb 以下的资源会被内联
   },
   server: {
-    host: 'localhost',
     port: 5174
   },
   // 优化依赖预构建
   optimizeDeps: {
     include: ['vue', 'vue-router', 'bootstrap'],
     // 排除不需要预构建的依赖
-    exclude: []
+    exclude: [],
+    // 启用更快的依赖扫描
+    esbuildOptions: {
+      target: 'esnext',
+    }
   },
   // 禁用不必要的功能以提升性能
   esbuild: {

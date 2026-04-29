@@ -1,5 +1,8 @@
 <template>
   <div class="sunshine-page">
+    <!-- 阅读进度条 -->
+    <ReadingProgress />
+    
     <!-- Hero -->
     <section class="test-hero">
       <div class="container-fluid px-4">
@@ -152,6 +155,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import ReadingProgress from '@/components/ReadingProgress.vue'
 
 const agreeOptions = [
   { value: 0, label: '完全不符合' },

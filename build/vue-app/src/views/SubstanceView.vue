@@ -1,5 +1,8 @@
-﻿<template>
+<template>
   <div class="substance-page">
+    <!-- 阅读进度条 -->
+    <ReadingProgress />
+    
     <!-- Hero -->
     <section class="test-hero substance-hero">
       <div class="container-fluid px-4">
@@ -82,6 +85,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import ReadingProgress from '@/components/ReadingProgress.vue'
 
 // 物质使用障碍题目 (AUDIT + DAST-10)
 const questions = ref([

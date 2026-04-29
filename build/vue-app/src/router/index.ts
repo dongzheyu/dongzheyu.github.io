@@ -12,19 +12,18 @@ const router = createRouter({
     {
       path: '/projects',
       name: 'projects',
-      component: () => import('../views/ProjectsView.vue'),
+      // 使用动态导入实现懒加载，并添加预取提示
+      component: () => import(/* webpackPrefetch: true */ '../views/ProjectsView.vue'),
     },
-        {
+    {
       path: '/blog',
       name: 'blog',
-      component: () => import('../views/BlogView.vue'),
+      component: () => import(/* webpackPrefetch: true */ '../views/BlogView.vue'),
     },
-    
-
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      component: () => import(/* webpackPrefetch: true */ '../views/AboutView.vue'),
     },
     {
       path: '/tests',
@@ -34,12 +33,14 @@ const router = createRouter({
     {
       path: '/emergency',
       name: 'emergency',
-      component: () => import('../views/EmergencyView.vue'),
+      // 紧急求助页面需要快速加载，使用预加载
+      component: () => import(/* webpackPreload: true */ '../views/EmergencyView.vue'),
     },
     {
       path: '/tests/mbti',
       name: 'mbti',
-      component: () => import('../views/MbtiView.vue'),
+      // MBTI 测试页面较大，使用预取
+      component: () => import(/* webpackPrefetch: true */ '../views/MbtiView.vue'),
     },
     {
       path: '/tests/depression',
@@ -115,6 +116,12 @@ const router = createRouter({
       path: '/tests/somatic',
       name: 'somatic',
       component: () => import('../views/SomaticView.vue'),
+    },
+    // 404 页面 - 必须放在最后
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/NotFoundView.vue'),
     },
   ],
 })

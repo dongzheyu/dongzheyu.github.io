@@ -7,9 +7,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import lazyLoad from './directives/lazyLoad'
 
 const app = createApp(App)
 
 app.use(router)
+app.directive('lazy', lazyLoad)
 
 app.mount('#app')

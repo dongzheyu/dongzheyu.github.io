@@ -323,6 +323,7 @@ a:hover {
     rgba(255, 255, 255, 0.15) 0%,
     transparent 70%);
   opacity: 0;
+  /* 优化过渡性能 - 只动画必要的属性 */
   transition: opacity 200ms var(--ease-out-expo);
   z-index: 1;
   pointer-events: none;
@@ -448,7 +449,11 @@ input, textarea, select {
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
   outline: none;
-  transition: all var(--transition-fast);
+  /* 优化过渡性能 - 避免使用 all */
+  transition: background-color var(--transition-fast), 
+              border-color var(--transition-fast),
+              color var(--transition-fast),
+              transform var(--transition-fast);
 }
 
 input:focus, textarea:focus, select:focus {
@@ -685,6 +690,7 @@ input:focus, textarea:focus, select:focus {
 .text-animate {
   opacity: 0;
   transform: translate3d(0, 20px, 0);
+  /* 优化动画性能 - 使用 GPU 加速 */
   transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
               transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }

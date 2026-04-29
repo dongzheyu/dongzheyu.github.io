@@ -1,5 +1,8 @@
 <template>
   <div class="emergency-page">
+    <!-- 阅读进度条 -->
+    <ReadingProgress />
+    
     <!-- Hero 区域 -->
     <section class="emergency-hero">
       <div class="container-fluid px-4">
@@ -423,6 +426,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import ReadingProgress from '@/components/ReadingProgress.vue'
 
 // 模拟拨打电话
 const simulateCall = (number: string) => {

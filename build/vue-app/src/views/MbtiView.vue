@@ -1,5 +1,8 @@
 <template>
   <div class="mbti-page">
+    <!-- 阅读进度条 -->
+    <ReadingProgress />
+    
     <!-- Hero -->
     <section class="test-hero">
       <div class="container-fluid px-4">
@@ -148,6 +151,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import ReadingProgress from '@/components/ReadingProgress.vue'
 
 // ---- 题目数据 ----
 // dimension: EI | SN | TF | JP

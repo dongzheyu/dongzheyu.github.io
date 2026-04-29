@@ -1,5 +1,8 @@
-﻿<template>
+<template>
   <div class="ocd-page">
+    <!-- 阅读进度条 -->
+    <ReadingProgress />
+    
     <!-- Hero -->
     <section class="test-hero ocd-hero">
       <div class="container-fluid px-4">
@@ -82,6 +85,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import ReadingProgress from '@/components/ReadingProgress.vue'
 
 // 强迫症 OCI-R 题目
 const questions = ref([

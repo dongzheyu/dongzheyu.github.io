@@ -1,5 +1,8 @@
-﻿<template>
+<template>
   <div class="eating-page">
+    <!-- 阅读进度条 -->
+    <ReadingProgress />
+    
     <!-- Hero -->
     <section class="test-hero eating-hero">
       <div class="container-fluid px-4">
@@ -82,6 +85,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import ReadingProgress from '@/components/ReadingProgress.vue'
 
 // 进食障碍 EAT-26 题目
 const questions = ref([

@@ -224,15 +224,31 @@ onMounted(() => {
   line-height: 1.7;
 }
 
-/* Hero 底部渐变过渡 */
+/* Hero 底部渐变过渡 - 更自然的过渡 */
 .hero-fade {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--color-bg));
+  height: 300px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(26, 20, 16, 0.15) 30%,
+    rgba(26, 20, 16, 0.5) 60%,
+    var(--color-bg) 100%
+  );
   pointer-events: none;
+}
+
+[data-theme="light"] .hero-fade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    var(--color-bg) 100%
+  );
 }
 
 /* Features 区域 */
