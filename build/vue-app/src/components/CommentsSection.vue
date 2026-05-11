@@ -99,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'
 
@@ -125,6 +125,20 @@ onMounted(async () => {
   await loadComments()
   if (isAuthenticated.value) {
     await loadCurrentUserProfile()
+  }
+})
+
+// 监听认证状态变化，重新加载评论
+watch(isAuthenticated, async (newValue) => {
+  // 登录或登出时都重新加载评论
+  await loadComments()
+  
+  if (newValue) {
+    // 登录时加载当前用户资料
+    await loadCurrentUserProfile()
+  } else {
+    // 登出时清空当前用户资料
+    currentUserProfile.value = null
   }
 })
 
