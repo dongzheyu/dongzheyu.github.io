@@ -46,10 +46,10 @@
                       <i class="bi bi-person me-1 ms-2"></i>{{ post.author }}
                     </small>
                   </div>
-                  <a :href="post.link" class="btn btn-sm btn-animate" target="_blank"
+                  <RouterLink :to="post.link" class="btn btn-sm btn-animate"
                      style="border: 1.5px solid var(--color-border); color: var(--color-text);">
                     阅读全文 <i class="bi bi-arrow-right ms-1"></i>
-                  </a>
+                  </RouterLink>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@ const blogPosts = ref([
     excerpt: '这是一篇详细的C++入门指南，从最基础的Hello World程序开始，逐步讲解变量、数据类型、控制流、函数、指针到结构体等核心概念，适合初学者系统学习C++编程。',
     date: '2026-12-24',
     author: 'JetCPP Team',
-    link: '/blog/cpp-guide.html',
+    link: '/blog/cpp-guide',
     color: '#FF6B6B',
     category: '编程教程'
   },
@@ -82,7 +82,7 @@ const blogPosts = ref([
     excerpt: '一份全面的C#学习指南，涵盖从基础语法到高级特性的完整知识体系。包括变量、数据类型、控制流、方法、数组、面向对象编程、泛型、委托事件、LINQ查询和异步编程等核心内容，附带完整的学生管理系统实战项目。',
     date: '2026-03-04',
     author: 'JetCPP Team',
-    link: '/blog/csharp-guide.html',
+    link: '/blog/csharp-guide',
     color: '#dc2f02',
     category: '编程教程'
   },
@@ -92,7 +92,7 @@ const blogPosts = ref([
     excerpt: 'WPF界面开发完全指南，从XAML基础语法到MVVM架构模式。涵盖布局系统、常用控件、资源管理、数据绑定、样式模板、动画系统和自定义控件等内容，最后通过一个完整的待办事项应用项目展示实战技巧。',
     date: '2026-03-04',
     author: 'JetCPP Team',
-    link: '/blog/xaml-guide.html',
+    link: '/blog/xaml-guide',
     color: '#52b788',
     category: '编程教程'
   }
