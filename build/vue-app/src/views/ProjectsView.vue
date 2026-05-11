@@ -9,7 +9,7 @@
               项目展示
             </h1>
             <p class="projects-desc mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.15s">
-              探索我的开源项目，涵盖工具开发、游戏辅助、教育软件等多个领域
+              探索我们的开源项目，涵盖工具开发、游戏辅助、教育软件等多个领域
             </p>
           </div>
           <div class="col-lg-4">

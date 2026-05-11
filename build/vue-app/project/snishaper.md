@@ -319,10 +319,10 @@ wails dev
 ## 致谢与声明
 
 ### 官方网站
-- **官方网站**: [https://dongle.dpdns.org/](https://dongle.dpdns.org/)
+- **官方网站**: [https://jetcpp.dpdns.org/](https://jetcpp.dpdns.org/)
 
 ### 合作者与贡献者
-- **合作者 & 网页开发者**: dongle
+- **合作者 & 网页开发者**: JetCPP
 - **社区维护者**: jhonsmithsamsmith
 
 ### 重要声明
@@ -343,4 +343,4 @@ wails dev
 
 *让网络连接更稳定、更安全！*
 
-**官方网站**: [https://dongle.dpdns.org/](https://dongle.dpdns.org/) | **合作者 & 网页开发者**: dongle
+**官方网站**: [https://jetcpp.dpdns.org/](https://jetcpp.dpdns.org/) | **合作者 & 网页开发者**: JetCPP

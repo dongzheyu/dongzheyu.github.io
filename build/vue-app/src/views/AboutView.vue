@@ -6,13 +6,13 @@
         <div class="row align-items-center">
           <div class="col-lg-8">
             <h1 class="about-title mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
-              嗨，我是 <span class="text-gradient">dongle</span>
+              嗨，我们是 <span class="text-gradient">JetCPP</span>
             </h1>
             <p class="about-subtitle mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.15s">
               "用代码重塑世界，用创新驱动未来"
             </p>
             <p class="about-desc animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.3s">
-              一个热爱编程的小学生，专注于创造实用的软件工具，让技术更贴近生活。
+              一个热爱编程的小学生团队，专注于创造实用的软件工具，让技术更贴近生活。
             </p>
           </div>
           <div class="col-lg-4">
@@ -28,16 +28,16 @@
     <section class="tech-world-section">
       <div class="container-fluid px-5">
         <h2 class="section-title mb-5 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.5s">
-          我的技术世界
+          我们的技术世界
         </h2>
 
         <!-- Minecraft Section -->
         <div class="tech-category mb-5 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.6s">
           <h3 class="category-title mb-4">
-            <i class="bi bi-controller me-2"></i>Minecraft 是我的游乐场
+            <i class="bi bi-controller me-2"></i>Minecraft 是我们的游乐场
           </h3>
           <p class="category-desc mb-4">
-            我是一个狂热的 Minecraft 玩家，同时也是一个工具开发者！我创建了一系列 Minecraft 相关的工具，帮助玩家们更好地享受游戏：
+            我们是狂热的 Minecraft 玩家，同时也是工具开发者！我们创建了一系列 Minecraft 相关的工具，帮助玩家们更好地享受游戏：
           </p>
           <div class="row g-4">
             <div class="col-md-4">
@@ -66,7 +66,7 @@
               <div class="project-card card h-100 border-0 shadow-sm card-hover">
                 <div class="card-body p-4">
                   <h5 class="card-title fw-bold mb-3">JetCPPWebsite</h5>
-                  <p class="card-text">我的技术博客网站，分享编程经验和项目故事</p>
+                  <p class="card-text">我们的技术博客网站，分享编程经验和项目故事</p>
                   <a href="https://github.com/dongzheyu/JetCPPWebsite" target="_blank" class="btn btn-sm btn-animate">
                     <i class="bi bi-github me-1"></i>查看项目
                   </a>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <p class="mt-4 text-muted">
-            <strong>为什么做这些？</strong> 因为我曾经也是个被复杂配置困扰的玩家，所以想用技术让游戏变得更简单、更有趣！
+            <strong>为什么做这些？</strong> 因为我们曾经也是被复杂配置困扰的玩家，所以想用技术让游戏变得更简单、更有趣！
           </p>
         </div>
 
@@ -89,7 +89,7 @@
               <div class="project-card card h-100 border-0 shadow-sm card-hover">
                 <div class="card-body p-4">
                   <h5 class="card-title fw-bold mb-3">JetCPPWebsite</h5>
-                  <p class="card-text">我的技术博客网站，分享编程经验和项目故事</p>
+                  <p class="card-text">我们的技术博客网站，分享编程经验和项目故事</p>
                   <a href="https://github.com/dongzheyu/JetCPPWebsite" target="_blank" class="btn btn-sm btn-animate">
                     <i class="bi bi-github me-1"></i>查看项目
                   </a>
@@ -109,7 +109,7 @@
               <div class="project-card card h-100 border-0 shadow-sm card-hover">
                 <div class="card-body p-4">
                   <h5 class="card-title fw-bold mb-3">dongzheyu.github.io</h5>
-                  <p class="card-text">我的个人主页</p>
+                  <p class="card-text">我们的个人主页</p>
                   <a href="https://github.com/dongzheyu/dongzheyu.github.io" target="_blank" class="btn btn-sm btn-animate">
                     <i class="bi bi-github me-1"></i>查看项目
                   </a>
@@ -136,7 +136,7 @@
     <section class="philosophy-section">
       <div class="container-fluid px-5">
         <h2 class="section-title mb-5 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.9s">
-          我的编程哲学
+          我们的编程哲学
         </h2>
         <div class="row g-4">
           <div class="col-md-4">
@@ -146,7 +146,7 @@
                   <i class="bi bi-stars fs-1"></i>
                 </div>
                 <h5 class="card-title fw-bold mb-3">简单就是美</h5>
-                <p class="card-text">我坚信好的工具应该让用户感到轻松，而不是增加负担。</p>
+                <p class="card-text">我们坚信好的工具应该让用户感到轻松，而不是增加负担。</p>
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@
                   <i class="bi bi-person-check fs-1"></i>
                 </div>
                 <h5 class="card-title fw-bold mb-3">从用户出发</h5>
-                <p class="card-text">每个项目都是因为我自己遇到了问题，然后想出了解决方案。</p>
+                <p class="card-text">每个项目都是因为我们要自己遇到了问题，然后想出了解决方案。</p>
               </div>
             </div>
           </div>
@@ -168,7 +168,7 @@
                   <i class="bi bi-arrow-repeat fs-1"></i>
                 </div>
                 <h5 class="card-title fw-bold mb-3">持续学习</h5>
-                <p class="card-text">编程路上我还在不断学习，每次解决问题都是一次进步。</p>
+                <p class="card-text">编程路上我们还在不断学习，每次解决问题都是一次进步。</p>
               </div>
             </div>
           </div>
@@ -180,7 +180,7 @@
     <section class="skills-section">
       <div class="container-fluid px-5">
         <h2 class="section-title mb-5 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1.3s">
-          我的技能栈
+          我们的技能栈
         </h2>
         <div class="row g-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1.4s">
           <div class="col-md-6 col-lg-3">
@@ -328,11 +328,11 @@
             在 GitHub 上关注我
           </h2>
           <p class="lead mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 2.5s">
-            查看我的开源项目和代码贡献
+            查看我们的开源项目和代码贡献
           </p>
           <div class="animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 2.6s">
             <a href="https://github.com/dongzheyu" target="_blank" class="btn btn-primary btn-lg btn-animate">
-              <i class="bi bi-github me-2"></i>访问我的 GitHub 主页
+              <i class="bi bi-github me-2"></i>访问我们的 GitHub 主页
             </a>
           </div>
         </div>
@@ -345,12 +345,12 @@
         <div class="closing-card card border-0 shadow-lg animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 2.6s">
           <div class="card-body p-5 text-center">
             <h3 class="mb-4">最后想说</h3>
-            <p class="lead mb-4">编程对我来说不只是写代码，更是创造价值的过程。</p>
-            <p class="mb-4">每个项目都是一个小故事，记录着我的成长轨迹。</p>
-            <p class="fw-bold mb-0">感谢你的关注！希望我的项目能给你带来一些启发或帮助</p>
+            <p class="lead mb-4">编程对我们来说不只是写代码，更是创造价值的过程。</p>
+            <p class="mb-4">每个项目都是一个小故事，记录着我们的成长轨迹。</p>
+            <p class="fw-bold mb-0">感谢你的关注！希望我们的项目能给你带来一些启发或帮助</p>
             <hr class="my-4">
             <p class="text-muted fst-italic">"代码改变世界，梦想驱动未来"</p>
-            <p class="text-muted">— dongle</p>
+            <p class="text-muted">— JetCPP</p>
           </div>
         </div>
       </div>
@@ -361,10 +361,10 @@
       <div class="container-fluid px-5">
         <div class="text-center mb-5">
           <h2 class="contact-title mb-3 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 2.7s">
-            联系我
+            联系我们
           </h2>
           <p class="lead animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 2.8s">
-            欢迎通过以下方式与我取得联系
+            欢迎通过以下方式与我们取得联系
           </p>
         </div>
 

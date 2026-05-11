@@ -111,6 +111,26 @@ const handleSubmit = async () => {
       }
       
       console.log('登录成功:', data)
+      
+      // 检查用户是否被封禁
+      if (data.user) {
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('banned')
+          .eq('id', data.user.id)
+          .single()
+        
+        if (profileError) {
+          console.error('获取用户资料失败:', profileError)
+        } else if (profile?.banned) {
+          // 用户已被封禁，立即退出登录
+          await supabase.auth.signOut()
+          error.value = '您的账户已被封禁，无法登录。请联系管理员。'
+          loading.value = false
+          return
+        }
+      }
+      
       successMessage.value = '登录成功！'
       
       // 这里可以添加登录成功后的跳转逻辑

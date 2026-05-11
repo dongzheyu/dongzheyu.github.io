@@ -134,7 +134,8 @@ const allAnswered = computed(() => {
 // 总分
 const totalScore = computed(() => {
   return userAnswers.value.reduce((sum, answerIndex) => {
-    return sum + (answerIndex !== -1 ? options.value[answerIndex].value : 0)
+    const option = options.value[answerIndex]
+    return sum + (answerIndex !== -1 && option ? option.value : 0)
   }, 0)
 })
 
@@ -165,7 +166,8 @@ const selectAnswer = (questionIndex: number, optionIndex: number) => {
 const calculateScore = () => {
   if (allAnswered.value) {
     showResult.value = true
-    window.scrollTo({ top: document.querySelector('.result-section')?.offsetTop || 0, behavior: 'smooth' })
+    const element = document.querySelector('.result-section') as HTMLElement | null
+    window.scrollTo({ top: element?.offsetTop || 0, behavior: 'smooth' })
   }
 }
 

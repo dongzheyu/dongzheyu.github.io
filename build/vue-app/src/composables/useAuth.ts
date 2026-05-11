@@ -9,11 +9,49 @@ const loading = ref(true)
 async function initAuth() {
   // 获取当前会话
   const { data: { session } } = await supabase.auth.getSession()
-  user.value = session?.user ?? null
+  
+  if (session?.user) {
+    // 检查用户是否被封禁
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('banned')
+      .eq('id', session.user.id)
+      .single()
+    
+    if (profileError) {
+      console.error('获取用户资料失败:', profileError)
+    } else if (profile?.banned) {
+      // 用户已被封禁，立即退出登录
+      console.warn('用户已被封禁，强制退出登录')
+      await supabase.auth.signOut()
+      user.value = null
+    } else {
+      user.value = session.user
+    }
+  } else {
+    user.value = null
+  }
   
   // 监听认证状态变化
-  supabase.auth.onAuthStateChange((_event, session) => {
-    user.value = session?.user ?? null
+  supabase.auth.onAuthStateChange(async (_event, session) => {
+    if (session?.user) {
+      // 再次检查封禁状态
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('banned')
+        .eq('id', session.user.id)
+        .single()
+      
+      if (profile?.banned) {
+        console.warn('用户已被封禁，强制退出登录')
+        await supabase.auth.signOut()
+        user.value = null
+      } else {
+        user.value = session.user
+      }
+    } else {
+      user.value = null
+    }
   })
   
   loading.value = false
@@ -47,7 +85,14 @@ async function signUp(email: string, password: string) {
 // 登出
 async function signOut() {
   const { error } = await supabase.auth.signOut()
-  if (error) throw error
+  
+  // 即使有错误，也清除本地状态
+  user.value = null
+  
+  if (error) {
+    console.warn('Supabase signOut 警告:', error.message)
+    // 不抛出错误，因为本地状态已经清除
+  }
 }
 
 export function useAuth() {

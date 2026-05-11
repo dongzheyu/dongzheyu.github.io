@@ -26,6 +26,21 @@ const router = createRouter({
       component: () => import('../views/BlogPostView.vue'),
     },
     {
+      path: '/blog/new',
+      name: 'new-post',
+      component: () => import('../views/PostEditorView.vue'),
+    },
+    {
+      path: '/blog/edit/:id',
+      name: 'edit-post',
+      component: () => import('../views/PostEditorView.vue'),
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/AdminView.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import(/* webpackPrefetch: true */ '../views/AboutView.vue'),

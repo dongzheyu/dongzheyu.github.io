@@ -58,6 +58,25 @@ onMounted(async () => {
 
     if (sessionError) throw sessionError
 
+    // 检查用户是否被封禁
+    if (data.user) {
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('banned')
+        .eq('id', data.user.id)
+        .single()
+      
+      if (profileError) {
+        console.error('获取用户资料失败:', profileError)
+      } else if (profile?.banned) {
+        // 用户已被封禁，立即退出登录
+        await supabase.auth.signOut()
+        error.value = '您的账户已被封禁，无法验证邮箱。请联系管理员。'
+        loading.value = false
+        return
+      }
+    }
+
     // 验证成功
     success.value = true
     

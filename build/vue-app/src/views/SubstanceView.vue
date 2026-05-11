@@ -169,7 +169,8 @@ const alcoholScore = computed(() => {
   let score = 0
   for (let i = 0; i < 4 && i < userAnswers.value.length; i++) {
     if (userAnswers.value[i] !== -1) {
-      score += questions.value[i].options[userAnswers.value[i]].value
+      const option = questions.value[i]?.options[userAnswers.value[i]]
+      score += option ? option.value : 0
     }
   }
   return score
@@ -180,7 +181,8 @@ const drugScore = computed(() => {
   let score = 0
   for (let i = 4; i < userAnswers.value.length; i++) {
     if (userAnswers.value[i] !== -1) {
-      score += questions.value[i].options[userAnswers.value[i]].value
+      const option = questions.value[i]?.options[userAnswers.value[i]]
+      score += option ? option.value : 0
     }
   }
   return score
@@ -224,7 +226,8 @@ const selectAnswer = (questionIndex: number, optionIndex: number) => {
 const calculateScore = () => {
   if (allAnswered.value) {
     showResult.value = true
-    window.scrollTo({ top: document.querySelector('.result-section')?.offsetTop || 0, behavior: 'smooth' })
+    const element = document.querySelector('.result-section') as HTMLElement | null
+    window.scrollTo({ top: element?.offsetTop || 0, behavior: 'smooth' })
   }
 }
 

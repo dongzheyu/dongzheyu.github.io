@@ -45,6 +45,10 @@
             <i class="bi bi-pencil"></i>
             编辑资料
           </button>
+          <button @click="showDeleteModal = true" class="btn btn-danger btn-animate">
+            <i class="bi bi-trash"></i>
+            注销账户
+          </button>
         </div>
       </div>
 
@@ -112,6 +116,63 @@
         </form>
       </div>
     </div>
+
+    <!-- 注销账户模态框 -->
+    <div v-if="showDeleteModal" class="modal-overlay" @click.self="showDeleteModal = false">
+      <div class="modal-content modal-danger">
+        <div class="modal-header">
+          <h3><i class="bi bi-exclamation-triangle-fill"></i> 注销账户</h3>
+          <button @click="showDeleteModal = false" class="close-btn">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="warning-box">
+            <i class="bi bi-exclamation-triangle"></i>
+            <div>
+              <strong>警告：</strong>此操作不可恢复！
+            </div>
+          </div>
+
+          <p>注销账户将：</p>
+          <ul class="delete-info">
+            <li><i class="bi bi-x-circle"></i> 删除您的个人资料</li>
+            <li><i class="bi bi-x-circle"></i> 删除您发布的所有文章</li>
+            <li><i class="bi bi-x-circle"></i> 删除您的所有评论</li>
+            <li><i class="bi bi-x-circle"></i> 永久删除您的账户</li>
+          </ul>
+
+          <div class="confirm-section">
+            <p>请输入 <strong>DELETE</strong> 以确认：</p>
+            <input
+              v-model="deleteConfirmText"
+              type="text"
+              placeholder="输入 DELETE"
+              class="form-input"
+            />
+          </div>
+
+          <div v-if="deleteError" class="error-message">
+            <i class="bi bi-exclamation-circle"></i>
+            {{ deleteError }}
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button @click="showDeleteModal = false" class="btn btn-secondary">
+            取消
+          </button>
+          <button 
+            @click="handleDeleteAccount" 
+            class="btn btn-danger btn-animate"
+            :disabled="deleteConfirmText !== 'DELETE' || deleting"
+          >
+            {{ deleting ? '注销中...' : '确认注销' }}
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -130,8 +191,12 @@ const isOwnProfile = computed(() => currentUser.value?.id === userId.value)
 const profile = ref<any>(null)
 const loading = ref(true)
 const showEditModal = ref(false)
+const showDeleteModal = ref(false)
 const saving = ref(false)
+const deleting = ref(false)
 const error = ref('')
+const deleteError = ref('')
+const deleteConfirmText = ref('')
 const fileInput = ref<HTMLInputElement | null>(null)
 const uploading = ref(false)
 
@@ -287,6 +352,51 @@ async function handleAvatarUpload(event: Event) {
     uploading.value = false
     // 清空文件输入
     if (target) target.value = ''
+  }
+}
+
+// 注销账户
+async function handleDeleteAccount() {
+  if (deleteConfirmText.value !== 'DELETE') {
+    deleteError.value = '请输入 DELETE 以确认'
+    return
+  }
+  
+  deleting.value = true
+  deleteError.value = ''
+  
+  try {
+    // 1. 删除用户的所有评论
+    await supabase
+      .from('comments')
+      .delete()
+      .eq('user_id', userId.value)
+    
+    // 2. 删除用户的所有文章
+    await supabase
+      .from('user_posts')
+      .delete()
+      .eq('author_id', userId.value)
+    
+    // 3. 删除用户资料
+    await supabase
+      .from('profiles')
+      .delete()
+      .eq('id', userId.value)
+    
+    // 4. 退出登录
+    await supabase.auth.signOut()
+    
+    alert('账户已注销')
+    
+    // 5. 跳转到首页
+    window.location.href = '/'
+    
+  } catch (err: any) {
+    console.error('注销失败:', err)
+    deleteError.value = err.message || '注销失败，请稍后重试'
+  } finally {
+    deleting.value = false
   }
 }
 </script>
@@ -567,5 +677,74 @@ async function handleAvatarUpload(event: Event) {
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+/* 注销模态框特殊样式 */
+.modal-danger .modal-header h3 {
+  color: #ff4757;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.warning-box {
+  padding: 1rem;
+  background: rgba(255, 71, 87, 0.1);
+  border: 2px solid #ff4757;
+  border-radius: 8px;
+  color: #ff4757;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.warning-box i {
+  font-size: 2rem;
+}
+
+.delete-info {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.delete-info li {
+  padding: 0.5rem 0;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.delete-info li i {
+  color: #ff4757;
+}
+
+.confirm-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff4757, #ff6b81);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-danger:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+}
+
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

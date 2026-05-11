@@ -1,7 +1,7 @@
 {
   "name": "jetcpp-website",
   "version": "1.0.0",
-  "description": "dongle Website",
+  "description": "JetCPP Website",
   "main": "index.js",
   "type": "module",
   "scripts": {

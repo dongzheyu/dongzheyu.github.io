@@ -48,6 +48,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { supabase } from '@/supabase/client'
 import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 import CommentsSection from '@/components/CommentsSection.vue'
 
@@ -56,6 +57,7 @@ const loading = ref(true)
 const postContent = ref('')
 const postTitle = ref('')
 const postDate = ref('')
+const isUserPost = ref(false)
 
 onMounted(async () => {
   await loadPost()
@@ -67,7 +69,23 @@ async function loadPost() {
   try {
     const slug = route.params.slug as string
     
-    // 从 public/blog 目录加载 markdown 文件
+    // 第一步：尝试从 Supabase 加载用户文章
+    const { data: userPost, error: userPostError } = await supabase
+      .from('user_posts')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle()
+    
+    if (userPost && !userPostError) {
+      // 找到用户文章
+      isUserPost.value = true
+      postTitle.value = userPost.title
+      postDate.value = new Date(userPost.created_at).toLocaleDateString('zh-CN')
+      postContent.value = userPost.content
+      return
+    }
+    
+    // 第二步：从 public/blog 目录加载 markdown 文件
     const response = await fetch(`/blog/${slug}.md`)
     
     if (!response.ok) {
@@ -79,6 +97,7 @@ async function loadPost() {
     // 解析 Front Matter（如果有的话）
     const { title, date, body } = parseFrontMatter(content)
     
+    isUserPost.value = false
     postTitle.value = title || slug
     postDate.value = date || ''
     postContent.value = body
@@ -97,7 +116,7 @@ function parseFrontMatter(content: string) {
   const match = content.match(frontMatterRegex)
   
   if (match) {
-    const [, frontMatterStr, body] = match
+    const [, frontMatterStr = '', body = ''] = match
     const frontMatter: Record<string, string> = {}
     
     // 解析 YAML front matter

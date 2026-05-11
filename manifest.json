@@ -1,6 +1,6 @@
 {
-  "name": "dongle",
-  "short_name": "dongle",
+  "name": "JetCPP",
+  "short_name": "JetCPP",
   "description": "代码重塑世界 · 创新驱动未来",
   "start_url": "/",
   "display": "standalone",

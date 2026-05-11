@@ -78,7 +78,7 @@ const searchData = [
   { id: 4, title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理评估', icon: 'bi bi-person-badge', color: '#ff6b35', path: '/tests/mbti' },
   { id: 5, title: '抑郁自评量表', description: '专业的抑郁症自我评估工具', category: '心理评估', icon: 'bi bi-heart-pulse', color: '#e63946', path: '/tests/depression' },
   { id: 6, title: '焦虑自评量表', description: '评估焦虑程度的专业工具', category: '心理评估', icon: 'bi bi-activity', color: '#ff9f1c', path: '/tests/anxiety' },
-  { id: 7, title: '关于我', description: '了解dongle的故事和技术背景', category: '个人', icon: 'bi bi-person', color: '#4cc9f0', path: '/about' },
+  { id: 7, title: '关于我们', description: '了解JetCPP的故事和技术背景', category: '团队', icon: 'bi bi-person', color: '#4cc9f0', path: '/about' },
   { id: 8, title: '技术博客', description: 'C++编程经验、项目开发心得分享', category: '博客', icon: 'bi bi-journal-text', color: '#f48c06', path: '/blog' },
 ]
 

@@ -150,9 +150,9 @@ onMounted(() => {
     supabase.auth.setSession({
       access_token: accessToken,
       refresh_token: hashParams.get('refresh_token') || '',
-    }).then(({ error }) => {
-      if (error) {
-        console.error('设置会话失败:', error)
+    }).then(({ error: sessionError }) => {
+      if (sessionError) {
+        console.error('设置会话失败:', sessionError)
         error.value = '链接已过期或无效，请重新请求重置'
         step.value = 1
       }

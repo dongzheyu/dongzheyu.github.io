@@ -171,9 +171,11 @@ const handleKeydown = (e: KeyboardEvent) => {
 const handleSignOut = async () => {
   try {
     await signOut()
-    router.push('/')
-  } catch (error) {
+    // 强制刷新页面以确保状态完全清除
+    window.location.href = '/'
+  } catch (error: any) {
     console.error('登出失败:', error)
+    alert('退出登录失败: ' + (error.message || '未知错误'))
   }
 }
 </script>
@@ -190,8 +192,8 @@ const handleSignOut = async () => {
     <nav class="navbar navbar-expand-lg shadow-sm sticky-top">
       <div class="container-fluid px-4">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
-          <img v-lazy src="/logo.png" alt="dongle Logo" width="38" height="38" class="me-2">
-          <span>dongle</span>
+          <img v-lazy src="/logo.png" alt="JetCPP Logo" width="38" height="38" class="me-2">
+          <span>JetCPP</span>
         </RouterLink>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -210,7 +212,7 @@ const handleSignOut = async () => {
               <RouterLink to="/blog" class="nav-link">博客</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/about" class="nav-link">关于我</RouterLink>
+              <RouterLink to="/about" class="nav-link">关于我们</RouterLink>
             </li>
             <li class="nav-item">
               <RouterLink to="/tests" class="nav-link" :class="{ 'active': isTestsRoute }">
@@ -327,7 +329,7 @@ const handleSignOut = async () => {
       <div class="container-fluid px-4">
         <div class="row align-items-center">
           <div class="col-md-6">
-            <h5>dongle</h5>
+            <h5>JetCPP</h5>
             <p class="text-muted mb-0">代码重塑世界 · 创新驱动未来</p>
           </div>
           <div class="col-md-6 text-md-end mt-3 mt-md-0">
@@ -342,7 +344,7 @@ const handleSignOut = async () => {
                 <i class="bi bi-play-circle"></i>
               </a>
             </div>
-            <p class="text-muted mb-0">&copy; 2026 dongle. All rights reserved.</p>
+            <p class="text-muted mb-0">&copy; 2026 JetCPP. All rights reserved.</p>
           </div>
         </div>
 
