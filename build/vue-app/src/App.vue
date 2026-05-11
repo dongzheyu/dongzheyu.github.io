@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import BackToTop from './components/BackToTop.vue'
 import SearchModal from './components/SearchModal.vue'
+import { useAuth } from './composables/useAuth'
 
 const route = useRoute()
+const router = useRouter()
+const { user, isAuthenticated, signOut } = useAuth()
 
 const isTestsRoute = computed(() => route.path.startsWith('/tests'))
 const isEmergencyRoute = computed(() => route.path === '/emergency')
@@ -163,6 +166,16 @@ const handleKeydown = (e: KeyboardEvent) => {
     router.back()
   }
 }
+
+// 处理登出
+const handleSignOut = async () => {
+  try {
+    await signOut()
+    router.push('/')
+  } catch (error) {
+    console.error('登出失败:', error)
+  }
+}
 </script>
 
 <template>
@@ -274,6 +287,23 @@ const handleKeydown = (e: KeyboardEvent) => {
                   <i class="bi bi-play-circle me-2"></i> 哔哩哔哩
                 </a></li>
               </ul>
+            </div>
+
+            <!-- 个人主页 / 登录状态 -->
+            <div v-if="isAuthenticated && user" class="d-flex align-items-center gap-2">
+              <RouterLink :to="`/user/${user.id}`" class="btn btn-outline-light">
+                <i class="bi bi-person-circle me-1"></i>
+                个人主页
+              </RouterLink>
+              <button @click="handleSignOut" class="btn btn-outline-light" title="退出登录">
+                <i class="bi bi-box-arrow-right"></i>
+              </button>
+            </div>
+            <div v-else>
+              <RouterLink to="/auth" class="btn btn-outline-light">
+                <i class="bi bi-box-arrow-in-right me-1"></i>
+                登录
+              </RouterLink>
             </div>
 
             <!-- 赞助 -->

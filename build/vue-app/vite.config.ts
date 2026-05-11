@@ -64,10 +64,6 @@ export default defineConfig({
     include: ['vue', 'vue-router', 'bootstrap'],
     // 排除不需要预构建的依赖
     exclude: [],
-    // 启用更快的依赖扫描
-    esbuildOptions: {
-      target: 'esnext',
-    }
   },
   // 禁用不必要的功能以提升性能
   esbuild: {

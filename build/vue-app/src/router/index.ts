@@ -117,6 +117,26 @@ const router = createRouter({
       name: 'somatic',
       component: () => import('../views/SomaticView.vue'),
     },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: () => import('../views/AuthTestView.vue'),
+    },
+    {
+      path: '/auth/callback',
+      name: 'auth-callback',
+      component: () => import('../views/AuthCallbackView.vue'),
+    },
+    {
+      path: '/reset-password',
+      name: 'reset-password',
+      component: () => import('../views/ResetPasswordView.vue'),
+    },
+    {
+      path: '/user/:userId',
+      name: 'profile',
+      component: () => import('../views/ProfileView.vue'),
+    },
     // 404 页面 - 必须放在最后
     {
       path: '/:pathMatch(.*)*',
