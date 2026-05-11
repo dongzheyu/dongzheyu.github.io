@@ -1,7 +1,7 @@
 <template>
   <div class="auth-test-page">
     <div class="container">
-      <h1 class="page-title">Supabase 认证测试</h1>
+      <h1 class="page-title">JetCPP统一认证</h1>
       
       <!-- 未登录时显示登录表单 -->
       <AuthForm v-if="!isAuthenticated" />
