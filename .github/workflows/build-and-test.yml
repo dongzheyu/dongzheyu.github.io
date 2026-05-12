@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+# 主动选择使用 Node.js 24 运行 JavaScript Actions
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-test:
     strategy:
