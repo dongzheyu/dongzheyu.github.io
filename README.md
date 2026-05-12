@@ -487,16 +487,20 @@ Edge Function 是一种安全的服务器端函数，可以在不暴露 Service 
    # 按提示选择你的项目
    ```
 
-4. **设置环境变量**
-   - 访问 Supabase Dashboard → Functions → Settings
-   - 添加以下变量：
-     - `SUPABASE_URL`: 你的项目 URL
-     - `SUPABASE_SERVICE_ROLE_KEY`: 从 Settings → API 获取
-
-5. **部署函数**
+4. **部署函数**
    ```bash
    supabase functions deploy delete-user
    ```
+
+5. **设置 Secrets（在 Supabase Dashboard 中）**
+   - 访问：Dashboard → Functions → Secrets
+   - 添加以下两个 Secrets：
+     - `PROJECT_URL`: 你的项目 URL（从 Settings → API 获取）
+     - `SERVICE_ROLE_KEY`: 你的 Service Role Key（从 Settings → API 获取）
+
+**注意：**
+- Secret 名称不能以 `SUPABASE_` 开头
+- Service Role Key 只在服务器端使用，不会暴露在前端代码中
 
 ### 本地开发环境配置
 
