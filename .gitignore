@@ -5,6 +5,7 @@
 # Build outputs
 /dist
 /.vitepress/dist
+/assets
 
 # Executables
 *.exe
