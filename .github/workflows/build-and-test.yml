@@ -12,12 +12,14 @@ env:
 
 jobs:
   build-and-test:
-    # 可用的 Ubuntu 版本:
-    # - ubuntu-latest (当前最新 LTS, 通常是 24.04)
-    # - ubuntu-24.04
-    # - ubuntu-22.04
-    # - ubuntu-20.04
-    runs-on: ubuntu-24.04
+    # 可用的操作系统:
+    # - ubuntu-24.04 (Debian-based)
+    # - windows-2022
+    # - macos-14 (Apple Silicon)
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, windows-2022, macos-14]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -41,8 +43,11 @@ jobs:
           npm run build
 
       - name: Verify build output
+        shell: bash
         run: |
           echo "Checking build output in root directory..."
+          
+          # Check index.html
           if [ -f "index.html" ]; then
             echo "✅ index.html found in root directory"
           else
@@ -50,14 +55,22 @@ jobs:
             exit 1
           fi
           
+          # Check assets directory
           if [ -d "assets" ]; then
             echo "✅ assets directory found"
-            echo "Files in assets: $(ls assets | wc -l)"
+            if [[ "$RUNNER_OS" == "Linux" ]]; then
+              echo "Files in assets: $(ls assets | wc -l)"
+            elif [[ "$RUNNER_OS" == "macOS" ]]; then
+              echo "Files in assets: $(ls assets | wc -l)"
+            else
+              echo "Files in assets: $(ls assets | wc -l)"
+            fi
           else
             echo "❌ assets directory not found"
             exit 1
           fi
           
+          # Check blog directory
           if [ -d "blog" ]; then
             echo "✅ blog directory found"
           else
@@ -65,6 +78,7 @@ jobs:
             exit 1
           fi
           
+          # Check project directory
           if [ -d "project" ]; then
             echo "✅ project directory found"
           else
@@ -73,17 +87,35 @@ jobs:
           fi
 
       - name: Check file sizes
+        shell: bash
         run: |
           echo "Checking file sizes..."
-          du -sh index.html
-          du -sh assets/*.js | head -5
-          du -sh assets/*.css | head -5
+          echo "=== index.html ==="
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            powershell -Command "Get-Item index.html | Select-Object Name, Length"
+          else
+            du -sh index.html
+          fi
+          
+          echo "=== Sample JS files ==="
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            powershell -Command "Get-ChildItem assets/*.js | Select-Object -First 5 Name, Length"
+          else
+            du -sh assets/*.js | head -5
+          fi
+          
+          echo "=== Sample CSS files ==="
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            powershell -Command "Get-ChildItem assets/*.css | Select-Object -First 5 Name, Length"
+          else
+            du -sh assets/*.css | head -5
+          fi
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: build-output
+          name: build-output-${{ matrix.os }}
           path: |
             index.html
             assets/
