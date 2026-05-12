@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename)
 
 // 源目录和目标目录
 const srcDir = path.join(__dirname, '..', 'dist')
-const destDir = path.join(__dirname, '..', '..')
+const destDir = path.join(__dirname, '..', '..', '..')
 
 console.log('🚀 开始部署...')
 console.log(`源目录: ${srcDir}`)
