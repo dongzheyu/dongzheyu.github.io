@@ -1,105 +1,22 @@
 <template>
-  <div class="gaming-page">
-    <!-- 阅读进度条 -->
-    <ReadingProgress />
-    
-    <section class="test-hero">
-      <div class="container-fluid px-4">
-        <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
-            <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
-            </RouterLink>
-            <h1 class="test-hero-title mb-3">游戏障碍自评测试</h1>
-            <p class="test-hero-sub mb-2">网络游戏障碍测试（IGD-20） · 20 道题 · 约 6 分钟</p>
-            <p class="test-hero-desc">
-              网络游戏障碍测试（Internet Gaming Disorder Test-20）是根据 DSM-5 研究标准开发的自评工具，用于评估游戏成瘾风险。
-              请根据过去一年的情况回答。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container-fluid px-4 test-body">
-      <div v-if="!showResult">
-        <p class="freq-instruction mb-5" style="padding-left: 5%;">请评估以下陈述与你的实际情况的符合程度：</p>
-        <div
-          v-for="(q, index) in questions"
-          :key="q.id"
-          class="question-card mb-4"
-          :class="{ answered: answers[q.id] !== undefined }"
-        >
-          <div class="question-number">{{ index + 1 }} / {{ questions.length }}</div>
-          <p class="question-text">{{ q.text }}</p>
-          <div class="freq-options">
-            <button
-              v-for="opt in freqOptions"
-              :key="opt.value"
-              class="freq-btn"
-              :class="{ selected: answers[q.id] === opt.value }"
-              @click="answers[q.id] = opt.value; answers = { ...answers }"
-            >
-              <span class="freq-score">{{ opt.value }}</span>
-              <span class="freq-label">{{ opt.label }}</span>
-            </button>
-          </div>
-        </div>
-        <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">还有 {{ questions.length - answeredCount }} 道题未作答</p>
-          <button class="btn btn-primary btn-animate btn-lg" :disabled="answeredCount < questions.length" @click="calculateResult">查看结果</button>
-        </div>
-      </div>
-
-      <div v-if="showResult" class="result-section">
-        <div class="score-card mb-5">
-          <div class="score-circle" :style="`--score-color: ${result.color}`">
-            <span class="score-num">{{ totalScore }}</span>
-            <span class="score-total">/ 80</span>
-          </div>
-          <div class="score-info">
-            <div class="score-level" :style="`color: ${result.color}`">{{ result.level }}</div>
-            <p class="score-desc">{{ result.description }}</p>
-          </div>
-        </div>
-
-        <div class="impairment-section mb-5">
-          <h3 class="review-title">详细分析</h3>
-          <div class="detail-grid">
-            <div class="detail-block">
-              <h4 class="detail-block-title">测试说明</h4>
-              <p class="detail-block-text">{{ result.analysis }}</p>
-            </div>
-            <div class="detail-block">
-              <h4 class="detail-block-title">建议行动</h4>
-              <ul class="detail-list">
-                <li v-for="s in result.suggestions" :key="s">{{ s }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="important-notice mb-5">
-          <i class="bi bi-exclamation-triangle notice-icon"></i>
-          <div>
-            <strong>重要说明</strong>
-            <p>IGD-20 是筛查工具，不能替代专业诊断。游戏障碍是一种行为成瘾，通过认知行为疗法、家庭治疗和时间管理技巧通常能够显著改善。如果你感觉游戏已经控制了你的生活，寻求帮助是正确的选择。</p>
-          </div>
-        </div>
-
-        <div class="text-center" style="text-align: left !important;">
-          <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
-          <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
-        </div>
-      </div>
-    </div>
-  </div>
+  <TestTemplate
+    title="游戏障碍自评测试"
+    subtitle="网络游戏障碍测试（IGD-20） · 20 道题 · 约 6 分钟"
+    description="网络游戏障碍测试（Internet Gaming Disorder Test-20）是根据 DSM-5 研究标准开发的自评工具，用于评估游戏成瘾风险。请根据过去一年的情况回答。"
+    instruction="请评估以下陈述与你的实际情况的符合程度："
+    :questions="questions"
+    :options="freqOptions"
+    :calculate-result-fn="calculateResult"
+    theme-class="gaming-page"
+    hero-padding="5%"
+    instruction-padding="5%"
+    disclaimer="IGD-20 是筛查工具，不能替代专业诊断。游戏障碍是一种行为成瘾，通过认知行为疗法、家庭治疗和时间管理技巧通常能够显著改善。如果你感觉游戏已经控制了你的生活，寻求帮助是正确的选择。"
+  />
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
-import ReadingProgress from '@/components/ReadingProgress.vue'
+import { ref } from 'vue'
+import TestTemplate from '@/components/TestTemplate.vue'
 
 const freqOptions = [
   { value: 0, label: '完全不符合' },
@@ -132,26 +49,20 @@ const questions = ref([
   { id: 20, text: '我即使意识到问题也无法减少游戏时间' },
 ])
 
-const answers = ref<Record<number, number>>({})
-const showResult = ref(false)
-const result = ref<any>(null)
-
-const answeredCount = computed(() => questions.value.filter(q => answers.value[q.id] !== undefined).length)
-const totalScore = computed(() => questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0))
-
-const getScoreClass = (score: number) => {
-  if (score === 0) return 'score-none'
-  if (score <= 1) return 'score-low'
-  if (score <= 2) return 'score-mid'
-  return 'score-high'
+interface Result {
+  level: string
+  color: string
+  description: string
+  analysis: string
+  suggestions: string[]
 }
 
-const calculateResult = () => {
-  const score = totalScore.value
+const calculateResult = (answers: Record<number, number>): Result => {
+  const score = Object.values(answers).reduce((sum, val) => sum + val, 0)
   // IGD-20 阈值：≥71 高风险
   
   if (score <= 30) {
-    result.value = {
+    return {
       level: '健康游戏习惯',
       color: '#52b788',
       description: '你的游戏习惯基本健康，没有出现游戏障碍风险。',
@@ -159,7 +70,7 @@ const calculateResult = () => {
       suggestions: ['继续保持健康的游戏习惯', '设定明确的游戏时间限制', '保持游戏与其他活动的平衡'],
     }
   } else if (score <= 50) {
-    result.value = {
+    return {
       level: '风险游戏行为',
       color: '#f48c06',
       description: '你有一些风险游戏行为，值得关注但可能未达到障碍水平。',
@@ -167,7 +78,7 @@ const calculateResult = () => {
       suggestions: ['设定具体的每日游戏时间限制', '寻找替代的娱乐活动', '记录游戏时间和影响', '避免使用游戏逃避现实问题'],
     }
   } else if (score <= 70) {
-    result.value = {
+    return {
       level: '中度游戏障碍风险',
       color: '#ff8c42',
       description: '你的游戏行为显示中度风险，很可能存在游戏障碍，建议寻求专业评估。',
@@ -175,7 +86,7 @@ const calculateResult = () => {
       suggestions: ['建议预约心理咨询师或成瘾专科医生', '了解认知行为疗法对行为成瘾的效果', '参加数字健康支持团体', '使用应用程序监控和限制游戏时间'],
     }
   } else {
-    result.value = {
+    return {
       level: '重度游戏障碍风险',
       color: '#ef233c',
       description: '你的游戏行为显示高风险，很可能符合游戏障碍诊断，建议立即寻求专业帮助。',
@@ -183,15 +94,6 @@ const calculateResult = () => {
       suggestions: ['请尽快就诊成瘾医学专科或精神科', '如实告诉医生你的游戏情况和影响', '考虑住院治疗或强化门诊治疗选项', '危机时刻请拨打行为成瘾援助热线 400-161-9995'],
     }
   }
-  showResult.value = true
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const resetTest = () => {
-  answers.value = {}
-  showResult.value = false
-  result.value = null
-  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>
 
