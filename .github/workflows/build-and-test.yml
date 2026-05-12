@@ -86,31 +86,6 @@ jobs:
             exit 1
           fi
 
-      - name: Check file sizes
-        shell: bash
-        run: |
-          echo "Checking file sizes..."
-          echo "=== index.html ==="
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            powershell -Command "Get-Item index.html | Select-Object Name, Length"
-          else
-            du -sh index.html
-          fi
-          
-          echo "=== Sample JS files ==="
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            powershell -Command "Get-ChildItem assets/*.js | Select-Object -First 5 Name, Length"
-          else
-            du -sh assets/*.js | head -5
-          fi
-          
-          echo "=== Sample CSS files ==="
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            powershell -Command "Get-ChildItem assets/*.css | Select-Object -First 5 Name, Length"
-          else
-            du -sh assets/*.css | head -5
-          fi
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         if: success()
