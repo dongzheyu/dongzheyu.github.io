@@ -1,0 +1,92 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: build/vue-app/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd build/vue-app
+          npm ci
+
+      - name: Build project
+        run: |
+          cd build/vue-app
+          npm run build
+
+      - name: Verify build output
+        run: |
+          echo "Checking build output in root directory..."
+          if [ -f "index.html" ]; then
+            echo "✅ index.html found in root directory"
+          else
+            echo "❌ index.html not found in root directory"
+            exit 1
+          fi
+          
+          if [ -d "assets" ]; then
+            echo "✅ assets directory found"
+            echo "Files in assets: $(ls assets | wc -l)"
+          else
+            echo "❌ assets directory not found"
+            exit 1
+          fi
+          
+          if [ -d "blog" ]; then
+            echo "✅ blog directory found"
+          else
+            echo "❌ blog directory not found"
+            exit 1
+          fi
+          
+          if [ -d "project" ]; then
+            echo "✅ project directory found"
+          else
+            echo "❌ project directory not found"
+            exit 1
+          fi
+
+      - name: Check file sizes
+        run: |
+          echo "Checking file sizes..."
+          du -sh index.html
+          du -sh assets/*.js | head -5
+          du -sh assets/*.css | head -5
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: build-output
+          path: |
+            index.html
+            assets/
+            blog/
+            project/
+            *.html
+            *.css
+            *.js
+            *.png
+            *.ico
+            *.woff*
+            *.ttf
+            _redirects
+            manifest.json
+          retention-days: 7
