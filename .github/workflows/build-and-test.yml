@@ -6,16 +6,8 @@ on:
   pull_request:
     branches: [ main ]
 
-# Opt into Node.js 24 for JavaScript actions
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build-and-test:
-    # 可用的操作系统:
-    # - ubuntu-24.04 (Debian-based)
-    # - windows-2022
-    # - macos-14 (Apple Silicon)
     strategy:
       matrix:
         os: [ubuntu-24.04, windows-2022, macos-14]
@@ -23,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
           cache: 'npm'
@@ -47,47 +39,37 @@ jobs:
         run: |
           echo "Checking build output in root directory..."
           
-          # Check index.html
           if [ -f "index.html" ]; then
-            echo "✅ index.html found in root directory"
+            echo "index.html found in root directory"
           else
-            echo "❌ index.html not found in root directory"
+            echo "index.html not found in root directory"
             exit 1
           fi
           
-          # Check assets directory
           if [ -d "assets" ]; then
-            echo "✅ assets directory found"
-            if [[ "$RUNNER_OS" == "Linux" ]]; then
-              echo "Files in assets: $(ls assets | wc -l)"
-            elif [[ "$RUNNER_OS" == "macOS" ]]; then
-              echo "Files in assets: $(ls assets | wc -l)"
-            else
-              echo "Files in assets: $(ls assets | wc -l)"
-            fi
+            echo "assets directory found"
+            echo "Files in assets: $(ls assets | wc -l)"
           else
-            echo "❌ assets directory not found"
+            echo "assets directory not found"
             exit 1
           fi
           
-          # Check blog directory
           if [ -d "blog" ]; then
-            echo "✅ blog directory found"
+            echo "blog directory found"
           else
-            echo "❌ blog directory not found"
+            echo "blog directory not found"
             exit 1
           fi
           
-          # Check project directory
           if [ -d "project" ]; then
-            echo "✅ project directory found"
+            echo "project directory found"
           else
-            echo "❌ project directory not found"
+            echo "project directory not found"
             exit 1
           fi
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: success()
         with:
           name: build-output-${{ matrix.os }}
