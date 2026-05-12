@@ -486,28 +486,41 @@ function handleViewProfile(userId: string) {
 }
 
 async function handleDeleteUser(userId: string, nickname: string) {
-  if (!confirm(`确定要删除用户 "${nickname || userId}" 吗？\n此操作将删除该用户的所有数据，且不可恢复！`)) {
+  if (!confirm(`确定要删除用户 "${nickname || userId}" 吗？\n此操作将永久删除该用户及其所有数据，且不可恢复！`)) {
     return
   }
   
   try {
-    // 注意：Supabase 不允许直接删除 auth.users 表
-    // 这里只删除 profiles 表的数据
-    const { error } = await supabase
-      .from('profiles')
-      .delete()
-      .eq('id', userId)
+    console.log('=== 开始删除用户 ===')
+    console.log('用户ID:', userId)
+    console.log('昵称:', nickname)
     
-    if (error) throw error
+    // 调用 Edge Function 删除用户
+    console.log('调用 Edge Function...')
+    const { data, error } = await supabase.functions.invoke('delete-user', {
+      body: { userId }
+    })
+    
+    if (error) {
+      console.error('Edge Function 调用失败:', error)
+      throw new Error(error.message || '删除失败')
+    }
+    
+    if (!data.success) {
+      throw new Error(data.error || '删除失败')
+    }
+    
+    console.log('用户删除成功')
     
     // 从列表中移除
     users.value = users.value.filter(u => u.id !== userId)
     stats.value.totalUsers--
     
-    alert('用户资料已删除（需要在 Supabase Dashboard 中手动删除认证账户）')
+    alert('用户已完全删除（包括认证账户和所有相关数据）')
+    console.log('=== 删除完成 ===')
   } catch (err: any) {
     console.error('删除用户失败:', err)
-    alert('删除失败: ' + err.message)
+    alert('删除失败: ' + (err.message || '未知错误'))
   }
 }
 

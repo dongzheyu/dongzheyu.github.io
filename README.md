@@ -344,6 +344,9 @@ cp .env.example .env.local
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-anon-key-here
 
+# Supabase Service Role Key（可选，用于管理员删除用户等功能）
+VITE_SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
+
 # 管理员配置（可选）
 VITE_ADMIN_EMAIL=your-admin-email@example.com
 ```
@@ -354,10 +357,17 @@ VITE_ADMIN_EMAIL=your-admin-email@example.com
 3. 进入 Settings → API
 4. 复制 Project URL 和 anon public key
 
+**获取 Service Role Key（可选）：**
+- 在同一个 API 设置页面
+- 找到 "service_role key (secret)"
+- 点击 "Reveal" 显示密钥并复制
+- **注意**：此密钥具有完全权限，请妥善保管，不要泄露
+
 **重要提示：**
 - `.env.local` 已被 `.gitignore` 忽略，不会提交到 Git
 - 永远不要将 `.env.local` 文件上传到公开仓库
 - 生产环境需要在部署平台设置相同的环境变量
+- Service Role Key 仅用于管理员操作，可以绕过 RLS 策略
 
 ### 数据库初始化
 
@@ -451,7 +461,42 @@ VITE_ADMIN_EMAIL=your-admin-email@example.com
 - 管理所有文章（编辑/删除）
 - 管理所有评论（删除）
 - 查看系统统计数据
-- 封禁/删除用户（需额外实现）
+- **封禁/解封用户**（通过 profiles 表的 banned 字段）
+- **完全删除用户**（需要部署 Edge Function）
+
+**配置 Edge Function 以启用用户删除功能：**
+
+Edge Function 是一种安全的服务器端函数，可以在不暴露 Service Role Key 的情况下删除用户。
+
+**部署步骤：**
+
+1. **安装 Supabase CLI**
+   ```bash
+   npm install -g supabase
+   ```
+
+2. **登录 Supabase**
+   ```bash
+   supabase login
+   ```
+
+3. **链接项目**
+   ```bash
+   cd build/vue-app
+   supabase link
+   # 按提示选择你的项目
+   ```
+
+4. **设置环境变量**
+   - 访问 Supabase Dashboard → Functions → Settings
+   - 添加以下变量：
+     - `SUPABASE_URL`: 你的项目 URL
+     - `SUPABASE_SERVICE_ROLE_KEY`: 从 Settings → API 获取
+
+5. **部署函数**
+   ```bash
+   supabase functions deploy delete-user
+   ```
 
 ### 本地开发环境配置
 
