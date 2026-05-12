@@ -6,6 +6,12 @@
 /dist
 /.vitepress/dist
 
+# Executables
+*.exe
+*.dll
+*.so
+*.dylib
+
 # Logs
 *.log
 
