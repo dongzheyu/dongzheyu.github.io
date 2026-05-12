@@ -8,7 +8,12 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    # 可用的 Ubuntu 版本:
+    # - ubuntu-latest (当前最新 LTS, 通常是 24.04)
+    # - ubuntu-24.04
+    # - ubuntu-22.04
+    # - ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
