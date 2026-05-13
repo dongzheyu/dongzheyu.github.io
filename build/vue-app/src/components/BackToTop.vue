@@ -7,13 +7,14 @@
       title="回到顶部"
       aria-label="回到顶部"
     >
-      <i class="bi bi-arrow-up"></i>
+      <Icon icon="mdi:arrow-up" />
     </button>
   </transition>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import Icon from './Icon.vue'
 
 const isVisible = ref(false)
 const scrollThreshold = 300 // 滚动超过300px显示按钮

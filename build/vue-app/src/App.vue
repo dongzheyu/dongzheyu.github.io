@@ -4,6 +4,7 @@ import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import BackToTop from './components/BackToTop.vue'
 import SearchModal from './components/SearchModal.vue'
+import Icon from './components/Icon.vue'
 import { useAuth } from './composables/useAuth'
 
 const route = useRoute()
@@ -18,9 +19,9 @@ type Theme = 'dark' | 'light' | 'system'
 const currentTheme = ref<Theme>('system')
 
 const themeIcon = computed(() => {
-  if (currentTheme.value === 'dark') return 'bi bi-moon-stars-fill'
-  if (currentTheme.value === 'light') return 'bi bi-sun-fill'
-  return 'bi bi-circle-half'
+  if (currentTheme.value === 'dark') return 'mdi:weather-night'
+  if (currentTheme.value === 'light') return 'mdi:weather-sunny'
+  return 'mdi:brightness-auto'
 })
 
 const setTheme = (theme: Theme) => {
@@ -46,7 +47,7 @@ mediaQuery.addEventListener('change', handleSystemThemeChange)
 // ---- 关闭动画开关 ----
 const reducedMotion = ref(false)
 const reducedMotionIcon = computed(() =>
-  reducedMotion.value ? 'bi bi-lightning-charge-fill' : 'bi bi-lightning-charge'
+  reducedMotion.value ? 'mdi:lightning-bolt' : 'mdi:lightning-bolt-outline'
 )
 
 const toggleReducedMotion = () => {
@@ -235,7 +236,7 @@ const handleSignOut = async () => {
               title="搜索 (Ctrl+K)"
               aria-label="搜索"
             >
-              <i class="bi bi-search"></i>
+              <Icon icon="mdi:magnify" />
             </button>
 
             <!-- 减少动画按钮 -->
@@ -246,28 +247,28 @@ const handleSignOut = async () => {
               :title="reducedMotion ? '恢复动画' : '关闭动画'"
               @click="toggleReducedMotion"
             >
-              <i :class="reducedMotionIcon"></i>
+              <Icon :icon="reducedMotionIcon" />
             </button>
 
             <!-- 主题切换下拉菜单 -->
             <div class="dropdown">
               <button class="theme-toggle-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i :class="themeIcon"></i>
+                <Icon :icon="themeIcon" />
               </button>
               <ul class="dropdown-menu dropdown-menu-end theme-dropdown">
                 <li>
                   <button class="dropdown-item d-flex align-items-center gap-2" :class="{ active: currentTheme === 'light' }" @click="setTheme('light')">
-                    <i class="bi bi-sun-fill"></i> 浅色
+                    <Icon icon="mdi:weather-sunny" /> 浅色
                   </button>
                 </li>
                 <li>
                   <button class="dropdown-item d-flex align-items-center gap-2" :class="{ active: currentTheme === 'dark' }" @click="setTheme('dark')">
-                    <i class="bi bi-moon-stars-fill"></i> 深色
+                    <Icon icon="mdi:weather-night" /> 深色
                   </button>
                 </li>
                 <li>
                   <button class="dropdown-item d-flex align-items-center gap-2" :class="{ active: currentTheme === 'system' }" @click="setTheme('system')">
-                    <i class="bi bi-circle-half"></i> 跟随系统
+                    <Icon icon="mdi:brightness-auto" /> 跟随系统
                   </button>
                 </li>
               </ul>
@@ -280,13 +281,13 @@ const handleSignOut = async () => {
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="https://github.com/dongzheyu" target="_blank">
-                  <i class="bi bi-github me-2"></i> Github
+                  <Icon icon="mdi:github" style="margin-right: 8px;" /> Github
                 </a></li>
                 <li><a class="dropdown-item" href="https://gitee.com/jetcpp" target="_blank">
-                  <i class="bi bi-git me-2"></i> Gitee
+                  <Icon icon="mdi:git" style="margin-right: 8px;" /> Gitee
                 </a></li>
                 <li><a class="dropdown-item" href="https://space.bilibili.com/3546730880567808" target="_blank">
-                  <i class="bi bi-play-circle me-2"></i> 哔哩哔哩
+                  <Icon icon="mdi:youtube" style="margin-right: 8px;" /> 哔哩哔哩
                 </a></li>
               </ul>
             </div>
@@ -294,23 +295,23 @@ const handleSignOut = async () => {
             <!-- 个人主页 / 登录状态 -->
             <div v-if="isAuthenticated && user" class="d-flex align-items-center gap-2">
               <RouterLink :to="`/user/${user.id}`" class="btn btn-outline-light">
-                <i class="bi bi-person-circle me-1"></i>
+                <Icon icon="mdi:account-circle" style="margin-right: 4px;" />
                 个人主页
               </RouterLink>
               <button @click="handleSignOut" class="btn btn-outline-light" title="退出登录">
-                <i class="bi bi-box-arrow-right"></i>
+                <Icon icon="mdi:logout" />
               </button>
             </div>
             <div v-else>
               <RouterLink to="/auth" class="btn btn-outline-light">
-                <i class="bi bi-box-arrow-in-right me-1"></i>
+                <Icon icon="mdi:login" style="margin-right: 4px;" />
                 登录
               </RouterLink>
             </div>
 
             <!-- 赞助 -->
             <a href="https://afdian.com/a/JetCPP" target="_blank" class="btn btn-warning ms-1">
-              <i class="bi bi-heart me-1"></i> 赞助
+              <Icon icon="mdi:heart" style="margin-right: 4px;" /> 赞助
             </a>
           </div>
         </div>
@@ -335,13 +336,13 @@ const handleSignOut = async () => {
           <div class="col-md-6 text-md-end mt-3 mt-md-0">
             <div class="mb-3">
               <a href="https://github.com/dongzheyu" class="me-3" target="_blank">
-                <i class="bi bi-github"></i>
+                <Icon icon="mdi:github" />
               </a>
               <a href="https://gitee.com/jetcpp" class="me-3" target="_blank">
-                <i class="bi bi-git"></i>
+                <Icon icon="mdi:git" />
               </a>
               <a href="https://space.bilibili.com/3546730880567808" target="_blank">
-                <i class="bi bi-play-circle"></i>
+                <Icon icon="mdi:youtube" />
               </a>
             </div>
             <p class="text-muted mb-0">&copy; 2026 JetCPP. All rights reserved.</p>

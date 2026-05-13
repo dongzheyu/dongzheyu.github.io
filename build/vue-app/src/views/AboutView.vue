@@ -17,7 +17,7 @@
           </div>
           <div class="col-lg-4">
             <div class="hero-illustration animate-float" :class="{ 'visible': isVisible }" style="animation-delay: 0.45s">
-              <i class="bi bi-person-fill display-1" style="color: var(--color-primary); opacity: 0.3;"></i>
+              <Icon icon="mdi:account" size="64" style="color: var(--color-primary); opacity: 0.3;" />
             </div>
           </div>
         </div>
@@ -34,7 +34,8 @@
         <!-- Minecraft Section -->
         <div class="tech-category mb-5 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.6s">
           <h3 class="category-title mb-4">
-            <i class="bi bi-controller me-2"></i>Minecraft 是我们的游乐场
+            <Icon icon="mdi:gamepad-variant" />
+            Minecraft 是我们的游乐场
           </h3>
           <p class="category-desc mb-4">
             我们是狂热的 Minecraft 玩家，同时也是工具开发者！我们创建了一系列 Minecraft 相关的工具，帮助玩家们更好地享受游戏：
@@ -46,7 +47,7 @@
                   <h5 class="card-title fw-bold mb-3">Minecraft-Toos</h5>
                   <p class="card-text">C++ 编写的多功能工具包，一键管理启动器和游戏环境</p>
                   <a href="https://github.com/dongzheyu/Minecraft-Toos" target="_blank" class="btn btn-sm btn-animate">
-                    <i class="bi bi-github me-1"></i>查看项目
+                    <Icon icon="mdi:github" style="margin-right: 4px;" />查看项目
                   </a>
                 </div>
               </div>
@@ -57,7 +58,7 @@
                   <h5 class="card-title fw-bold mb-3">GoodMinecraft</h5>
                   <p class="card-text">高性能的 Minecraft 整合包，优化游戏体验，让每台电脑都能流畅运行</p>
                   <a href="https://github.com/dongzheyu/GoodMinecraft" target="_blank" class="btn btn-sm btn-animate">
-                    <i class="bi bi-github me-1"></i>查看项目
+                    <Icon icon="mdi:github" style="margin-right: 4px;" />查看项目
                   </a>
                 </div>
               </div>
@@ -68,7 +69,7 @@
                   <h5 class="card-title fw-bold mb-3">JetCPPWebsite</h5>
                   <p class="card-text">我们的技术博客网站，分享编程经验和项目故事</p>
                   <a href="https://github.com/dongzheyu/JetCPPWebsite" target="_blank" class="btn btn-sm btn-animate">
-                    <i class="bi bi-github me-1"></i>查看项目
+                    <Icon icon="mdi:github" style="margin-right: 4px;" />查看项目
                   </a>
                 </div>
               </div>
@@ -82,7 +83,8 @@
         <!-- 实用工具 Section -->
         <div class="tech-category mb-5 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.7s">
           <h3 class="category-title mb-4">
-            <i class="bi bi-tools me-2"></i>实用工具开发者
+            <Icon icon="mdi:wrench" />
+            实用工具开发者
           </h3>
           <div class="row g-4">
             <div class="col-md-12">
@@ -91,7 +93,7 @@
                   <h5 class="card-title fw-bold mb-3">JetCPPWebsite</h5>
                   <p class="card-text">我们的技术博客网站，分享编程经验和项目故事</p>
                   <a href="https://github.com/dongzheyu/JetCPPWebsite" target="_blank" class="btn btn-sm btn-animate">
-                    <i class="bi bi-github me-1"></i>查看项目
+                    <Icon icon="mdi:github" style="margin-right: 4px;" />查看项目
                   </a>
                 </div>
               </div>
@@ -102,7 +104,8 @@
         <!-- 网站与文档 Section -->
         <div class="tech-category mb-5 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.8s">
           <h3 class="category-title mb-4">
-            <i class="bi bi-globe me-2"></i>网站与文档
+            <Icon icon="mdi:web" />
+            网站与文档
           </h3>
           <div class="row g-4">
             <div class="col-md-6">
@@ -111,7 +114,7 @@
                   <h5 class="card-title fw-bold mb-3">dongzheyu.github.io</h5>
                   <p class="card-text">我们的个人主页</p>
                   <a href="https://github.com/dongzheyu/dongzheyu.github.io" target="_blank" class="btn btn-sm btn-animate">
-                    <i class="bi bi-github me-1"></i>查看项目
+                    <Icon icon="mdi:github" style="margin-right: 4px;" />查看项目
                   </a>
                 </div>
               </div>
@@ -122,7 +125,7 @@
                   <h5 class="card-title fw-bold mb-3">Office-Tool-docs</h5>
                   <p class="card-text">文档项目，帮助更多人学习技术</p>
                   <a href="https://github.com/dongzheyu/Office-Tool-docs" target="_blank" class="btn btn-sm btn-animate">
-                    <i class="bi bi-github me-1"></i>查看项目
+                    <Icon icon="mdi:github" style="margin-right: 4px;" />查看项目
                   </a>
                 </div>
               </div>
@@ -143,7 +146,7 @@
             <div class="philosophy-card card h-100 border-0 shadow-sm animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1.0s">
               <div class="card-body text-center p-4">
                 <div class="philosophy-icon mb-3">
-                  <i class="bi bi-stars fs-1"></i>
+                  <Icon icon="mdi:star-four-points" size="32" />
                 </div>
                 <h5 class="card-title fw-bold mb-3">简单就是美</h5>
                 <p class="card-text">我们坚信好的工具应该让用户感到轻松，而不是增加负担。</p>
@@ -154,7 +157,7 @@
             <div class="philosophy-card card h-100 border-0 shadow-sm animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1.1s">
               <div class="card-body text-center p-4">
                 <div class="philosophy-icon mb-3">
-                  <i class="bi bi-person-check fs-1"></i>
+                  <Icon icon="mdi:account-check" size="32" />
                 </div>
                 <h5 class="card-title fw-bold mb-3">从用户出发</h5>
                 <p class="card-text">每个项目都是因为我们要自己遇到了问题，然后想出了解决方案。</p>
@@ -165,7 +168,7 @@
             <div class="philosophy-card card h-100 border-0 shadow-sm animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1.2s">
               <div class="card-body text-center p-4">
                 <div class="philosophy-icon mb-3">
-                  <i class="bi bi-arrow-repeat fs-1"></i>
+                  <Icon icon="mdi:sync" size="32" />
                 </div>
                 <h5 class="card-title fw-bold mb-3">持续学习</h5>
                 <p class="card-text">编程路上我们还在不断学习，每次解决问题都是一次进步。</p>
@@ -187,7 +190,7 @@
             <div class="skill-card card h-100 border-0 shadow-sm">
               <div class="card-body p-4">
                 <h5 class="card-title fw-bold mb-3">
-                  <i class="bi bi-joystick me-2"></i>游戏开发
+                  <Icon icon="mdi:gamepad-variant" />游戏开发
                 </h5>
                 <p class="card-text text-muted">Minecraft Modding | C++ | Java</p>
               </div>
@@ -197,7 +200,7 @@
             <div class="skill-card card h-100 border-0 shadow-sm">
               <div class="card-body p-4">
                 <h5 class="card-title fw-bold mb-3">
-                  <i class="bi bi-pc-display me-2"></i>系统工具
+                  <Icon icon="mdi:desktop-classic" />系统工具
                 </h5>
                 <p class="card-text text-muted">Windows 开发 | 环境配置 | 自动化</p>
               </div>
@@ -207,7 +210,7 @@
             <div class="skill-card card h-100 border-0 shadow-sm">
               <div class="card-body p-4">
                 <h5 class="card-title fw-bold mb-3">
-                  <i class="bi bi-window-desktop me-2"></i>前端技术
+                  <Icon icon="mdi:monitor" />前端技术
                 </h5>
                 <p class="card-text text-muted">HTML | CSS | JavaScript | VitePress</p>
               </div>
@@ -217,7 +220,7 @@
             <div class="skill-card card h-100 border-0 shadow-sm">
               <div class="card-body p-4">
                 <h5 class="card-title fw-bold mb-3">
-                  <i class="bi bi-book me-2"></i>学习方法
+                  <Icon icon="mdi:book-open-page-variant" />学习方法
                 </h5>
                 <p class="card-text text-muted">实践驱动 | 问题导向 | 持续迭代</p>
               </div>
@@ -238,15 +241,16 @@
             <div class="highlight-card card h-100 border-0 shadow-sm animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1.6s">
               <div class="card-body p-4">
                 <h4 class="card-title fw-bold mb-3">
-                  <i class="bi bi-trophy me-2 text-warning"></i>最让我自豪的项目
+                  <Icon icon="mdi:trophy" />
+                  最让我自豪的项目
                 </h4>
                 <h5 class="mb-3">Minecraft-Toos</h5>
                 <p class="card-text">这是我目前最用心的作品，因为它：</p>
                 <ul class="list-unstyled">
-                  <li><i class="bi bi-check-circle-fill me-2 text-success"></i>解决了玩家们的实际痛点</li>
-                  <li><i class="bi bi-check-circle-fill me-2 text-success"></i>采用了简洁高效的设计</li>
-                  <li><i class="bi bi-check-circle-fill me-2 text-success"></i>支持正版游戏体验</li>
-                  <li><i class="bi bi-check-circle-fill me-2 text-success"></i>完全开源，让每个人都能受益</li>
+                  <li><Icon icon="mdi:check-circle" style="margin-right: 8px; color: #52b788;" />解决了玩家们的实际痛点</li>
+                  <li><Icon icon="mdi:check-circle" style="margin-right: 8px; color: #52b788;" />采用了简洁高效的设计</li>
+                  <li><Icon icon="mdi:check-circle" style="margin-right: 8px; color: #52b788;" />支持正版游戏体验</li>
+                  <li><Icon icon="mdi:check-circle" style="margin-right: 8px; color: #52b788;" />完全开源，让每个人都能受益</li>
                 </ul>
               </div>
             </div>
@@ -255,7 +259,8 @@
             <div class="highlight-card card h-100 border-0 shadow-sm animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 1.7s">
               <div class="card-body p-4">
                 <h4 class="card-title fw-bold mb-3">
-                  <i class="bi bi-award me-2 text-warning"></i>最有成就感的作品
+                  <Icon icon="mdi:award" />
+                  最有成就感的作品
                 </h4>
                 <h5 class="mb-3">JetCPPWebsite</h5>
                 <p class="card-text">用 Vue 3 + TypeScript + Vite 开发的个人网站，整合了博客和项目展示功能。从设计到实现，让我感受到了全栈开发的乐趣！</p>
@@ -300,7 +305,7 @@
             <div class="learning-card card h-100 border-0 shadow-sm">
               <div class="card-body p-4">
                 <h5 class="card-title fw-bold mb-3">
-                  <i class="bi bi-graph-up me-2"></i>算法与数据结构
+                  <Icon icon="mdi:trending-up" />算法与数据结构
                 </h5>
                 <p class="card-text text-muted">打好编程基础</p>
               </div>
@@ -310,7 +315,7 @@
             <div class="learning-card card h-100 border-0 shadow-sm">
               <div class="card-body p-4">
                 <h5 class="card-title fw-bold mb-3">
-                  <i class="bi bi-wifi me-2"></i>网络编程
+                  <Icon icon="mdi:wifi" />网络编程
                 </h5>
                 <p class="card-text text-muted">让程序能够互相交流</p>
               </div>
@@ -332,7 +337,7 @@
           </p>
           <div class="animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 2.6s">
             <a href="https://github.com/dongzheyu" target="_blank" class="btn btn-primary btn-lg btn-animate">
-              <i class="bi bi-github me-2"></i>访问我们的 GitHub 主页
+              <Icon icon="mdi:github" />访问我们的 GitHub 主页
             </a>
           </div>
         </div>
@@ -374,16 +379,16 @@
                  :class="{ 'visible': isVisible }"
                  style="animation-delay: 2.9s">
               <a href="https://github.com/dongzheyu" target="_blank" class="btn btn-animate">
-                <i class="bi bi-github me-2"></i> GitHub
+                <Icon icon="mdi:github" /> GitHub
               </a>
               <a href="https://gitee.com/jetcpp" target="_blank" class="btn btn-animate">
-                <i class="bi bi-git me-2"></i> Gitee
+                <Icon icon="mdi:git" /> Gitee
               </a>
               <a href="https://space.bilibili.com/3546730880567808" target="_blank" class="btn btn-animate">
-                <i class="bi bi-play-circle me-2"></i> 哔哩哔哩
+                <Icon icon="mdi:youtube" /> 哔哩哔哩
               </a>
               <a href="https://afdian.com/a/JetCPP" target="_blank" class="btn btn-primary btn-animate">
-                <i class="bi bi-heart me-2"></i> 赞助支持
+                <Icon icon="mdi:heart" /> 赞助支持
               </a>
             </div>
           </div>
@@ -395,6 +400,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { useAnimations } from '@/composables/useAnimations'
 
 const { isVisible } = useAnimations()

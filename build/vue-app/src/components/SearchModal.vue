@@ -2,7 +2,7 @@
   <div class="search-modal" :class="{ active: isOpen }" @click.self="close">
     <div class="search-container">
       <div class="search-header">
-        <i class="bi bi-search search-icon"></i>
+        <Icon icon="mdi:magnify" class="search-icon" />
         <input
           ref="searchInput"
           v-model="query"
@@ -13,7 +13,7 @@
           @input="handleSearch"
         />
         <button class="search-close" @click="close" aria-label="关闭搜索">
-          <i class="bi bi-x-lg"></i>
+          <Icon icon="mdi:close" />
         </button>
       </div>
 
@@ -27,19 +27,19 @@
           @mouseenter="selectedIndex = index"
         >
           <div class="result-icon" :style="`background-color: ${result.color}18; color: ${result.color}`">
-            <i :class="result.icon"></i>
+            <Icon :icon="result.icon" />
           </div>
           <div class="result-content">
             <h4 class="result-title">{{ result.title }}</h4>
             <p class="result-desc">{{ result.description }}</p>
             <span class="result-category">{{ result.category }}</span>
           </div>
-          <i class="bi bi-arrow-right result-arrow"></i>
+          <Icon icon="mdi:arrow-right" class="result-arrow" />
         </div>
       </div>
 
       <div class="search-empty" v-else-if="query.length > 0">
-        <i class="bi bi-inbox fs-1"></i>
+        <Icon icon="mdi:inbox" size="48" />
         <p>未找到相关内容</p>
       </div>
 
@@ -63,6 +63,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import Icon from './Icon.vue'
 
 const router = useRouter()
 const isOpen = ref(false)
@@ -72,14 +73,14 @@ const searchInput = ref<HTMLInputElement | null>(null)
 
 // 搜索数据源
 const searchData = [
-  { id: 1, title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '网络工具', icon: 'bi bi-shield-check', color: '#00ADD8', path: '/project/snishaper.html' },
-  { id: 2, title: 'English Listen WinUI', description: '现代化英语听写训练工具，WinUI 3 + C# + C++混合开发', category: '教育软件', icon: 'bi bi-headphones', color: '#f48c06', path: '/project/english-listen-winui.html' },
-  { id: 3, title: 'English-Listen', description: '专业英语听写训练工具，基于C++和Qt6开发', category: '教育软件', icon: 'bi bi-book', color: '#52b788', path: '/project/english-listen.html' },
-  { id: 4, title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理评估', icon: 'bi bi-person-badge', color: '#ff6b35', path: '/tests/mbti' },
-  { id: 5, title: '抑郁自评量表', description: '专业的抑郁症自我评估工具', category: '心理评估', icon: 'bi bi-heart-pulse', color: '#e63946', path: '/tests/depression' },
-  { id: 6, title: '焦虑自评量表', description: '评估焦虑程度的专业工具', category: '心理评估', icon: 'bi bi-activity', color: '#ff9f1c', path: '/tests/anxiety' },
-  { id: 7, title: '关于我们', description: '了解JetCPP的故事和技术背景', category: '团队', icon: 'bi bi-person', color: '#4cc9f0', path: '/about' },
-  { id: 8, title: '技术博客', description: 'C++编程经验、项目开发心得分享', category: '博客', icon: 'bi bi-journal-text', color: '#f48c06', path: '/blog' },
+  { id: 1, title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '网络工具', icon: 'mdi:shield-check', color: '#00ADD8', path: '/project/snishaper' },
+  { id: 2, title: 'English Listen WinUI', description: '现代化英语听写训练工具，WinUI 3 + C# + C++混合开发', category: '教育软件', icon: 'mdi:headphones', color: '#f48c06', path: '/project/english-listen-winui' },
+  { id: 3, title: 'English-Listen', description: '专业英语听写训练工具，基于C++和Qt6开发', category: '教育软件', icon: 'mdi:book-open-page-variant', color: '#52b788', path: '/project/english-listen' },
+  { id: 4, title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理评估', icon: 'mdi:account-badge', color: '#ff6b35', path: '/tests/mbti' },
+  { id: 5, title: '抑郁自评量表', description: '专业的抑郁症自我评估工具', category: '心理评估', icon: 'mdi:heart-pulse', color: '#e63946', path: '/tests/depression' },
+  { id: 6, title: '焦虑自评量表', description: '评估焦虑程度的专业工具', category: '心理评估', icon: 'mdi:activity', color: '#ff9f1c', path: '/tests/anxiety' },
+  { id: 7, title: '关于我们', description: '了解JetCPP的故事和技术背景', category: '团队', icon: 'mdi:account-group', color: '#4cc9f0', path: '/about' },
+  { id: 8, title: '技术博客', description: 'C++编程经验、项目开发心得分享', category: '博客', icon: 'mdi:newspaper-variant', color: '#f48c06', path: '/blog' },
 ]
 
 const hotTags = ['SniShaper', '英语听写', 'MBTI', 'C++', '心理测试']

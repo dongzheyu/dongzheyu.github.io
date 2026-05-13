@@ -8,7 +8,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" :style="{ paddingLeft: heroPadding }">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">{{ title }}</h1>
             <p class="test-hero-sub mb-2">{{ subtitle }}</p>
@@ -73,7 +73,7 @@
           <h3 class="review-title">症状维度分析</h3>
           <div class="dimension-grid">
             <div v-for="dim in dimensions" :key="dim.name" class="dim-card">
-              <div class="dim-icon"><i :class="dim.icon"></i></div>
+              <div class="dim-icon"><Icon :icon="dim.icon" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">{{ dim.name }}</h4>
                 <p class="dim-score">{{ dim.score }} / {{ dim.maxScore }}</p>
@@ -102,7 +102,7 @@
 
         <!-- 重要提示 -->
         <div class="important-notice mb-5">
-          <i class="bi bi-exclamation-triangle notice-icon"></i>
+          <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>{{ disclaimerTitle }}</strong>
             <p>{{ disclaimer }}</p>
@@ -123,6 +123,7 @@
 import { ref, computed, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from './Icon.vue'
 
 interface Question {
   id: number

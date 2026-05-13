@@ -34,7 +34,7 @@
               @click="showPassword = !showPassword"
               :title="showPassword ? '隐藏密码' : '显示密码'"
             >
-              <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+              <Icon :icon="showPassword ? 'mdi:eye-off' : 'mdi:eye'" />
             </button>
           </div>
         </div>
@@ -45,12 +45,12 @@
       </form>
 
       <div v-if="error" class="error-message">
-        <i class="bi bi-exclamation-circle"></i>
+        <Icon icon="mdi:alert-circle" />
         {{ error }}
       </div>
 
       <div v-if="successMessage" class="success-message">
-        <i class="bi bi-check-circle"></i>
+        <Icon icon="mdi:check-circle" />
         {{ successMessage }}
       </div>
 
@@ -73,6 +73,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { supabase } from '@/supabase/client'
+import Icon from './Icon.vue'
 
 const isLogin = ref(true)
 const email = ref('')
