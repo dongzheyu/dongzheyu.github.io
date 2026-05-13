@@ -140,7 +140,7 @@
 .markdown-content :deep(.code-lang-badge) {
   position: absolute;
   top: 0.75rem;
-  right: 5rem;
+  left: 1rem;
   background: rgba(255, 140, 66, 0.2);
   color: var(--color-primary-light);
   padding: 0.25rem 0.75rem;

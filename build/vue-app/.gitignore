@@ -37,3 +37,4 @@ __screenshots__/
 
 # Supabase CLI
 supabase.exe
+/supabase/.temp/
