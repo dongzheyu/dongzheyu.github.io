@@ -9,15 +9,6 @@
     "build": "vite build && npm run deploy",
     "deploy": "node scripts/deploy.js",
     "preview": "vite preview",
-    "blog:dev": "vitepress dev docs",
-    "blog:build": "vitepress build docs",
-    "blog:preview": "vitepress preview docs",
-    "project:dev": "vitepress dev project",
-    "project:build": "vitepress build project",
-    "project:preview": "vitepress preview project",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs",
     "add-project": "node scripts/add-content.js project",
     "add-blog": "node scripts/add-content.js blog"
   },
@@ -37,7 +28,6 @@
     "@vitejs/plugin-vue": "^6.0.3",
     "esbuild": "^0.28.0",
     "supabase": "^2.95.6",
-    "vite": "^8.0.10",
-    "vitepress": "^1.3.0"
+    "vite": "^8.0.10"
   }
 }
