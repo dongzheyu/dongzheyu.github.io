@@ -12,9 +12,9 @@
         <div class="profile-header">
           <div class="user-avatar-large" :class="{ 'is-own-profile': isOwnProfile }" @click="isOwnProfile && triggerFileInput()">
             <img v-if="profile.avatar_url" :src="profile.avatar_url" alt="头像" class="avatar-image" />
-            <i v-else class="bi bi-person-circle"></i>
+            <Icon v-else icon="mdi:account-circle" />
             <div v-if="isOwnProfile" class="avatar-overlay">
-              <i class="bi bi-camera-fill"></i>
+              <Icon icon="mdi:camera" />
               <span>更换头像</span>
             </div>
           </div>
@@ -42,11 +42,11 @@
         <!-- 编辑按钮（仅本人可见） -->
         <div v-if="isOwnProfile" class="profile-actions">
           <button @click="showEditModal = true" class="btn btn-primary btn-animate">
-            <i class="bi bi-pencil"></i>
+            <Icon icon="mdi:pencil" />
             编辑资料
           </button>
           <button @click="showDeleteModal = true" class="btn btn-danger btn-animate">
-            <i class="bi bi-trash"></i>
+            <Icon icon="mdi:delete" />
             注销账户
           </button>
         </div>
@@ -54,7 +54,7 @@
 
       <!-- 用户不存在 -->
       <div v-else class="not-found">
-        <i class="bi bi-person-x icon-large"></i>
+        <Icon icon="mdi:account-remove" class="icon-large" />
         <h2>用户不存在</h2>
         <p>该用户可能已被删除或禁用</p>
         <RouterLink to="/" class="btn btn-primary btn-animate">返回首页</RouterLink>
@@ -67,13 +67,13 @@
         <div class="modal-header">
           <h3>编辑个人资料</h3>
           <button @click="showEditModal = false" class="close-btn">
-            <i class="bi bi-x-lg"></i>
+            <Icon icon="mdi:close" />
           </button>
         </div>
 
         <form @submit.prevent="handleUpdateProfile" class="modal-body">
           <div v-if="error && !uploading" class="error-message">
-            <i class="bi bi-exclamation-circle"></i>
+            <Icon icon="mdi:alert-circle" />
             {{ error }}
           </div>
 
@@ -101,7 +101,7 @@
           </div>
 
           <div v-if="error" class="error-message">
-            <i class="bi bi-exclamation-circle"></i>
+            <Icon icon="mdi:alert-circle" />
             {{ error }}
           </div>
 
@@ -121,15 +121,15 @@
     <div v-if="showDeleteModal" class="modal-overlay" @click.self="showDeleteModal = false">
       <div class="modal-content modal-danger">
         <div class="modal-header">
-          <h3><i class="bi bi-exclamation-triangle-fill"></i> 注销账户</h3>
+          <h3><Icon icon="mdi:alert" /> 注销账户</h3>
           <button @click="showDeleteModal = false" class="close-btn">
-            <i class="bi bi-x-lg"></i>
+            <Icon icon="mdi:close" />
           </button>
         </div>
 
         <div class="modal-body">
           <div class="warning-box">
-            <i class="bi bi-exclamation-triangle"></i>
+            <Icon icon="mdi:alert" />
             <div>
               <strong>警告：</strong>此操作不可恢复！
             </div>
@@ -137,10 +137,10 @@
 
           <p>注销账户将：</p>
           <ul class="delete-info">
-            <li><i class="bi bi-x-circle"></i> 删除您的个人资料</li>
-            <li><i class="bi bi-x-circle"></i> 删除您发布的所有文章</li>
-            <li><i class="bi bi-x-circle"></i> 删除您的所有评论</li>
-            <li><i class="bi bi-x-circle"></i> 永久删除您的账户</li>
+            <li><Icon icon="mdi:close-circle" /> 删除您的个人资料</li>
+            <li><Icon icon="mdi:close-circle" /> 删除您发布的所有文章</li>
+            <li><Icon icon="mdi:close-circle" /> 删除您的所有评论</li>
+            <li><Icon icon="mdi:close-circle" /> 永久删除您的账户</li>
           </ul>
 
           <div class="confirm-section">
@@ -154,7 +154,7 @@
           </div>
 
           <div v-if="deleteError" class="error-message">
-            <i class="bi bi-exclamation-circle"></i>
+            <Icon icon="mdi:alert-circle" />
             {{ deleteError }}
           </div>
         </div>
@@ -178,6 +178,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { useRoute } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'

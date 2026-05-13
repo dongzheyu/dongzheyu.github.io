@@ -7,7 +7,7 @@
       </div>
 
       <div v-else-if="error" class="error-state">
-        <i class="bi bi-exclamation-triangle error-icon"></i>
+        <Icon icon="mdi:alert" class="error-icon" />
         <h2>验证失败</h2>
         <p>{{ error }}</p>
         <RouterLink to="/auth" class="btn btn-primary btn-animate">
@@ -16,7 +16,7 @@
       </div>
 
       <div v-else-if="success" class="success-state">
-        <i class="bi bi-check-circle success-icon"></i>
+        <Icon icon="mdi:check-circle" class="success-icon" />
         <h2>邮箱验证成功！</h2>
         <p>你的邮箱已成功验证，现在可以登录了。</p>
         <RouterLink to="/auth" class="btn btn-primary btn-animate">
@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 

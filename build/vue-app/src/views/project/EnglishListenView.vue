@@ -33,12 +33,12 @@
               <div>
                 <a href="https://github.com/dongzheyu/english-listen" target="_blank" class="btn btn-animate me-2"
                    style="background: var(--gradient-primary); color: #fff;">
-                  <i class="bi bi-github"></i> 查看源码
+                  <Icon icon="mdi:github" /> 查看源码
                 </a>
               </div>
               <router-link to="/projects" class="btn btn-animate"
                            style="border: 1.5px solid var(--color-border); color: var(--color-text);">
-                <i class="bi bi-arrow-left"></i> 返回项目列表
+                <Icon icon="mdi:arrow-left" /> 返回项目列表
               </router-link>
             </div>
           </footer>

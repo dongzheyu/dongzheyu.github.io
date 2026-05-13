@@ -9,7 +9,7 @@
       <!-- 已登录时显示用户信息 -->
       <div v-else class="user-info-card">
         <div class="user-header">
-          <i class="bi bi-person-circle user-icon"></i>
+          <Icon icon="mdi:account-circle" class="user-icon" />
           <h2>欢迎回来！</h2>
         </div>
         
@@ -29,7 +29,7 @@
         </div>
         
         <button @click="handleSignOut" class="btn btn-secondary btn-animate">
-          <i class="bi bi-box-arrow-right"></i>
+          <Icon icon="mdi:logout" />
           退出登录
         </button>
       </div>

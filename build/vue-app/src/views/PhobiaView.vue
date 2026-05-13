@@ -8,7 +8,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">恐惧症自评测试</h1>
             <p class="test-hero-sub mb-2">社交恐惧量表（SPIN）+ 特定恐惧症 · 22 道题 · 约 7 分钟</p>
@@ -81,7 +81,7 @@
           <h3 class="review-title">维度分析</h3>
           <div class="dimension-grid">
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-people-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:account-group" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">社交恐惧</h4>
                 <p class="dim-score">{{ socialScore }} / 32</p>
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-geo-alt-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:map-marker" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">广场恐惧</h4>
                 <p class="dim-score">{{ agoraphobiaScore }} / 12</p>
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-bug-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:bug" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">特定恐惧</h4>
                 <p class="dim-score">{{ specificScore }} / 28</p>
@@ -124,7 +124,7 @@
         </div>
 
         <div class="important-notice mb-5">
-          <i class="bi bi-exclamation-triangle notice-icon"></i>
+          <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
             <p>恐惧症测试是筛查工具，不能替代专业诊断。恐惧症通常可以通过暴露疗法、认知行为疗法等有效治疗。如果你的恐惧已经严重影响日常生活，建议寻求专业帮助。</p>
@@ -144,6 +144,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from '@/components/Icon.vue'
 
 const freqOptions = [
   { value: 0, label: '一点也不' },

@@ -17,23 +17,23 @@
       <!-- 趣味元素 -->
       <div class="fun-elements">
         <div class="floating-icon" style="--delay: 0s;">
-          <i class="bi bi-compass"></i>
+          <Icon icon="mdi:compass" />
         </div>
         <div class="floating-icon" style="--delay: 0.5s;">
-          <i class="bi bi-map"></i>
+          <Icon icon="mdi:map" />
         </div>
         <div class="floating-icon" style="--delay: 1s;">
-          <i class="bi bi-signpost-2"></i>
+          <Icon icon="mdi:sign-direction" />
         </div>
       </div>
 
       <!-- 操作按钮 -->
       <div class="action-buttons">
         <router-link to="/" class="btn btn-primary btn-animate btn-lg">
-          <i class="bi bi-house me-2"></i>返回首页
+          <Icon icon="mdi:home" style="margin-right: 8px;" />返回首页
         </router-link>
         <button class="btn btn-outline btn-animate btn-lg" @click="goBack">
-          <i class="bi bi-arrow-left me-2"></i>返回上一页
+          <Icon icon="mdi:arrow-left" style="margin-right: 8px;" />返回上一页
         </button>
       </div>
 
@@ -42,15 +42,15 @@
         <p class="suggestions-title">不妨看看这些：</p>
         <div class="suggestion-links">
           <router-link to="/projects" class="suggestion-link">
-            <i class="bi bi-folder"></i>
+            <Icon icon="mdi:folder" />
             <span>项目展示</span>
           </router-link>
           <router-link to="/blog" class="suggestion-link">
-            <i class="bi bi-journal-text"></i>
+            <Icon icon="mdi:newspaper-variant" />
             <span>技术博客</span>
           </router-link>
           <router-link to="/tests" class="suggestion-link">
-            <i class="bi bi-clipboard-check"></i>
+            <Icon icon="mdi:clipboard-check" />
             <span>心理评估</span>
           </router-link>
         </div>

@@ -9,7 +9,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">阳光抑郁症测试</h1>
             <p class="test-hero-sub mb-2">微笑型抑郁筛查 · 15 道题 · 约 8 分钟</p>
@@ -136,7 +136,7 @@
 
         <!-- 免责声明 -->
         <div class="notice-box mb-5">
-          <i class="bi bi-info-circle notice-icon"></i>
+          <Icon icon="mdi:information" class="notice-icon" />
           <div>
             <strong>测试说明</strong>
             <p>本测试基于阳光抑郁症的研究特征设计，不是临床诊断工具。得分偏高并不意味着你患有抑郁症，但值得认真对待自己的内心感受。如果你长期感到内外不一致的痛苦，建议寻求专业心理咨询。</p>
@@ -156,6 +156,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from '@/components/Icon.vue'
 
 const agreeOptions = [
   { value: 0, label: '完全不符合' },

@@ -656,7 +656,7 @@ int main() {
               </div>
               <router-link to="/blog" class="btn btn-animate"
                            style="border: 1.5px solid var(--color-border); color: var(--color-text);">
-                <i class="bi bi-arrow-left"></i> 返回博客列表
+                <Icon icon="mdi:arrow-left" /> 返回博客列表
               </router-link>
             </div>
           </footer>

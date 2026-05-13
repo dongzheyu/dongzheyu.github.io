@@ -9,7 +9,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">进食障碍自评测试</h1>
             <p class="test-hero-sub mb-2">EAT-26 进食态度测试 · 26 道题 · 约 6 分钟</p>
@@ -86,6 +86,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from '@/components/Icon.vue'
 
 // 进食障碍 EAT-26 题目
 const questions = ref([

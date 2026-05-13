@@ -39,10 +39,10 @@
                   <p class="test-card-desc mb-3">{{ test.description }}</p>
                   <div class="test-meta d-flex gap-3">
                     <span class="meta-item">
-                      <i class="bi bi-list-check me-1"></i>{{ test.questions }} 题
+                      <Icon icon="mdi:format-list-checks" style="margin-right: 4px;" />{{ test.questions }} 题
                     </span>
                     <span class="meta-item">
-                      <i class="bi bi-clock me-1"></i>约 {{ test.minutes }} 分钟
+                      <Icon icon="mdi:clock" style="margin-right: 4px;" />约 {{ test.minutes }} 分钟
                     </span>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
     <section class="tests-disclaimer">
       <div class="container-fluid px-4">
         <div class="disclaimer-box animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.6s">
-          <i class="bi bi-info-circle disclaimer-icon"></i>
+          <Icon icon="mdi:information" class="disclaimer-icon" />
           <div>
             <strong>免责声明</strong>
             <p>本页面所有测试均基于公开标准量表，仅供个人参考与自我认知。测试结果不能替代专业的心理健康评估。若你感到持续的心理困扰，请及时联系心理卫生专业人士。</p>
@@ -75,6 +75,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { RouterLink } from 'vue-router'
 import { useAnimations } from '@/composables/useAnimations'
 

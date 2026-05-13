@@ -8,7 +8,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">创伤后应激障碍（PTSD）自评测试</h1>
             <p class="test-hero-sub mb-2">PTSD 检查表（PCL-5） · 20 道题 · 约 6 分钟</p>
@@ -81,7 +81,7 @@
           <h3 class="review-title">DSM-5 症状群分析</h3>
           <div class="dimension-grid">
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-eye-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:eye" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">再体验症状</h4>
                 <p class="dim-score">{{ clusterB }} / 20</p>
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-slash-circle-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:cancel" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">回避症状</h4>
                 <p class="dim-score">{{ clusterC }} / 8</p>
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-lightning-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:lightning-bolt" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">负性认知情绪</h4>
                 <p class="dim-score">{{ clusterD }} / 28</p>
@@ -105,7 +105,7 @@
               </div>
             </div>
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-activity"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:activity" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">过度警觉</h4>
                 <p class="dim-score">{{ clusterE }} / 24</p>
@@ -132,7 +132,7 @@
         </div>
 
         <div class="important-notice mb-5">
-          <i class="bi bi-exclamation-triangle notice-icon"></i>
+          <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
             <p>PCL-5 是筛查工具，不能替代临床诊断。PTSD 是一种可能影响任何人（无论创伤事件类型）的精神障碍，通过适当的治疗（如眼动脱敏与再处理疗法、认知加工疗法）通常能够显著改善。如果你经历过创伤事件并持续感到困扰，请寻求专业帮助。</p>
@@ -152,6 +152,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from '@/components/Icon.vue'
 
 const freqOptions = [
   { value: 0, label: '一点也没有' },

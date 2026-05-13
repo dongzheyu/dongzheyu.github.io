@@ -5,7 +5,7 @@
         <!-- 第一步：请求重置 -->
         <div v-if="step === 1" class="reset-step">
           <div class="step-header">
-            <i class="bi bi-key icon-large"></i>
+            <Icon icon="mdi:key" class="icon-large" />
             <h2>重置密码</h2>
             <p class="step-desc">输入你的邮箱，我们会发送重置密码链接</p>
           </div>
@@ -29,18 +29,18 @@
           </form>
 
           <div v-if="error" class="error-message">
-            <i class="bi bi-exclamation-circle"></i>
+            <Icon icon="mdi:alert-circle" />
             {{ error }}
           </div>
 
           <div v-if="successMessage" class="success-message">
-            <i class="bi bi-check-circle"></i>
+            <Icon icon="mdi:check-circle" />
             {{ successMessage }}
           </div>
 
           <div class="back-link">
             <RouterLink to="/auth" class="link-btn">
-              <i class="bi bi-arrow-left"></i>
+              <Icon icon="mdi:arrow-left" />
               返回登录
             </RouterLink>
           </div>
@@ -49,7 +49,7 @@
         <!-- 第二步：设置新密码 -->
         <div v-else-if="step === 2" class="reset-step">
           <div class="step-header">
-            <i class="bi bi-lock icon-large"></i>
+            <Icon icon="mdi:lock" class="icon-large" />
             <h2>设置新密码</h2>
             <p class="step-desc">请输入你的新密码（至少6位）</p>
           </div>
@@ -107,12 +107,12 @@
           </form>
 
           <div v-if="error" class="error-message">
-            <i class="bi bi-exclamation-circle"></i>
+            <Icon icon="mdi:alert-circle" />
             {{ error }}
           </div>
 
           <div v-if="successMessage" class="success-message">
-            <i class="bi bi-check-circle"></i>
+            <Icon icon="mdi:check-circle" />
             {{ successMessage }}
           </div>
         </div>
@@ -123,6 +123,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 

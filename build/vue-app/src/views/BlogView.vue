@@ -14,7 +14,7 @@
           </div>
           <div class="col-lg-4">
             <div class="hero-illustration animate-float" :class="{ 'visible': isVisible }" style="animation-delay: 0.4s">
-              <i class="bi bi-journal-text display-1" style="color: var(--color-primary); opacity: 0.3;"></i>
+              <Icon icon="mdi:newspaper-variant" size="64" style="color: var(--color-primary); opacity: 0.3;" />
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@
         <!-- 写文章按钮（仅登录用户可见） -->
         <div v-if="isAuthenticated" class="write-post-btn-container mb-4">
           <RouterLink to="/blog/new" class="btn btn-primary btn-animate btn-lg">
-            <i class="bi bi-pencil-square me-2"></i>
+            <Icon icon="mdi:pencil" />
             写文章
           </RouterLink>
         </div>
@@ -50,7 +50,7 @@
                 <div class="card-body p-4">
                   <div class="blog-header mb-3">
                     <div class="blog-category-badge mb-2" :style="`background-color: ${post.color}20; color: ${post.color}`">
-                      <i class="bi bi-tag-fill me-1"></i>{{ post.category }}
+                      <Icon icon="mdi:tag" style="margin-right: 4px;" />{{ post.category }}
                     </div>
                     <h5 class="card-title fw-bold">{{ post.title }}</h5>
                   </div>
@@ -58,22 +58,22 @@
                   <div class="blog-footer d-flex justify-content-between align-items-center">
                     <div class="blog-meta">
                       <small class="text-muted">
-                        <i class="bi bi-calendar3 me-1"></i>{{ post.date }} · 
-                        <i class="bi bi-person me-1 ms-2"></i>{{ post.author }}
+                        <Icon icon="mdi:calendar" style="margin-right: 4px;" />{{ post.date }} · 
+                        <Icon icon="mdi:account" style="margin-left: 8px; margin-right: 4px;" />{{ post.author }}
                       </small>
                     </div>
                     <div class="blog-actions">
                       <RouterLink v-if="post.isEditable" :to="`/blog/edit/${post.originalId}`" class="btn btn-sm btn-outline-secondary me-2">
-                        <i class="bi bi-pencil"></i>
+                        <Icon icon="mdi:pencil" />
                         编辑
                       </RouterLink>
                       <button v-if="post.isDeletable" @click="handleDeletePost(post.originalId, post.title)" class="btn btn-sm btn-outline-danger me-2">
-                        <i class="bi bi-trash"></i>
+                        <Icon icon="mdi:delete" />
                         删除
                       </button>
                       <RouterLink :to="post.link" class="btn btn-sm btn-animate"
                          style="border: 1.5px solid var(--color-border); color: var(--color-text);">
-                        阅读全文 <i class="bi bi-arrow-right ms-1"></i>
+                        阅读全文 <Icon icon="mdi:arrow-right" style="margin-left: 4px;" />
                       </RouterLink>
                     </div>
                   </div>
@@ -82,7 +82,7 @@
 
               <!-- 无文章提示 -->
               <div v-if="allPosts.length === 0" class="no-posts">
-                <i class="bi bi-journal-x"></i>
+                <Icon icon="mdi:text-box-remove" />
                 <p>暂无文章</p>
               </div>
             </div>
@@ -98,6 +98,7 @@ import { ref, computed, onMounted } from 'vue'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'
 import { useAnimations } from '@/composables/useAnimations'
+import Icon from '@/components/Icon.vue'
 
 const { user, isAuthenticated } = useAuth()
 const { isVisible } = useAnimations()

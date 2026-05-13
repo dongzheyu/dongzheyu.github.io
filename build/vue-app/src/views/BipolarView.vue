@@ -8,7 +8,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">双相情感障碍自评测试</h1>
             <p class="test-hero-sub mb-2">心境障碍问卷（MDQ） · 13 道题 · 约 5 分钟</p>
@@ -94,7 +94,7 @@
         </div>
 
         <div class="important-notice mb-5">
-          <i class="bi bi-exclamation-triangle notice-icon"></i>
+          <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
             <p>MDQ 是筛查工具，不是诊断工具。双相情感障碍的诊断需要精神科医生通过详细的临床访谈和观察才能确定。如果你对这些症状感到担忧，请务必寻求专业评估。</p>
@@ -114,6 +114,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from '@/components/Icon.vue'
 
 const freqOptions = [
   { value: 0, label: '没有' },

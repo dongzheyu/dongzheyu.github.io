@@ -30,7 +30,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="emergency-card police-card">
               <div class="card-icon">
-                <i class="bi bi-telephone"></i>
+                <Icon icon="mdi:phone" />
               </div>
               <h3 class="card-title">报警电话</h3>
               <div class="phone-number">
@@ -49,7 +49,7 @@
                 </ul>
               </div>
               <button class="btn call-btn" @click="simulateCall('110')">
-                <i class="bi bi-telephone-outbound"></i> 模拟拨打
+                <Icon icon="mdi:phone-outgoing" /> 模拟拨打
               </button>
             </div>
           </div>
@@ -58,7 +58,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="emergency-card medical-card">
               <div class="card-icon">
-                <i class="bi bi-heart-pulse"></i>
+                <Icon icon="mdi:heart-pulse" />
               </div>
               <h3 class="card-title">急救电话</h3>
               <div class="phone-number">
@@ -77,7 +77,7 @@
                 </ul>
               </div>
               <button class="btn call-btn" @click="simulateCall('120')">
-                <i class="bi bi-telephone-outbound"></i> 模拟拨打
+                <Icon icon="mdi:phone-outgoing" /> 模拟拨打
               </button>
             </div>
           </div>
@@ -86,7 +86,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="emergency-card fire-card">
               <div class="card-icon">
-                <i class="bi bi-fire"></i>
+                <Icon icon="mdi:fire" />
               </div>
               <h3 class="card-title">火警电话</h3>
               <div class="phone-number">
@@ -105,7 +105,7 @@
                 </ul>
               </div>
               <button class="btn call-btn" @click="simulateCall('119')">
-                <i class="bi bi-telephone-outbound"></i> 模拟拨打
+                <Icon icon="mdi:phone-outgoing" /> 模拟拨打
               </button>
             </div>
           </div>
@@ -114,7 +114,7 @@
           <div class="col-12">
             <div class="emergency-table-card">
               <h3 class="table-section-title">
-                <i class="bi bi-grid-3x3-gap me-2"></i>完整报警电话速查
+                <Icon icon="mdi:view-grid" style="margin-right: 8px;" />完整报警电话速查
               </h3>
 
               <!-- 核心报警 -->
@@ -206,7 +206,7 @@
           <div class="col-lg-6">
             <div class="emergency-card mental-card">
               <div class="card-icon">
-                <i class="bi bi-heart"></i>
+                <Icon icon="mdi:heart" />
               </div>
               <h3 class="card-title">心理援助热线</h3>
               <div class="phone-number">
@@ -227,7 +227,7 @@
                 </div>
               </div>
               <button class="btn call-btn" @click="simulateCall('12320')">
-                <i class="bi bi-telephone-outbound"></i> 模拟拨打
+                <Icon icon="mdi:phone-outgoing" /> 模拟拨打
               </button>
             </div>
           </div>
@@ -236,7 +236,7 @@
           <div class="col-lg-6">
             <div class="emergency-card women-card">
               <div class="card-icon">
-                <i class="bi bi-person-heart"></i>
+                <Icon icon="mdi:account-heart" />
               </div>
               <h3 class="card-title">妇女儿童保护</h3>
               <div class="phone-number">
@@ -257,7 +257,7 @@
                 </div>
               </div>
               <button class="btn call-btn" @click="simulateCall('12338')">
-                <i class="bi bi-telephone-outbound"></i> 模拟拨打
+                <Icon icon="mdi:phone-outgoing" /> 模拟拨打
               </button>
             </div>
           </div>
@@ -276,7 +276,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                <i class="bi bi-heart-pulse me-3"></i> 心肺复苏（CPR）基本步骤
+                <Icon icon="mdi:heart-pulse" style="margin-right: 12px;" /> 心肺复苏（CPR）基本步骤
               </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show">
@@ -304,7 +304,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                <i class="bi bi-droplet me-3"></i> 外伤止血方法
+                <Icon icon="mdi:water" style="margin-right: 12px;" /> 外伤止血方法
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse">
@@ -337,7 +337,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                <i class="bi bi-fire me-3"></i> 火灾逃生要点
+                <Icon icon="mdi:fire" style="margin-right: 12px;" /> 火灾逃生要点
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse">
@@ -364,7 +364,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                <i class="bi bi-heart me-3"></i> 心理危机应对方法
+                <Icon icon="mdi:heart" style="margin-right: 12px;" /> 心理危机应对方法
               </button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse">
@@ -401,14 +401,14 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="notice-item">
-                  <i class="bi bi-exclamation-triangle"></i>
+                  <Icon icon="mdi:alert" />
                   <h5>紧急情况处理原则</h5>
                   <p>保持冷静 → 确保安全 → 寻求帮助 → 实施救助</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="notice-item">
-                  <i class="bi bi-shield-check"></i>
+                  <Icon icon="mdi:shield-check" />
                   <h5>求救信息要点</h5>
                   <p>地点准确 → 情况清楚 → 联系方式 → 保持通话</p>
                 </div>
@@ -426,6 +426,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import Icon from '@/components/Icon.vue'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 
 // 模拟拨打电话

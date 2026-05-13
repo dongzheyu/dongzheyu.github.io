@@ -13,7 +13,7 @@
           <h1 class="post-title">{{ postTitle }}</h1>
           <div class="post-meta">
             <span class="post-date" v-if="postDate">
-              <i class="bi bi-calendar"></i>
+              <Icon icon="mdi:calendar" />
               {{ postDate }}
             </span>
           </div>
@@ -26,7 +26,7 @@
 
         <footer class="post-footer">
           <RouterLink to="/blog" class="btn btn-outline-light">
-            <i class="bi bi-arrow-left"></i>
+            <Icon icon="mdi:arrow-left" />
             返回博客列表
           </RouterLink>
         </footer>
@@ -34,7 +34,7 @@
 
       <!-- 文章不存在 -->
       <div v-else class="not-found">
-        <i class="bi bi-file-text icon-large"></i>
+        <Icon icon="mdi:text-box-outline" class="icon-large" />
         <h2>文章不存在</h2>
         <p>该文章可能已被删除或移动</p>
         <RouterLink to="/blog" class="btn btn-primary btn-animate">
@@ -47,6 +47,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { useRoute } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import MarkdownRenderer from '@/components/MarkdownRenderer.vue'

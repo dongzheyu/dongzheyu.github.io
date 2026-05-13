@@ -4,21 +4,21 @@
       <div class="editor-header">
         <h1>{{ isEditing ? '编辑文章' : '发布新文章' }}</h1>
         <RouterLink to="/blog" class="btn btn-secondary">
-          <i class="bi bi-arrow-left"></i>
+          <Icon icon="mdi:arrow-left" />
           返回博客
         </RouterLink>
       </div>
 
       <!-- 错误提示 -->
       <div v-if="error" class="error-alert">
-        <i class="bi bi-exclamation-triangle"></i>
+        <Icon icon="mdi:alert" />
         {{ error }}
         <button @click="error = ''" class="close-btn">&times;</button>
       </div>
 
       <!-- 成功提示 -->
       <div v-if="successMessage" class="success-alert">
-        <i class="bi bi-check-circle"></i>
+        <Icon icon="mdi:check-circle" />
         {{ successMessage }}
       </div>
 
@@ -97,31 +97,31 @@
           <label for="content">文章内容 (Markdown) *</label>
           <div class="editor-toolbar">
             <button type="button" @click="insertMarkdown('**', '**')" title="粗体">
-              <i class="bi bi-type-bold"></i>
+              <Icon icon="mdi:format-bold" />
             </button>
             <button type="button" @click="insertMarkdown('*', '*')" title="斜体">
-              <i class="bi bi-type-italic"></i>
+              <Icon icon="mdi:format-italic" />
             </button>
             <button type="button" @click="insertMarkdown('# ', '')" title="标题">
-              <i class="bi bi-type-h1"></i>
+              <Icon icon="mdi:format-header-1" />
             </button>
             <button type="button" @click="insertMarkdown('- ', '')" title="列表">
-              <i class="bi bi-list-ul"></i>
+              <Icon icon="mdi:format-list-bulleted" />
             </button>
             <button type="button" @click="insertMarkdown('```\n', '\n```')" title="代码块">
-              <i class="bi bi-code-slash"></i>
+              <Icon icon="mdi:code-tags" />
             </button>
             <button type="button" @click="insertMarkdown('[', '](url)')" title="链接">
-              <i class="bi bi-link"></i>
+              <Icon icon="mdi:link" />
             </button>
             <button type="button" @click="insertMarkdown('![alt](', ')')" title="图片">
-              <i class="bi bi-image"></i>
+              <Icon icon="mdi:image" />
             </button>
             <button type="button" @click="insertMarkdown('> ', '')" title="引用">
-              <i class="bi bi-chat-quote"></i>
+              <Icon icon="mdi:format-quote-close" />
             </button>
             <button type="button" @click="handleImageUpload" title="上传图片">
-              <i class="bi bi-upload"></i>
+              <Icon icon="mdi:upload" />
             </button>
           </div>
           <textarea
@@ -141,7 +141,7 @@
           <div class="preview-container">
             <MarkdownRenderer v-if="form.content" :content="form.content" />
             <div v-else class="preview-empty">
-              <i class="bi bi-eye"></i>
+              <Icon icon="mdi:eye" />
               <p>在上方输入内容以查看预览</p>
             </div>
           </div>
@@ -184,6 +184,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'

@@ -2,16 +2,16 @@
   <div class="admin-page">
     <div class="container">
       <div class="admin-header">
-        <h1><i class="bi bi-shield-lock"></i> 管理员面板</h1>
+        <h1><Icon icon="mdi:shield-lock" /> 管理员面板</h1>
         <RouterLink to="/blog" class="btn btn-secondary">
-          <i class="bi bi-arrow-left"></i>
+          <Icon icon="mdi:arrow-left" />
           返回博客
         </RouterLink>
       </div>
 
       <!-- 权限检查 -->
       <div v-if="!isAdmin" class="access-denied">
-        <i class="bi bi-exclamation-triangle"></i>
+        <Icon icon="mdi:alert" />
         <h2>访问被拒绝</h2>
         <p>您没有管理员权限</p>
         <RouterLink to="/" class="btn btn-primary">返回首页</RouterLink>
@@ -22,21 +22,21 @@
         <!-- 统计卡片 -->
         <div class="stats-grid">
           <div class="stat-card">
-            <i class="bi bi-people"></i>
+            <Icon icon="mdi:account-group" />
             <div class="stat-info">
               <h3>{{ stats.totalUsers }}</h3>
               <p>总用户数</p>
             </div>
           </div>
           <div class="stat-card">
-            <i class="bi bi-file-text"></i>
+            <Icon icon="mdi:text-box-outline" />
             <div class="stat-info">
               <h3>{{ stats.totalPosts }}</h3>
               <p>文章总数</p>
             </div>
           </div>
           <div class="stat-card">
-            <i class="bi bi-chat"></i>
+            <Icon icon="mdi:comment" />
             <div class="stat-info">
               <h3>{{ stats.totalComments }}</h3>
               <p>评论总数</p>
@@ -50,19 +50,19 @@
             :class="['tab-btn', { active: activeTab === 'users' }]"
             @click="activeTab = 'users'"
           >
-            <i class="bi bi-people"></i> 用户管理
+            <Icon icon="mdi:account-group" /> 用户管理
           </button>
           <button 
             :class="['tab-btn', { active: activeTab === 'posts' }]"
             @click="activeTab = 'posts'"
           >
-            <i class="bi bi-file-text"></i> 文章管理
+            <Icon icon="mdi:text-box-outline" /> 文章管理
           </button>
           <button 
             :class="['tab-btn', { active: activeTab === 'comments' }]"
             @click="activeTab = 'comments'"
           >
-            <i class="bi bi-chat"></i> 评论管理
+            <Icon icon="mdi:comment" /> 评论管理
           </button>
         </div>
 
@@ -111,7 +111,7 @@
                         class="btn-action btn-view"
                         title="查看资料"
                       >
-                        <i class="bi bi-eye"></i>
+                        <Icon icon="mdi:eye" />
                       </button>
                       <button 
                         v-if="profile.id !== user?.id && !profile.banned"
@@ -119,7 +119,7 @@
                         class="btn-action btn-ban"
                         title="封禁用户"
                       >
-                        <i class="bi bi-slash-circle"></i>
+                        <Icon icon="mdi:cancel" />
                       </button>
                       <button 
                         v-if="profile.id !== user?.id && profile.banned"
@@ -127,7 +127,7 @@
                         class="btn-action btn-unban"
                         title="解封用户"
                       >
-                        <i class="bi bi-check-circle"></i>
+                        <Icon icon="mdi:check-circle" />
                       </button>
                       <button 
                         v-if="profile.id !== user?.id"
@@ -135,10 +135,10 @@
                         class="btn-action btn-delete"
                         title="删除用户"
                       >
-                        <i class="bi bi-trash"></i>
+                        <Icon icon="mdi:delete" />
                       </button>
                       <span v-else class="text-muted" style="font-size: 0.85rem;">
-                        <i class="bi bi-person-check"></i> 当前用户
+                        <Icon icon="mdi:account-check" /> 当前用户
                       </span>
                     </div>
                   </td>
@@ -200,7 +200,7 @@
                       class="btn-action btn-edit"
                       title="编辑"
                     >
-                      <i class="bi bi-pencil"></i>
+                      <Icon icon="mdi:pencil" />
                     </button>
                     <button 
                       v-if="post.author_id !== user?.id"
@@ -208,10 +208,10 @@
                       class="btn-action btn-delete"
                       title="删除"
                     >
-                      <i class="bi bi-trash"></i>
+                      <Icon icon="mdi:delete" />
                     </button>
                     <span v-if="post.author_id === user?.id" class="text-muted" style="font-size: 0.85rem;">
-                      <i class="bi bi-lock"></i> 自己的文章
+                      <Icon icon="mdi:lock" /> 自己的文章
                     </span>
                   </td>
                 </tr>
@@ -261,10 +261,10 @@
                       class="btn-action btn-delete"
                       title="删除"
                     >
-                      <i class="bi bi-trash"></i>
+                      <Icon icon="mdi:delete" />
                     </button>
                     <span v-else class="text-muted" style="font-size: 0.85rem;">
-                      <i class="bi bi-lock"></i> 自己的评论
+                      <Icon icon="mdi:lock" /> 自己的评论
                     </span>
                   </td>
                 </tr>
@@ -279,6 +279,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
+import Icon from '@/components/Icon.vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import { useAdmin } from '@/composables/useAdmin'

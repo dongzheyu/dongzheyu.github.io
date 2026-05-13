@@ -14,7 +14,7 @@
           </div>
           <div class="col-lg-4">
             <div class="hero-illustration animate-float" :class="{ 'visible': isVisible }" style="animation-delay: 0.3s">
-              <i class="bi bi-folder-fill display-1" style="color: var(--color-primary); opacity: 0.3;"></i>
+              <Icon icon="mdi:folder" size="64" style="color: var(--color-primary); opacity: 0.3;" />
             </div>
           </div>
         </div>

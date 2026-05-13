@@ -8,7 +8,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">注意力缺陷多动障碍（ADHD）自评测试</h1>
             <p class="test-hero-sub mb-2">成人 ADHD 自评量表（ASRS-v1.1） · 18 道题 · 约 5 分钟</p>
@@ -67,7 +67,7 @@
           <h3 class="review-title">症状维度分析</h3>
           <div class="dimension-grid">
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-lightbulb-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:lightbulb-on" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">注意缺陷</h4>
                 <p class="dim-score">{{ inattentionScore }} / 36</p>
@@ -75,7 +75,7 @@
               </div>
             </div>
             <div class="dim-card">
-              <div class="dim-icon"><i class="bi bi-lightning-fill"></i></div>
+              <div class="dim-icon"><Icon icon="mdi:lightning-bolt" /></div>
               <div class="dim-content">
                 <h4 class="dim-title">多动冲动</h4>
                 <p class="dim-score">{{ hyperactivityScore }} / 36</p>
@@ -102,7 +102,7 @@
         </div>
 
         <div class="important-notice mb-5">
-          <i class="bi bi-exclamation-triangle notice-icon"></i>
+          <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
             <p>ASRS 是筛查工具，不能替代专业诊断。ADHD 是一种神经发育障碍，通过药物治疗、行为治疗和技能训练通常能够显著改善功能。如果你怀疑自己可能有 ADHD，建议寻求专业的神经精神科评估。</p>
@@ -122,6 +122,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from '@/components/Icon.vue'
 
 const freqOptions = [
   { value: 0, label: '从不' },

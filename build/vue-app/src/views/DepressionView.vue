@@ -9,7 +9,7 @@
         <div class="row align-items-center">
           <div class="col-lg-8" style="padding-left: 5%;">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <i class="bi bi-arrow-left"></i> 返回评估列表
+              <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">抑郁症自评测试</h1>
             <p class="test-hero-sub mb-2">PHQ-9 患者健康问卷 · 9 道题 · 约 5 分钟</p>
@@ -127,7 +127,7 @@
 
         <!-- 重要免责声明 -->
         <div class="important-notice mb-5">
-          <i class="bi bi-exclamation-triangle notice-icon"></i>
+          <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
             <p>PHQ-9 是筛查工具，不是诊断工具。测试结果不能替代精神科医生或心理咨询师的专业评估。如果你对自己的心理健康状况感到担忧，请务必寻求专业帮助。如果你有伤害自己的想法，请立即拨打危机热线或前往最近的急诊室。</p>
@@ -147,6 +147,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
+import Icon from '@/components/Icon.vue'
 
 const freqOptions = [
   { value: 0, label: '完全没有' },
