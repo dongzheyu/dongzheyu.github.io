@@ -28,72 +28,152 @@ const renderedHtml = computed(() => {
 .markdown-content {
   line-height: 1.8;
   color: var(--color-text);
+  font-size: 1rem;
 }
 
-/* 标题样式 */
+/* 标题样式 - 添加渐变和动画 */
 .markdown-content :deep(h1) {
-  font-size: 2rem;
-  margin: 2rem 0 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--color-primary);
-  color: var(--color-text);
+  font-size: 2.25rem;
+  margin: 2.5rem 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--color-primary), transparent) 1;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .markdown-content :deep(h2) {
-  font-size: 1.75rem;
-  margin: 1.75rem 0 1rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.875rem;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 140, 66, 0.3);
   color: var(--color-text);
+  font-weight: 700;
+  position: relative;
+}
+
+.markdown-content :deep(h2)::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: var(--color-primary);
+  border-radius: 2px;
 }
 
 .markdown-content :deep(h3) {
   font-size: 1.5rem;
-  margin: 1.5rem 0 0.75rem;
+  margin: 1.75rem 0 0.875rem;
   color: var(--color-text);
+  font-weight: 600;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--color-primary);
 }
 
 .markdown-content :deep(h4) {
   font-size: 1.25rem;
-  margin: 1.25rem 0 0.5rem;
+  margin: 1.5rem 0 0.75rem;
   color: var(--color-text);
+  font-weight: 600;
 }
 
-/* 段落 */
+.markdown-content :deep(h5) {
+  font-size: 1.125rem;
+  margin: 1.25rem 0 0.625rem;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.markdown-content :deep(h6) {
+  font-size: 1rem;
+  margin: 1rem 0 0.5rem;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 段落 - 优化间距 */
 .markdown-content :deep(p) {
-  margin: 1rem 0;
-  line-height: 1.8;
+  margin: 1.25rem 0;
+  line-height: 1.9;
+  text-align: justify;
 }
 
-/* 链接 */
+/* 链接 - 添加下划线动画 */
 .markdown-content :deep(a) {
   color: var(--color-primary);
   text-decoration: none;
-  transition: color 0.3s ease;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.markdown-content :deep(a)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
 }
 
 .markdown-content :deep(a:hover) {
   color: var(--color-primary-light);
-  text-decoration: underline;
 }
 
-/* 代码块 */
+.markdown-content :deep(a:hover)::after {
+  width: 100%;
+}
+
+/* 行内代码 - 添加光晕效果 */
 .markdown-content :deep(code) {
-  background: rgba(255, 140, 66, 0.1);
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: 'Consolas', 'Monaco', monospace;
-  font-size: 0.9em;
+  background: linear-gradient(135deg, rgba(255, 140, 66, 0.15) 0%, rgba(255, 140, 66, 0.08) 100%);
+  padding: 0.25em 0.5em;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.875em;
   color: var(--color-primary);
+  border: 1px solid rgba(255, 140, 66, 0.2);
+  box-shadow: 0 2px 4px rgba(255, 140, 66, 0.1);
+  transition: all 0.2s ease;
 }
 
+.markdown-content :deep(code:hover) {
+  background: linear-gradient(135deg, rgba(255, 140, 66, 0.2) 0%, rgba(255, 140, 66, 0.12) 100%);
+  box-shadow: 0 3px 6px rgba(255, 140, 66, 0.15);
+}
+
+/* 代码块 - 现代化设计 */
 .markdown-content :deep(pre) {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 1.5rem;
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%);
+  padding: 1.75rem;
+  border-radius: 12px;
   overflow-x: auto;
-  margin: 1.5rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+  border: 1px solid rgba(255, 140, 66, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.markdown-content :deep(pre)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
+  border-radius: 12px 12px 0 0;
 }
 
 .markdown-content :deep(pre code) {
@@ -101,86 +181,147 @@ const renderedHtml = computed(() => {
   padding: 0;
   color: var(--color-text);
   font-size: 0.9rem;
-  line-height: 1.6;
+  line-height: 1.7;
+  border: none;
+  box-shadow: none;
 }
 
-/* 列表 */
+/* 列表 - 自定义标记 */
 .markdown-content :deep(ul),
 .markdown-content :deep(ol) {
-  margin: 1rem 0;
+  margin: 1.25rem 0;
   padding-left: 2rem;
 }
 
 .markdown-content :deep(li) {
-  margin: 0.5rem 0;
-  line-height: 1.8;
+  margin: 0.625rem 0;
+  line-height: 1.9;
+  position: relative;
 }
 
 .markdown-content :deep(ul li) {
-  list-style-type: disc;
+  list-style: none;
+  position: relative;
+}
+
+.markdown-content :deep(ul li)::before {
+  content: '▸';
+  position: absolute;
+  left: -1.5rem;
+  color: var(--color-primary);
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.markdown-content :deep(ul li:hover)::before {
+  transform: translateX(4px);
 }
 
 .markdown-content :deep(ol li) {
   list-style-type: decimal;
+  padding-left: 0.5rem;
 }
 
-/* 引用块 */
+.markdown-content :deep(ol li::marker) {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* 引用块 - 增强视觉效果 */
 .markdown-content :deep(blockquote) {
-  border-left: 4px solid var(--color-primary);
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  background: rgba(255, 140, 66, 0.05);
-  border-radius: 0 8px 8px 0;
+  border-left: 4px solid transparent;
+  border-image: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)) 1;
+  padding: 1.25rem 1.75rem;
+  margin: 2rem 0;
+  background: linear-gradient(135deg, rgba(255, 140, 66, 0.08) 0%, rgba(255, 140, 66, 0.03) 100%);
+  border-radius: 0 12px 12px 0;
   color: var(--color-text-secondary);
+  position: relative;
+  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.08);
+}
+
+.markdown-content :deep(blockquote)::before {
+  content: '"';
+  position: absolute;
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 4rem;
+  color: var(--color-primary);
+  opacity: 0.2;
+  font-family: Georgia, serif;
+  line-height: 1;
 }
 
 .markdown-content :deep(blockquote p) {
   margin: 0.5rem 0;
+  position: relative;
+  z-index: 1;
 }
 
-/* 图片 */
+/* 图片 - 添加悬停效果 */
 .markdown-content :deep(img) {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  margin: 1.5rem 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  margin: 2rem 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 表格 */
+.markdown-content :deep(img:hover) {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  border-color: var(--color-primary);
+}
+
+/* 表格 - 现代化设计 */
 .markdown-content :deep(table) {
   width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .markdown-content :deep(th) {
-  background: rgba(255, 140, 66, 0.15);
-  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, rgba(255, 140, 66, 0.2) 0%, rgba(255, 140, 66, 0.1) 100%);
+  padding: 1rem 1.25rem;
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 140, 66, 0.3);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
 }
 
 .markdown-content :deep(td) {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   color: var(--color-text);
+  transition: background 0.2s ease;
 }
 
-.markdown-content :deep(tr:hover) {
-  background: rgba(255, 255, 255, 0.03);
+.markdown-content :deep(tr:last-child td) {
+  border-bottom: none;
 }
 
-/* 分隔线 */
+.markdown-content :deep(tr:hover td) {
+  background: rgba(255, 140, 66, 0.05);
+}
+
+/* 分隔线 - 渐变效果 */
 .markdown-content :deep(hr) {
   border: none;
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
-  margin: 2rem 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  margin: 3rem 0;
+  opacity: 0.5;
 }
 
 /* 任务列表 */
