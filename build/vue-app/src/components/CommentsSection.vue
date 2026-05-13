@@ -1,13 +1,13 @@
 <template>
   <div class="comments-section">
     <h3 class="comments-title">
-      <i class="bi bi-chat-left-text"></i>
+      <Icon icon="mdi:comment-text-outline" />
       评论 ({{ comments.length }})
     </h3>
 
     <!-- 未登录提示 -->
     <div v-if="!isAuthenticated" class="login-prompt">
-      <i class="bi bi-lock"></i>
+      <Icon icon="mdi:lock" />
       <p>请登录后发表评论</p>
       <RouterLink to="/auth" class="btn btn-primary btn-animate">
         去登录
@@ -23,7 +23,7 @@
           alt="头像" 
           class="avatar-small"
         />
-        <i v-else class="bi bi-person-circle avatar-small"></i>
+        <Icon v-else icon="mdi:account-circle" class="avatar-small" />
         <span class="username">{{ currentUserProfile?.nickname || '用户' }}</span>
       </div>
       <textarea
@@ -52,7 +52,7 @@
     </div>
 
     <div v-else-if="comments.length === 0" class="no-comments">
-      <i class="bi bi-chat-square-quote"></i>
+      <Icon icon="mdi:comment-quote" />
       <p>暂无评论，来发表第一条评论吧！</p>
     </div>
 
@@ -70,7 +70,7 @@
               alt="头像" 
               class="avatar-small"
             />
-            <i v-else class="bi bi-person-circle avatar-small"></i>
+            <Icon v-else icon="mdi:account-circle" class="avatar-small" />
             <RouterLink 
               :to="`/user/${comment.user_id}`" 
               class="comment-username"
@@ -86,7 +86,7 @@
               class="delete-btn"
               title="删除评论"
             >
-              <i class="bi bi-trash"></i>
+              <Icon icon="mdi:delete" />
             </button>
           </div>
         </div>
@@ -102,6 +102,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'
+import Icon from './Icon.vue'
 
 const props = defineProps<{
   postSlug: string
@@ -411,7 +412,7 @@ function formatDate(dateString: string) {
   color: var(--color-text-secondary);
 }
 
-.no-comments i {
+.no-comments :deep(.iconify) {
   font-size: 3rem;
   margin-bottom: 1rem;
   opacity: 0.5;

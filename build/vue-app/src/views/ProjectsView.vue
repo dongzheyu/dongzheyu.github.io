@@ -31,7 +31,7 @@
                  :style="`animation-delay: ${index * 0.1}s`">
               <div class="card-body p-4">
                 <div class="project-icon mb-3" :style="`background-color: ${project.color}18; color: ${project.color}`">
-                  <i class="bi bi-code-slash fs-2"></i>
+                  <Icon icon="mdi:code-tags" size="32" />
                 </div>
                 <h5 class="card-title fw-bold mb-3">{{ project.title }}</h5>
                 <p class="card-text text-muted mb-4">{{ project.description }}</p>
@@ -41,7 +41,7 @@
                   </span>
                   <RouterLink :to="project.link" class="btn btn-animate btn-sm"
                      :style="`border: 1.5px solid ${project.color}40; color: ${project.color}`">
-                    查看详情 <i class="bi bi-arrow-right ms-1"></i>
+                    查看详情 <Icon icon="mdi:arrow-right" size="16" style="margin-left: 4px;" />
                   </RouterLink>
                 </div>
               </div>
@@ -56,6 +56,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAnimations } from '@/composables/useAnimations'
+import Icon from '@/components/Icon.vue'
 
 const { isVisible } = useAnimations()
 

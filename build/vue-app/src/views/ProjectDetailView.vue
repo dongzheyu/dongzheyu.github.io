@@ -20,7 +20,7 @@
 
         <footer class="project-footer">
           <RouterLink to="/projects" class="btn btn-outline-light">
-            <i class="bi bi-arrow-left"></i>
+            <Icon icon="mdi:arrow-left" size="16" style="margin-right: 4px;" />
             返回项目列表
           </RouterLink>
         </footer>
@@ -28,7 +28,7 @@
 
       <!-- 项目不存在 -->
       <div v-else class="not-found">
-        <i class="bi bi-folder-x icon-large"></i>
+        <Icon icon="mdi:folder-remove" size="64" class="icon-large" />
         <h2>项目不存在</h2>
         <p>该项目可能已被删除或移动</p>
         <RouterLink to="/projects" class="btn btn-primary btn-animate">
@@ -44,6 +44,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 import CommentsSection from '@/components/CommentsSection.vue'
+import Icon from '@/components/Icon.vue'
 
 const route = useRoute()
 const loading = ref(true)
@@ -176,7 +177,6 @@ function parseFrontMatter(content: string) {
 }
 
 .icon-large {
-  font-size: 4rem;
   color: var(--color-text-secondary);
   opacity: 0.3;
   margin-bottom: 1.5rem;
