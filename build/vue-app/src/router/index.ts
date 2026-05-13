@@ -16,6 +16,11 @@ const router = createRouter({
       component: () => import(/* webpackPrefetch: true */ '../views/ProjectsView.vue'),
     },
     {
+      path: '/project/:slug',
+      name: 'project-detail',
+      component: () => import('../views/ProjectDetailView.vue'),
+    },
+    {
       path: '/blog',
       name: 'blog',
       component: () => import(/* webpackPrefetch: true */ '../views/BlogView.vue'),

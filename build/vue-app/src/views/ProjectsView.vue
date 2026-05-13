@@ -39,10 +39,10 @@
                   <span class="badge px-3 py-2" :style="`background-color: ${project.color}18; color: ${project.color}`">
                     {{ project.category }}
                   </span>
-                  <a :href="project.link" class="btn btn-animate btn-sm" target="_blank"
+                  <RouterLink :to="project.link" class="btn btn-animate btn-sm"
                      :style="`border: 1.5px solid ${project.color}40; color: ${project.color}`">
                     查看详情 <i class="bi bi-arrow-right ms-1"></i>
-                  </a>
+                  </RouterLink>
                 </div>
               </div>
             </div>
@@ -65,7 +65,7 @@ const projects = ref([
     "title": "SniShaper",
     "description": "基于 Go + Wails v3 的智能网络代理工具，集成 ECH 注入、TLS-RF 分片、QUIC 重建连接等先进技术",
     "category": "网络",
-    "link": "/project/snishaper.html",
+    "link": "/project/snishaper",
     "color": "#00ADD8"
   },
   {
@@ -73,7 +73,7 @@ const projects = ref([
     "title": "English Listen WinUI",
     "description": "现代化英语听写训练工具，基于WinUI 3 + C# + C++混合开发，MVVM架构，Mica材质，百度翻译集成",
     "category": "教育",
-    "link": "/project/english-listen-winui.html",
+    "link": "/project/english-listen-winui",
     "color": "#f48c06"
   },
   {
@@ -81,7 +81,7 @@ const projects = ref([
     "title": "English-Listen",
     "description": "专业英语听写训练工具，基于C++和Qt6开发的现代化听写软件",
     "category": "教育",
-    "link": "/project/english-listen.html",
+    "link": "/project/english-listen",
     "color": "#52b788"
   }
 ])
