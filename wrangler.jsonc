@@ -6,7 +6,19 @@
     "enabled": true
   },
   "assets": {
-    "directory": "./build/vue-app/dist"
+    "directory": ".",
+    "exclude": [
+      "node_modules/**",
+      "**/node_modules/**",
+      "supabase.exe",
+      "**/supabase.exe",
+      "**/supabase/bin/supabase",
+      "*.exe",
+      ".idea/**",
+      ".vscode/**",
+      ".git/**",
+      "supabase/.temp/**"
+    ]
   },
   "compatibility_flags": [
     "nodejs_compat"
