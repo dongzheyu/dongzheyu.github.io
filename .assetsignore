@@ -1,0 +1,14 @@
+# Assets ignore file for Wrangler 4.x
+# Exclude large files from Cloudflare Pages deployment
+
+node_modules
+**/node_modules
+*.exe
+supabase.exe
+**/supabase.exe
+supabase/bin
+**/supabase/bin
+.idea
+.vscode
+.git
+supabase/.temp

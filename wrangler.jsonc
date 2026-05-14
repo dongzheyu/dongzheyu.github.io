@@ -8,6 +8,17 @@
   "assets": {
     "directory": "."
   },
+  "build": {
+    "upload": {
+      "exclude": [
+        "node_modules/**/*",
+        "**/node_modules/**/*",
+        "supabase/bin/supabase",
+        "**/supabase/bin/supabase",
+        "*.exe"
+      ]
+    }
+  },
   "compatibility_flags": [
     "nodejs_compat"
   ]
