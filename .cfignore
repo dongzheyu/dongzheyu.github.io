@@ -1,0 +1,40 @@
+# Cloudflare Pages 忽略文件
+# 防止大文件被上传到 CDN
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# Supabase 可执行文件
+supabase.exe
+**/supabase.exe
+supabase/bin/supabase
+**/supabase/bin/supabase
+
+# 所有可执行文件
+*.exe
+
+# IDE 配置
+.idea/
+.vscode/
+
+# Git
+.git/
+
+# 源代码（只需要 dist 输出）
+src/
+scripts/
+
+# Markdown 文档
+*.md
+
+# 数据库脚本
+*.sql
+
+# 大型资源文件（这些应该在 public 中通过构建处理）
+*.ttf
+*.jpg
+*.png
+
+# 临时文件
+supabase/.temp/
