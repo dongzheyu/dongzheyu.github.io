@@ -6,19 +6,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": ".",
-    "exclude": [
-      "node_modules/**",
-      "**/node_modules/**",
-      "supabase.exe",
-      "**/supabase.exe",
-      "**/supabase/bin/supabase",
-      "*.exe",
-      ".idea/**",
-      ".vscode/**",
-      ".git/**",
-      "supabase/.temp/**"
-    ]
+    "directory": "."
   },
   "compatibility_flags": [
     "nodejs_compat"
