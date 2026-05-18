@@ -39,7 +39,7 @@
                   <span class="badge px-3 py-2" :style="`background-color: ${project.color}18; color: ${project.color}`">
                     {{ project.category }}
                   </span>
-                  <a v-if="project.external" :href="project.link" target="_blank" class="btn btn-animate btn-sm"
+                  <a v-if="project.external" :href="project.link" target="_blank" rel="noopener noreferrer" class="btn btn-animate btn-sm"
                      :style="`border: 1.5px solid ${project.color}40; color: ${project.color}`">
                     查看详情 <Icon icon="mdi:arrow-right" size="16" style="margin-left: 4px;" />
                   </a>

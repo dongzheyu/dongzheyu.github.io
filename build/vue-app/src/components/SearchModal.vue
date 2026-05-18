@@ -117,8 +117,9 @@ const handleSearch = () => {
 }
 
 const navigateTo = (result: any) => {
-  if (result.path.startsWith('http')) {
-    window.open(result.path, '_blank')
+  // 外部链接或 HTML 文件直接使用 window.open
+  if (result.path.startsWith('http') || result.path.endsWith('.html')) {
+    window.open(result.path, '_blank', 'noopener,noreferrer')
   } else {
     router.push(result.path)
   }
