@@ -28,3 +28,6 @@ build\vue-app\.workbuddy
 
 #Other
 复制构建产物.bat
+
+# SniShaperWeb 独立仓库（避免被识别为子模块）
+build/vue-app/snishaperweb/
