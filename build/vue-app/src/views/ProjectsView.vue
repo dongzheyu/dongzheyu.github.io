@@ -70,7 +70,7 @@ const projects = ref([
     "title": "SniShaper",
     "description": "基于 Go + Wails v3 的智能网络代理工具，集成 ECH 注入、TLS-RF 分片、QUIC 重建连接等先进技术",
     "category": "网络",
-    "link": "/SnishaperWeb/index.html",
+    "link": "SnishaperWeb/index.html",
     "external": true,
     "color": "#00ADD8"
   },
