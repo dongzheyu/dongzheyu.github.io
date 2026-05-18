@@ -39,7 +39,11 @@
                   <span class="badge px-3 py-2" :style="`background-color: ${project.color}18; color: ${project.color}`">
                     {{ project.category }}
                   </span>
-                  <RouterLink :to="project.link" class="btn btn-animate btn-sm"
+                  <a v-if="project.external" :href="project.link" target="_blank" class="btn btn-animate btn-sm"
+                     :style="`border: 1.5px solid ${project.color}40; color: ${project.color}`">
+                    查看详情 <Icon icon="mdi:arrow-right" size="16" style="margin-left: 4px;" />
+                  </a>
+                  <RouterLink v-else :to="project.link" class="btn btn-animate btn-sm"
                      :style="`border: 1.5px solid ${project.color}40; color: ${project.color}`">
                     查看详情 <Icon icon="mdi:arrow-right" size="16" style="margin-left: 4px;" />
                   </RouterLink>
@@ -66,7 +70,8 @@ const projects = ref([
     "title": "SniShaper",
     "description": "基于 Go + Wails v3 的智能网络代理工具，集成 ECH 注入、TLS-RF 分片、QUIC 重建连接等先进技术",
     "category": "网络",
-    "link": "/project/snishaper",
+    "link": "/SnishaperWeb/index.html",
+    "external": true,
     "color": "#00ADD8"
   },
   {

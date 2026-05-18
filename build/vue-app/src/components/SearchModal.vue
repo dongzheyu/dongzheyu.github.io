@@ -73,7 +73,7 @@ const searchInput = ref<HTMLInputElement | null>(null)
 
 // 搜索数据源
 const searchData = [
-  { id: 1, title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '网络工具', icon: 'mdi:shield-check', color: '#00ADD8', path: '/project/snishaper' },
+  { id: 1, title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '网络工具', icon: 'mdi:shield-check', color: '#00ADD8', path: '/SnishaperWeb/index.html' },
   { id: 2, title: 'English Listen WinUI', description: '现代化英语听写训练工具，WinUI 3 + C# + C++混合开发', category: '教育软件', icon: 'mdi:headphones', color: '#f48c06', path: '/project/english-listen-winui' },
   { id: 3, title: 'English-Listen', description: '专业英语听写训练工具，基于C++和Qt6开发', category: '教育软件', icon: 'mdi:book-open-page-variant', color: '#52b788', path: '/project/english-listen' },
   { id: 4, title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理评估', icon: 'mdi:account-badge', color: '#ff6b35', path: '/tests/mbti' },

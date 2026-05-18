@@ -33,6 +33,12 @@ function copyRecursive(src, dest) {
     const entries = fs.readdirSync(src)
     
     for (const entry of entries) {
+      // 排除 node_modules 目录
+      if (entry === 'node_modules') {
+        console.log(`  ⊘ 跳过: ${path.relative(srcDir, path.join(src, entry))}`)
+        continue
+      }
+      
       const srcPath = path.join(src, entry)
       const destPath = path.join(dest, entry)
       copyRecursive(srcPath, destPath)

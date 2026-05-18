@@ -336,13 +336,13 @@ const handleSignOut = async () => {
           <div class="col-md-6 text-md-end mt-3 mt-md-0">
             <div class="mb-3">
               <a href="https://github.com/dongzheyu" class="me-3" target="_blank">
-                <Icon icon="mdi:github" />
+                <Icon icon="mdi:github" style="font-size: 24px;" />
               </a>
               <a href="https://gitee.com/jetcpp" class="me-3" target="_blank">
-                <Icon icon="mdi:git" />
+                <Icon icon="mdi:git" style="font-size: 24px;" />
               </a>
               <a href="https://space.bilibili.com/3546730880567808" target="_blank">
-                <Icon icon="mdi:youtube" />
+                <Icon icon="mdi:youtube" style="font-size: 24px;" />
               </a>
             </div>
             <p class="text-muted mb-0">&copy; 2026 JetCPP. All rights reserved.</p>

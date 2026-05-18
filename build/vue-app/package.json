@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/clean-public.js",
     "build": "vite build && npm run deploy",
     "deploy": "node scripts/deploy.js",
     "preview": "vite preview",
