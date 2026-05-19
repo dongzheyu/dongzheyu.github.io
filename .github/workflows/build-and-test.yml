@@ -98,7 +98,7 @@ jobs:
           echo "assets directory: $(stat -c '%y' assets 2>/dev/null || stat -f '%Sm' assets)"
 
       - name: Commit and push changes
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-24.04'
         run: |
           git config --local user.email "youmao2023@outlook.com"
           git config --local user.name "dongle"
