@@ -10,8 +10,8 @@
     var search = window.location.search;  // e.g. "?foo=bar"
     var hash = window.location.hash;      // e.g. "#section"
     
-    // 构建正确的 hash 路由 URL: /#/path
-    var newUrl = '/#' + path + search + hash;
+    // 构建正确的 History 路由 URL: /path
+    var newUrl = path + search + hash;
     
     // 跳转到正确的 URL
     window.location.replace(newUrl);
@@ -20,7 +20,7 @@
 <body>
   <p style="text-align: center; padding: 50px; font-family: sans-serif;">
     正在跳转...<br>
-    如果页面没有自动跳转，<a href="/#/">点击这里</a>返回首页
+    如果页面没有自动跳转，<a href="/">点击这里</a>返回首页
   </p>
 </body>
 </html>

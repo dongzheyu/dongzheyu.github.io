@@ -40,12 +40,12 @@ const success = ref(false)
 
 onMounted(async () => {
   try {
-    // 从 URL 哈希中获取参数
-    const hashParams = new URLSearchParams(window.location.hash.substring(1))
+    // 从 URL 查询参数中获取参数
+    const urlParams = new URLSearchParams(window.location.search)
     
-    const accessToken = hashParams.get('access_token')
-    const refreshToken = hashParams.get('refresh_token')
-    const type = hashParams.get('type')
+    const accessToken = urlParams.get('access_token')
+    const refreshToken = urlParams.get('refresh_token')
+    const type = urlParams.get('type')
 
     if (!accessToken) {
       throw new Error('缺少访问令牌')
