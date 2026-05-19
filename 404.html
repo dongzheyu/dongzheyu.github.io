@@ -3,34 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
+  <title>Loading...</title>
   <script>
-<<<<<<< HEAD
-    // 在 History 模式下，如果访问了不存在的路径，直接重定向到首页
-    // 让 Vue Router 处理后续的 404 显示
-    window.location.replace('/');
-=======
-    // 获取当前路径
-    var path = window.location.pathname;  // e.g. "/about" or "/projects"
-    var search = window.location.search;  // e.g. "?foo=bar"
-    var hash = window.location.hash;      // e.g. "#section"
+    // 获取当前路径，例如 /projects
+    var path = window.location.pathname;
+    var search = window.location.search;
+    var hash = window.location.hash;
     
-    // 构建正确的 hash 路由 URL: /#/path
-    var newUrl = '/#' + path + search + hash;
-    
-    // 跳转到正确的 URL
-    window.location.replace(newUrl);
->>>>>>> 5cf500f (ci: auto-build and deploy [skip ci])
+    // 直接跳转到根路径，让 Vue Router 处理后续逻辑
+    // 使用 replace 避免在历史记录中留下这个 404 页面
+    window.location.replace('/' + path.substring(1) + search + hash);
   </script>
 </head>
 <body>
   <p style="text-align: center; padding: 50px; font-family: sans-serif;">
-    正在跳转...<br>
-<<<<<<< HEAD
-    如果页面没有自动跳转，<a href="/">点击这里</a>返回首页
-=======
-    如果页面没有自动跳转，<a href="/#/">点击这里</a>返回首页
->>>>>>> 5cf500f (ci: auto-build and deploy [skip ci])
+    Loading application...
   </p>
 </body>
 </html>
