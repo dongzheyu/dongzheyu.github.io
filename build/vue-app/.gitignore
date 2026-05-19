@@ -10,7 +10,6 @@ lerna-debug.log*
 node_modules
 SniShaperWeb/build/node_modules
 public/snishaper/build/node_modules
-public/SnishaperWeb/assets
 .DS_Store
 dist
 dist-ssr
