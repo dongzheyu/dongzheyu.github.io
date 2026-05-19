@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
-  <script>
-    // 获取当前路径
-    var path = window.location.pathname;  // e.g. "/about" or "/projects"
-    var search = window.location.search;  // e.g. "?foo=bar"
-    var hash = window.location.hash;      // e.g. "#section"
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff8c42" />
+    <meta name="description" content="dongle - 代码重塑世界 · 创新驱动未来" />
+    <title>dongle</title>
     
-    // 构建正确的 hash 路由 URL: /#/path
-    var newUrl = '/#' + path + search + hash;
+    <!-- DNS 预取 - 加速外部资源加载 -->
+    <link rel="dns-prefetch" href="https://github.com">
+    <link rel="dns-prefetch" href="https://gitee.com">
+    <link rel="dns-prefetch" href="https://space.bilibili.com">
     
-    // 跳转到正确的 URL
-    window.location.replace(newUrl);
-  </script>
-</head>
-<body>
-  <p style="text-align: center; padding: 50px; font-family: sans-serif;">
-    正在跳转...<br>
-    如果页面没有自动跳转，<a href="/#/">点击这里</a>返回首页
-  </p>
-</body>
+    <!-- 预连接 - 提前建立连接 -->
+    <link rel="preconnect" href="https://github.com">
+    <link rel="preconnect" href="https://gitee.com">
+
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="/logo.png" as="image">
+    <script type="module" crossorigin src="/assets/index-BJL1YXMm.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-cYrLTzkK.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CnYUwNcv.js">
+    <link rel="stylesheet" crossorigin href="/assets/vendor-D_9LnJ1d.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-BVZICP-v.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
