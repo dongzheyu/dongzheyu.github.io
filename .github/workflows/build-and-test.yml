@@ -40,33 +40,58 @@ jobs:
           echo "Checking build output in root directory..."
           
           if [ -f "index.html" ]; then
-            echo "index.html found in root directory"
+            echo "✓ index.html found in root directory"
           else
-            echo "index.html not found in root directory"
+            echo "✗ index.html not found in root directory"
             exit 1
           fi
           
           if [ -d "assets" ]; then
-            echo "assets directory found"
-            echo "Files in assets: $(ls assets | wc -l)"
+            echo "✓ assets directory found"
+            echo "  Files in assets: $(ls assets | wc -l)"
           else
-            echo "assets directory not found"
+            echo "✗ assets directory not found"
             exit 1
           fi
           
           if [ -d "blog" ]; then
-            echo "blog directory found"
+            echo "✓ blog directory found"
           else
-            echo "blog directory not found"
+            echo "✗ blog directory not found"
             exit 1
           fi
           
           if [ -d "project" ]; then
-            echo "project directory found"
+            echo "✓ project directory found"
           else
-            echo "project directory not found"
+            echo "✗ project directory not found"
             exit 1
           fi
+          
+          if [ -d "SniShaperWeb" ]; then
+            echo "✓ SniShaperWeb directory found"
+            echo "  Files: $(ls SniShaperWeb)"
+          else
+            echo "⚠ SniShaperWeb directory not found (optional)"
+          fi
+
+      - name: Check file timestamps
+        shell: bash
+        run: |
+          echo "Checking file modification times..."
+          echo "index.html: $(stat -c '%y' index.html 2>/dev/null || stat -f '%Sm' index.html)"
+          echo "assets directory: $(stat -c '%y' assets 2>/dev/null || stat -f '%Sm' assets)"
+
+      - name: Commit and push changes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --staged --quiet || git commit -m "ci: auto-build and deploy [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
