@@ -15,13 +15,11 @@ app.use(router)
 app.directive('lazy', lazyLoad)
 
 // GitHub Pages SPA fallback: 恢复原始路由
-const savedPath = sessionStorage.getItem('vue-router-path')
+const savedPath = localStorage.getItem('vue-router-redirect')
 if (savedPath) {
-  sessionStorage.removeItem('vue-router-path')
-  // 等待 router 准备好后导航到保存的路径
-  router.isReady().then(() => {
-    router.replace(savedPath)
-  })
+  localStorage.removeItem('vue-router-redirect')
+  // 立即替换 URL，在挂载前完成
+  window.history.replaceState(null, '', savedPath)
 }
 
 app.mount('#app')
