@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading...</title>
+  <title>Redirecting...</title>
   <script>
-    // 获取当前路径，例如 /projects
+    // Cloudflare Pages 在找不到文件时会返回 404.html
+    // 我们将用户重定向回根路径，由 Vue Router (History 模式) 接管
     var path = window.location.pathname;
     var search = window.location.search;
     var hash = window.location.hash;
     
-    // 直接跳转到根路径，让 Vue Router 处理后续逻辑
-    // 使用 replace 避免在历史记录中留下这个 404 页面
-    window.location.replace('/' + path.substring(1) + search + hash);
+    // 注意：在 History 模式下，我们直接加载 index.html 而不改变 URL
+    // 但由于这是 404 页面，浏览器地址栏已经是 /projects 了
+    // 我们只需要让浏览器去加载 index.html 即可
+    window.location.href = '/' + path.substring(1) + search + hash;
   </script>
 </head>
 <body>
   <p style="text-align: center; padding: 50px; font-family: sans-serif;">
-    Loading application...
+    Loading...
   </p>
 </body>
 </html>
