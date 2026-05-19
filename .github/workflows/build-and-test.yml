@@ -37,6 +37,13 @@ jobs:
           cd build/vue-app
           npm ci
 
+      - name: Create .env.local
+        run: |
+          cd build/vue-app
+          echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}" > .env.local
+          echo "VITE_SUPABASE_ANON_KEY=${{ secrets.VITE_SUPABASE_ANON_KEY }}" >> .env.local
+          echo "VITE_ADMIN_EMAIL=${{ secrets.VITE_ADMIN_EMAIL }}" >> .env.local
+
       - name: Build project
         run: |
           cd build/vue-app
