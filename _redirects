@@ -1,3 +1,1 @@
-# GitHub Pages SPA 路由支持
-# 所有路由都重定向到 index.html，由 Vue Router 处理
-/*    /index.html   200
+/* /index.html 200
