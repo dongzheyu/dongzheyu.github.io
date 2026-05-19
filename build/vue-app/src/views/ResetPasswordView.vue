@@ -140,8 +140,8 @@ const successMessage = ref('')
 
 onMounted(() => {
   // 检查 URL 中是否有 access_token（从重置邮件链接过来）
-  const hashParams = new URLSearchParams(window.location.hash.substring(1))
-  const accessToken = hashParams.get('access_token')
+  const urlParams = new URLSearchParams(window.location.search)
+  const accessToken = urlParams.get('access_token')
   
   if (accessToken) {
     // 有 token，直接进入设置新密码步骤
@@ -150,7 +150,7 @@ onMounted(() => {
     // 设置会话
     supabase.auth.setSession({
       access_token: accessToken,
-      refresh_token: hashParams.get('refresh_token') || '',
+      refresh_token: urlParams.get('refresh_token') || '',
     }).then(({ error: sessionError }) => {
       if (sessionError) {
         console.error('设置会话失败:', sessionError)
@@ -169,7 +169,7 @@ const handleResetRequest = async () => {
 
   try {
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.value, {
-      redirectTo: `${window.location.origin}/#/reset-password`,
+      redirectTo: `${window.location.origin}/reset-password`,
     })
 
     if (resetError) throw resetError

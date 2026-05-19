@@ -483,7 +483,7 @@ async function loadComments() {
 
 // 操作处理
 function handleViewProfile(userId: string) {
-  window.open(`/#/user/${userId}`, '_blank')
+  window.open(`/user/${userId}`, '_blank')
 }
 
 async function handleDeleteUser(userId: string, nickname: string) {

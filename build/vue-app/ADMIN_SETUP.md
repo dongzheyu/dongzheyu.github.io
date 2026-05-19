@@ -8,7 +8,7 @@
 
 1. **访问登录页面**
    ```
-   http://localhost:5175/#/auth
+   http://localhost:5175/auth
    ```
 
 2. **注册管理员账户**
@@ -52,11 +52,11 @@ npm run dev
 ### 3. 访问管理员面板
 
 1. **登录管理员账户**
-   - 访问 http://localhost:5175/#/auth
+   - 访问 http://localhost:5175/auth
    - 使用管理员邮箱和密码登录
 
 2. **进入管理员面板**
-   - 直接访问：http://localhost:5175/#/admin
+   - 直接访问：http://localhost:5175/admin
    - 或从导航栏点击管理员入口（如果已添加）
 
 ---
