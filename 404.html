@@ -5,16 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting...</title>
   <script>
-    // 获取当前路径
-    var path = window.location.pathname;  // e.g. "/about" or "/projects"
-    var search = window.location.search;  // e.g. "?foo=bar"
-    var hash = window.location.hash;      // e.g. "#section"
-    
-    // 构建正确的 History 路由 URL: /path
-    var newUrl = path + search + hash;
-    
-    // 跳转到正确的 URL
-    window.location.replace(newUrl);
+    // 在 History 模式下，如果访问了不存在的路径，直接重定向到首页
+    // 让 Vue Router 处理后续的 404 显示
+    window.location.replace('/');
   </script>
 </head>
 <body>
