@@ -31,3 +31,4 @@ build\vue-app\.workbuddy
 
 # SniShaperWeb 独立仓库（避免被识别为子模块）
 build/vue-app/snishaperweb/404.html
+build/vue-app/snishaperweb/
