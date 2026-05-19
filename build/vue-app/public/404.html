@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading...</title>
+  <script>
+    // 获取当前路径，例如 /projects
+    var path = window.location.pathname;
+    var search = window.location.search;
+    var hash = window.location.hash;
+    
+    // 直接跳转到根路径，让 Vue Router 处理后续逻辑
+    // 使用 replace 避免在历史记录中留下这个 404 页面
+    window.location.replace('/' + path.substring(1) + search + hash);
+  </script>
+</head>
+<body>
+  <p style="text-align: center; padding: 50px; font-family: sans-serif;">
+    Loading application...
+  </p>
+</body>
+</html>
