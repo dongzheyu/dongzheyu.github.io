@@ -1,15 +1,11 @@
 name = "dongzheyu-github-io"
 compatibility_date = "2024-01-01"
-
-[build]
-command = "npm run build"
-output_dir = "dist"
+pages_build_output_dir = "dist"
 
 [[routes]]
 pattern = "jetcpp.dpdns.org/*"
 custom_domain = true
 
-# 这里的 redirects 对应 _redirects 文件的内容
 [[redirects]]
 from = "/*"
 to = "/index.html"
