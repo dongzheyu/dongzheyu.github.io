@@ -126,7 +126,8 @@ function parseFrontMatter(content: string) {
 <style scoped>
 .project-detail-page {
   min-height: calc(100vh - 200px);
-  padding: 3rem 0;
+  padding-top: 80px; /* 为 sticky 导航栏留出空间 */
+  padding-bottom: 3rem;
 }
 
 .loading-container {
