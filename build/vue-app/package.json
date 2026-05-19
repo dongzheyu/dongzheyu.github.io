@@ -8,7 +8,7 @@
     "dev": "vite",
     "prebuild": "node scripts/clean-public.js",
     "build": "vite build && npm run deploy",
-    "deploy": "node scripts/deploy.js",
+    "deploy": "node scripts/deploy.js && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
     "preview": "vite preview",
     "add-project": "node scripts/add-content.js project",
     "add-blog": "node scripts/add-content.js blog"
