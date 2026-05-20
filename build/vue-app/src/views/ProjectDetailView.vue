@@ -61,15 +61,7 @@ async function loadProject() {
   try {
     const slug = route.params.slug as string
     
-    // 特殊处理：如果是 snishaper，直接嵌入显示
-    if (slug === 'snishaper') {
-      projectTitle.value = 'SniShaper'
-      projectContent.value = '<iframe src="/snishaper/index.html" style="width:100%;height:calc(100vh - 200px);border:none;"></iframe>'
-      loading.value = false
-      return
-    }
-    
-    // 从 public/project 目录加载 markdown 文件
+    // 从 public/project 目录加载 Markdown 文件
     const response = await fetch(`/project/${slug}.md`)
     
     if (!response.ok) {

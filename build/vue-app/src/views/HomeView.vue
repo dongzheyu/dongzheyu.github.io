@@ -71,8 +71,8 @@ onMounted(() => {
           </div>
 
           <h1 class="hero-title mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
-            你好，我是<br>
-            <span class="text-gradient">dongle</span>
+            你好，我们是<br>
+            <span class="text-gradient">JetCPP Team</span>
           </h1>
 
           <p class="hero-subtitle mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.15s">

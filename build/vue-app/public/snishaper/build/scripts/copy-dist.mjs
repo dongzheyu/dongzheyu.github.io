@@ -1,9 +1,9 @@
 /**
- * postbuild: 将 dist/ 产物复制到主项目的 public/SnishaperWeb 目录
+ * postbuild: 将 dist/ 产物复制到主项目的 public/snishaper 目录
  * 复制规则：
- *   dist/index.html  → ../../../public/SnishaperWeb/index.html
- *   dist/assets/*    → ../../../public/SnishaperWeb/assets/*（先清空再写入）
- *   logo.png         → ../../../public/SnishaperWeb/logo.png
+ *   dist/index.html  → ../../snishaper/index.html
+ *   dist/assets/*    → ../../snishaper/assets/*（先清空再写入）
+ *   logo.png         → ../../snishaper/logo.png
  */
 
 import fs from 'fs';
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir   = path.resolve(__dirname, '../dist');
-const rootDir   = path.resolve(__dirname, '../../../public/SnishaperWeb');
+const rootDir   = path.resolve(__dirname, '../..');
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -45,7 +45,7 @@ function copyDir(src, dest) {
 
 // ── main ─────────────────────────────────────────────────────────────────────
 
-console.log('\n📦 postbuild: copying dist → public/SnishaperWeb…\n');
+console.log('\n📦 postbuild: copying dist → public/snishaper…\n');
 
 if (!fs.existsSync(distDir)) {
   console.error('❌  dist/ not found. Did vite build succeed?');
@@ -58,11 +58,7 @@ copyFile(
   path.join(rootDir, 'index.html'),
 );
 
-// 2. logo.png
-const sourceLogo = path.resolve(__dirname, '../../logo.png');
-if (fs.existsSync(sourceLogo)) {
-  copyFile(sourceLogo, path.join(rootDir, 'logo.png'));
-}
+// 2. logo.png - 不复制，保留 snishaper 目录原有的 logo
 
 // 3. assets/ — clean first to remove stale hashed files
 const destAssets = path.join(rootDir, 'assets');

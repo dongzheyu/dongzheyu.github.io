@@ -12,7 +12,6 @@ console.log('🧹 清理 public 目录中的 node_modules...')
 // 需要清理的路径列表
 const pathsToClean = [
   'snishaper/build/node_modules',
-  'SnishaperWeb/build/node_modules',
 ]
 
 let cleanedCount = 0

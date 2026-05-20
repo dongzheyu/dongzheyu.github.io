@@ -102,10 +102,8 @@ const goBack = () => {
   display: flex;
   justify-content: center;
   gap: 10px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* 深色模式：白色，浅色模式：黑色 */
+  color: var(--color-heading);
 }
 
 .digit {

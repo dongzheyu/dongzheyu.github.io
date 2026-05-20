@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  // 使用相对路径，确保在子目录中也能正确加载资源
+  base: './',
   server: {
     port: 5173,
     host: '0.0.0.0',
