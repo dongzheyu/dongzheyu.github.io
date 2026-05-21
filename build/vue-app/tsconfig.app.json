@@ -7,6 +7,11 @@
 
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    "disableSizeLimit": true,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "skipLibCheck": true
   }
 }

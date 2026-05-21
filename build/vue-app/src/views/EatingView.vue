@@ -78,6 +78,15 @@
             </div>
           </div>
         </div>
+
+        <!-- 免责声明 -->
+        <div class="important-notice mb-5">
+          <Icon icon="mdi:alert" class="notice-icon" />
+          <div>
+            <strong>重要说明</strong>
+            <p>EAT-26 是筛查工具，不能替代专业诊断。进食障碍是一种严重的精神健康问题，可能对身体健康造成严重危害。如果你对自己的进食行为或身体形象感到持续困扰，请务必寻求专业医生或心理治疗师的帮助。进食障碍是可以治疗的，早期干预效果更好。</p>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -220,4 +229,10 @@ const resetTest = () => {
 .result-card {
   border-left: 6px solid #ff5d8f;
 }
+
+/* 免责声明 */
+.important-notice { display: flex; gap: 1rem; padding: 1.5rem; background: rgba(255, 140, 66, 0.1); border-left: 4px solid #ff8c42; border-radius: 8px; margin-bottom: 1.5rem; }
+.notice-icon { font-size: 1.5rem; color: #ff8c42; flex-shrink: 0; }
+.important-notice strong { display: block; font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 6px; }
+.important-notice p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.7; margin: 0; }
 </style>

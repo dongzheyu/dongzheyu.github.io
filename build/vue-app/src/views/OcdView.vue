@@ -78,6 +78,15 @@
             </div>
           </div>
         </div>
+
+        <!-- 免责声明 -->
+        <div class="important-notice mb-5">
+          <Icon icon="mdi:alert" class="notice-icon" />
+          <div>
+            <strong>重要说明</strong>
+            <p>OCI-R 是筛查工具，不能替代专业诊断。强迫症（OCD）是一种可通过认知行为疗法（特别是暴露与反应阻止疗法，ERP）有效治疗的精神障碍。如果你怀疑自己有强迫症状并感到困扰，建议寻求专业心理治疗师的评估和帮助。</p>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -220,4 +229,10 @@ const resetTest = () => {
 .result-card {
   border-left: 6px solid #3a0ca3;
 }
+
+/* 免责声明 */
+.important-notice { display: flex; gap: 1rem; padding: 1.5rem; background: rgba(255, 140, 66, 0.1); border-left: 4px solid #ff8c42; border-radius: 8px; margin-bottom: 1.5rem; }
+.notice-icon { font-size: 1.5rem; color: #ff8c42; flex-shrink: 0; }
+.important-notice strong { display: block; font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 6px; }
+.important-notice p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.7; margin: 0; }
 </style>

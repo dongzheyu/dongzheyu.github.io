@@ -62,10 +62,10 @@
     <section class="tests-disclaimer">
       <div class="container-fluid px-4">
         <div class="disclaimer-box animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.6s">
-          <Icon icon="mdi:information" class="disclaimer-icon" />
+          <Icon icon="mdi:alert-circle" class="disclaimer-icon" />
           <div>
-            <strong>免责声明</strong>
-            <p>本页面所有测试均基于公开标准量表，仅供个人参考与自我认知。测试结果不能替代专业的心理健康评估。若你感到持续的心理困扰，请及时联系心理卫生专业人士。</p>
+            <strong>⚠️ 重要免责声明</strong>
+            <p>本页面所有测试均为<strong>心理健康自评筛查工具</strong>，仅供个人参考与自我认知，<strong>不构成任何医学或心理学诊断依据</strong>，也不能替代专业医疗建议。测试结果受多种因素影响，可能存在偏差。若你感到持续的心理困扰，请及时联系心理卫生专业人士或前往正规医疗机构就诊。请勿将测试结果作为自我诊断或他人诊断的依据。</p>
           </div>
         </div>
       </div>

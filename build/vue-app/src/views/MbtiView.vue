@@ -22,6 +22,19 @@
       </div>
     </section>
 
+    <!-- 重要免责声明 -->
+    <section class="test-disclaimer-banner">
+      <div class="container-fluid px-4">
+        <div class="disclaimer-banner-inner">
+          <Icon icon="mdi:alert-circle" class="banner-icon" />
+          <div class="banner-text">
+            <strong>⚠️ 重要声明</strong>
+            <p>MBTI 是一种人格类型理论工具，测试结果反映的是个人偏好倾向，<strong>不是医学诊断，也不是绝对的性格定论</strong>。每个人都是复杂而独特的，不应以类型标签来限定自我或他人。本测试仅供自我认知参考，不能替代专业的心理评估。测试结果受答题时的心情、环境和主观理解等因素影响，可能存在偏差。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="container-fluid px-4 test-body">
 
       <!-- 进度条 -->
@@ -273,7 +286,7 @@ const answeredCount = computed(() =>
   Object.keys(answers.value).filter(id => answers.value[parseInt(id)] !== undefined).length
 )
 
-const selectAnswer = (id: number, value: string, dimension: string) => {
+const selectAnswer = (id: number, value: string, _dimension: string) => {
   answers.value[id] = value
   answers.value = { ...answers.value }
 }
@@ -301,17 +314,17 @@ const calculateResult = () => {
   })
 
   const type =
-    (scores.EI.E >= scores.EI.I ? 'E' : 'I') +
-    (scores.SN.S >= scores.SN.N ? 'S' : 'N') +
-    (scores.TF.T >= scores.TF.F ? 'T' : 'F') +
-    (scores.JP.J >= scores.JP.P ? 'J' : 'P')
+    (scores.EI?.E >= scores.EI?.I ? 'E' : 'I') +
+    (scores.SN?.S >= scores.SN?.N ? 'S' : 'N') +
+    (scores.TF?.T >= scores.TF?.F ? 'T' : 'F') +
+    (scores.JP?.J >= scores.JP?.P ? 'J' : 'P')
 
   // 维度分数
   const dims = [
-    { key: 'EI', left: 'E', right: 'I', leftCount: scores.EI.E, rightCount: scores.EI.I },
-    { key: 'SN', left: 'S', right: 'N', leftCount: scores.SN.S, rightCount: scores.SN.N },
-    { key: 'TF', left: 'T', right: 'F', leftCount: scores.TF.T, rightCount: scores.TF.F },
-    { key: 'JP', left: 'J', right: 'P', leftCount: scores.JP.J, rightCount: scores.JP.P },
+    { key: 'EI', left: 'E', right: 'I', leftCount: scores.EI?.E ?? 0, rightCount: scores.EI?.I ?? 0 },
+    { key: 'SN', left: 'S', right: 'N', leftCount: scores.SN?.S ?? 0, rightCount: scores.SN?.N ?? 0 },
+    { key: 'TF', left: 'T', right: 'F', leftCount: scores.TF?.T ?? 0, rightCount: scores.TF?.F ?? 0 },
+    { key: 'JP', left: 'J', right: 'P', leftCount: scores.JP?.J ?? 0, rightCount: scores.JP?.P ?? 0 },
   ]
 
   dimensionScores.value = dims.map(d => {
@@ -552,4 +565,11 @@ const mbtiProfiles: Record<string, any> = {
 .result-list li::before { content: '—'; position: absolute; left: 0; color: var(--color-primary); font-weight: 700; }
 .result-disclaimer { font-size: 0.82rem; color: var(--color-text-muted); text-align: center; padding: 16px 24px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-bg-soft); line-height: 1.65; }
 .mb-6 { margin-bottom: 2rem; }
+
+/* 页面级免责声明横幅 */
+.test-disclaimer-banner { padding: 0 0 32px; }
+.disclaimer-banner-inner { display: flex; gap: 16px; align-items: flex-start; padding: 20px 24px; background: rgba(255, 140, 66, 0.08); border: 1px solid rgba(255, 140, 66, 0.25); border-radius: 10px; max-width: 900px; }
+.banner-icon { font-size: 1.5rem; color: #ff8c42; flex-shrink: 0; margin-top: 2px; }
+.banner-text strong { display: block; font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 6px; }
+.banner-text p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.7; margin: 0; }
 </style>
