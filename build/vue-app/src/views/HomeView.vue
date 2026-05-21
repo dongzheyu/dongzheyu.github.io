@@ -165,10 +165,18 @@ onMounted(() => {
           </p>
         </div>
         <div class="cta-action">
-          <a href="https://github.com/dongzheyu" target="_blank"
+          <a href="https://github.com/dongzheyu" target="_blank" rel="noopener noreferrer"
              class="btn btn-light btn-lg animate-on-scroll" style="animation-delay: 0.2s">
             <i class="bi bi-github me-2"></i>访问 GitHub
           </a>
+        </div>
+        <div class="cta-links mt-4 animate-on-scroll" style="animation-delay: 0.3s">
+          <RouterLink to="/privacy" class="text-muted me-3" style="font-size: 0.85rem; text-decoration: none;">
+            隐私政策
+          </RouterLink>
+          <RouterLink to="/terms" class="text-muted" style="font-size: 0.85rem; text-decoration: none;">
+            服务条款
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -318,6 +326,14 @@ onMounted(() => {
 
 .cta-action {
   flex-shrink: 0;
+}
+
+.cta-links a {
+  transition: color 0.3s ease;
+}
+
+.cta-links a:hover {
+  color: var(--color-primary) !important;
 }
 
 /* 滚动触发动画初始状态（轻量版 — 移除 will-change） */

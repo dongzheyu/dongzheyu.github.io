@@ -280,13 +280,13 @@ const handleSignOut = async () => {
                 关注我
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="https://github.com/dongzheyu" target="_blank">
+                <li><a class="dropdown-item" href="https://github.com/dongzheyu" target="_blank" rel="noopener noreferrer">
                   <Icon icon="mdi:github" style="margin-right: 8px;" /> Github
                 </a></li>
-                <li><a class="dropdown-item" href="https://gitee.com/jetcpp" target="_blank">
+                <li><a class="dropdown-item" href="https://gitee.com/jetcpp" target="_blank" rel="noopener noreferrer">
                   <Icon icon="mdi:git" style="margin-right: 8px;" /> Gitee
                 </a></li>
-                <li><a class="dropdown-item" href="https://space.bilibili.com/3546730880567808" target="_blank">
+                <li><a class="dropdown-item" href="https://space.bilibili.com/3546730880567808" target="_blank" rel="noopener noreferrer">
                   <Icon icon="mdi:youtube" style="margin-right: 8px;" /> 哔哩哔哩
                 </a></li>
               </ul>
@@ -310,7 +310,7 @@ const handleSignOut = async () => {
             </div>
 
             <!-- 赞助 -->
-            <a href="https://afdian.com/a/JetCPP" target="_blank" class="btn btn-warning ms-1">
+            <a href="https://afdian.com/a/JetCPP" target="_blank" rel="noopener noreferrer" class="btn btn-warning ms-1">
               <Icon icon="mdi:heart" style="margin-right: 4px;" /> 赞助
             </a>
           </div>
@@ -335,17 +335,25 @@ const handleSignOut = async () => {
           </div>
           <div class="col-md-6 text-md-end mt-3 mt-md-0">
             <div class="mb-3">
-              <a href="https://github.com/dongzheyu" class="me-3" target="_blank">
+              <a href="https://github.com/dongzheyu" class="me-3" target="_blank" rel="noopener noreferrer">
                 <Icon icon="mdi:github" style="font-size: 24px;" />
               </a>
-              <a href="https://gitee.com/jetcpp" class="me-3" target="_blank">
+              <a href="https://gitee.com/jetcpp" class="me-3" target="_blank" rel="noopener noreferrer">
                 <Icon icon="mdi:git" style="font-size: 24px;" />
               </a>
-              <a href="https://space.bilibili.com/3546730880567808" target="_blank">
+              <a href="https://space.bilibili.com/3546730880567808" target="_blank" rel="noopener noreferrer">
                 <Icon icon="mdi:youtube" style="font-size: 24px;" />
               </a>
             </div>
             <p class="text-muted mb-0">&copy; 2026 JetCPP. All rights reserved.</p>
+            <div class="footer-links mt-2">
+              <RouterLink to="/privacy" class="text-muted me-3" style="font-size: 0.8rem; text-decoration: none;">
+                隐私政策
+              </RouterLink>
+              <RouterLink to="/terms" class="text-muted" style="font-size: 0.8rem; text-decoration: none;">
+                服务条款
+              </RouterLink>
+            </div>
           </div>
         </div>
 
@@ -486,5 +494,13 @@ const handleSignOut = async () => {
 main {
   position: relative;
   z-index: 1;
+}
+
+.footer-links a {
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary) !important;
 }
 </style>

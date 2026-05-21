@@ -39,7 +39,22 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-animate btn-block" :disabled="loading">
+        <!-- 数据使用告知 -->
+        <div class="data-consent-info">
+          <Icon icon="mdi:info" />
+          <span>我们仅收集您的邮箱用于创建账号和登录验证，详细信息请参考</span>
+          <RouterLink to="/privacy" target="_blank">隐私政策</RouterLink>
+        </div>
+
+        <!-- 用户同意复选框（注册时显示） -->
+        <div v-if="!isLogin" class="terms-consent">
+          <label class="consent-label">
+            <input type="checkbox" v-model="agreeTerms" />
+            <span>我已阅读并同意<a href="/terms" target="_blank">服务条款</a>和<a href="/privacy" target="_blank">隐私政策</a></span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-animate btn-block" :disabled="loading || ( !isLogin && !agreeTerms)">
           {{ loading ? '处理中...' : (isLogin ? '登录' : '注册') }}
         </button>
       </form>
@@ -82,6 +97,7 @@ const showPassword = ref(false)
 const loading = ref(false)
 const error = ref('')
 const successMessage = ref('')
+const agreeTerms = ref(false)
 
 const toggleMode = () => {
   isLogin.value = !isLogin.value
@@ -89,6 +105,7 @@ const toggleMode = () => {
   successMessage.value = ''
   email.value = ''
   password.value = ''
+  agreeTerms.value = false
 }
 
 const handleSubmit = async () => {
@@ -138,6 +155,12 @@ const handleSubmit = async () => {
       // 例如：router.push('/')
     } else {
       // 注册
+      if (!agreeTerms.value) {
+        error.value = '请先阅读并同意服务条款和隐私政策'
+        loading.value = false
+        return
+      }
+
       console.log('尝试注册:', { email: email.value })
       
       const { data, error: signUpError } = await supabase.auth.signUp({
@@ -323,6 +346,76 @@ const handleSubmit = async () => {
 }
 
 .link-btn:hover {
+  color: var(--color-primary-light);
+  text-decoration: underline;
+}
+
+.data-consent-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(var(--color-primary-rgb), 0.08);
+  border-radius: 8px;
+  border-left: 3px solid var(--color-primary);
+  font-size: 0.85rem;
+  color: var(--color-text);
+  margin-top: 0.5rem;
+}
+
+[data-theme="light"] .data-consent-info {
+  background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.data-consent-info a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.data-consent-info a:hover {
+  color: var(--color-primary-light);
+  text-decoration: underline;
+}
+
+.terms-consent {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.3s ease;
+}
+
+.consent-label:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.consent-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.consent-label a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.consent-label a:hover {
   color: var(--color-primary-light);
   text-decoration: underline;
 }

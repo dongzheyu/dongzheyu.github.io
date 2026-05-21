@@ -162,6 +162,16 @@ const router = createRouter({
       name: 'profile',
       component: () => import('../views/ProfileView.vue'),
     },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: () => import(/* webpackPrefetch: true */ '../views/PrivacyView.vue'),
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: () => import(/* webpackPrefetch: true */ '../views/TermsView.vue'),
+    },
     // 404 页面 - 必须放在最后
     {
       path: '/:pathMatch(.*)*',
