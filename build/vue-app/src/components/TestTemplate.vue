@@ -322,7 +322,7 @@ defineExpose({
 }
 
 .submit-hint {
-  color: #ff8c42;
+  color: #1976D2;
   margin-bottom: 1rem;
 }
 
@@ -444,13 +444,13 @@ defineExpose({
   display: flex;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(255, 140, 66, 0.1);
-  border-left: 4px solid #ff8c42;
+  background: rgba(25, 118, 210, 0.1);
+  border-left: 4px solid #1976D2;
   border-radius: 8px;
 }
 
 .notice-icon {
   font-size: 1.5rem;
-  color: #ff8c42;
+  color: #1976D2;
 }
 </style>

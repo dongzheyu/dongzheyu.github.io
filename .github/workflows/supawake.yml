@@ -1,0 +1,27 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # 每3天运行一次（UTC 06:00）
+    - cron: '0 6 */3 * *'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install supawake
+        run: npm install -g supawake
+
+      - name: Write config from secret
+        run: |
+          mkdir -p "$HOME/.config/supawake"
+          echo "${{ secrets.SUPAWAKE_CONFIG }}" > "$HOME/.config/supawake/config.json"
+
+      - name: Ping Supabase
+        run: supawake ping

@@ -295,7 +295,7 @@ async function handleDeletePost(postId: string, title: string) {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(255, 140, 66, 0.2);
+  border: 4px solid rgba(25, 118, 210, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;

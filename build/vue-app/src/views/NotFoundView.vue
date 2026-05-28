@@ -233,7 +233,7 @@ const goBack = () => {
 .suggestion-link:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: rgba(255, 140, 66, 0.08);
+  background: rgba(25, 118, 210, 0.08);
   transform: translateY(-2px);
 }
 

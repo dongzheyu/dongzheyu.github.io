@@ -1,6 +1,6 @@
 /* ========================================================
-   🔥 炽炭主题 — Ember Charcoal Theme System
-   深炭灰 + 琥珀橙 | 浅色/深色双主题
+   蔚蓝主题 — Azure Blue Theme System
+   深炭灰 + 冰晶蓝 | 浅色/深色双主题
    设计哲学：反主流、有触感、带灵魂
    ======================================================== */
 
@@ -16,19 +16,19 @@
   color-scheme: dark;
 
   /* ---- 渐变色 ---- */
-  --gradient-primary:    linear-gradient(135deg, #ff8c42 0%, #e85d04 100%);
-  --gradient-secondary:  linear-gradient(135deg, #f48c06 0%, #dc2f02 100%);
-  --gradient-accent:     linear-gradient(135deg, #ffba08 0%, #f48c06 100%);
+  --gradient-primary:    linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+  --gradient-secondary:  linear-gradient(135deg, #42A5F5 0%, #1565C0 100%);
+  --gradient-accent:     linear-gradient(135deg, #82B1FF 0%, #448AFF 100%);
   --gradient-success:    linear-gradient(135deg, #52b788 0%, #40916c 100%);
-  --gradient-warning:    linear-gradient(135deg, #ffba08 0%, #e8590c 100%);
+  --gradient-warning:    linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
   --gradient-danger:     linear-gradient(135deg, #ef233c 0%, #d90429 100%);
   --gradient-mute:       linear-gradient(135deg, #2c2a25 0%, #1a1814 100%);
 
   /* ---- 场景渐变 ---- */
-  --gradient-hero:       linear-gradient(165deg, #1a1814 0%, #2c2418 35%, #1a1814 65%, #0f0e0c 100%);
-  --gradient-warm:       linear-gradient(135deg, #2c2418 0%, #3d2b1f 50%, #1a1814 100%);
-  --gradient-ember:      linear-gradient(135deg, #3d2b1f 0%, #5a3825 40%, #2c2418 100%);
-  --gradient-section:    linear-gradient(180deg, transparent 0%, rgba(255, 140, 66, 0.03) 50%, transparent 100%);
+  --gradient-hero:       linear-gradient(165deg, #1a1814 0%, #141e2c 35%, #1a1814 65%, #0f0e0c 100%);
+  --gradient-warm:       linear-gradient(135deg, #141e2c 0%, #1a2a3d 50%, #1a1814 100%);
+  --gradient-ember:      linear-gradient(135deg, #1a2a3d 0%, #0d2137 40%, #141e2c 100%);
+  --gradient-section:    linear-gradient(180deg, transparent 0%, rgba(25, 118, 210, 0.03) 50%, transparent 100%);
   --gradient-dark:       linear-gradient(135deg, #0f0e0c 0%, #1a1814 100%);
 
   /* ---- 背景色阶 ---- */
@@ -46,24 +46,24 @@
   --color-heading:       #f5f0e6;
 
   /* ---- 边框 ---- */
-  --color-border:        rgba(255, 140, 66, 0.12);
-  --color-border-hover:  rgba(255, 140, 66, 0.35);
-  --color-border-focus:  #ff8c42;
+  --color-border:        rgba(25, 118, 210, 0.12);
+  --color-border-hover:  rgba(25, 118, 210, 0.35);
+  --color-border-focus:  #1976D2;
 
   /* ---- 主题色 ---- */
-  --color-primary:       #ff8c42;
-  --color-primary-light: #ffab6e;
-  --color-primary-dark:  #e85d04;
-  --color-secondary:     #f48c06;
-  --color-accent:        #ffba08;
+  --color-primary:       #1976D2;
+  --color-primary-light: #42A5F5;
+  --color-primary-dark:  #1565C0;
+  --color-secondary:     #42A5F5;
+  --color-accent:        #82B1FF;
   --color-success:       #52b788;
-  --color-warning:       #ffba08;
+  --color-warning:       #1976D2;
   --color-danger:        #ef233c;
 
   /* ---- 发光 ---- */
-  --glow-primary:   0 0 20px rgba(255, 140, 66, 0.3), 0 0 60px rgba(255, 140, 66, 0.1);
-  --glow-warm:      0 0 30px rgba(244, 140, 6, 0.25);
-  --glow-subtle:    0 0 15px rgba(255, 186, 8, 0.15);
+  --glow-primary:   0 0 20px rgba(25, 118, 210, 0.3), 0 0 60px rgba(25, 118, 210, 0.1);
+  --glow-warm:      0 0 30px rgba(66, 165, 245, 0.25);
+  --glow-subtle:    0 0 15px rgba(130, 177, 255, 0.15);
 
   /* ---- 阴影系统（简化以提升渲染性能） ---- */
   --shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.6);
@@ -71,13 +71,13 @@
   --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.5);
   --shadow-lg:  0 12px 36px rgba(0, 0, 0, 0.6);
   --shadow-xl:  0 24px 56px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 40px rgba(255, 140, 66, 0.2);
+  --shadow-glow: 0 0 40px rgba(25, 118, 210, 0.2);
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
-  --shadow-warm: 0 8px 30px rgba(255, 140, 66, 0.15);
+  --shadow-warm: 0 8px 30px rgba(25, 118, 210, 0.15);
 
   /* ---- 玻璃态 ---- */
   --glass-bg:     rgba(26, 24, 20, 0.75);
-  --glass-border: rgba(255, 140, 66, 0.12);
+  --glass-border: rgba(25, 118, 210, 0.12);
   --glass-blur:   blur(16px);
 
   /* ---- 导航栏 ---- */
@@ -89,19 +89,19 @@
 [data-theme="light"] {
   color-scheme: light;
 
-  --gradient-primary:    linear-gradient(135deg, #e85d04 0%, #dc2f02 100%);
-  --gradient-secondary:  linear-gradient(135deg, #f48c06 0%, #e8590c 100%);
-  --gradient-accent:     linear-gradient(135deg, #e85d04 0%, #f48c06 100%);
+  --gradient-primary:    linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+  --gradient-secondary:  linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+  --gradient-accent:     linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
   --gradient-success:    linear-gradient(135deg, #40916c 0%, #52b788 100%);
-  --gradient-warning:    linear-gradient(135deg, #e8590c 0%, #dc2f02 100%);
+  --gradient-warning:    linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
   --gradient-danger:     linear-gradient(135deg, #d90429 0%, #ef233c 100%);
   --gradient-mute:       linear-gradient(135deg, #f0ebe3 0%, #faf7f2 100%);
 
-  --gradient-hero:       linear-gradient(165deg, #faf7f2 0%, #f0ebe3 35%, #faf7f2 65%, #fffdf8 100%);
-  --gradient-warm:       linear-gradient(135deg, #f0ebe3 0%, #e8dfd2 50%, #faf7f2 100%);
-  --gradient-ember:      linear-gradient(135deg, #e8dfd2 0%, #ddd2bf 40%, #f0ebe3 100%);
-  --gradient-section:    linear-gradient(180deg, transparent 0%, rgba(232, 93, 4, 0.04) 50%, transparent 100%);
-  --gradient-dark:       linear-gradient(135deg, #e8dfd2 0%, #f0ebe3 100%);
+  --gradient-hero:       linear-gradient(165deg, #faf7f2 0%, #edf2f7 35%, #faf7f2 65%, #fffdf8 100%);
+  --gradient-warm:       linear-gradient(135deg, #edf2f7 0%, #dce5ef 50%, #faf7f2 100%);
+  --gradient-ember:      linear-gradient(135deg, #dce5ef 0%, #c5d5e8 40%, #edf2f7 100%);
+  --gradient-section:    linear-gradient(180deg, transparent 0%, rgba(21, 101, 192, 0.04) 50%, transparent 100%);
+  --gradient-dark:       linear-gradient(135deg, #dce5ef 0%, #edf2f7 100%);
 
   --color-bg:           #faf7f2;
   --color-bg-soft:      #f0ebe3;
@@ -115,34 +115,34 @@
   --color-text-muted:    #a09585;
   --color-heading:       #1a1410;
 
-  --color-border:        rgba(232, 93, 4, 0.12);
-  --color-border-hover:  rgba(232, 93, 4, 0.3);
-  --color-border-focus:  #e85d04;
+  --color-border:        rgba(21, 101, 192, 0.12);
+  --color-border-hover:  rgba(21, 101, 192, 0.3);
+  --color-border-focus:  #1565C0;
 
-  --color-primary:       #e85d04;
-  --color-primary-light: #f48c06;
-  --color-primary-dark:  #c44900;
-  --color-secondary:     #dc2f02;
-  --color-accent:        #f48c06;
+  --color-primary:       #1565C0;
+  --color-primary-light: #1976D2;
+  --color-primary-dark:  #0D47A1;
+  --color-secondary:     #1976D2;
+  --color-accent:        #1976D2;
   --color-success:       #40916c;
-  --color-warning:       #e8590c;
+  --color-warning:       #1565C0;
   --color-danger:        #d90429;
 
-  --glow-primary:   0 0 20px rgba(232, 93, 4, 0.15), 0 0 60px rgba(232, 93, 4, 0.06);
-  --glow-warm:      0 0 30px rgba(244, 140, 6, 0.12);
-  --glow-subtle:    0 0 15px rgba(244, 140, 6, 0.08);
+  --glow-primary:   0 0 20px rgba(21, 101, 192, 0.15), 0 0 60px rgba(21, 101, 192, 0.06);
+  --glow-warm:      0 0 30px rgba(25, 118, 210, 0.12);
+  --glow-subtle:    0 0 15px rgba(25, 118, 210, 0.08);
 
   --shadow-xs:  0 1px 2px rgba(44, 36, 24, 0.06);
   --shadow-sm:  0 2px 8px rgba(44, 36, 24, 0.08);
   --shadow-md:  0 4px 16px rgba(44, 36, 24, 0.1);
   --shadow-lg:  0 12px 36px rgba(44, 36, 24, 0.12);
   --shadow-xl:  0 24px 56px rgba(44, 36, 24, 0.15);
-  --shadow-glow: 0 0 40px rgba(232, 93, 4, 0.1);
+  --shadow-glow: 0 0 40px rgba(21, 101, 192, 0.1);
   --shadow-card: 0 4px 20px rgba(44, 36, 24, 0.07);
-  --shadow-warm: 0 8px 30px rgba(232, 93, 4, 0.08);
+  --shadow-warm: 0 8px 30px rgba(21, 101, 192, 0.08);
 
   --glass-bg:     rgba(250, 247, 242, 0.8);
-  --glass-border: rgba(232, 93, 4, 0.1);
+  --glass-border: rgba(21, 101, 192, 0.1);
   --glass-blur:   blur(16px);
 
   --navbar-bg:    rgba(250, 247, 242, 0.88);
@@ -264,16 +264,16 @@ body::before {
 [data-theme="dark"] body,
 :root body {
   background:
-    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(255, 140, 66, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(244, 140, 6, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(25, 118, 210, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(66, 165, 245, 0.04) 0%, transparent 60%),
     var(--color-bg);
 }
 
 /* 浅色背景微暖 */
 [data-theme="light"] body {
   background:
-    radial-gradient(ellipse 80% 60% at 15% 25%, rgba(232, 93, 4, 0.04) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 85% 75%, rgba(244, 140, 6, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 15% 25%, rgba(21, 101, 192, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 75%, rgba(25, 118, 210, 0.03) 0%, transparent 60%),
     var(--color-bg);
 }
 
@@ -289,7 +289,7 @@ a:hover {
   color: var(--color-primary-light);
 }
 
-/* ========== 按钮系统（有触感） ========== */
+/* ========== 按钮系统（Vuetify 风格） ========== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -297,21 +297,23 @@ a:hover {
   gap: 8px;
   padding: 11px 24px;
   font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--radius-md);
+  font-weight: 500;
+  border-radius: 4px;
   border: none;
   cursor: pointer;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
-  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  letter-spacing: .089em;
   isolation: isolate;
-  /* 所有按钮的动效 */
+  min-width: 64px;
   transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base),
-    background-color var(--transition-base),
-    border-color var(--transition-base);
+    transform .28s cubic-bezier(.4,0,.2,1),
+    box-shadow .28s cubic-bezier(.4,0,.2,1),
+    background-color .28s cubic-bezier(.4,0,.2,1),
+    border-color .28s cubic-bezier(.4,0,.2,1),
+    opacity .28s cubic-bezier(.4,0,.2,1);
 }
 
 /* 按钮悬停光晕层 */
@@ -324,7 +326,7 @@ a:hover {
     transparent 70%);
   opacity: 0;
   /* 优化过渡性能 - 只动画必要的属性 */
-  transition: opacity 200ms var(--ease-out-expo);
+  transition: opacity .28s cubic-bezier(.4,0,.2,1);
   z-index: 1;
   pointer-events: none;
 }
@@ -340,12 +342,12 @@ a:hover {
 .btn-primary {
   background: var(--gradient-primary);
   color: #fff;
-  box-shadow: var(--shadow-sm), 0 0 0 0 rgba(255, 140, 66, 0);
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md), 0 0 16px rgba(255, 140, 66, 0.15);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 }
 
 /* 轮廓按钮 */
@@ -353,8 +355,9 @@ a:hover {
 .btn-outline-light,
 .btn-outline-primary {
   background: transparent;
-  border: 1.5px solid var(--color-border);
+  border: thin solid var(--color-border);
   color: var(--color-text) !important;
+  box-shadow: none;
 }
 
 .btn-outline:hover,
@@ -362,7 +365,7 @@ a:hover {
 .btn-outline-primary:hover {
   border-color: var(--color-primary) !important;
   color: var(--color-primary) !important;
-  background: rgba(255, 140, 66, 0.06) !important;
+  background: rgba(25, 118, 210, 0.06) !important;
   transform: translateY(-1px);
 }
 
@@ -372,13 +375,13 @@ a:hover {
   background: var(--gradient-accent);
   color: #1a1410 !important;
   border: none;
-  box-shadow: 0 0 20px rgba(255, 186, 8, 0.15);
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 .btn-warning:hover,
 .btn-outline-warning:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   color: #1a1410 !important;
 }
 
@@ -386,11 +389,12 @@ a:hover {
 .btn-danger {
   background: var(--gradient-danger);
   color: white;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 .btn-danger:hover {
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 }
 
 /* 浅色按钮 */
@@ -398,7 +402,7 @@ a:hover {
   background: var(--color-bg-elevated);
   color: var(--color-heading) !important;
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 [data-theme="dark"] .btn-light {
@@ -408,13 +412,13 @@ a:hover {
 
 .btn-light:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   background: var(--color-bg-card);
 }
 
 /* 按钮尺寸 */
-.btn-sm { padding: 6px 16px; font-size: 13px; border-radius: var(--radius-sm); }
-.btn-lg { padding: 14px 32px; font-size: 16px; border-radius: var(--radius-lg); }
+.btn-sm { padding: 6px 16px; font-size: 13px; border-radius: 4px; }
+.btn-lg { padding: 14px 32px; font-size: 16px; border-radius: 4px; }
 .btn-rounded { border-radius: var(--radius-full) !important; }
 
 /* ========== 卡片（有质感） ========== */
@@ -458,7 +462,7 @@ input, textarea, select {
 
 input:focus, textarea:focus, select:focus {
   border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.12);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.12);
   background: var(--color-bg-card);
 }
 
@@ -640,10 +644,10 @@ input:focus, textarea:focus, select:focus {
 
 /* ---- 按钮动画（轻量版） ---- */
 .btn-animate {
-  transition: transform 180ms var(--ease-out-expo),
-              box-shadow 180ms var(--ease-out-expo);
-  border-radius: var(--radius-md);
-  font-weight: 600;
+  transition: transform .28s cubic-bezier(.4,0,.2,1),
+              box-shadow .28s cubic-bezier(.4,0,.2,1);
+  border-radius: 4px;
+  font-weight: 500;
   position: relative;
   overflow: hidden;
 }
@@ -654,7 +658,7 @@ input:focus, textarea:focus, select:focus {
   top: 50%; left: 50%;
   width: 0; height: 0;
   border-radius: 50%;
-  background: rgba(255, 140, 66, 0.15);
+  background: rgba(25, 118, 210, 0.15);
   transform: translate(-50%, -50%);
   transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1),
               height 400ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -662,7 +666,7 @@ input:focus, textarea:focus, select:focus {
 
 .btn-animate:hover {
   transform: translate3d(0, -2px, 0);
-  box-shadow: var(--shadow-warm);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 }
 
 .btn-animate:hover::before {
@@ -838,10 +842,10 @@ footer {
 }
 
 /* ========== 测试页面按钮颜色定义 ========== */
-.btn-test-mbti { background: linear-gradient(135deg, #ff6b35 0%, #e63946 100%); color: white !important; }
+.btn-test-mbti { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); color: white !important; }
 .btn-test-depression { background: linear-gradient(135deg, #e63946 0%, #d90429 100%); color: white !important; }
-.btn-test-sunshine { background: linear-gradient(135deg, #ffb703 0%, #ff9f1c 100%); color: #1a1410 !important; }
-.btn-test-anxiety { background: linear-gradient(135deg, #ff9f1c 0%, #f48c06 100%); color: #1a1410 !important; }
+.btn-test-sunshine { background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%); color: white !important; }
+.btn-test-anxiety { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); color: white !important; }
 .btn-test-bipolar { background: linear-gradient(135deg, #c9184a 0%, #a4161a 100%); color: white !important; }
 .btn-test-phobia { background: linear-gradient(135deg, #52b788 0%, #40916c 100%); color: white !important; }
 .btn-test-ptsd { background: linear-gradient(135deg, #9d0208 0%, #6a040f 100%); color: white !important; }
@@ -850,10 +854,10 @@ footer {
 .btn-test-substance { background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%); color: white !important; }
 .btn-test-gambling { background: linear-gradient(135deg, #6d4c41 0%, #5a3727 100%); color: white !important; }
 .btn-test-gaming { background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%); color: white !important; }
-.btn-test-adhd { background: linear-gradient(135deg, #ffba08 0%, #f48c06 100%); color: #1a1410 !important; }
+.btn-test-adhd { background: linear-gradient(135deg, #00838f 0%, #006064 100%); color: white !important; }
 .btn-test-asd { background: linear-gradient(135deg, #4a4e69 0%, #22223b 100%); color: white !important; }
-.btn-test-bpd { background: linear-gradient(135deg, #dc2f02 0%, #e85d04 100%); color: white !important; }
-.btn-test-somatic { background: linear-gradient(135deg, #bc6c25 0%, #dda15e 100%); color: #1a1410 !important; }
+.btn-test-bpd { background: linear-gradient(135deg, #37474f 0%, #263238 100%); color: white !important; }
+.btn-test-somatic { background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%); color: white !important; }
 
 /* 提高测试页面按钮在深色主题下的可见性 */
 [data-theme="dark"] .btn-test-bipolar,
