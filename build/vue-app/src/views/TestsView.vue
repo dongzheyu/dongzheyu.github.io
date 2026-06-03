@@ -89,8 +89,8 @@ const tests = ref([
     description: '基于迈尔斯-布里格斯类型指标，通过 93 道题目测出你在四个维度上的偏好，识别 16 种人格类型之一。',
     icon: 'bi bi-diagram-3',
     badge: 'MBTI',
-    gradient: 'linear-gradient(135deg, rgba(255,140,66,0.15) 0%, rgba(244,140,6,0.08) 100%)',
-    color: '#ff8c42',
+    gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(21,101,192,0.08) 100%)',
+    color: '#1976D2',
     questions: 93,
     minutes: 15
   },
@@ -113,8 +113,8 @@ const tests = ref([
     description: '识别"微笑型抑郁"特征——表面乐观开朗，内心却承受痛苦。通过 15 道题目评估这一隐性状态。',
     icon: 'bi bi-sun',
     badge: '微笑抑郁',
-    gradient: 'linear-gradient(135deg, rgba(255,186,8,0.15) 0%, rgba(244,140,6,0.08) 100%)',
-    color: '#f48c06',
+    gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(66,165,245,0.08) 100%)',
+    color: '#1976D2',
     questions: 15,
     minutes: 8
   },
@@ -125,8 +125,8 @@ const tests = ref([
     description: '基于 GAD-7 广泛性焦虑量表，评估过去两周内的焦虑症状频率，共 7 个核心问题。',
     icon: 'bi bi-shield-exclamation',
     badge: 'GAD-7',
-    gradient: 'linear-gradient(135deg, rgba(244,140,6,0.15) 0%, rgba(232,93,4,0.08) 100%)',
-    color: '#f48c06',
+    gradient: 'linear-gradient(135deg, rgba(21,101,192,0.15) 0%, rgba(13,71,161,0.08) 100%)',
+    color: '#1565C0',
     questions: 7,
     minutes: 3
   },
@@ -198,8 +198,8 @@ const tests = ref([
     description: '结合酒精使用障碍测试（AUDIT）和药物滥用筛查（DAST-10），共 20 题。',
     icon: 'bi bi-droplet-half',
     badge: 'AUDIT',
-    gradient: 'linear-gradient(135deg, rgba(232,93,4,0.15) 0%, rgba(242,113,24,0.08) 100%)',
-    color: '#e85d04',
+    gradient: 'linear-gradient(135deg, rgba(13,71,161,0.15) 0%, rgba(21,101,192,0.08) 100%)',
+    color: '#0D47A1',
     questions: 20,
     minutes: 5
   },
@@ -234,8 +234,8 @@ const tests = ref([
     description: '成人 ADHD 自评量表（ASRS-v1.1）根据 DSM-5 标准开发，共 18 题。',
     icon: 'bi bi-lightning-charge',
     badge: 'ASRS',
-    gradient: 'linear-gradient(135deg, rgba(255,209,102,0.15) 0%, rgba(255,229,122,0.08) 100%)',
-    color: '#ffd166',
+    gradient: 'linear-gradient(135deg, rgba(66,165,245,0.15) 0%, rgba(33,150,243,0.08) 100%)',
+    color: '#42A5F5',
     questions: 18,
     minutes: 5
   },
@@ -270,8 +270,8 @@ const tests = ref([
     description: '躯体症状量表（PHQ-15）评估常见躯体症状严重程度，共 15 题。',
     icon: 'bi bi-thermometer',
     badge: 'PHQ-15',
-    gradient: 'linear-gradient(135deg, rgba(188,108,37,0.15) 0%, rgba(208,128,57,0.08) 100%)',
-    color: '#bc6c25',
+    gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(21,101,192,0.08) 100%)',
+    color: '#1976D2',
     questions: 15,
     minutes: 4
   }
