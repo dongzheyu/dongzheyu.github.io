@@ -15,7 +15,7 @@ console.log(`目标目录: ${destDir}`)
 
 // 检查源目录是否存在
 if (!fs.existsSync(srcDir)) {
-  console.error('❌ 错误: dist 目录不存在，请先运行 npm run build')
+  console.error('❌ 错误: dist 目录不存在，请先运行 bun run build')
   process.exit(1)
 }
 

@@ -3,6 +3,7 @@
 ![Vue](https://img.shields.io/badge/Vue-3.2+-4FC08D?logo=vue.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7.3+-646CFF?logo=vite)
+![Bun](https://img.shields.io/badge/Bun-1.3+-006DFF?logo=bun&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3+-7952B3?logo=bootstrap)
 ![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?logo=supabase)
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -319,8 +320,7 @@ animations.css 包含 20+ 关键帧，全部使用 translate3d/scale3d 强制 GP
 - @vitejs/plugin-vue：Vue 3 支持
 
 **开发环境**
-- Node.js 20.19.0+ 或 22.12.0+
-- npm 或 yarn
+- Bun 1.3+
 
 ## 开发指南
 
@@ -472,7 +472,7 @@ Edge Function 是一种安全的服务器端函数，可以在不暴露 Service 
 
 1. **安装 Supabase CLI**
    ```bash
-   npm install -g supabase
+    bun install -g supabase
    ```
 
 2. **登录 Supabase**
@@ -514,7 +514,7 @@ cd dongzheyu.github.io/build/vue-app
 #### 2. 安装依赖
 
 ```bash
-npm install
+bun install
 ```
 
 #### 3. 启动开发服务器
@@ -522,7 +522,7 @@ npm install
 启动主网站开发服务器（Vue Vite）：
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 开发服务器将在 http://localhost:5173 启动（Vite 默认端口）。
@@ -530,7 +530,7 @@ npm run dev
 启动博客开发服务器（VitePress）：
 
 ```bash
-npm run blog:dev
+bun run blog:dev
 ```
 
 博客服务器将在 http://localhost:5173 启动。
@@ -538,7 +538,7 @@ npm run blog:dev
 启动项目文档开发服务器（VitePress）：
 
 ```bash
-npm run project:dev
+bun run project:dev
 ```
 
 项目文档服务器将在 http://localhost:5173 启动。
@@ -548,7 +548,7 @@ npm run project:dev
 #### 构建主网站
 
 ```bash
-npm run build
+bun run build
 ```
 
 生成的静态文件位于 `dist/` 目录，包含完整的 Vue 应用。
@@ -556,7 +556,7 @@ npm run build
 #### 构建博客系统
 
 ```bash
-npm run blog:build
+bun run blog:build
 ```
 
 生成的静态文件位于 `docs/.vitepress/dist/`，需复制到 `public/blog/` 目录。
@@ -564,7 +564,7 @@ npm run blog:build
 #### 构建项目文档
 
 ```bash
-npm run project:build
+bun run project:build
 ```
 
 生成的静态文件位于 `project/.vitepress/dist/`，需复制到 `public/project/` 目录。
@@ -575,7 +575,7 @@ npm run project:build
 1. 更新 project/.vitepress/config.ts 的 sidebar 配置
 2. 更新 project/index.md 首页的 hero actions 和 features
 3. 在 src/views/ProjectsView.vue 的 projects 数组中添加新项目卡片
-4. 执行 npm run project:build 进行构建
+4. 执行 bun run project:build 进行构建
 
 ### 添加新博客文章
 
@@ -583,7 +583,7 @@ npm run project:build
 
 在 docs/ 目录下创建 .md 文件，然后：
 1. 按需更新 docs/.vitepress/config.ts 的 sidebar 配置
-2. 执行 npm run blog:build 进行构建
+2. 执行 bun run blog:build 进行构建
 3. 将生成的文件复制到 public/blog/
 
 #### 方式二：用户发布文章（推荐）
@@ -640,7 +640,7 @@ npm run project:build
 运行预览命令查看生产构建效果：
 
 ```bash
-npm run preview
+bun run preview
 ```
 
 ### CDN 与域名
@@ -652,8 +652,8 @@ npm run preview
 ## 注意事项
 
 1. VitePress 博客与项目文档独立构建，生成的 HTML 文件需手动复制到 public/blog/ 和 public/project/ 目录
-2. 修改 src/ 内容后需重新执行 npm run build
-3. 修改博客/项目文档后需分别执行 npm run blog:build 和 npm run project:build
+2. 修改 src/ 内容后需重新执行 bun run build
+3. 修改博客/项目文档后需分别执行 bun run blog:build 和 bun run project:build
 4. 主题切换与减少动画偏好自动存储到 localStorage，支持跨会话恢复
 5. 在禁用 JavaScript 的浏览器中，网站将显示静态内容
 

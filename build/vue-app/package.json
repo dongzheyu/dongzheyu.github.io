@@ -5,13 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "prebuild": "node scripts/clean-public.js",
-    "build": "vite build && npm run deploy",
-    "deploy": "node scripts/deploy.js && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
-    "preview": "vite preview",
-    "add-project": "node scripts/add-content.js project",
-    "add-blog": "node scripts/add-content.js blog"
+    "dev": "bun run --bun vite",
+    "prebuild": "bun scripts/clean-public.js",
+    "build": "bun run --bun vite build && bun run deploy",
+    "deploy": "bun scripts/deploy.js && bun -e \"import fs from 'fs'; fs.copyFileSync('dist/index.html', 'dist/404.html')\"",
+    "preview": "bun run --bun vite preview",
+    "add-project": "bun scripts/add-content.js project",
+    "add-blog": "bun scripts/add-content.js blog"
   },
   "dependencies": {
     "@iconify/vue": "^4.3.0",
