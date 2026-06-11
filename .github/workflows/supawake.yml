@@ -1,27 +1,26 @@
+
 name: Supabase Keep Alive
 
 on:
   schedule:
-    # 每3天运行一次（UTC 06:00）
-    - cron: '0 6 */3 * *'
-  workflow_dispatch: # 允许手动触发
+    - cron: '30 23 * * *'  # 每天 UTC 23:30 (北京时间次日 07:30)
+  workflow_dispatch:        # 允许手动触发
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install supawake
-        run: npm install -g supawake
-
-      - name: Write config from secret
-        run: |
-          mkdir -p "$HOME/.config/supawake"
-          echo "${{ secrets.SUPAWAKE_CONFIG }}" > "$HOME/.config/supawake/config.json"
-
       - name: Ping Supabase
-        run: supawake ping
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          curl -I \
+            "${SUPABASE_URL}/rest/v1/" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            --fail \
+            --output /dev/null \
+            --write-out "HTTP Status: %{http_code}\n"
+          
+          echo "✅ Supabase keep-alive successful"
