@@ -20,9 +20,24 @@
 
     <section class="tests-cards-section">
       <div class="container-fluid px-4">
+        <!-- 分类筛选栏 -->
+        <div class="category-filter mb-4">
+          <button
+            v-for="cat in categories"
+            :key="cat.value"
+            class="category-btn"
+            :class="{ active: activeCategory === cat.value }"
+            @click="activeCategory = cat.value"
+          >
+            <Icon :icon="cat.icon" class="me-1" />
+            {{ cat.label }}
+            <span v-if="cat.value !== 'all'" class="category-count">{{ getCategoryCount(cat.value) }}</span>
+          </button>
+        </div>
+
         <div class="row g-4">
           <div
-            v-for="(test, index) in tests"
+            v-for="(test, index) in filteredTests"
             :key="test.id"
             class="col-md-4 animate-slide-up"
             :class="{ 'visible': isVisible }"
@@ -74,12 +89,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Icon from '@/components/Icon.vue'
 import { RouterLink } from 'vue-router'
 import { useAnimations } from '@/composables/useAnimations'
 
 const { isVisible } = useAnimations()
+const activeCategory = ref('all')
+
+// 分类定义
+const categories = [
+  { value: 'all', label: '全部', icon: 'mdi:view-grid' },
+  { value: '人格', label: '人格测试', icon: 'mdi:account-badge' },
+  { value: '情绪', label: '情绪评估', icon: 'mdi:emoticon' },
+  { value: '焦虑', label: '焦虑相关', icon: 'mdi:alert-circle' },
+  { value: '创伤', label: '创伤障碍', icon: 'mdi:flash-alert' },
+  { value: '成瘾', label: '成瘾行为', icon: 'mdi:dependency' },
+]
+
+const filteredTests = computed(() => {
+  if (activeCategory.value === 'all') return tests.value
+  return tests.value.filter(t => t.category === activeCategory.value)
+})
+
+const getCategoryCount = (category: string) => {
+  return tests.value.filter(t => t.category === category).length
+}
 
 const tests = ref([
   {
@@ -91,6 +126,7 @@ const tests = ref([
     badge: 'MBTI',
     gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(21,101,192,0.08) 100%)',
     color: '#1976D2',
+    category: '人格',
     questions: 93,
     minutes: 15
   },
@@ -103,6 +139,7 @@ const tests = ref([
     badge: 'PHQ-9',
     gradient: 'linear-gradient(135deg, rgba(239,35,60,0.12) 0%, rgba(217,4,41,0.06) 100%)',
     color: '#ef233c',
+    category: '情绪',
     questions: 9,
     minutes: 5
   },
@@ -115,6 +152,7 @@ const tests = ref([
     badge: '微笑抑郁',
     gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(66,165,245,0.08) 100%)',
     color: '#1976D2',
+    category: '情绪',
     questions: 15,
     minutes: 8
   },
@@ -127,6 +165,7 @@ const tests = ref([
     badge: 'GAD-7',
     gradient: 'linear-gradient(135deg, rgba(21,101,192,0.15) 0%, rgba(13,71,161,0.08) 100%)',
     color: '#1565C0',
+    category: '焦虑',
     questions: 7,
     minutes: 3
   },
@@ -139,6 +178,7 @@ const tests = ref([
     badge: 'MDQ',
     gradient: 'linear-gradient(135deg, rgba(114,9,183,0.15) 0%, rgba(123,44,191,0.08) 100%)',
     color: '#7209b7',
+    category: '情绪',
     questions: 13,
     minutes: 5
   },
@@ -151,7 +191,8 @@ const tests = ref([
     badge: 'SPIN',
     gradient: 'linear-gradient(135deg, rgba(22,138,173,0.15) 0%, rgba(32,156,192,0.08) 100%)',
     color: '#168aad',
-    colorDark: '#5acce6', /* 深色主题下使用更浅的蓝绿色 */
+    colorDark: '#5acce6',
+    category: '焦虑',
     questions: 22,
     minutes: 7
   },
@@ -164,6 +205,7 @@ const tests = ref([
     badge: 'PCL-5',
     gradient: 'linear-gradient(135deg, rgba(157,2,8,0.15) 0%, rgba(177,32,38,0.08) 100%)',
     color: '#9d0208',
+    category: '创伤',
     questions: 20,
     minutes: 6
   },
@@ -176,6 +218,7 @@ const tests = ref([
     badge: 'OCI-R',
     gradient: 'linear-gradient(135deg, rgba(58,12,163,0.15) 0%, rgba(88,42,193,0.08) 100%)',
     color: '#3a0ca3',
+    category: '焦虑',
     questions: 18,
     minutes: 5
   },
@@ -430,5 +473,52 @@ const tests = ref([
   color: var(--color-text-muted);
   line-height: 1.65;
   margin: 0;
+}
+
+/* 分类筛选栏 */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+}
+
+.category-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.category-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.category-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.category-count {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-left: 0.25rem;
+}
+
+.category-btn.active .category-count {
+  background: rgba(255, 255, 255, 0.25);
 }
 </style>

@@ -318,7 +318,273 @@ using (
 
 
 -- ============================================================
--- 5. 验证所有策略
+-- 5. User Favorites 表（用户收藏）
+-- ============================================================
+
+-- 创建 user_favorites 表
+create table if not exists user_favorites (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references auth.users not null,
+  item_id text not null,
+  item_type text check (item_type in ('test', 'blog')) not null,
+  item_title text,
+  item_description text,
+  item_icon text,
+  item_color text,
+  created_at timestamp with time zone default now(),
+  unique(user_id, item_id)
+);
+
+-- 添加注释
+comment on table user_favorites is '用户收藏表，存储用户收藏的测试和文章';
+comment on column user_favorites.user_id is '用户ID';
+comment on column user_favorites.item_id is '项目ID，格式为 test:mbti 或 blog:cpp-guide';
+comment on column user_favorites.item_type is '项目类型：test 或 blog';
+comment on column user_favorites.item_title is '项目标题';
+comment on column user_favorites.item_description is '项目描述';
+comment on column user_favorites.item_icon is '项目图标';
+comment on column user_favorites.item_color is '项目颜色';
+
+-- 创建索引
+create index if not exists idx_user_favorites_user_id on user_favorites(user_id);
+create index if not exists idx_user_favorites_item_id on user_favorites(item_id);
+create index if not exists idx_user_favorites_item_type on user_favorites(item_type);
+create index if not exists idx_user_favorites_created_at on user_favorites(created_at desc);
+
+-- 启用行级安全
+alter table user_favorites enable row level security;
+
+-- 删除所有现有策略
+do $$
+declare
+    pol record;
+begin
+    for pol in 
+        select policyname 
+        from pg_policies 
+        where tablename = 'user_favorites'
+    loop
+        execute format('drop policy if exists %I on user_favorites', pol.policyname);
+    end loop;
+end $$;
+
+-- User Favorites RLS 策略
+create policy "Users can view their own favorites"
+on user_favorites for select
+using ( auth.uid() = user_id );
+
+create policy "Admins can view all favorites"
+on user_favorites for select
+using ( auth.jwt() ->> 'email' = 'your-admin-email@example.com' );
+
+create policy "Users can insert their own favorites"
+on user_favorites for insert
+with check ( auth.uid() = user_id );
+
+create policy "Users can delete their own favorites"
+on user_favorites for delete
+using ( auth.uid() = user_id );
+
+create policy "Admins can delete all favorites"
+on user_favorites for delete
+using ( auth.jwt() ->> 'email' = 'your-admin-email@example.com' );
+
+
+-- ============================================================
+-- 6. User Test History 表（测试历史）
+-- ============================================================
+
+-- 创建 user_test_history 表
+create table if not exists user_test_history (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references auth.users not null,
+  test_id text not null,
+  test_title text,
+  score integer,
+  max_score integer,
+  level text,
+  answers jsonb,
+  completed_at timestamp with time zone default now()
+);
+
+-- 添加注释
+comment on table user_test_history is '用户测试历史表，存储用户的测试结果';
+comment on column user_test_history.user_id is '用户ID';
+comment on column user_test_history.test_id is '测试ID，如 mbti, depression';
+comment on column user_test_history.test_title is '测试标题';
+comment on column user_test_history.score is '测试得分';
+comment on column user_test_history.max_score is '测试满分';
+comment on column user_test_history.level is '测试等级或结果类型';
+comment on column user_test_history.answers is '用户答案（JSON格式）';
+comment on column user_test_history.completed_at is '测试完成时间';
+
+-- 创建索引
+create index if not exists idx_user_test_history_user_id on user_test_history(user_id);
+create index if not exists idx_user_test_history_test_id on user_test_history(test_id);
+create index if not exists idx_user_test_history_completed_at on user_test_history(completed_at desc);
+
+-- 启用行级安全
+alter table user_test_history enable row level security;
+
+-- 删除所有现有策略
+do $$
+declare
+    pol record;
+begin
+    for pol in 
+        select policyname 
+        from pg_policies 
+        where tablename = 'user_test_history'
+    loop
+        execute format('drop policy if exists %I on user_test_history', pol.policyname);
+    end loop;
+end $$;
+
+-- User Test History RLS 策略
+create policy "Users can view their own test history"
+on user_test_history for select
+using ( auth.uid() = user_id );
+
+create policy "Admins can view all test history"
+on user_test_history for select
+using ( auth.jwt() ->> 'email' = 'your-admin-email@example.com' );
+
+create policy "Users can insert their own test history"
+on user_test_history for insert
+with check ( auth.uid() = user_id );
+
+create policy "Users can delete their own test history"
+on user_test_history for delete
+using ( auth.uid() = user_id );
+
+create policy "Admins can delete all test history"
+on user_test_history for delete
+using ( auth.jwt() ->> 'email' = 'your-admin-email@example.com' );
+
+
+-- ============================================================
+-- 7. Tags 表（标签）
+-- ============================================================
+
+-- 创建 tags 表
+create table if not exists tags (
+  id uuid default gen_random_uuid() primary key,
+  name text unique not null,
+  count integer default 0,
+  created_at timestamp with time zone default now()
+);
+
+-- 添加注释
+comment on table tags is '标签表，存储所有标签';
+comment on column tags.name is '标签名称';
+comment on column tags.count is '标签使用次数';
+
+-- 创建索引
+create index if not exists idx_tags_name on tags(name);
+create index if not exists idx_tags_count on tags(count desc);
+
+-- 启用行级安全
+alter table tags enable row level security;
+
+-- 删除所有现有策略
+do $$
+declare
+    pol record;
+begin
+    for pol in 
+        select policyname 
+        from pg_policies 
+        where tablename = 'tags'
+    loop
+        execute format('drop policy if exists %I on tags', pol.policyname);
+    end loop;
+end $$;
+
+-- Tags RLS 策略
+create policy "Tags are viewable by everyone"
+on tags for select
+using ( true );
+
+create policy "Admins can manage all tags"
+on tags for all
+using ( auth.jwt() ->> 'email' = 'your-admin-email@example.com' );
+
+create policy "Authenticated users can create tags"
+on tags for insert
+with check ( auth.role() = 'authenticated' );
+
+
+-- ============================================================
+-- 8. Post Tags 表（文章标签关联）
+-- ============================================================
+
+-- 创建 post_tags 表
+create table if not exists post_tags (
+  id uuid default gen_random_uuid() primary key,
+  post_id uuid references user_posts on delete cascade not null,
+  tag_name text not null,
+  created_at timestamp with time zone default now(),
+  unique(post_id, tag_name)
+);
+
+-- 添加注释
+comment on table post_tags is '文章标签关联表，存储文章与标签的多对多关系';
+comment on column post_tags.post_id is '文章ID';
+comment on column post_tags.tag_name is '标签名称';
+
+-- 创建索引
+create index if not exists idx_post_tags_post_id on post_tags(post_id);
+create index if not exists idx_post_tags_tag_name on post_tags(tag_name);
+
+-- 启用行级安全
+alter table post_tags enable row level security;
+
+-- 删除所有现有策略
+do $$
+declare
+    pol record;
+begin
+    for pol in 
+        select policyname 
+        from pg_policies 
+        where tablename = 'post_tags'
+    loop
+        execute format('drop policy if exists %I on post_tags', pol.policyname);
+    end loop;
+end $$;
+
+-- Post Tags RLS 策略
+create policy "Post tags are viewable by everyone"
+on post_tags for select
+using ( true );
+
+create policy "Admins can manage all post tags"
+on post_tags for all
+using ( auth.jwt() ->> 'email' = 'your-admin-email@example.com' );
+
+create policy "Users can insert tags for their own posts"
+on post_tags for insert
+with check (
+  exists (
+    select 1 from user_posts
+    where user_posts.id = post_tags.post_id
+    and user_posts.author_id = auth.uid()
+  )
+);
+
+create policy "Users can delete tags from their own posts"
+on post_tags for delete
+using (
+  exists (
+    select 1 from user_posts
+    where user_posts.id = post_tags.post_id
+    and user_posts.author_id = auth.uid()
+  )
+);
+
+
+-- ============================================================
+-- 9. 验证所有策略
 -- ============================================================
 
 select 
@@ -328,6 +594,6 @@ select
   cmd,
   qual
 from pg_policies 
-where tablename in ('profiles', 'user_posts', 'comments')
+where tablename in ('profiles', 'user_posts', 'comments', 'user_favorites', 'user_test_history', 'tags', 'post_tags')
    or (tablename = 'objects' and schemaname = 'storage')
 order by tablename, policyname;

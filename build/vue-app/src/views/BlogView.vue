@@ -32,8 +32,24 @@
           </RouterLink>
         </div>
 
+        <!-- 分类筛选栏 -->
+        <div class="category-filter mb-4">
+          <button
+            v-for="cat in categories"
+            :key="cat.value"
+            class="category-btn"
+            :class="{ active: activeCategory === cat.value }"
+            @click="activeCategory = cat.value"
+          >
+            <Icon :icon="cat.icon" class="me-1" />
+            {{ cat.label }}
+            <span v-if="cat.value !== 'all'" class="category-count">{{ getCategoryCount(cat.value) }}</span>
+          </button>
+        </div>
+
         <div class="row">
-          <div class="col-12">
+          <!-- 文章列表 -->
+          <div :class="showSidebar ? 'col-lg-9' : 'col-12'">
             <!-- 加载中 -->
             <div v-if="loading" class="loading-posts">
               <div class="spinner"></div>
@@ -43,7 +59,7 @@
             <!-- 文章列表 -->
             <div v-else>
               <div class="blog-post card mb-4 border-0 shadow-sm card-hover animate-slide-up" 
-                   v-for="(post, index) in allPosts" 
+                   v-for="(post, index) in filteredPosts" 
                    :key="post.id"
                    :class="{ 'visible': isVisible }" 
                    :style="`animation-delay: ${index * 0.15}s`">
@@ -81,10 +97,18 @@
               </div>
 
               <!-- 无文章提示 -->
-              <div v-if="allPosts.length === 0" class="no-posts">
+              <div v-if="filteredPosts.length === 0" class="no-posts">
                 <Icon icon="mdi:text-box-remove" />
                 <p>暂无文章</p>
               </div>
+            </div>
+          </div>
+
+          <!-- 侧边栏 -->
+          <div v-if="showSidebar" class="col-lg-3">
+            <div class="blog-sidebar">
+              <TagCloud :tags="allTags" @tag-click="handleTagClick" />
+              <RssSubscribe class="mt-4" />
             </div>
           </div>
         </div>
@@ -98,12 +122,27 @@ import { ref, computed, onMounted } from 'vue'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'
 import { useAnimations } from '@/composables/useAnimations'
+import { useTags } from '@/composables/useStore'
 import Icon from '@/components/Icon.vue'
+import TagCloud from '@/components/TagCloud.vue'
+import RssSubscribe from '@/components/RssSubscribe.vue'
 
 const { user, isAuthenticated } = useAuth()
 const { isVisible } = useAnimations()
+const { allTags, loadTags } = useTags()
 
 const loading = ref(true)
+const activeCategory = ref('all')
+const showSidebar = ref(true)
+
+// 分类定义
+const categories = [
+  { value: 'all', label: '全部', icon: 'mdi:view-grid' },
+  { value: '编程教程', label: '编程教程', icon: 'mdi:code-braces' },
+  { value: '心理测试', label: '心理测试', icon: 'mdi:brain' },
+  { value: '技术分享', label: '技术分享', icon: 'mdi:share-variant' },
+  { value: '个人文章', label: '个人文章', icon: 'mdi:note-text' },
+]
 
 // 静态博客文章数据
 const staticPosts = ref([
@@ -169,8 +208,25 @@ const allPosts = computed(() => {
   return [...formattedUserPosts, ...staticPosts.value]
 })
 
+// 按分类筛选文章
+const filteredPosts = computed(() => {
+  if (activeCategory.value === 'all') return allPosts.value
+  return allPosts.value.filter(post => post.category === activeCategory.value)
+})
+
+// 获取分类文章数量
+const getCategoryCount = (category: string) => {
+  return allPosts.value.filter(post => post.category === category).length
+}
+
+// 处理标签点击
+const handleTagClick = (tag: string) => {
+  activeCategory.value = 'all'
+  // 搜索包含该标签的文章
+}
+
 onMounted(async () => {
-  await loadUserPosts()
+  await Promise.all([loadUserPosts(), loadTags()])
 })
 
 // 加载用户文章
@@ -321,5 +377,64 @@ async function handleDeletePost(postId: string, title: string) {
   font-size: 4rem;
   opacity: 0.3;
   margin-bottom: 1rem;
+}
+
+/* 分类筛选栏 */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 2rem;
+}
+
+.category-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.category-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.category-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.category-count {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-left: 0.25rem;
+}
+
+.category-btn.active .category-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* 侧边栏 */
+.blog-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 991.98px) {
+  .blog-sidebar {
+    margin-top: 2rem;
+  }
 }
 </style>

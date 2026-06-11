@@ -10,7 +10,17 @@
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
               <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
-            <h1 class="test-hero-title mb-3">{{ title }}</h1>
+            <h1 class="test-hero-title mb-3">
+              {{ title }}
+              <button
+                class="favorite-btn"
+                :class="{ active: isFavorite(testId) }"
+                @click="toggleFavorite({ id: testId, title: testTitle, type: 'test' })"
+                :title="isFavorite(testId) ? '取消收藏' : '收藏此测试'"
+              >
+                <Icon :icon="isFavorite(testId) ? 'mdi:heart' : 'mdi:heart-outline'" />
+              </button>
+            </h1>
             <p class="test-hero-sub mb-2">{{ subtitle }}</p>
             <p class="test-hero-desc" v-html="description"></p>
           </div>
@@ -19,6 +29,21 @@
     </section>
 
     <div class="container-fluid px-4 test-body">
+      <!-- 进度恢复对话框 -->
+      <div v-if="showRestoreDialog" class="restore-dialog mb-4">
+        <div class="restore-card">
+          <Icon icon="mdi:history" class="restore-icon" />
+          <div class="restore-content">
+            <h4>检测到未完成的测试</h4>
+            <p class="restore-info">{{ savedProgressInfo }}</p>
+          </div>
+          <div class="restore-actions">
+            <button class="btn btn-sm btn-primary me-2" @click="restoreProgress">恢复进度</button>
+            <button class="btn btn-sm btn-outline" @click="discardProgress">重新开始</button>
+          </div>
+        </div>
+      </div>
+
       <!-- 答题区域 -->
       <div v-if="!showResult">
         <p class="freq-instruction mb-5" :style="{ paddingLeft: instructionPadding }">{{ instruction }}</p>
@@ -113,6 +138,9 @@
         <div class="text-center" :style="{ textAlign: buttonAlign }">
           <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
           <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
+          <RouterLink to="/profile?tab=history" class="btn btn-animate ms-3 history-link">
+            <Icon icon="mdi:history" class="me-1" /> 查看历史记录
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -120,10 +148,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, type PropType } from 'vue'
+import { ref, computed, onMounted, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 import Icon from './Icon.vue'
+import { useFavorites, useHistory, useTestProgress } from '@/composables/useStore'
 
 interface Question {
   id: number
@@ -158,6 +187,8 @@ const props = defineProps({
   subtitle: { type: String, required: true },
   description: { type: String, required: true },
   instruction: { type: String, required: true },
+  testId: { type: String, required: true },
+  testTitle: { type: String, required: true },
   
   // 题目和选项
   questions: { type: Array as PropType<Question[]>, required: true },
@@ -183,6 +214,12 @@ const props = defineProps({
 const answers = ref<Record<number, number>>({})
 const showResult = ref(false)
 const result = ref<Result | null>(null)
+const showRestoreDialog = ref(false)
+const savedProgressInfo = ref<string>('')
+
+const { isFavorite, toggleFavorite, loadFavorites } = useFavorites()
+const { addToHistory } = useHistory()
+const { getProgress, saveProgress, clearProgress } = useTestProgress()
 
 const answeredCount = computed(() => 
   props.questions.filter(q => answers.value[q.id] !== undefined).length
@@ -200,20 +237,46 @@ const maxScore = computed(() => {
 const selectAnswer = (questionId: number, value: number) => {
   answers.value[questionId] = value
   answers.value = { ...answers.value }
+  saveProgress(props.testId, answers.value, questionId)
 }
 
 const calculateResult = () => {
   result.value = props.calculateResultFn(answers.value)
   showResult.value = true
+  clearProgress(props.testId)
+  addToHistory({
+    testId: props.testId,
+    testTitle: props.testTitle,
+    score: totalScore.value,
+    maxScore: maxScore.value,
+    level: result.value.level,
+    completedAt: new Date().toISOString()
+  })
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-const resetTest = () => {
-  answers.value = {}
-  showResult.value = false
-  result.value = null
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+const restoreProgress = () => {
+  const saved = getProgress(props.testId)
+  if (saved) {
+    answers.value = saved.answers
+    showRestoreDialog.value = false
+  }
 }
+
+const discardProgress = () => {
+  clearProgress(props.testId)
+  showRestoreDialog.value = false
+}
+
+onMounted(() => {
+  loadFavorites()
+  const saved = getProgress(props.testId)
+  if (saved && Object.keys(saved.answers).length > 0) {
+    const time = new Date(saved.savedAt).toLocaleString('zh-CN')
+    savedProgressInfo.value = `${time}，已答 ${Object.keys(saved.answers).length} 题`
+    showRestoreDialog.value = true
+  }
+})
 
 // 暴露给父组件
 defineExpose({
@@ -452,5 +515,91 @@ defineExpose({
 .notice-icon {
   font-size: 1.5rem;
   color: #1976D2;
+}
+
+/* 收藏按钮 */
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s, transform 0.2s;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  padding: 0;
+  line-height: 1;
+}
+
+.favorite-btn:hover {
+  color: #ff6b6b;
+  transform: scale(1.15);
+}
+
+.favorite-btn.active {
+  color: #ff4757;
+}
+
+/* 进度恢复对话框 */
+.restore-dialog {
+  margin-bottom: 2rem;
+}
+
+.restore-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 193, 7, 0.12);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 12px;
+}
+
+.restore-icon {
+  font-size: 2rem;
+  color: #ffc107;
+  flex-shrink: 0;
+}
+
+.restore-content {
+  flex: 1;
+}
+
+.restore-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.restore-info {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.restore-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: inherit;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 历史记录链接 */
+.history-link {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.history-link:hover {
+  opacity: 1;
 }
 </style>
