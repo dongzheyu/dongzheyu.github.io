@@ -25,17 +25,15 @@ jobs:
           persist-credentials: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: '24'
-          cache: 'npm'
-          cache-dependency-path: build/vue-app/package-lock.json
+          bun-version: latest
 
-      - name: Install dependencies
+      - name: Install dependencies (bun)
         run: |
           cd build/vue-app
-          npm ci
+          bun install --frozen-lockfile   # 类似 npm ci
 
       - name: Create .env.local
         run: |
@@ -44,10 +42,10 @@ jobs:
           echo "VITE_SUPABASE_ANON_KEY=${{ secrets.VITE_SUPABASE_ANON_KEY }}" >> .env.local
           echo "VITE_ADMIN_EMAIL=${{ secrets.VITE_ADMIN_EMAIL }}" >> .env.local
 
-      - name: Build project
+      - name: Build project (bun)
         run: |
           cd build/vue-app
-          npm run build
+          bun run build
 
       - name: Verify build output
         shell: bash
