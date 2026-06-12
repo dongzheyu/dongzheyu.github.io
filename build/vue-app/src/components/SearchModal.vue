@@ -31,9 +31,9 @@
         </button>
       </div>
 
-      <div class="search-results" v-if="results.length > 0">
+      <div class="search-results" v-if="searchResults.length > 0">
         <div
-          v-for="(result, index) in results"
+          v-for="(result, index) in searchResults"
           :key="result.id"
           class="search-result-item"
           :class="{ selected: selectedIndex === index }"
@@ -46,13 +46,20 @@
           <div class="result-content">
             <h4 class="result-title">{{ result.title }}</h4>
             <p class="result-desc">{{ result.description }}</p>
+            <div class="result-snippet" v-if="result.matchInContent" v-html="result.snippet"></div>
             <span class="result-category">{{ result.category }}</span>
           </div>
           <Icon icon="mdi:arrow-right" class="result-arrow" />
         </div>
       </div>
 
-      <div class="search-empty" v-else-if="query.length > 0">
+      <!-- 加载中 -->
+      <div class="search-loading" v-else-if="isLoading">
+        <div class="loading-spinner"></div>
+        <p>搜索中...</p>
+      </div>
+
+      <div class="search-empty" v-else-if="query.length > 0 && !isLoading">
         <Icon icon="mdi:inbox" size="48" />
         <p>未找到相关内容</p>
       </div>
@@ -94,7 +101,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onMounted } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import { useTags } from '@/composables/useStore'
@@ -108,10 +115,26 @@ const query = ref('')
 const selectedIndex = ref(0)
 const searchInput = ref<HTMLInputElement | null>(null)
 const selectedCategory = ref<string | null>(null)
-const blogPosts = ref<any[]>([])
+const isLoading = ref(false)
+const searchResults = ref<any[]>([])
+
+// 防抖定时器
+let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
 // 分类列表
 const categories = getCategories()
+
+// 静态数据（不搜索content）
+const staticData = [
+  { id: 'static-1', title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '编程教程', icon: 'mdi:shield-check', color: '#00ADD8', path: '/snishaper/index.html', content: '' },
+  { id: 'static-2', title: 'English Listen WinUI', description: '现代化英语听写训练工具，WinUI 3 + C# + C++混合开发', category: '技术分享', icon: 'mdi:headphones', color: '#f48c06', path: '/project/english-listen-winui', content: '' },
+  { id: 'static-3', title: 'English-Listen', description: '专业英语听写训练工具，基于C++和Qt6开发', category: '技术分享', icon: 'mdi:book-open-page-variant', color: '#52b788', path: '/project/english-listen', content: '' },
+  { id: 'static-4', title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理测试', icon: 'mdi:account-badge', color: '#ff6b35', path: '/tests/mbti', content: '' },
+  { id: 'static-5', title: '抑郁自评量表', description: '专业的抑郁症自我评估工具', category: '心理测试', icon: 'mdi:heart-pulse', color: '#e63946', path: '/tests/depression', content: '' },
+  { id: 'static-6', title: '焦虑自评量表', description: '评估焦虑程度的专业工具', category: '心理测试', icon: 'mdi:activity', color: '#ff9f1c', path: '/tests/anxiety', content: '' },
+  { id: 'static-7', title: '关于我们', description: '了解JetCPP的故事和技术背景', category: '团队动态', icon: 'mdi:account-group', color: '#4cc9f0', path: '/about', content: '' },
+  { id: 'static-8', title: '技术博客', description: 'C++编程经验、项目开发心得分享', category: '技术分享', icon: 'mdi:newspaper-variant', color: '#f48c06', path: '/blog', content: '' },
+]
 
 // 搜索历史
 interface SearchHistoryItem {
@@ -124,7 +147,6 @@ const searchHistory = ref<SearchHistoryItem[]>([])
 const HISTORY_KEY = 'search_history'
 const MAX_HISTORY = 10
 
-// 从 localStorage 加载搜索历史
 const loadSearchHistory = () => {
   try {
     const saved = localStorage.getItem(HISTORY_KEY)
@@ -136,75 +158,123 @@ const loadSearchHistory = () => {
   }
 }
 
-// 保存搜索历史
 const saveToHistory = (searchQuery: string, category?: string) => {
   if (!searchQuery.trim()) return
-
-  // 移除已存在的相同搜索
   const filtered = searchHistory.value.filter(
     item => !(item.query === searchQuery && item.category === category)
   )
-
-  // 添加到最前面
-  filtered.unshift({
-    query: searchQuery,
-    category,
-    timestamp: Date.now()
-  })
-
-  // 保留最近 10 条
+  filtered.unshift({ query: searchQuery, category, timestamp: Date.now() })
   searchHistory.value = filtered.slice(0, MAX_HISTORY)
   localStorage.setItem(HISTORY_KEY, JSON.stringify(searchHistory.value))
 }
 
-// 清除搜索历史
 const clearSearchHistory = () => {
   searchHistory.value = []
   localStorage.removeItem(HISTORY_KEY)
 }
 
-// 从 Supabase 加载博客文章
-const loadBlogPosts = async () => {
+// 从内容中提取匹配片段（带高亮）
+const extractSnippet = (content: string, q: string, maxLen = 150): { html: string; matchInContent: boolean } => {
+  if (!content || !q) return { html: '', matchInContent: false }
+
+  const lowerContent = content.toLowerCase()
+  const lowerQ = q.toLowerCase()
+  const idx = lowerContent.indexOf(lowerQ)
+
+  if (idx === -1) return { html: '', matchInContent: false }
+
+  // 提取匹配位置前后的上下文
+  const start = Math.max(0, idx - 40)
+  const end = Math.min(content.length, idx + q.length + maxLen)
+  let snippet = content.slice(start, end)
+
+  // 添加省略号
+  if (start > 0) snippet = '...' + snippet
+  if (end < content.length) snippet += '...'
+
+  // 高亮关键词：用正则替换所有匹配项（不区分大小写）
+  const escapedQ = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const highlighted = snippet.replace(
+    new RegExp(`(${escapedQ})`, 'gi'),
+    '<mark>$1</mark>'
+  )
+
+  return { html: highlighted, matchInContent: true }
+}
+
+// 从 Supabase 全文搜索博客文章
+const searchFromSupabase = async (q: string) => {
   try {
-    // 加载用户文章
-    const { data: userPosts } = await supabase
-      .from('user_posts')
-      .select('id, title, excerpt, content, category, slug, color, created_at')
-      .eq('published', true)
-      .order('created_at', { ascending: false })
+    isLoading.value = true
 
-    // 构建搜索数据：静态 + 动态
-    const staticData = [
-      { id: 'static-1', title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '编程教程', icon: 'mdi:shield-check', color: '#00ADD8', path: '/snishaper/index.html' },
-      { id: 'static-2', title: 'English Listen WinUI', description: '现代化英语听写训练工具，WinUI 3 + C# + C++混合开发', category: '技术分享', icon: 'mdi:headphones', color: '#f48c06', path: '/project/english-listen-winui' },
-      { id: 'static-3', title: 'English-Listen', description: '专业英语听写训练工具，基于C++和Qt6开发', category: '技术分享', icon: 'mdi:book-open-page-variant', color: '#52b788', path: '/project/english-listen' },
-      { id: 'static-4', title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理测试', icon: 'mdi:account-badge', color: '#ff6b35', path: '/tests/mbti' },
-      { id: 'static-5', title: '抑郁自评量表', description: '专业的抑郁症自我评估工具', category: '心理测试', icon: 'mdi:heart-pulse', color: '#e63946', path: '/tests/depression' },
-      { id: 'static-6', title: '焦虑自评量表', description: '评估焦虑程度的专业工具', category: '心理测试', icon: 'mdi:activity', color: '#ff9f1c', path: '/tests/anxiety' },
-      { id: 'static-7', title: '关于我们', description: '了解JetCPP的故事和技术背景', category: '团队动态', icon: 'mdi:account-group', color: '#4cc9f0', path: '/about' },
-      { id: 'static-8', title: '技术博客', description: 'C++编程经验、项目开发心得分享', category: '技术分享', icon: 'mdi:newspaper-variant', color: '#f48c06', path: '/blog' },
-    ]
+    let dynamicResults: any[] = []
 
-    // 动态文章转换为搜索数据
-    const dynamicData = (userPosts || []).map(post => ({
-      id: `user-${post.id}`,
-      title: post.title,
-      description: post.excerpt || (post.content ? post.content.substring(0, 120) + '...' : ''),
-      category: post.category || '技术分享',
-      icon: 'mdi:newspaper-variant',
-      color: post.color || '#FF6B6B',
-      path: `/blog/${post.slug}`
+    // 优先尝试 RPC 全文搜索
+    try {
+      const { data: rpcResults, error: rpcError } = await supabase.rpc('search_posts', { search_query: q })
+      
+      if (!rpcError && rpcResults) {
+        dynamicResults = rpcResults.map((post: any) => ({
+          id: `user-${post.id}`,
+          title: post.title,
+          description: post.excerpt || '',
+          snippet: post.content_snippet || '',
+          matchInContent: !!post.content_snippet,
+          category: post.category || '技术分享',
+          icon: 'mdi:newspaper-variant',
+          color: post.color || '#FF6B6B',
+          path: `/blog/${post.slug}`,
+        }))
+      }
+    } catch {
+      // RPC 不可用，继续使用 fallback
+    }
+
+    // RPC 失败时 fallback 到 ilike 查询
+    if (dynamicResults.length === 0) {
+      const { data: userPosts } = await supabase
+        .from('user_posts')
+        .select('id, title, excerpt, content, category, slug, color')
+        .eq('published', true)
+        .or(`title.ilike.%${q}%,content.ilike.%${q}%,excerpt.ilike.%${q}%`)
+        .limit(20)
+
+      dynamicResults = (userPosts || []).map(post => {
+        const snippet = extractSnippet(post.content || '', q)
+        const description = post.excerpt || (post.content ? post.content.substring(0, 120) + '...' : '')
+        return {
+          id: `user-${post.id}`,
+          title: post.title,
+          description,
+          snippet: snippet.html,
+          matchInContent: snippet.matchInContent,
+          category: post.category || '技术分享',
+          icon: 'mdi:newspaper-variant',
+          color: post.color || '#FF6B6B',
+          path: `/blog/${post.slug}`,
+        }
+      })
+    }
+
+    // 静态数据在标题/描述/分类中匹配
+    const lowerQ = q.toLowerCase()
+    const staticResults = staticData.filter(item =>
+      item.title.toLowerCase().includes(lowerQ) ||
+      item.description.toLowerCase().includes(lowerQ) ||
+      item.category.toLowerCase().includes(lowerQ)
+    ).map(item => ({
+      ...item,
+      snippet: '',
+      matchInContent: false,
     }))
 
-    blogPosts.value = [...staticData, ...dynamicData]
+    // 合并结果：动态文章在前（通常更相关），静态在后
+    searchResults.value = [...dynamicResults, ...staticResults].slice(0, 20)
   } catch (e) {
-    console.error('加载博客文章失败:', e)
-    // 降级使用静态数据
-    blogPosts.value = [
-      { id: 'static-1', title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '编程教程', icon: 'mdi:shield-check', color: '#00ADD8', path: '/snishaper/index.html' },
-      { id: 'static-4', title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理测试', icon: 'mdi:account-badge', color: '#ff6b35', path: '/tests/mbti' },
-      { id: 'static-8', title: '技术博客', description: 'C++编程经验、项目开发心得分享', category: '技术分享', icon: 'mdi:newspaper-variant', color: '#f48c06', path: '/blog' },
-    ]
+    console.error('搜索失败:', e)
+    searchResults.value = []
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -213,28 +283,45 @@ const hotTags = ['SniShaper', '英语听写', 'MBTI', 'C++', '心理测试']
 const toggleCategory = (catName: string) => {
   selectedCategory.value = selectedCategory.value === catName ? null : catName
   selectedIndex.value = 0
+  performSearch()
 }
 
-const results = computed(() => {
-  if (!query.value.trim() && !selectedCategory.value) return []
+// 带防抖的搜索
+const performSearch = () => {
+  if (debounceTimer) {
+    clearTimeout(debounceTimer)
+    debounceTimer = null
+  }
 
-  const q = query.value.toLowerCase()
-  return blogPosts.value.filter(item => {
-    // 分类筛选
-    const categoryMatch = !selectedCategory.value || item.category === selectedCategory.value
-    // 搜索匹配（有搜索词时匹配，无搜索词时仅按分类筛选）
-    const queryMatch = !q || item.title.toLowerCase().includes(q) ||
-      item.description.toLowerCase().includes(q) ||
-      item.category.toLowerCase().includes(q)
-    return categoryMatch && queryMatch
-  })
-})
+  selectedIndex.value = 0
+  const q = query.value.trim()
+
+  if (!q) {
+    searchResults.value = []
+    isLoading.value = false
+    return
+  }
+
+  // 分类筛选（有分类但无搜索词时，在静态数据中按分类筛选）
+  if (selectedCategory.value && !q) {
+    searchResults.value = staticData
+      .filter(item => item.category === selectedCategory.value)
+      .map(item => ({ ...item, snippet: '', matchInContent: false }))
+    return
+  }
+
+  isLoading.value = true
+  debounceTimer = setTimeout(() => {
+    searchFromSupabase(q)
+  }, 300)
+}
 
 const open = () => {
   isOpen.value = true
   query.value = ''
   selectedIndex.value = 0
   selectedCategory.value = null
+  searchResults.value = []
   loadSearchHistory()
   nextTick(() => {
     searchInput.value?.focus()
@@ -246,11 +333,16 @@ const close = () => {
   isOpen.value = false
   query.value = ''
   selectedCategory.value = null
+  searchResults.value = []
+  if (debounceTimer) {
+    clearTimeout(debounceTimer)
+    debounceTimer = null
+  }
   document.body.style.overflow = ''
 }
 
 const handleSearch = () => {
-  selectedIndex.value = 0
+  performSearch()
 }
 
 const navigateTo = (result: any) => {
@@ -287,19 +379,15 @@ const handleKeydown = (e: KeyboardEvent) => {
 
   if (e.key === 'ArrowDown') {
     e.preventDefault()
-    selectedIndex.value = Math.min(selectedIndex.value + 1, results.value.length - 1)
+    selectedIndex.value = Math.min(selectedIndex.value + 1, searchResults.value.length - 1)
   } else if (e.key === 'ArrowUp') {
     e.preventDefault()
     selectedIndex.value = Math.max(selectedIndex.value - 1, 0)
-  } else if (e.key === 'Enter' && results.value[selectedIndex.value]) {
+  } else if (e.key === 'Enter' && searchResults.value[selectedIndex.value]) {
     e.preventDefault()
-    navigateTo(results.value[selectedIndex.value])
+    navigateTo(searchResults.value[selectedIndex.value])
   }
 }
-
-onMounted(() => {
-  loadBlogPosts()
-})
 
 // 暴露方法给父组件
 defineExpose({ open, close })
@@ -500,6 +588,50 @@ defineExpose({ open, close })
 .search-empty i {
   margin-bottom: 12px;
   opacity: 0.5;
+}
+
+/* 搜索结果片段 */
+.result-snippet {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-top: 4px;
+  padding: 6px 8px;
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--color-primary);
+}
+
+.result-snippet :deep(mark) {
+  background: var(--color-primary);
+  color: white;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+/* 加载状态 */
+.search-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--color-text-muted);
+  gap: 12px;
+}
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .search-history,

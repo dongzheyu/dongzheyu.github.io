@@ -1,8 +1,15 @@
 import fs from 'fs'
 import path from 'path'
+import { createClient } from '@supabase/supabase-js'
 
-// 博客文章数据
-const blogPosts = [
+const SITE_URL = 'https://jetcpp.dpdns.org'
+
+// Supabase 配置
+const supabaseUrl = process.env.VITE_SUPABASE_URL
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY
+
+// 静态博客文章（本地 .md 文件）
+const staticPosts = [
   {
     title: 'C++完全入门指南：从Hello World到结构体',
     slug: 'cpp-guide',
@@ -26,39 +33,97 @@ const blogPosts = [
   }
 ]
 
-function generateRSS() {
+// 从 Supabase 获取用户文章
+async function fetchUserPosts() {
+  if (!supabaseUrl || !supabaseKey) {
+    console.warn('Supabase 环境变量未设置，跳过用户文章')
+    return []
+  }
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey)
+    const { data, error } = await supabase
+      .from('user_posts')
+      .select('title, slug, excerpt, content, category, color, created_at')
+      .eq('published', true)
+      .order('created_at', { ascending: false })
+      .limit(50)
+
+    if (error) {
+      console.error('Supabase 查询错误:', error.message)
+      return []
+    }
+
+    console.log(`从 Supabase 获取到 ${(data || []).length} 篇用户文章`)
+
+    return (data || []).map(post => ({
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt || (post.content ? post.content.substring(0, 200).replace(/[#*`\n]/g, ' ').trim() + '...' : ''),
+      date: new Date(post.created_at).toISOString(),
+      category: post.category || '个人文章'
+    }))
+  } catch (err) {
+    console.error('获取用户文章失败:', err.message)
+    return []
+  }
+}
+
+function escapeXml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+function generateRSS(userPosts) {
   const buildDate = new Date().toUTCString()
   
-  const items = blogPosts.map(post => `
+  // 合并：用户文章在前，静态文章在后
+  const allPosts = [...userPosts, ...staticPosts]
+
+  const items = allPosts.map(post => `
     <item>
-      <title><![CDATA[${post.title}]]></title>
-      <link>https://dongzheyu.github.io/blog/${post.slug}</link>
-      <description><![CDATA[${post.excerpt}]]></description>
+      <title><![CDATA[${escapeXml(post.title)}]]></title>
+      <link>${SITE_URL}/blog/${post.slug}</link>
+      <description><![CDATA[${escapeXml(post.excerpt)}]]></description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-      <category>${post.category}</category>
-      <guid isPermaLink="false">https://dongzheyu.github.io/blog/${post.slug}</guid>
+      <category>${escapeXml(post.category)}</category>
+      <guid isPermaLink="false">${SITE_URL}/blog/${post.slug}</guid>
     </item>`).join('')
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>JetCPP Team 博客</title>
-    <link>https://dongzheyu.github.io</link>
+    <link>${SITE_URL}</link>
     <description>代码重塑世界 · 创新驱动未来 - JetCPP Team 技术博客</description>
     <language>zh-CN</language>
     <lastBuildDate>${buildDate}</lastBuildDate>
-    <atom:link href="https://dongzheyu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
-      <url>https://dongzheyu.github.io/logo.png</url>
+      <url>${SITE_URL}/logo.png</url>
       <title>JetCPP Team</title>
-      <link>https://dongzheyu.github.io</link>
+      <link>${SITE_URL}</link>
     </image>
     ${items}
   </channel>
 </rss>`
 
   fs.writeFileSync(path.join(process.cwd(), 'public', 'feed.xml'), rss)
-  console.log('RSS feed generated successfully!')
+  console.log(`RSS feed generated: ${allPosts.length} posts (${userPosts.length} user + ${staticPosts.length} static)`)
 }
 
-generateRSS()
+async function main() {
+  const userPosts = await fetchUserPosts()
+  generateRSS(userPosts)
+}
+
+main().catch(err => {
+  console.error('生成 RSS 失败:', err)
+  // 降级：只生成静态文章
+  generateRSS([])
+  process.exit(0)
+})

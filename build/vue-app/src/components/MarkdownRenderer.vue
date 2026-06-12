@@ -3,20 +3,38 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, nextTick } from 'vue'
 import MarkdownIt from 'markdown-it'
 
 const props = defineProps<{
   content: string
 }>()
 
+// 生成 slug（中文支持）
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\u4e00-\u9fff\u3400-\u4dbf]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/--+/g, '-')
+}
+
 // 初始化 markdown-it
 const md = new MarkdownIt({
-  html: true,        // 允许 HTML 标签
-  linkify: true,     // 自动识别链接
-  typographer: true, // 启用智能引号等
-  breaks: true,      // 转换换行符为 <br>
+  html: true,
+  linkify: true,
+  typographer: true,
+  breaks: true,
 })
+
+// 为标题添加 id 和锚点链接
+md.renderer.rules.heading_open = (tokens, idx) => {
+  const token = tokens[idx]
+  const nextToken = tokens[idx + 1]
+  const text = nextToken.children?.reduce((acc: string, t: any) => acc + t.content, '') || ''
+  const id = slugify(text)
+  return `<h${token.tagLevel} id="${id}"><a class="header-anchor" href="#${id}" aria-hidden="true"></a>`
+}
 
 // 自定义代码块渲染，添加复制按钮
 const defaultRender = md.renderer.rules.fence || function(tokens, idx, options, env, self) {

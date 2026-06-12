@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "bun run --bun vite",
     "prebuild": "bun scripts/clean-public.js",
-    "build": "bun run --bun vite build && bun run deploy",
+    "build": "bun run generate-rss && bun run --bun vite build && bun run deploy",
     "deploy": "bun scripts/deploy.js && bun -e \"import fs from 'fs'; fs.copyFileSync('dist/index.html', 'dist/404.html')\"",
     "preview": "bun run --bun vite preview",
+    "generate-rss": "bun scripts/generate-rss.js",
     "add-project": "bun scripts/add-content.js project",
     "add-blog": "bun scripts/add-content.js blog"
   },
