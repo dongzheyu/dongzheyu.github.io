@@ -27,6 +27,21 @@ async function initAuth() {
       user.value = null
     } else {
       user.value = session.user
+
+      // 同步 OAuth 用户的昵称和头像到 profiles
+      const meta = session.user.user_metadata
+      const fullName = meta?.full_name || meta?.name || ''
+      const avatarUrl = meta?.avatar_url || meta?.picture || ''
+      if (fullName || avatarUrl) {
+        await supabase
+          .from('profiles')
+          .upsert({
+            id: session.user.id,
+            nickname: fullName,
+            avatar_url: avatarUrl,
+            updated_at: new Date().toISOString()
+          }, { onConflict: 'id' })
+      }
     }
   } else {
     user.value = null
@@ -48,6 +63,21 @@ async function initAuth() {
         user.value = null
       } else {
         user.value = session.user
+
+        // 同步 OAuth 用户的昵称和头像到 profiles
+        const meta = session.user.user_metadata
+        const fullName = meta?.full_name || meta?.name || ''
+        const avatarUrl = meta?.avatar_url || meta?.picture || ''
+        if (fullName || avatarUrl) {
+          await supabase
+            .from('profiles')
+            .upsert({
+              id: session.user.id,
+              nickname: fullName,
+              avatar_url: avatarUrl,
+              updated_at: new Date().toISOString()
+            }, { onConflict: 'id' })
+        }
       }
     } else {
       user.value = null
@@ -84,14 +114,16 @@ async function signUp(email: string, password: string) {
 
 // 登出
 async function signOut() {
-  const { error } = await supabase.auth.signOut()
-  
-  // 即使有错误，也清除本地状态
+  // 立即清除本地状态（即使在网络请求挂起时也能让 UI 响应）
   user.value = null
   
-  if (error) {
-    console.warn('Supabase signOut 警告:', error.message)
-    // 不抛出错误，因为本地状态已经清除
+  try {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.warn('Supabase signOut 警告:', error.message)
+    }
+  } catch (err) {
+    console.warn('Supabase signOut 异常:', err)
   }
 }
 

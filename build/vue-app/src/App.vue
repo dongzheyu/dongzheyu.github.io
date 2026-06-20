@@ -171,13 +171,16 @@ const handleKeydown = (e: KeyboardEvent) => {
 // 处理登出
 const handleSignOut = async () => {
   try {
-    await signOut()
-    // 强制刷新页面以确保状态完全清除
-    window.location.href = '/'
+    // 超时保护：最多等 3 秒，确保即使 supabase 请求挂起也能跳转
+    await Promise.race([
+      signOut(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('退出登录超时')), 3000))
+    ])
   } catch (error: any) {
-    console.error('登出失败:', error)
-    alert('退出登录失败: ' + (error.message || '未知错误'))
+    console.warn('退出登录（已清除本地状态）:', error.message)
   }
+  // 无论 supabase 是否响应，都强制跳转
+  window.location.href = '/'
 }
 </script>
 

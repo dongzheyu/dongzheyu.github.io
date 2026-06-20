@@ -17,9 +17,9 @@
 
       <div v-else-if="success" class="success-state">
         <Icon icon="mdi:check-circle" class="success-icon" />
-        <h2>邮箱验证成功！</h2>
-        <p>你的邮箱已成功验证，现在可以登录了。</p>
-        <RouterLink to="/auth" class="btn btn-primary btn-animate">
+        <h2>{{ isOAuth ? '登录成功！' : '邮箱验证成功！' }}</h2>
+        <p>{{ isOAuth ? '正在跳转到首页...' : '你的邮箱已成功验证，现在可以登录了。' }}</p>
+        <RouterLink v-if="!isOAuth" to="/auth" class="btn btn-primary btn-animate">
           前往登录
         </RouterLink>
       </div>
@@ -37,54 +37,38 @@ const router = useRouter()
 const loading = ref(true)
 const error = ref('')
 const success = ref(false)
+const isOAuth = ref(false)
 
 onMounted(async () => {
   try {
-    // 从 URL 查询参数中获取参数
-    const urlParams = new URLSearchParams(window.location.search)
-    
-    const accessToken = urlParams.get('access_token')
-    const refreshToken = urlParams.get('refresh_token')
-    const type = urlParams.get('type')
+    // Supabase 会自动从 URL 中提取 session
+    // 等待 Supabase 处理完成
+    await new Promise(resolve => setTimeout(resolve, 500))
 
-    if (!accessToken) {
-      throw new Error('缺少访问令牌')
-    }
-
-    // 设置会话
-    const { data, error: sessionError } = await supabase.auth.setSession({
-      access_token: accessToken,
-      refresh_token: refreshToken || '',
-    })
+    const { data, error: sessionError } = await supabase.auth.getSession()
 
     if (sessionError) throw sessionError
 
-    // 检查用户是否被封禁
-    if (data.user) {
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('banned')
-        .eq('id', data.user.id)
-        .single()
-      
-      if (profileError) {
-        console.error('获取用户资料失败:', profileError)
-      } else if (profile?.banned) {
-        // 用户已被封禁，立即退出登录
-        await supabase.auth.signOut()
-        error.value = '您的账户已被封禁，无法验证邮箱。请联系管理员。'
-        loading.value = false
-        return
-      }
+    if (data.session) {
+      // OAuth 登录成功
+      isOAuth.value = true
+      success.value = true
+      setTimeout(() => {
+        router.push('/')
+      }, 2000)
+      return
     }
 
-    // 验证成功
-    success.value = true
-    
-    // 3秒后自动跳转到登录页面
-    setTimeout(() => {
-      router.push('/auth')
-    }, 3000)
+    // 检查是否有错误参数
+    const urlParams = new URLSearchParams(window.location.search)
+    const errorParam = urlParams.get('error')
+
+    if (errorParam) {
+      throw new Error(urlParams.get('error_description') || 'OAuth 授权失败')
+    }
+
+    // 如果没有 session 也没有错误，跳转到首页
+    router.push('/')
 
   } catch (err: any) {
     console.error('验证失败:', err)

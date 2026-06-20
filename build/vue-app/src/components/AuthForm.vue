@@ -81,6 +81,27 @@
           忘记密码？
         </RouterLink>
       </div>
+
+      <!-- 第三方登录 -->
+      <div class="social-login-section">
+        <div class="divider">
+          <span>或使用第三方账号登录</span>
+        </div>
+        <div class="social-buttons">
+          <button type="button" class="social-btn google-btn" @click="loginWithOAuth('google')" :disabled="loading">
+            <Icon icon="mdi:google" :size="20" />
+            <span>Google</span>
+          </button>
+          <button type="button" class="social-btn github-btn" @click="loginWithOAuth('github')" :disabled="loading">
+            <Icon icon="mdi:github" :size="20" />
+            <span>GitHub</span>
+          </button>
+          <button type="button" class="social-btn microsoft-btn" @click="loginWithOAuth('azure')" :disabled="loading">
+            <Icon icon="mdi:microsoft" :size="20" />
+            <span>Microsoft</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -106,6 +127,25 @@ const toggleMode = () => {
   email.value = ''
   password.value = ''
   agreeTerms.value = false
+}
+
+const loginWithOAuth = async (provider: 'google' | 'github' | 'azure') => {
+  loading.value = true
+  error.value = ''
+  try {
+    const { error: oauthError } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        // 重要: 指向 OAuth 回调处理页面
+        redirectTo: window.location.origin + '/auth/callback'
+      }
+    })
+    if (oauthError) throw oauthError
+  } catch (err: any) {
+    console.error('OAuth 登录失败:', err)
+    error.value = err.message || '第三方登录失败，请稍后重试'
+    loading.value = false
+  }
 }
 
 const handleSubmit = async () => {
@@ -418,5 +458,74 @@ const handleSubmit = async () => {
 .consent-label a:hover {
   color: var(--color-primary-light);
   text-decoration: underline;
+}
+
+.social-login-section {
+  margin-top: 1.5rem;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+  padding: 0 1rem;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.social-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.google-btn:hover:not(:disabled) {
+  border-color: #4285F4;
+}
+
+.github-btn:hover:not(:disabled) {
+  border-color: #333;
+}
+
+.microsoft-btn:hover:not(:disabled) {
+  border-color: #00A4EF;
 }
 </style>

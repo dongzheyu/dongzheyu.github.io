@@ -624,6 +624,39 @@ bun run project:build
 - 搜索评论内容
 - 删除垃圾/不当评论
 
+## 环境配置
+
+### 本地开发环境变量
+
+在 `build/vue-app/` 目录下创建 `.env.local` 文件：
+
+```
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_ADMIN_EMAIL=your-email@example.com
+```
+
+### GitHub Actions Secrets
+
+GitHub Actions 自动构建需要在仓库 **Settings → Secrets and variables → Actions** 中添加以下 Secrets：
+
+| Secret 名称 | 说明 |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase 项目 URL（如 `https://xxxxx.supabase.co`） |
+| `VITE_SUPABASE_ANON_KEY` | Supabase 匿名密钥（`sb_publishable_xxx`） |
+| `VITE_ADMIN_EMAIL` | 管理员邮箱 |
+
+添加后重新触发 workflow 即可生效。
+
+### 数据库初始化
+
+首次部署前，需要在 **Supabase SQL Editor** 中执行以下脚本：
+
+1. 执行 `build/vue-app/database-setup.sql` — 创建所有表、RLS 策略和触发器
+2. 执行 `build/vue-app/database-fulltext-search.sql`（可选）— 启用 PostgreSQL 全文搜索
+
+将 SQL 文件中的 `your-admin-email@example.com` 替换为你的管理员邮箱。
+
 ## 部署
 
 该网站部署到 GitHub Pages，通过 GitHub Actions 实现自动构建与发布。
