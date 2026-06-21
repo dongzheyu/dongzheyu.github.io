@@ -133,11 +133,11 @@ const loginWithOAuth = async (provider: 'google' | 'github' | 'azure') => {
   loading.value = true
   error.value = ''
   try {
+    const siteUrl = import.meta.env.VITE_SITE_URL || window.location.origin
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        // 重要: 指向 OAuth 回调处理页面
-        redirectTo: window.location.origin + '/auth/callback'
+        redirectTo: siteUrl + '/auth/callback'
       }
     })
     if (oauthError) throw oauthError
