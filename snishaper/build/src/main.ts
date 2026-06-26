@@ -10,7 +10,7 @@ const zh: Translations = {
   nav_download: '下载',
 
   // Hero
-  hero_badge: 'v1.26 Windows 原生应用',
+  hero_badge: 'v1.27 Windows 原生应用',
   hero_desc: '专为复杂网络环境设计的本地代理工具。TLS 分片、QUIC 重建、ECH 注入 — 让你的流量在封锁网络中持续可用。',
   hero_btn_download: '立即下载',
   hero_btn_tech: '了解技术原理',
@@ -123,6 +123,16 @@ const zh: Translations = {
   cl_subtitle: '持续迭代，不断优化体验',
   cl_latest: '最新发行版',
   cl_more: '更多版本见更新日志',
+  cl127_title: 'SOCKS5 代理 & 进化模式',
+  cl127_l1: '新增完整 SOCKS5 代理协议支持，含前后端配置界面与运行时管理',
+  cl127_l2: '全新进化模式：AI 驱动的自动规则生成、测试与优化系统，支持自定义测试用例',
+  cl127_l3: '新增 About 页面，展示核心特性、贡献者名单及更新检查功能',
+  cl127_l4: '完整添加俄语界面支持（ru.json）',
+  cl127_l5: '构建脚本支持 -Silent 开关，管理员权限提升时自动传递参数',
+  cl127_l6: '进化模式 UI 重做，渐变 Header、进度条动画、暗色模式修复',
+  cl127_l7: 'sync.RWMutex 替换 sync.Mutex 提升并发性能',
+  cl127_l8: '文件写入权限 0644→0600，RPC 认证令牌机制，响应体大小限制，XSS 防护',
+  cl127_l9: '修复 Socks5 关闭不当导致的内存泄漏',
   cl126_title: 'DNS 上游 & 平台支持增强',
   cl126_l1: '支持 DNS 上游服务器配置，配合域名绕过功能',
   cl126_l2: 'QUIC 和 ECH 模式组合使用支持',
@@ -161,7 +171,7 @@ const zh: Translations = {
   // Download
   dl_title: '准备掌控流量了吗？',
   dl_desc: '下载 SniShaper Windows 版本。开源免费，无需注册。',
-  dl_btn: '下载 Windows x64 (v1.26)',
+  dl_btn: '下载 Windows x64 (v1.27)',
   dl_win: 'Windows 10/11',
   dl_gui: '图形界面',
   dl_open: '开源项目',
@@ -205,7 +215,7 @@ const en: Translations = {
   nav_download: 'Download',
 
   // Hero
-  hero_badge: 'v1.26 Windows Native App',
+  hero_badge: 'v1.27 Windows Native App',
   hero_desc: 'A local proxy tool purpose-built for complex network environments. TLS fragmentation, QUIC reconstruction, ECH injection — keep your traffic accessible even in heavily restricted networks.',
   hero_btn_download: 'Download Now',
   hero_btn_tech: 'How It Works',
@@ -318,6 +328,16 @@ const en: Translations = {
   cl_subtitle: 'Continuously iterating and improving the experience',
   cl_latest: 'Latest Release',
   cl_more: 'Full changelog',
+  cl127_title: 'SOCKS5 Proxy & Evolution Mode',
+  cl127_l1: 'Full SOCKS5 protocol support with frontend/backend configuration UI and runtime management',
+  cl127_l2: 'AI-powered Evolution mode: automatic rule generation, testing, and optimization with custom test cases',
+  cl127_l3: 'New About page showcasing core features, contributor list, and update checking',
+  cl127_l4: 'Complete Russian UI support (ru.json) covering all pages and build scripts',
+  cl127_l5: 'Build script supports -Silent switch for silent admin elevation with auto parameter passing',
+  cl127_l6: 'Evolution UI overhaul: gradient header, progress bar animations, dark mode textarea fix',
+  cl127_l7: 'Replaced sync.Mutex with sync.RWMutex for better read-heavy concurrency performance',
+  cl127_l8: 'File permissions 0644→0600, RPC auth tokens, response size limits, XSS prevention',
+  cl127_l9: 'Fixed memory leaks caused by improper SOCKS5 shutdown',
   cl126_title: 'DNS Upstreams & Platform Support',
   cl126_l1: 'Support for DNS upstream servers with domain bypass features',
   cl126_l2: 'Combined operation of QUIC and ECH modes',
@@ -356,7 +376,7 @@ const en: Translations = {
   // Download
   dl_title: 'Ready to Take Control of Your Traffic?',
   dl_desc: 'Download SniShaper for Windows. Open source, free, no registration required.',
-  dl_btn: 'Download Windows x64 (v1.26)',
+  dl_btn: 'Download Windows x64 (v1.27)',
   dl_win: 'Windows 10/11',
   dl_gui: 'GUI',
   dl_open: 'Open Source',
@@ -494,7 +514,7 @@ export function initApp(): void {
                     <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
                     <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
                     <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
-                    <span class="ml-4 text-xs text-snip-muted font-mono">SniShaper v1.25</span>
+                    <span class="ml-4 text-xs text-snip-muted font-mono">SniShaper v1.27</span>
                   </div>
                   <div class="p-4 space-y-3">
                     <div class="flex items-center justify-between px-3 py-2 bg-snip-dark rounded-lg">
@@ -829,16 +849,16 @@ export function initApp(): void {
               <div class="absolute -left-2 top-0 w-4 h-4 bg-snip-orange rounded-full"></div>
               <div class="space-y-3">
                 <div class="flex items-center gap-3 flex-wrap">
-                  <span class="px-3 py-1 bg-snip-orange text-white rounded-full text-sm font-bold">v1.26</span>
+                  <span class="px-3 py-1 bg-snip-orange text-white rounded-full text-sm font-bold">v1.27</span>
                   <span class="px-2 py-0.5 bg-snip-orange/20 text-snip-orange rounded text-xs font-medium" data-i18n="cl_latest">${T.cl_latest}</span>
                 </div>
-                <h3 class="text-lg font-bold" data-i18n="cl126_title">${T.cl126_title}</h3>
+                <h3 class="text-lg font-bold" data-i18n="cl127_title">${T.cl127_title}</h3>
                 <ul class="space-y-2 text-snip-muted text-sm">
-                  ${[1,2,3,4,5,6,7,8,9].map(n => `<li class="flex items-start gap-2"><span class="text-snip-orange shrink-0">-</span><span data-i18n="cl126_l${n}">${T[`cl126_l${n}`]}</span></li>`).join('')}
+                  ${[1,2,3,4,5,6,7,8,9].map(n => `<li class="flex items-start gap-2"><span class="text-snip-orange shrink-0">-</span><span data-i18n="cl127_l${n}">${T[`cl127_l${n}`]}</span></li>`).join('')}
                 </ul>
               </div>
             </div>
-            ${[['125',''],['124','stable'],['122',''],['121',''],['11x','final'],['10','']].map(([ver,tag]) => {
+            ${[['126',''],['125',''],['124','stable'],['122',''],['121',''],['11x','final'],['10','']].map(([ver,tag]) => {
               const displayVer = ver === '10' ? '1.0' : ver === '11x' ? '1.1' : `1.${ver.slice(1)}`;
               return `
             <div class="relative pl-8 border-l-2 border-snip-gray-light">
@@ -847,6 +867,7 @@ export function initApp(): void {
                 <span class="px-3 py-1 bg-snip-gray text-snip-muted rounded-full text-sm font-bold">v${displayVer}${tag ? '-'+tag : ''}</span>
                 <h3 class="text-lg font-bold" data-i18n="cl${ver}_title">${T[`cl${ver}_title`]}</h3>
                 <ul class="space-y-2 text-snip-muted text-sm">
+                  ${ver==='127'?[1,2,3,4,5,6,7,8,9].map(n=>`<li class="flex items-start gap-2"><span class="text-snip-orange shrink-0">-</span><span data-i18n="cl127_l${n}">${T[`cl127_l${n}`]}</span></li>`).join(''):''}
                   ${ver==='126'?[1,2,3,4,5,6,7,8,9].map(n=>`<li class="flex items-start gap-2"><span class="text-snip-orange shrink-0">-</span><span data-i18n="cl126_l${n}">${T[`cl126_l${n}`]}</span></li>`).join(''):''}
                   ${ver==='125'?[1,2,3].map(n=>`<li class="flex items-start gap-2"><span class="text-snip-orange shrink-0">-</span><span data-i18n="cl125_l${n}">${T[`cl125_l${n}`]}</span></li>`).join(''):''}
                   ${ver==='124'?[1,2,3,4].map(n=>`<li class="flex items-start gap-2"><span class="text-snip-orange shrink-0">-</span><span data-i18n="cl124_l${n}">${T[`cl124_l${n}`]}</span></li>`).join(''):''}
@@ -931,7 +952,7 @@ export function initApp(): void {
           </button>
           <h3 class="text-2xl font-bold mb-6" data-i18n="modal_title">${T.modal_title}</h3>
           <div class="space-y-4">
-            <a href="https://workdrive.zohopublic.com.cn/external/84487a84ff53bc86084a07edf87e38eca39989f941a6c7c04c8391860b689a34/download" target="_blank" class="download-option flex items-start gap-4 p-4 bg-snip-gray rounded-xl border border-snip-gray-light hover:border-snip-orange/50 transition-all group">
+            <a href="https://workdrive.zohopublic.com.cn/external/e0630c15869d11d9e527030dd2c34264b40e34ae1313205051fe840f41481ce4/download" target="_blank" class="download-option flex items-start gap-4 p-4 bg-snip-gray rounded-xl border border-snip-gray-light hover:border-snip-orange/50 transition-all group">
               <div class="w-10 h-10 bg-snip-orange/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-snip-orange/20 transition-colors">
                 <svg class="w-5 h-5 text-snip-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
               </div>
@@ -940,7 +961,7 @@ export function initApp(): void {
                 <div class="text-sm text-snip-muted" data-i18n="modal_zoho_desc">${T.modal_zoho_desc}</div>
               </div>
             </a>
-            <a href="https://github.com/SniShaper/SniShaper/releases/download/v1.26/SniShaper-Windows-1.26.7z" target="_blank" class="download-option flex items-start gap-4 p-4 bg-snip-gray rounded-xl border border-snip-gray-light hover:border-snip-orange/50 transition-all group">
+            <a href="https://github.com/SniShaper/SniShaper/releases/download/v1.27/Snishaper-Win-x64-1.27Setup.exe" target="_blank" class="download-option flex items-start gap-4 p-4 bg-snip-gray rounded-xl border border-snip-gray-light hover:border-snip-orange/50 transition-all group">
               <div class="w-10 h-10 bg-snip-orange/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-snip-orange/20 transition-colors">
                 <svg class="w-5 h-5 text-snip-orange" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 2.02.837.58-.16 1.201-.24 1.82-.242.618.002 1.239.082 1.82.242 1.012-1.159 2.02-.837 2.02-.837.652 1.652.241 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               </div>
@@ -949,7 +970,7 @@ export function initApp(): void {
                 <div class="text-sm text-snip-muted" data-i18n="modal_github_desc">${T.modal_github_desc}</div>
               </div>
             </a>
-            <a href="https://files.zohopublic.com.cn/public/workdrive-public/download/oqvg1b2490138595c4ac6b80bef201cc6e6d4?x-cli-msg=%7B%22linkId%22%3A%221GumWstoXFf-35NGn%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D" target="_blank" class="download-option flex items-start gap-4 p-4 bg-snip-gray rounded-xl border border-snip-gray-light hover:border-snip-orange/50 transition-all group">
+            <a href="https://files.zohopublic.com.cn/public/workdrive-public/download/27xz8047bd39882bf4a9f8f6a12c2668bb416?x-cli-msg=%7B%22linkId%22%3A%221GumWstpbIf-35NGn%22%2C%22isFileOwner%22%3Afalse%2C%22version%22%3A%221.0%22%2C%22isWDSupport%22%3Afalse%7D" target="_blank" class="download-option flex items-start gap-4 p-4 bg-snip-gray rounded-xl border border-snip-gray-light hover:border-snip-orange/50 transition-all group">
               <div class="w-10 h-10 bg-snip-orange/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-snip-orange/20 transition-colors">
                 <svg class="w-5 h-5 text-snip-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               </div>

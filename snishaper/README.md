@@ -280,14 +280,14 @@ type Translations = Record<string, string>;
 const zh: Translations = {
   nav_features: '功能特性',
   nav_tech: '核心技术',
-  hero_badge: 'v1.26 Windows 原生应用',
+  hero_badge: 'v1.27 Windows 原生应用',
   // ... 更多翻译
 };
 
 const en: Translations = {
   nav_features: 'Features',
   nav_tech: 'Core Tech',
-  hero_badge: 'v1.26 Windows Native App',
+  hero_badge: 'v1.27 Windows Native App',
   // ... 更多翻译
 };
 ```
@@ -528,7 +528,7 @@ const mainContent = `
 const ja: Translations = {
   nav_features: '機能',
   nav_tech: 'コア技術',
-  hero_badge: 'v1.26 Windows ネイティブ',
+  hero_badge: 'v1.27 Windows ネイティブ',
   // ... 更多日文翻译
 };
 
@@ -1452,14 +1452,14 @@ type Translations = Record<string, string>;
 const zh: Translations = {
   nav_features: '功能特性',
   nav_tech: '核心技术',
-  hero_badge: 'v1.26 Windows 原生应用',
+  hero_badge: 'v1.27 Windows 原生应用',
   // ... more translations
 };
 
 const en: Translations = {
   nav_features: 'Features',
   nav_tech: 'Core Tech',
-  hero_badge: 'v1.26 Windows Native App',
+  hero_badge: 'v1.27 Windows Native App',
   // ... more translations
 };
 ```
@@ -1700,7 +1700,7 @@ const mainContent = `
 const ja: Translations = {
   nav_features: '機能',
   nav_tech: 'コア技術',
-  hero_badge: 'v1.26 Windows ネイティブ',
+  hero_badge: 'v1.27 Windows ネイティブ',
   // ... more Japanese translations
 };
 
