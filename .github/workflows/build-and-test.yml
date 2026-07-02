@@ -95,15 +95,21 @@ jobs:
           echo "index.html: $(stat -c '%y' index.html 2>/dev/null || stat -f '%Sm' index.html)"
           echo "assets directory: $(stat -c '%y' assets 2>/dev/null || stat -f '%Sm' assets)"
 
-      - name: Commit and push changes
+      - name: Create PR with build output
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-24.04'
-        run: |
-          git config --local user.email "youmao2023@outlook.com"
-          git config --local user.name "dongle"
-          git add -A
-          git diff --staged --quiet || git commit -m "ci: auto-build and deploy [skip ci]"
-          git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main || true
-          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "ci: auto-build [skip ci]"
+          branch: auto-build/output
+          delete-branch: true
+          title: "ci: auto-build output"
+          body: "Auto-generated build output from CI."
+          add-paths: |
+            index.html
+            assets/
+            blog/
+            project/
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
