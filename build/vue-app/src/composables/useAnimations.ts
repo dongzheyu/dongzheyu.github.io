@@ -18,7 +18,7 @@ export function useAnimations(options: AnimationOptions = {}) {
   })
 
   return {
-    isVisible
+    isVisible,
   }
 }
 
@@ -36,7 +36,7 @@ export function useScrollAnimation(options: AnimationOptions = {}) {
     if (!observer) {
       observer = new IntersectionObserver(
         (entries) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             const target = entry.target as HTMLElement
             if (entry.isIntersecting) {
               target.classList.add('visible')
@@ -49,7 +49,7 @@ export function useScrollAnimation(options: AnimationOptions = {}) {
             }
           })
         },
-        { threshold, rootMargin }
+        { threshold, rootMargin },
       )
     }
 
@@ -66,7 +66,7 @@ export function useScrollAnimation(options: AnimationOptions = {}) {
   })
 
   return {
-    observe
+    observe,
   }
 }
 
@@ -89,6 +89,6 @@ export function useReducedMotion() {
   })
 
   return {
-    prefersReducedMotion
+    prefersReducedMotion,
   }
 }

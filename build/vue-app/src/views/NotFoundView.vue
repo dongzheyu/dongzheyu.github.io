@@ -10,19 +10,19 @@
 
       <h1 class="error-title">页面未找到</h1>
       <p class="error-message">
-        抱歉，您访问的页面似乎迷路了...<br>
+        抱歉，您访问的页面似乎迷路了...<br />
         也许它去探索其他维度了？
       </p>
 
       <!-- 趣味元素 -->
       <div class="fun-elements">
-        <div class="floating-icon" style="--delay: 0s;">
+        <div class="floating-icon" style="--delay: 0s">
           <Icon icon="mdi:compass" />
         </div>
-        <div class="floating-icon" style="--delay: 0.5s;">
+        <div class="floating-icon" style="--delay: 0.5s">
           <Icon icon="mdi:map" />
         </div>
-        <div class="floating-icon" style="--delay: 1s;">
+        <div class="floating-icon" style="--delay: 1s">
           <Icon icon="mdi:sign-direction" />
         </div>
       </div>
@@ -30,10 +30,10 @@
       <!-- 操作按钮 -->
       <div class="action-buttons">
         <router-link to="/" class="btn btn-primary btn-animate btn-lg">
-          <Icon icon="mdi:home" style="margin-right: 8px;" />返回首页
+          <Icon icon="mdi:home" style="margin-right: 8px" />返回首页
         </router-link>
         <button class="btn btn-outline btn-animate btn-lg" @click="goBack">
-          <Icon icon="mdi:arrow-left" style="margin-right: 8px;" />返回上一页
+          <Icon icon="mdi:arrow-left" style="margin-right: 8px" />返回上一页
         </button>
       </div>
 
@@ -117,7 +117,8 @@ const goBack = () => {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -174,7 +175,8 @@ const goBack = () => {
 }
 
 @keyframes drift {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   33% {
@@ -233,7 +235,7 @@ const goBack = () => {
 .suggestion-link:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: rgba(25, 118, 210, 0.08);
+  background: rgba(59, 130, 246, 0.08);
   transform: translateY(-2px);
 }
 
@@ -242,8 +244,8 @@ const goBack = () => {
 }
 
 /* 关闭动画模式 */
-[data-motion="off"] .digit,
-[data-motion="off"] .floating-icon {
+[data-motion='off'] .digit,
+[data-motion='off'] .floating-icon {
   animation: none;
 }
 

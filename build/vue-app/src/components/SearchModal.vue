@@ -24,7 +24,11 @@
           :key="cat.name"
           class="category-btn"
           :class="{ active: selectedCategory === cat.name }"
-          :style="selectedCategory === cat.name ? `background-color: ${cat.color}20; color: ${cat.color}; border-color: ${cat.color}40` : ''"
+          :style="
+            selectedCategory === cat.name
+              ? `background-color: ${cat.color}20; color: ${cat.color}; border-color: ${cat.color}40`
+              : ''
+          "
           @click="toggleCategory(cat.name)"
         >
           <Icon :icon="cat.icon" />{{ cat.name }}
@@ -40,7 +44,10 @@
           @click="navigateTo(result)"
           @mouseenter="selectedIndex = index"
         >
-          <div class="result-icon" :style="`background-color: ${result.color}18; color: ${result.color}`">
+          <div
+            class="result-icon"
+            :style="`background-color: ${result.color}18; color: ${result.color}`"
+          >
             <Icon :icon="result.icon" />
           </div>
           <div class="result-content">
@@ -77,7 +84,7 @@
             class="hint-tag history-tag"
             @click="searchTag(item.query)"
           >
-            <Icon icon="mdi:magnify" style="font-size: 0.8rem;" />{{ item.query }}
+            <Icon icon="mdi:magnify" style="font-size: 0.8rem" />{{ item.query }}
             <span class="history-category" v-if="item.category">· {{ item.category }}</span>
           </span>
         </div>
@@ -86,12 +93,7 @@
       <div class="search-hints" v-else>
         <p class="hint-title">热门搜索</p>
         <div class="hint-tags">
-          <span
-            v-for="tag in hotTags"
-            :key="tag"
-            class="hint-tag"
-            @click="searchTag(tag)"
-          >
+          <span v-for="tag in hotTags" :key="tag" class="hint-tag" @click="searchTag(tag)">
             {{ tag }}
           </span>
         </div>
@@ -126,14 +128,86 @@ const categories = getCategories()
 
 // 静态数据（不搜索content）
 const staticData = [
-  { id: 'static-1', title: 'SniShaper', description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术', category: '编程教程', icon: 'mdi:shield-check', color: '#00ADD8', path: '/snishaper/index.html', content: '' },
-  { id: 'static-2', title: 'English Listen WinUI', description: '现代化英语听写训练工具，WinUI 3 + C# + C++混合开发', category: '技术分享', icon: 'mdi:headphones', color: '#f48c06', path: '/project/english-listen-winui', content: '' },
-  { id: 'static-3', title: 'English-Listen', description: '专业英语听写训练工具，基于C++和Qt6开发', category: '技术分享', icon: 'mdi:book-open-page-variant', color: '#52b788', path: '/project/english-listen', content: '' },
-  { id: 'static-4', title: 'MBTI 人格测试', description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型', category: '心理测试', icon: 'mdi:account-badge', color: '#ff6b35', path: '/tests/mbti', content: '' },
-  { id: 'static-5', title: '抑郁自评量表', description: '专业的抑郁症自我评估工具', category: '心理测试', icon: 'mdi:heart-pulse', color: '#e63946', path: '/tests/depression', content: '' },
-  { id: 'static-6', title: '焦虑自评量表', description: '评估焦虑程度的专业工具', category: '心理测试', icon: 'mdi:activity', color: '#ff9f1c', path: '/tests/anxiety', content: '' },
-  { id: 'static-7', title: '关于我们', description: '了解JetCPP的故事和技术背景', category: '团队动态', icon: 'mdi:account-group', color: '#4cc9f0', path: '/about', content: '' },
-  { id: 'static-8', title: '技术博客', description: 'C++编程经验、项目开发心得分享', category: '技术分享', icon: 'mdi:newspaper-variant', color: '#f48c06', path: '/blog', content: '' },
+  {
+    id: 'static-1',
+    title: 'SniShaper',
+    description: '智能网络代理工具，集成ECH注入、TLS-RF分片等技术',
+    category: '编程教程',
+    icon: 'mdi:shield-check',
+    color: '#00ADD8',
+    path: '/snishaper/index.html',
+    content: '',
+  },
+  {
+    id: 'static-2',
+    title: 'English Listen WinUI',
+    description: '现代化英语听写训练工具，WinUI 3 + C# + C++混合开发',
+    category: '技术分享',
+    icon: 'mdi:headphones',
+    color: '#f48c06',
+    path: '/project/english-listen-winui',
+    content: '',
+  },
+  {
+    id: 'static-3',
+    title: 'English-Listen',
+    description: '专业英语听写训练工具，基于C++和Qt6开发',
+    category: '技术分享',
+    icon: 'mdi:book-open-page-variant',
+    color: '#52b788',
+    path: '/project/english-listen',
+    content: '',
+  },
+  {
+    id: 'static-4',
+    title: 'MBTI 人格测试',
+    description: '迈尔斯-布里格斯类型指标，93道题识别16种人格类型',
+    category: '心理测试',
+    icon: 'mdi:account-badge',
+    color: '#ff6b35',
+    path: '/tests/mbti',
+    content: '',
+  },
+  {
+    id: 'static-5',
+    title: '抑郁自评量表',
+    description: '专业的抑郁症自我评估工具',
+    category: '心理测试',
+    icon: 'mdi:heart-pulse',
+    color: '#e63946',
+    path: '/tests/depression',
+    content: '',
+  },
+  {
+    id: 'static-6',
+    title: '焦虑自评量表',
+    description: '评估焦虑程度的专业工具',
+    category: '心理测试',
+    icon: 'mdi:activity',
+    color: '#ff9f1c',
+    path: '/tests/anxiety',
+    content: '',
+  },
+  {
+    id: 'static-7',
+    title: '关于我们',
+    description: '了解JetCPP的故事和技术背景',
+    category: '团队动态',
+    icon: 'mdi:account-group',
+    color: '#4cc9f0',
+    path: '/about',
+    content: '',
+  },
+  {
+    id: 'static-8',
+    title: '技术博客',
+    description: 'C++编程经验、项目开发心得分享',
+    category: '技术分享',
+    icon: 'mdi:newspaper-variant',
+    color: '#f48c06',
+    path: '/blog',
+    content: '',
+  },
 ]
 
 // 搜索历史
@@ -161,7 +235,7 @@ const loadSearchHistory = () => {
 const saveToHistory = (searchQuery: string, category?: string) => {
   if (!searchQuery.trim()) return
   const filtered = searchHistory.value.filter(
-    item => !(item.query === searchQuery && item.category === category)
+    (item) => !(item.query === searchQuery && item.category === category),
   )
   filtered.unshift({ query: searchQuery, category, timestamp: Date.now() })
   searchHistory.value = filtered.slice(0, MAX_HISTORY)
@@ -174,7 +248,11 @@ const clearSearchHistory = () => {
 }
 
 // 从内容中提取匹配片段（带高亮）
-const extractSnippet = (content: string, q: string, maxLen = 150): { html: string; matchInContent: boolean } => {
+const extractSnippet = (
+  content: string,
+  q: string,
+  maxLen = 150,
+): { html: string; matchInContent: boolean } => {
   if (!content || !q) return { html: '', matchInContent: false }
 
   const lowerContent = content.toLowerCase()
@@ -194,10 +272,7 @@ const extractSnippet = (content: string, q: string, maxLen = 150): { html: strin
 
   // 高亮关键词：用正则替换所有匹配项（不区分大小写）
   const escapedQ = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const highlighted = snippet.replace(
-    new RegExp(`(${escapedQ})`, 'gi'),
-    '<mark>$1</mark>'
-  )
+  const highlighted = snippet.replace(new RegExp(`(${escapedQ})`, 'gi'), '<mark>$1</mark>')
 
   return { html: highlighted, matchInContent: true }
 }
@@ -211,8 +286,10 @@ const searchFromSupabase = async (q: string) => {
 
     // 优先尝试 RPC 全文搜索
     try {
-      const { data: rpcResults, error: rpcError } = await supabase.rpc('search_posts', { search_query: q })
-      
+      const { data: rpcResults, error: rpcError } = await supabase.rpc('search_posts', {
+        search_query: q,
+      })
+
       if (!rpcError && rpcResults) {
         dynamicResults = rpcResults.map((post: any) => ({
           id: `user-${post.id}`,
@@ -239,9 +316,10 @@ const searchFromSupabase = async (q: string) => {
         .or(`title.ilike.%${q}%,content.ilike.%${q}%,excerpt.ilike.%${q}%`)
         .limit(20)
 
-      dynamicResults = (userPosts || []).map(post => {
+      dynamicResults = (userPosts || []).map((post) => {
         const snippet = extractSnippet(post.content || '', q)
-        const description = post.excerpt || (post.content ? post.content.substring(0, 120) + '...' : '')
+        const description =
+          post.excerpt || (post.content ? post.content.substring(0, 120) + '...' : '')
         return {
           id: `user-${post.id}`,
           title: post.title,
@@ -258,15 +336,18 @@ const searchFromSupabase = async (q: string) => {
 
     // 静态数据在标题/描述/分类中匹配
     const lowerQ = q.toLowerCase()
-    const staticResults = staticData.filter(item =>
-      item.title.toLowerCase().includes(lowerQ) ||
-      item.description.toLowerCase().includes(lowerQ) ||
-      item.category.toLowerCase().includes(lowerQ)
-    ).map(item => ({
-      ...item,
-      snippet: '',
-      matchInContent: false,
-    }))
+    const staticResults = staticData
+      .filter(
+        (item) =>
+          item.title.toLowerCase().includes(lowerQ) ||
+          item.description.toLowerCase().includes(lowerQ) ||
+          item.category.toLowerCase().includes(lowerQ),
+      )
+      .map((item) => ({
+        ...item,
+        snippet: '',
+        matchInContent: false,
+      }))
 
     // 合并结果：动态文章在前（通常更相关），静态在后
     searchResults.value = [...dynamicResults, ...staticResults].slice(0, 20)
@@ -305,8 +386,8 @@ const performSearch = () => {
   // 分类筛选（有分类但无搜索词时，在静态数据中按分类筛选）
   if (selectedCategory.value && !q) {
     searchResults.value = staticData
-      .filter(item => item.category === selectedCategory.value)
-      .map(item => ({ ...item, snippet: '', matchInContent: false }))
+      .filter((item) => item.category === selectedCategory.value)
+      .map((item) => ({ ...item, snippet: '', matchInContent: false }))
     return
   }
 
@@ -631,7 +712,9 @@ defineExpose({ open, close })
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .search-history,

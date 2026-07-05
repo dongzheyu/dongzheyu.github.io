@@ -1,0 +1,5 @@
+src/views/blog/CPPGuideView.vue
+dist/
+node_modules/
+public/
+scripts/

@@ -2,7 +2,7 @@
   <div class="adhd-page">
     <!-- 阅读进度条 -->
     <ReadingProgress />
-    
+
     <section class="test-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
@@ -13,8 +13,8 @@
             <h1 class="test-hero-title mb-3">注意力缺陷多动障碍（ADHD）自评测试</h1>
             <p class="test-hero-sub mb-2">成人 ADHD 自评量表（ASRS-v1.1） · 18 道题 · 约 5 分钟</p>
             <p class="test-hero-desc">
-              成人 ADHD 自评量表（Adult ADHD Self-Report Scale v1.1）是根据 DSM-5 标准开发的自评工具，用于筛查成人 ADHD 症状。
-              请根据过去六个月的情况回答。
+              成人 ADHD 自评量表（Adult ADHD Self-Report Scale v1.1）是根据 DSM-5
+              标准开发的自评工具，用于筛查成人 ADHD 症状。 请根据过去六个月的情况回答。
             </p>
           </div>
         </div>
@@ -46,8 +46,16 @@
           </div>
         </div>
         <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">还有 {{ questions.length - answeredCount }} 道题未作答</p>
-          <button class="btn btn-primary btn-animate btn-lg" :disabled="answeredCount < questions.length" @click="calculateResult">查看结果</button>
+          <p v-if="answeredCount < questions.length" class="submit-hint">
+            还有 {{ questions.length - answeredCount }} 道题未作答
+          </p>
+          <button
+            class="btn btn-primary btn-animate btn-lg"
+            :disabled="answeredCount < questions.length"
+            @click="calculateResult"
+          >
+            查看结果
+          </button>
         </div>
       </div>
 
@@ -105,7 +113,11 @@
           <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
-            <p>ASRS 是筛查工具，不能替代专业诊断。ADHD 是一种神经发育障碍，通过药物治疗、行为治疗和技能训练通常能够显著改善功能。如果你怀疑自己可能有 ADHD，建议寻求专业的神经精神科评估。</p>
+            <p>
+              ASRS 是筛查工具，不能替代专业诊断。ADHD
+              是一种神经发育障碍，通过药物治疗、行为治疗和技能训练通常能够显著改善功能。如果你怀疑自己可能有
+              ADHD，建议寻求专业的神经精神科评估。
+            </p>
           </div>
         </div>
 
@@ -157,16 +169,22 @@ const answers = ref<Record<number, number>>({})
 const showResult = ref(false)
 const result = ref<any>(null)
 
-const answeredCount = computed(() => questions.value.filter(q => answers.value[q.id] !== undefined).length)
-const totalScore = computed(() => questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0))
+const answeredCount = computed(
+  () => questions.value.filter((q) => answers.value[q.id] !== undefined).length,
+)
+const totalScore = computed(() =>
+  questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0),
+)
 
 const inattentionScore = computed(() => {
-  return questions.value.filter(q => q.dimension === 'inattention')
+  return questions.value
+    .filter((q) => q.dimension === 'inattention')
     .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
 })
 
 const hyperactivityScore = computed(() => {
-  return questions.value.filter(q => q.dimension === 'hyperactivity')
+  return questions.value
+    .filter((q) => q.dimension === 'hyperactivity')
     .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
 })
 
@@ -181,17 +199,20 @@ const calculateResult = () => {
   const score = totalScore.value
   const inattention = inattentionScore.value
   const hyperactivity = hyperactivityScore.value
-  
+
   // ASRS 筛查算法：前6题（注意缺陷）≥4 阳性
-  const part1Score = questions.value.slice(0, 6).reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
+  const part1Score = questions.value
+    .slice(0, 6)
+    .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
   const isPositive = part1Score >= 4
-  
+
   if (score <= 20) {
     result.value = {
       level: '极轻微症状',
       color: '#52b788',
       description: '你的ADHD症状水平很低，属于正常范围。',
-      analysis: '总得分 ≤20 分表明ADHD症状极轻微。大多数人都有一些注意力不集中或冲动的时刻，这是正常的。你的得分显示ADHD不太可能影响你的生活。',
+      analysis:
+        '总得分 ≤20 分表明ADHD症状极轻微。大多数人都有一些注意力不集中或冲动的时刻，这是正常的。你的得分显示ADHD不太可能影响你的生活。',
       suggestions: ['继续保持现有的生活习惯', '如症状加重，可重新评估', '了解ADHD的正常表现范围'],
     }
   } else if (score <= 40) {
@@ -199,32 +220,50 @@ const calculateResult = () => {
       level: '轻度症状',
       color: '#f48c06',
       description: '你存在一定程度的ADHD症状，但可能未达到临床水平。',
-      analysis: '总得分 21-40 分属于轻度症状范围。你可能有一些注意力或多动冲动困难，但尚未严重影响功能。执行功能训练可能对你有帮助。',
-      suggestions: ['学习时间管理和组织技巧', '尝试使用待办事项清单和提醒工具', '记录分心时间和触发因素', '考虑阅读ADHD自助书籍'],
+      analysis:
+        '总得分 21-40 分属于轻度症状范围。你可能有一些注意力或多动冲动困难，但尚未严重影响功能。执行功能训练可能对你有帮助。',
+      suggestions: [
+        '学习时间管理和组织技巧',
+        '尝试使用待办事项清单和提醒工具',
+        '记录分心时间和触发因素',
+        '考虑阅读ADHD自助书籍',
+      ],
     }
   } else if (score <= 60) {
     result.value = {
       level: '中度症状',
       color: '#ff8c42',
       description: '你的ADHD症状已达到临床显著水平，建议寻求专业评估。',
-      analysis: '总得分 41-60 分达到临床显著阈值。在这个水平，ADHD症状很可能已经开始影响你的工作、学习或人际关系。ADHD是可以通过药物和行为治疗有效管理的神经发育障碍。',
-      suggestions: ['建议预约神经精神科医生或心理医生', '了解ADHD的诊断标准和治疗选项', '寻找ADHD专科治疗师', '考虑参加ADHD支持团体'],
+      analysis:
+        '总得分 41-60 分达到临床显著阈值。在这个水平，ADHD症状很可能已经开始影响你的工作、学习或人际关系。ADHD是可以通过药物和行为治疗有效管理的神经发育障碍。',
+      suggestions: [
+        '建议预约神经精神科医生或心理医生',
+        '了解ADHD的诊断标准和治疗选项',
+        '寻找ADHD专科治疗师',
+        '考虑参加ADHD支持团体',
+      ],
     }
   } else {
     result.value = {
       level: '重度症状',
       color: '#ef233c',
       description: '你的ADHD症状非常严重，很可能显著损害你的功能，建议立即寻求专业帮助。',
-      analysis: '总得分 ≥61 分属于重度ADHD症状范围。在这个水平，症状很可能已经严重影响你的日常生活功能。重度ADHD需要系统的专业评估和治疗干预。',
-      suggestions: ['请尽快就诊神经精神科或精神科', '如实告诉医生你的症状严重程度和持续时间', '了解药物治疗和心理治疗的联合方案', '考虑参加ADHD强化治疗项目'],
+      analysis:
+        '总得分 ≥61 分属于重度ADHD症状范围。在这个水平，症状很可能已经严重影响你的日常生活功能。重度ADHD需要系统的专业评估和治疗干预。',
+      suggestions: [
+        '请尽快就诊神经精神科或精神科',
+        '如实告诉医生你的症状严重程度和持续时间',
+        '了解药物治疗和心理治疗的联合方案',
+        '考虑参加ADHD强化治疗项目',
+      ],
     }
   }
-  
+
   // 补充ASRS筛查算法信息
   if (isPositive) {
     result.value.analysis += ' 根据ASRS筛查算法（前6题≥4），你的结果提示可能需要专业ADHD评估。'
   }
-  
+
   showResult.value = true
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -244,5 +283,7 @@ const resetTest = () => {
   --test-accent: #ffd166;
   --test-accent-rgb: 255, 209, 102;
 }
-.test-hero-sub { color: #ffd166; }
+.test-hero-sub {
+  color: #ffd166;
+}
 </style>

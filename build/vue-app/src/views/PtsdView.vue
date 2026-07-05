@@ -2,19 +2,19 @@
   <div class="ptsd-page">
     <!-- 阅读进度条 -->
     <ReadingProgress />
-    
+
     <section class="test-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
+          <div class="col-lg-8" style="padding-left: 5%">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
               <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
             <h1 class="test-hero-title mb-3">创伤后应激障碍（PTSD）自评测试</h1>
             <p class="test-hero-sub mb-2">PTSD 检查表（PCL-5） · 20 道题 · 约 6 分钟</p>
             <p class="test-hero-desc">
-              PTSD 检查表（Posttraumatic Stress Disorder Checklist for DSM-5）是根据 DSM-5 标准开发的自评工具，用于评估创伤后应激障碍症状。
-              请根据过去一个月的情况回答。
+              PTSD 检查表（Posttraumatic Stress Disorder Checklist for DSM-5）是根据 DSM-5
+              标准开发的自评工具，用于评估创伤后应激障碍症状。 请根据过去一个月的情况回答。
             </p>
           </div>
         </div>
@@ -23,7 +23,9 @@
 
     <div class="container-fluid px-4 test-body">
       <div v-if="!showResult">
-        <p class="freq-instruction mb-5" style="padding-left: 5%;">以下问题涉及你在经历创伤事件后可能出现的反应。请根据过去一个月的情况，评估每种问题对你的困扰程度：</p>
+        <p class="freq-instruction mb-5" style="padding-left: 5%">
+          以下问题涉及你在经历创伤事件后可能出现的反应。请根据过去一个月的情况，评估每种问题对你的困扰程度：
+        </p>
         <div
           v-for="(q, index) in questions"
           :key="q.id"
@@ -46,8 +48,16 @@
           </div>
         </div>
         <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">还有 {{ questions.length - answeredCount }} 道题未作答</p>
-          <button class="btn btn-primary btn-animate btn-lg" :disabled="answeredCount < questions.length" @click="calculateResult">查看结果</button>
+          <p v-if="answeredCount < questions.length" class="submit-hint">
+            还有 {{ questions.length - answeredCount }} 道题未作答
+          </p>
+          <button
+            class="btn btn-primary btn-animate btn-lg"
+            :disabled="answeredCount < questions.length"
+            @click="calculateResult"
+          >
+            查看结果
+          </button>
         </div>
       </div>
 
@@ -70,7 +80,7 @@
               <div class="review-q-num">Q{{ index + 1 }}</div>
               <div class="review-q-text">{{ q.text }}</div>
               <div class="review-score" :class="getScoreClass(answers[q.id])">
-                {{ freqOptions.find(o => o.value === answers[q.id])?.label }}
+                {{ freqOptions.find((o) => o.value === answers[q.id])?.label }}
                 <span class="review-score-num">+{{ answers[q.id] }}</span>
               </div>
             </div>
@@ -135,11 +145,14 @@
           <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
-            <p>PCL-5 是筛查工具，不能替代临床诊断。PTSD 是一种可能影响任何人（无论创伤事件类型）的精神障碍，通过适当的治疗（如眼动脱敏与再处理疗法、认知加工疗法）通常能够显著改善。如果你经历过创伤事件并持续感到困扰，请寻求专业帮助。</p>
+            <p>
+              PCL-5 是筛查工具，不能替代临床诊断。PTSD
+              是一种可能影响任何人（无论创伤事件类型）的精神障碍，通过适当的治疗（如眼动脱敏与再处理疗法、认知加工疗法）通常能够显著改善。如果你经历过创伤事件并持续感到困扰，请寻求专业帮助。
+            </p>
           </div>
         </div>
 
-        <div class="text-center" style="text-align: left !important;">
+        <div class="text-center" style="text-align: left !important">
           <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
           <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
         </div>
@@ -189,26 +202,34 @@ const answers = ref<Record<number, number>>({})
 const showResult = ref(false)
 const result = ref<any>(null)
 
-const answeredCount = computed(() => questions.value.filter(q => answers.value[q.id] !== undefined).length)
-const totalScore = computed(() => questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0))
+const answeredCount = computed(
+  () => questions.value.filter((q) => answers.value[q.id] !== undefined).length,
+)
+const totalScore = computed(() =>
+  questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0),
+)
 
 const clusterB = computed(() => {
-  return questions.value.filter(q => q.cluster === 'B')
+  return questions.value
+    .filter((q) => q.cluster === 'B')
     .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
 })
 
 const clusterC = computed(() => {
-  return questions.value.filter(q => q.cluster === 'C')
+  return questions.value
+    .filter((q) => q.cluster === 'C')
     .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
 })
 
 const clusterD = computed(() => {
-  return questions.value.filter(q => q.cluster === 'D')
+  return questions.value
+    .filter((q) => q.cluster === 'D')
     .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
 })
 
 const clusterE = computed(() => {
-  return questions.value.filter(q => q.cluster === 'E')
+  return questions.value
+    .filter((q) => q.cluster === 'E')
     .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
 })
 
@@ -221,52 +242,77 @@ const getScoreClass = (score: number) => {
 
 const calculateResult = () => {
   const score = totalScore.value
-  
+
   // PCL-5 筛查阈值：≥31–33（取决于研究）
   const isPositive = score >= 31
-  
+
   // DSM-5 诊断算法：B≥1, C≥1, D≥2, E≥2
-  const meetsDSM5 = clusterB.value >= 1 && clusterC.value >= 1 && clusterD.value >= 2 && clusterE.value >= 2
-  
+  const meetsDSM5 =
+    clusterB.value >= 1 && clusterC.value >= 1 && clusterD.value >= 2 && clusterE.value >= 2
+
   if (score <= 20) {
     result.value = {
       level: '极轻微症状',
       color: '#52b788',
       description: '你的PTSD症状水平很低，创伤事件可能未对你造成持久影响。',
-      analysis: '总得分 ≤20 分表明创伤后应激症状极轻微。许多人经历创伤事件后会自然恢复，你的得分显示你可能已经较好地适应或处理了创伤经历。',
-      suggestions: ['继续保持现有的应对策略', '保持与支持系统的联系', '如未来症状加重，可重新评估', '了解创伤后正常反应与病理反应的界限'],
+      analysis:
+        '总得分 ≤20 分表明创伤后应激症状极轻微。许多人经历创伤事件后会自然恢复，你的得分显示你可能已经较好地适应或处理了创伤经历。',
+      suggestions: [
+        '继续保持现有的应对策略',
+        '保持与支持系统的联系',
+        '如未来症状加重，可重新评估',
+        '了解创伤后正常反应与病理反应的界限',
+      ],
     }
   } else if (score <= 30) {
     result.value = {
       level: '轻度症状',
       color: '#f48c06',
       description: '你存在一定程度的创伤后症状，但可能未达到PTSD的诊断标准。',
-      analysis: '总得分 21–30 分属于轻度症状范围。你可能体验到一些创伤相关困扰，但尚未严重到符合PTSD的诊断阈值。这些症状仍值得关注，因为它们可能影响生活质量。',
-      suggestions: ['学习创伤知情自我照顾技巧', '考虑与心理咨询师讨论创伤经历', '练习正念和接地技术', '避免通过物质使用来缓解症状'],
+      analysis:
+        '总得分 21–30 分属于轻度症状范围。你可能体验到一些创伤相关困扰，但尚未严重到符合PTSD的诊断阈值。这些症状仍值得关注，因为它们可能影响生活质量。',
+      suggestions: [
+        '学习创伤知情自我照顾技巧',
+        '考虑与心理咨询师讨论创伤经历',
+        '练习正念和接地技术',
+        '避免通过物质使用来缓解症状',
+      ],
     }
   } else if (score <= 50) {
     result.value = {
       level: '中度症状',
       color: '#ff8c42',
       description: '你的PTSD症状已达到临床显著水平，建议寻求专业评估。',
-      analysis: '总得分 31–50 分达到PTSD筛查阳性标准。在这个水平，创伤后症状很可能已经影响你的日常生活功能。PTSD是可通过循证治疗（如EMDR、CPT、PE）有效治疗的障碍。',
-      suggestions: ['建议预约精神科医生或心理治疗师', '询问关于EMDR或认知加工疗法的信息', '寻找创伤知情治疗师', '与信任的人分享你的经历'],
+      analysis:
+        '总得分 31–50 分达到PTSD筛查阳性标准。在这个水平，创伤后症状很可能已经影响你的日常生活功能。PTSD是可通过循证治疗（如EMDR、CPT、PE）有效治疗的障碍。',
+      suggestions: [
+        '建议预约精神科医生或心理治疗师',
+        '询问关于EMDR或认知加工疗法的信息',
+        '寻找创伤知情治疗师',
+        '与信任的人分享你的经历',
+      ],
     }
   } else {
     result.value = {
       level: '重度症状',
       color: '#ef233c',
       description: '你的PTSD症状非常严重，很可能显著损害你的功能，建议立即寻求专业帮助。',
-      analysis: '总得分 ≥51 分属于重度PTSD症状范围。在这个水平，症状可能导致严重的功能障碍、生活质量下降和共病风险增高。重度PTSD需要系统、专业的治疗干预。',
-      suggestions: ['请尽快就诊精神科或创伤专科', '如实告诉医生你的症状严重程度和持续时间', '考虑住院治疗或强化门诊治疗选项', '危机时刻请拨打心理援助热线 400-161-9995'],
+      analysis:
+        '总得分 ≥51 分属于重度PTSD症状范围。在这个水平，症状可能导致严重的功能障碍、生活质量下降和共病风险增高。重度PTSD需要系统、专业的治疗干预。',
+      suggestions: [
+        '请尽快就诊精神科或创伤专科',
+        '如实告诉医生你的症状严重程度和持续时间',
+        '考虑住院治疗或强化门诊治疗选项',
+        '危机时刻请拨打心理援助热线 400-161-9995',
+      ],
     }
   }
-  
+
   // 补充DSM-5算法信息
   if (meetsDSM5) {
     result.value.analysis += ' 你的症状模式符合DSM-5 PTSD诊断算法（B≥1, C≥1, D≥2, E≥2）。'
   }
-  
+
   showResult.value = true
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -286,5 +332,7 @@ const resetTest = () => {
   --test-accent: #9d0208;
   --test-accent-rgb: 157, 2, 8;
 }
-.test-hero-sub { color: #9d0208; }
+.test-hero-sub {
+  color: #9d0208;
+}
 </style>

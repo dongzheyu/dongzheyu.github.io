@@ -2,7 +2,7 @@
   <div class="anxiety-page">
     <!-- 阅读进度条 -->
     <ReadingProgress />
-    
+
     <section class="test-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
@@ -13,8 +13,8 @@
             <h1 class="test-hero-title mb-3">焦虑症自评测试</h1>
             <p class="test-hero-sub mb-2">GAD-7 广泛性焦虑量表 · 7 道题 · 约 3 分钟</p>
             <p class="test-hero-desc">
-              GAD-7（Generalized Anxiety Disorder-7）是目前最广泛使用的焦虑筛查工具，
-              由 Spitzer 等人于 2006 年开发，已在全球数十项临床研究中验证其信效度。
+              GAD-7（Generalized Anxiety Disorder-7）是目前最广泛使用的焦虑筛查工具， 由 Spitzer
+              等人于 2006 年开发，已在全球数十项临床研究中验证其信效度。
               请根据过去两周内你的真实感受作答。
             </p>
           </div>
@@ -47,8 +47,16 @@
           </div>
         </div>
         <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">还有 {{ questions.length - answeredCount }} 道题未作答</p>
-          <button class="btn btn-primary btn-animate btn-lg" :disabled="answeredCount < questions.length" @click="calculateResult">查看结果</button>
+          <p v-if="answeredCount < questions.length" class="submit-hint">
+            还有 {{ questions.length - answeredCount }} 道题未作答
+          </p>
+          <button
+            class="btn btn-primary btn-animate btn-lg"
+            :disabled="answeredCount < questions.length"
+            @click="calculateResult"
+          >
+            查看结果
+          </button>
         </div>
       </div>
 
@@ -71,7 +79,7 @@
               <div class="review-q-num">Q{{ index + 1 }}</div>
               <div class="review-q-text">{{ q.text }}</div>
               <div class="review-score" :class="getScoreClass(answers[q.id])">
-                {{ freqOptions.find(o => o.value === answers[q.id])?.label }}
+                {{ freqOptions.find((o) => o.value === answers[q.id])?.label }}
                 <span class="review-score-num">+{{ answers[q.id] }}</span>
               </div>
             </div>
@@ -98,11 +106,14 @@
           <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
-            <p>GAD-7 是筛查工具，不是诊断工具。测试结果不能替代精神科医生或心理咨询师的专业评估。如果你对自己的心理健康状况感到担忧，请务必寻求专业帮助。</p>
+            <p>
+              GAD-7
+              是筛查工具，不是诊断工具。测试结果不能替代精神科医生或心理咨询师的专业评估。如果你对自己的心理健康状况感到担忧，请务必寻求专业帮助。
+            </p>
           </div>
         </div>
 
-        <div class="text-center" style="text-align: left !important;">
+        <div class="text-center" style="text-align: left !important">
           <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
           <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
         </div>
@@ -138,8 +149,12 @@ const answers = ref<Record<number, number>>({})
 const showResult = ref(false)
 const result = ref<any>(null)
 
-const answeredCount = computed(() => questions.value.filter(q => answers.value[q.id] !== undefined).length)
-const totalScore = computed(() => questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0))
+const answeredCount = computed(
+  () => questions.value.filter((q) => answers.value[q.id] !== undefined).length,
+)
+const totalScore = computed(() =>
+  questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0),
+)
 
 const getScoreClass = (score: number) => {
   if (score === 0) return 'score-none'
@@ -155,32 +170,59 @@ const calculateResult = () => {
       level: '无或极轻微焦虑',
       color: '#52b788',
       description: '你目前的焦虑水平在正常范围内，过去两周内你很少或几乎没有体验到明显的焦虑症状。',
-      analysis: '得分 0–4 分表示当前焦虑症状极轻微或不存在。适度的焦虑是正常的情绪反应，帮助我们应对日常挑战。你目前的焦虑水平不会对生活产生负面影响。保持现有的生活习惯和自我关怀即可。',
-      suggestions: ['保持规律的睡眠作息', '定期进行有氧运动，每周至少 150 分钟', '练习正念或冥想帮助维持心理平衡', '如未来状态有变化，可以再次评估'],
+      analysis:
+        '得分 0–4 分表示当前焦虑症状极轻微或不存在。适度的焦虑是正常的情绪反应，帮助我们应对日常挑战。你目前的焦虑水平不会对生活产生负面影响。保持现有的生活习惯和自我关怀即可。',
+      suggestions: [
+        '保持规律的睡眠作息',
+        '定期进行有氧运动，每周至少 150 分钟',
+        '练习正念或冥想帮助维持心理平衡',
+        '如未来状态有变化，可以再次评估',
+      ],
     }
   } else if (score <= 9) {
     result.value = {
       level: '轻度焦虑',
       color: '#f48c06',
       description: '你的得分表明存在轻度焦虑症状，这些症状可能对日常生活产生一定影响，值得留意。',
-      analysis: '得分 5–9 分属于轻度焦虑范围。你可能经历一定程度的担忧、紧张或身体上的焦虑反应。这个阶段通过生活方式调整和压力管理技巧，许多人能够有效缓解症状。如果这些感受已经持续超过 6 个月，建议考虑寻求心理咨询。',
-      suggestions: ['学习并练习腹式呼吸或渐进式肌肉放松技术', '减少咖啡因和酒精摄入', '建立规律的运动习惯', '考虑使用正念冥想应用程序（如 Headspace）', '与信任的朋友分享你的感受'],
+      analysis:
+        '得分 5–9 分属于轻度焦虑范围。你可能经历一定程度的担忧、紧张或身体上的焦虑反应。这个阶段通过生活方式调整和压力管理技巧，许多人能够有效缓解症状。如果这些感受已经持续超过 6 个月，建议考虑寻求心理咨询。',
+      suggestions: [
+        '学习并练习腹式呼吸或渐进式肌肉放松技术',
+        '减少咖啡因和酒精摄入',
+        '建立规律的运动习惯',
+        '考虑使用正念冥想应用程序（如 Headspace）',
+        '与信任的朋友分享你的感受',
+      ],
     }
   } else if (score <= 14) {
     result.value = {
       level: '中度焦虑',
       color: '#ff8c42',
       description: '你的得分表明存在中度焦虑症状，这些症状可能正在明显影响你的日常功能和生活质量。',
-      analysis: '得分 10–14 分属于中度焦虑范围。在这个阶段，焦虑症状可能已经开始干扰你的工作、学习和人际关系。认知行为疗法（CBT）对焦虑障碍有很好的循证支持效果，强烈建议寻求专业的心理健康支持。',
-      suggestions: ['尽快预约心理咨询师，了解认知行为疗法', '记录焦虑日记，识别触发因素和思维模式', '避免通过回避行为应对焦虑，逐步面对', '告知家人或朋友你的状态', '咨询医生是否需要辅助治疗'],
+      analysis:
+        '得分 10–14 分属于中度焦虑范围。在这个阶段，焦虑症状可能已经开始干扰你的工作、学习和人际关系。认知行为疗法（CBT）对焦虑障碍有很好的循证支持效果，强烈建议寻求专业的心理健康支持。',
+      suggestions: [
+        '尽快预约心理咨询师，了解认知行为疗法',
+        '记录焦虑日记，识别触发因素和思维模式',
+        '避免通过回避行为应对焦虑，逐步面对',
+        '告知家人或朋友你的状态',
+        '咨询医生是否需要辅助治疗',
+      ],
     }
   } else {
     result.value = {
       level: '重度焦虑',
       color: '#ef233c',
       description: '你的得分表明存在重度焦虑症状，这严重影响你的日常生活。请尽快寻求专业帮助。',
-      analysis: '得分 15–21 分属于重度焦虑范围。在这个阶段，焦虑症状已经严重影响你的生活功能。重度焦虑障碍是可以通过专业治疗（包括心理治疗和/或药物治疗）得到有效改善的，请不要独自承受，寻求专业帮助是正确的选择。',
-      suggestions: ['请尽快就诊精神科或心理科', '如实告诉医生你的症状持续时间和严重程度', '在获得专业帮助之前，确保与他人保持联系', '避免通过酒精或其他物质暂时缓解焦虑', '危机时刻请拨打心理援助热线 400-161-9995'],
+      analysis:
+        '得分 15–21 分属于重度焦虑范围。在这个阶段，焦虑症状已经严重影响你的生活功能。重度焦虑障碍是可以通过专业治疗（包括心理治疗和/或药物治疗）得到有效改善的，请不要独自承受，寻求专业帮助是正确的选择。',
+      suggestions: [
+        '请尽快就诊精神科或心理科',
+        '如实告诉医生你的症状持续时间和严重程度',
+        '在获得专业帮助之前，确保与他人保持联系',
+        '避免通过酒精或其他物质暂时缓解焦虑',
+        '危机时刻请拨打心理援助热线 400-161-9995',
+      ],
     }
   }
   showResult.value = true
@@ -202,5 +244,7 @@ const resetTest = () => {
   --test-accent: #f48c06;
   --test-accent-rgb: 244, 140, 6;
 }
-.test-hero-sub { color: #f48c06; }
+.test-hero-sub {
+  color: #f48c06;
+}
 </style>

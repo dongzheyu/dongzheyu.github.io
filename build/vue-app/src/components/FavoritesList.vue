@@ -1,8 +1,6 @@
 <template>
   <div class="favorites-container">
-    <h3 class="favorites-title">
-      <Icon icon="mdi:heart" /> 我的收藏
-    </h3>
+    <h3 class="favorites-title"><Icon icon="mdi:heart" /> 我的收藏</h3>
 
     <div v-if="items.length === 0" class="empty-favorites">
       <Icon icon="mdi:heart-outline" class="empty-icon" />
@@ -11,13 +9,12 @@
     </div>
 
     <template v-else>
-      <div
-        v-for="group in groupedItems"
-        :key="group.type"
-        class="favorites-group"
-      >
+      <div v-for="group in groupedItems" :key="group.type" class="favorites-group">
         <h4 class="group-label">
-          <Icon :icon="group.type === 'test' ? 'mdi:clipboard-check-outline' : 'mdi:book-open-variant'" :size="16" />
+          <Icon
+            :icon="group.type === 'test' ? 'mdi:clipboard-check-outline' : 'mdi:book-open-variant'"
+            :size="16"
+          />
           {{ group.type === 'test' ? '测试' : '博客' }}
           <span class="group-count">{{ group.items.length }}</span>
         </h4>

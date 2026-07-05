@@ -4,33 +4,33 @@ export const iconMap: Record<string, string> = {
   'bi-arrow-left': 'mdi:arrow-left',
   'bi-arrow-right': 'mdi:arrow-right',
   'bi-arrow-up': 'mdi:arrow-up',
-  
+
   // 用户相关
   'bi-person': 'mdi:account',
   'bi-person-circle': 'mdi:account-circle',
   'bi-person-fill': 'mdi:account',
-  
+
   // 搜索
   'bi-search': 'mdi:magnify',
-  
+
   // 关闭
   'bi-x-lg': 'mdi:close',
   'bi-x': 'mdi:close',
-  
+
   // 太阳/月亮（主题）
   'bi-sun-fill': 'mdi:weather-sunny',
   'bi-moon-stars-fill': 'mdi:weather-night',
   'bi-circle-half': 'mdi:brightness-auto',
-  
+
   // 社交
   'bi-github': 'mdi:github',
   'bi-git': 'mdi:git',
   'bi-play-circle': 'mdi:youtube',
-  
+
   // 登录/登出
   'bi-box-arrow-right': 'mdi:logout',
   'bi-box-arrow-in-right': 'mdi:login',
-  
+
   // 其他
   'bi-heart': 'mdi:heart',
   'bi-chat-left-text': 'mdi:comment-text-outline',

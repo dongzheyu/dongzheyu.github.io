@@ -2,17 +2,17 @@
   <div class="auth-test-page">
     <div class="container">
       <h1 class="page-title">JetCPP统一认证</h1>
-      
+
       <!-- 未登录时显示登录表单 -->
       <AuthForm v-if="!isAuthenticated" />
-      
+
       <!-- 已登录时显示用户信息 -->
       <div v-else class="user-info-card">
         <div class="user-header">
           <Icon icon="mdi:account-circle" class="user-icon" />
           <h2>欢迎回来！</h2>
         </div>
-        
+
         <div class="user-details">
           <div class="detail-item">
             <span class="detail-label">邮箱：</span>
@@ -27,7 +27,7 @@
             <span class="detail-value">{{ formatDate(user?.created_at) }}</span>
           </div>
         </div>
-        
+
         <button @click="handleSignOut" class="btn btn-secondary btn-animate">
           <Icon icon="mdi:logout" />
           退出登录

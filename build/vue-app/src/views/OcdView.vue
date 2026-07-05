@@ -2,12 +2,12 @@
   <div class="ocd-page">
     <!-- 阅读进度条 -->
     <ReadingProgress />
-    
+
     <!-- Hero -->
     <section class="test-hero ocd-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
+          <div class="col-lg-8" style="padding-left: 5%">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
               <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
@@ -39,9 +39,9 @@
                   :key="optIndex"
                   type="button"
                   class="option-btn"
-                  :class="{ 
-                    'selected': userAnswers[index] === optIndex,
-                    'gradient-border': userAnswers[index] === optIndex
+                  :class="{
+                    selected: userAnswers[index] === optIndex,
+                    'gradient-border': userAnswers[index] === optIndex,
                   }"
                   @click="selectAnswer(index, optIndex)"
                 >
@@ -55,7 +55,11 @@
           <!-- 提交按钮 -->
           <div class="submit-section">
             <button type="submit" class="btn btn-animate submit-btn" :disabled="!allAnswered">
-              {{ allAnswered ? '查看评估结果' : `请完成所有题目 (${answeredCount}/${questions.length})` }}
+              {{
+                allAnswered
+                  ? '查看评估结果'
+                  : `请完成所有题目 (${answeredCount}/${questions.length})`
+              }}
             </button>
           </div>
         </form>
@@ -84,7 +88,10 @@
           <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
-            <p>OCI-R 是筛查工具，不能替代专业诊断。强迫症（OCD）是一种可通过认知行为疗法（特别是暴露与反应阻止疗法，ERP）有效治疗的精神障碍。如果你怀疑自己有强迫症状并感到困扰，建议寻求专业心理治疗师的评估和帮助。</p>
+            <p>
+              OCI-R
+              是筛查工具，不能替代专业诊断。强迫症（OCD）是一种可通过认知行为疗法（特别是暴露与反应阻止疗法，ERP）有效治疗的精神障碍。如果你怀疑自己有强迫症状并感到困扰，建议寻求专业心理治疗师的评估和帮助。
+            </p>
           </div>
         </div>
       </div>
@@ -116,7 +123,7 @@ const questions = ref([
   { text: '我需要按照特定的顺序做事情', hint: '顺序需求' },
   { text: '我会被与性相关的不愉快想法困扰', hint: '性念头' },
   { text: '我会有清洗或清洁的冲动，即使不脏', hint: '清洗冲动' },
-  { text: '我会反复寻求他人的保证', hint: '寻求保证' }
+  { text: '我会反复寻求他人的保证', hint: '寻求保证' },
 ])
 
 // 评分选项 (0-4分)
@@ -125,7 +132,7 @@ const options = ref([
   { label: '很少', desc: '1分', value: 1 },
   { label: '有时', desc: '2分', value: 2 },
   { label: '经常', desc: '3分', value: 3 },
-  { label: '总是', desc: '4分', value: 4 }
+  { label: '总是', desc: '4分', value: 4 },
 ])
 
 const userAnswers = ref<number[]>(Array(questions.value.length).fill(-1))
@@ -133,12 +140,12 @@ const showResult = ref(false)
 
 // 计算已答题目数量
 const answeredCount = computed(() => {
-  return userAnswers.value.filter(answer => answer !== -1).length
+  return userAnswers.value.filter((answer) => answer !== -1).length
 })
 
 // 检查是否全部答完
 const allAnswered = computed(() => {
-  return userAnswers.value.every(answer => answer !== -1)
+  return userAnswers.value.every((answer) => answer !== -1)
 })
 
 // 总分
@@ -157,7 +164,7 @@ const maxScore = computed(() => {
 // 结果解读
 const resultInterpretation = computed(() => {
   const score = totalScore.value
-  
+
   if (score < 21) {
     return '<strong>轻度或无强迫症状</strong><br>您的分数表明您目前没有明显的强迫症状，或者症状非常轻微，对日常生活影响很小。'
   } else if (score < 41) {
@@ -191,11 +198,11 @@ const resetTest = () => {
 
 <style scoped>
 .ocd-hero {
-  background: linear-gradient(135deg, rgba(58,12,163,0.15) 0%, rgba(88,42,193,0.08) 100%);
+  background: linear-gradient(135deg, rgba(58, 12, 163, 0.15) 0%, rgba(88, 42, 193, 0.08) 100%);
 }
 
 .ocd-hero::before {
-  background: radial-gradient(ellipse at 30% 50%, rgba(58,12,163,0.25) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(58, 12, 163, 0.25) 0%, transparent 70%);
 }
 
 .test-hero-title {
@@ -203,7 +210,7 @@ const resetTest = () => {
 }
 
 .test-hero-sub {
-  color: rgba(58,12,163,0.7);
+  color: rgba(58, 12, 163, 0.7);
 }
 
 .question-card {
@@ -212,7 +219,7 @@ const resetTest = () => {
 }
 
 .option-btn.selected {
-  background: linear-gradient(135deg, rgba(58,12,163,0.1) 0%, rgba(88,42,193,0.05) 100%);
+  background: linear-gradient(135deg, rgba(58, 12, 163, 0.1) 0%, rgba(88, 42, 193, 0.05) 100%);
   border-color: #3a0ca3;
   color: #3a0ca3;
 }
@@ -231,8 +238,30 @@ const resetTest = () => {
 }
 
 /* 免责声明 */
-.important-notice { display: flex; gap: 1rem; padding: 1.5rem; background: rgba(255, 140, 66, 0.1); border-left: 4px solid #ff8c42; border-radius: 8px; margin-bottom: 1.5rem; }
-.notice-icon { font-size: 1.5rem; color: #ff8c42; flex-shrink: 0; }
-.important-notice strong { display: block; font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 6px; }
-.important-notice p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.7; margin: 0; }
+.important-notice {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 140, 66, 0.1);
+  border-left: 4px solid #ff8c42;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.notice-icon {
+  font-size: 1.5rem;
+  color: #ff8c42;
+  flex-shrink: 0;
+}
+.important-notice strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+.important-notice p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
 </style>

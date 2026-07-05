@@ -415,10 +415,10 @@ using namespace std;
 
 int main() {
     int value = 42;
-    int* ptr = &value;  // ptr指向value的地址
+    int* ptr = &amp;value;  // ptr指向value的地址
     
     cout << "值: " << value << endl;           // 42
-    cout << "地址: " << &value << endl;        // value的地址
+    cout << "地址: " << &amp;value << endl;        // value的地址
     cout << "指针值: " << ptr << endl;         // ptr存储的地址
     cout << "解引用: " << *ptr << endl;        // 通过指针访问值
     

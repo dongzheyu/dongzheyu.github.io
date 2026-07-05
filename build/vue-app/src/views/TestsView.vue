@@ -3,14 +3,22 @@
     <section class="tests-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
-            <h1 class="tests-title mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
+          <div class="col-lg-8" style="padding-left: 5%">
+            <h1 class="tests-title mb-4 animate-slide-up" :class="{ visible: isVisible }">
               心理评估 <span class="text-gradient">— 了解自己</span>
             </h1>
-            <p class="tests-subtitle mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.15s">
+            <p
+              class="tests-subtitle mb-4 animate-slide-up"
+              :class="{ visible: isVisible }"
+              style="animation-delay: 0.15s"
+            >
               基于标准量表，探索你的人格类型与心理状态
             </p>
-            <p class="tests-desc animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.3s">
+            <p
+              class="tests-desc animate-slide-up"
+              :class="{ visible: isVisible }"
+              style="animation-delay: 0.3s"
+            >
               以下测试仅供参考，不构成任何医学或心理学诊断依据。如有需要，请寻求专业心理咨询师的帮助。
             </p>
           </div>
@@ -31,7 +39,9 @@
           >
             <Icon :icon="cat.icon" class="me-1" />
             {{ cat.label }}
-            <span v-if="cat.value !== 'all'" class="category-count">{{ getCategoryCount(cat.value) }}</span>
+            <span v-if="cat.value !== 'all'" class="category-count">{{
+              getCategoryCount(cat.value)
+            }}</span>
           </button>
         </div>
 
@@ -40,7 +50,7 @@
             v-for="(test, index) in filteredTests"
             :key="test.id"
             class="col-md-4 animate-slide-up"
-            :class="{ 'visible': isVisible }"
+            :class="{ visible: isVisible }"
             :style="`animation-delay: ${0.1 + index * 0.15}s`"
           >
             <RouterLink :to="test.path" class="test-card-link">
@@ -54,16 +64,22 @@
                   <p class="test-card-desc mb-3">{{ test.description }}</p>
                   <div class="test-meta d-flex gap-3">
                     <span class="meta-item">
-                      <Icon icon="mdi:format-list-checks" style="margin-right: 4px;" />{{ test.questions }} 题
+                      <Icon icon="mdi:format-list-checks" style="margin-right: 4px" />{{
+                        test.questions
+                      }}
+                      题
                     </span>
                     <span class="meta-item">
-                      <Icon icon="mdi:clock" style="margin-right: 4px;" />约 {{ test.minutes }} 分钟
+                      <Icon icon="mdi:clock" style="margin-right: 4px" />约 {{ test.minutes }} 分钟
                     </span>
                   </div>
                 </div>
                 <div class="card-footer border-0 p-4 pt-0">
-                  <span class="btn btn-animate w-100 text-center" :style="`--btn-color: ${test.color}`"
-                        :class="`btn-test-${test.id}`">
+                  <span
+                    class="btn btn-animate w-100 text-center"
+                    :style="`--btn-color: ${test.color}`"
+                    :class="`btn-test-${test.id}`"
+                  >
                     开始评估
                   </span>
                 </div>
@@ -76,11 +92,17 @@
 
     <section class="tests-disclaimer">
       <div class="container-fluid px-4">
-        <div class="disclaimer-box animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.6s">
+        <div
+          class="disclaimer-box animate-slide-up"
+          :class="{ visible: isVisible }"
+          style="animation-delay: 0.6s"
+        >
           <Icon icon="mdi:alert-circle" class="disclaimer-icon" />
           <div>
             <strong>⚠️ 重要免责声明</strong>
-            <p>本页面所有测试均为<strong>心理健康自评筛查工具</strong>，仅供个人参考与自我认知，<strong>不构成任何医学或心理学诊断依据</strong>，也不能替代专业医疗建议。测试结果受多种因素影响，可能存在偏差。若你感到持续的心理困扰，请及时联系心理卫生专业人士或前往正规医疗机构就诊。请勿将测试结果作为自我诊断或他人诊断的依据。</p>
+            <p>
+              本页面所有测试均为<strong>心理健康自评筛查工具</strong>，仅供个人参考与自我认知，<strong>不构成任何医学或心理学诊断依据</strong>，也不能替代专业医疗建议。测试结果受多种因素影响，可能存在偏差。若你感到持续的心理困扰，请及时联系心理卫生专业人士或前往正规医疗机构就诊。请勿将测试结果作为自我诊断或他人诊断的依据。
+            </p>
           </div>
         </div>
       </div>
@@ -109,11 +131,11 @@ const categories = [
 
 const filteredTests = computed(() => {
   if (activeCategory.value === 'all') return tests.value
-  return tests.value.filter(t => t.category === activeCategory.value)
+  return tests.value.filter((t) => t.category === activeCategory.value)
 })
 
 const getCategoryCount = (category: string) => {
-  return tests.value.filter(t => t.category === category).length
+  return tests.value.filter((t) => t.category === category).length
 }
 
 const tests = ref([
@@ -121,14 +143,15 @@ const tests = ref([
     id: 'mbti',
     path: '/tests/mbti',
     title: 'MBTI 人格测试',
-    description: '基于迈尔斯-布里格斯类型指标，通过 93 道题目测出你在四个维度上的偏好，识别 16 种人格类型之一。',
+    description:
+      '基于迈尔斯-布里格斯类型指标，通过 93 道题目测出你在四个维度上的偏好，识别 16 种人格类型之一。',
     icon: 'bi bi-diagram-3',
     badge: 'MBTI',
-    gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(21,101,192,0.08) 100%)',
-    color: '#1976D2',
+    gradient: 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.08) 100%)',
+    color: '#3b82f6',
     category: '人格',
     questions: 93,
-    minutes: 15
+    minutes: 15,
   },
   {
     id: 'depression',
@@ -141,20 +164,21 @@ const tests = ref([
     color: '#ef233c',
     category: '情绪',
     questions: 9,
-    minutes: 5
+    minutes: 5,
   },
   {
     id: 'sunshine',
     path: '/tests/sunshine',
     title: '阳光抑郁症测试',
-    description: '识别"微笑型抑郁"特征——表面乐观开朗，内心却承受痛苦。通过 15 道题目评估这一隐性状态。',
+    description:
+      '识别"微笑型抑郁"特征——表面乐观开朗，内心却承受痛苦。通过 15 道题目评估这一隐性状态。',
     icon: 'bi bi-sun',
     badge: '微笑抑郁',
-    gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(66,165,245,0.08) 100%)',
-    color: '#1976D2',
+    gradient: 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(96,165,250,0.08) 100%)',
+    color: '#3b82f6',
     category: '情绪',
     questions: 15,
-    minutes: 8
+    minutes: 8,
   },
   {
     id: 'anxiety',
@@ -163,11 +187,11 @@ const tests = ref([
     description: '基于 GAD-7 广泛性焦虑量表，评估过去两周内的焦虑症状频率，共 7 个核心问题。',
     icon: 'bi bi-shield-exclamation',
     badge: 'GAD-7',
-    gradient: 'linear-gradient(135deg, rgba(21,101,192,0.15) 0%, rgba(13,71,161,0.08) 100%)',
-    color: '#1565C0',
+    gradient: 'linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(29,78,216,0.08) 100%)',
+    color: '#2563eb',
     category: '焦虑',
     questions: 7,
-    minutes: 3
+    minutes: 3,
   },
   {
     id: 'bipolar',
@@ -180,7 +204,7 @@ const tests = ref([
     color: '#7209b7',
     category: '情绪',
     questions: 13,
-    minutes: 5
+    minutes: 5,
   },
   {
     id: 'phobia',
@@ -194,7 +218,7 @@ const tests = ref([
     colorDark: '#5acce6',
     category: '焦虑',
     questions: 22,
-    minutes: 7
+    minutes: 7,
   },
   {
     id: 'ptsd',
@@ -207,7 +231,7 @@ const tests = ref([
     color: '#9d0208',
     category: '创伤',
     questions: 20,
-    minutes: 6
+    minutes: 6,
   },
   {
     id: 'ocd',
@@ -220,7 +244,7 @@ const tests = ref([
     color: '#3a0ca3',
     category: '焦虑',
     questions: 18,
-    minutes: 5
+    minutes: 5,
   },
   {
     id: 'eating',
@@ -232,7 +256,7 @@ const tests = ref([
     gradient: 'linear-gradient(135deg, rgba(255,93,143,0.15) 0%, rgba(255,113,163,0.08) 100%)',
     color: '#ff5d8f',
     questions: 26,
-    minutes: 6
+    minutes: 6,
   },
   {
     id: 'substance',
@@ -241,10 +265,10 @@ const tests = ref([
     description: '结合酒精使用障碍测试（AUDIT）和药物滥用筛查（DAST-10），共 20 题。',
     icon: 'bi bi-droplet-half',
     badge: 'AUDIT',
-    gradient: 'linear-gradient(135deg, rgba(13,71,161,0.15) 0%, rgba(21,101,192,0.08) 100%)',
-    color: '#0D47A1',
+    gradient: 'linear-gradient(135deg, rgba(29,78,216,0.15) 0%, rgba(37,99,235,0.08) 100%)',
+    color: '#1d4ed8',
     questions: 20,
-    minutes: 5
+    minutes: 5,
   },
   {
     id: 'gambling',
@@ -256,7 +280,7 @@ const tests = ref([
     gradient: 'linear-gradient(135deg, rgba(109,76,65,0.15) 0%, rgba(129,96,85,0.08) 100%)',
     color: '#6d4c41',
     questions: 9,
-    minutes: 3
+    minutes: 3,
   },
   {
     id: 'gaming',
@@ -268,7 +292,7 @@ const tests = ref([
     gradient: 'linear-gradient(135deg, rgba(6,214,160,0.15) 0%, rgba(26,234,180,0.08) 100%)',
     color: '#06d6a0',
     questions: 20,
-    minutes: 6
+    minutes: 6,
   },
   {
     id: 'adhd',
@@ -277,10 +301,10 @@ const tests = ref([
     description: '成人 ADHD 自评量表（ASRS-v1.1）根据 DSM-5 标准开发，共 18 题。',
     icon: 'bi bi-lightning-charge',
     badge: 'ASRS',
-    gradient: 'linear-gradient(135deg, rgba(66,165,245,0.15) 0%, rgba(33,150,243,0.08) 100%)',
-    color: '#42A5F5',
+    gradient: 'linear-gradient(135deg, rgba(96,165,250,0.15) 0%, rgba(33,150,243,0.08) 100%)',
+    color: '#60a5fa',
     questions: 18,
-    minutes: 5
+    minutes: 5,
   },
   {
     id: 'asd',
@@ -292,7 +316,7 @@ const tests = ref([
     gradient: 'linear-gradient(135deg, rgba(76,201,240,0.15) 0%, rgba(96,221,255,0.08) 100%)',
     color: '#4cc9f0',
     questions: 10,
-    minutes: 3
+    minutes: 3,
   },
   {
     id: 'bpd',
@@ -304,7 +328,7 @@ const tests = ref([
     gradient: 'linear-gradient(135deg, rgba(123,44,191,0.15) 0%, rgba(143,64,211,0.08) 100%)',
     color: '#7b2cbf',
     questions: 10,
-    minutes: 3
+    minutes: 3,
   },
   {
     id: 'somatic',
@@ -313,11 +337,11 @@ const tests = ref([
     description: '躯体症状量表（PHQ-15）评估常见躯体症状严重程度，共 15 题。',
     icon: 'bi bi-thermometer',
     badge: 'PHQ-15',
-    gradient: 'linear-gradient(135deg, rgba(25,118,210,0.15) 0%, rgba(21,101,192,0.08) 100%)',
-    color: '#1976D2',
+    gradient: 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.08) 100%)',
+    color: '#3b82f6',
     questions: 15,
-    minutes: 4
-  }
+    minutes: 4,
+  },
 ])
 </script>
 
@@ -380,9 +404,10 @@ const tests = ref([
   border: 1px solid var(--color-border) !important;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              border-color 0.2s ease;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.2s ease;
 }
 
 .test-card:hover {

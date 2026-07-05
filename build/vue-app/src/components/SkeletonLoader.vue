@@ -14,7 +14,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   type: 'text',
   width: '100%',
-  height: '16px'
+  height: '16px',
 })
 </script>
 
@@ -54,7 +54,7 @@ withDefaults(defineProps<Props>(), {
   }
 }
 
-[data-motion="off"] .skeleton-loader {
+[data-motion='off'] .skeleton-loader {
   animation: none;
   background: var(--color-bg-soft);
 }

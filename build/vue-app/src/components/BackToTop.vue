@@ -26,7 +26,7 @@ const handleScroll = () => {
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: 'smooth',
   })
 }
 
@@ -70,11 +70,11 @@ onUnmounted(() => {
 }
 
 /* 关闭动画模式 */
-[data-motion="off"] .back-to-top {
+[data-motion='off'] .back-to-top {
   transition: none;
 }
 
-[data-motion="off"] .back-to-top:hover {
+[data-motion='off'] .back-to-top:hover {
   transform: none;
 }
 

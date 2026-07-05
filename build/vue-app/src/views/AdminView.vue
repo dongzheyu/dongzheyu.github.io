@@ -46,19 +46,19 @@
 
         <!-- 标签页 -->
         <div class="admin-tabs">
-          <button 
+          <button
             :class="['tab-btn', { active: activeTab === 'users' }]"
             @click="activeTab = 'users'"
           >
             <Icon icon="mdi:account-group" /> 用户管理
           </button>
-          <button 
+          <button
             :class="['tab-btn', { active: activeTab === 'posts' }]"
             @click="activeTab = 'posts'"
           >
             <Icon icon="mdi:text-box-outline" /> 文章管理
           </button>
-          <button 
+          <button
             :class="['tab-btn', { active: activeTab === 'comments' }]"
             @click="activeTab = 'comments'"
           >
@@ -70,9 +70,9 @@
         <div v-if="activeTab === 'users'" class="tab-content">
           <div class="tab-header">
             <h2>用户管理</h2>
-            <input 
-              v-model="userSearch" 
-              type="text" 
+            <input
+              v-model="userSearch"
+              type="text"
               placeholder="搜索用户..."
               class="search-input"
             />
@@ -95,17 +95,23 @@
               </thead>
               <tbody>
                 <tr v-for="profile in filteredUsers" :key="profile.id">
-                  <td><small>{{ profile.id.substring(0, 8) }}...</small></td>
+                  <td>
+                    <small>{{ profile.id.substring(0, 8) }}...</small>
+                  </td>
                   <td>
                     {{ profile.nickname || '未设置' }}
-                    <span v-if="profile.banned" class="status-badge banned" style="margin-left: 0.5rem;">
+                    <span
+                      v-if="profile.banned"
+                      class="status-badge banned"
+                      style="margin-left: 0.5rem"
+                    >
                       已封禁
                     </span>
                   </td>
                   <td>{{ formatDate(profile.created_at) }}</td>
                   <td>
                     <div class="d-flex gap-1">
-                      <button 
+                      <button
                         v-if="profile.id !== user?.id"
                         @click="handleViewProfile(profile.id)"
                         class="btn-action btn-view"
@@ -113,7 +119,7 @@
                       >
                         <Icon icon="mdi:eye" />
                       </button>
-                      <button 
+                      <button
                         v-if="profile.id !== user?.id && !profile.banned"
                         @click="handleBanUser(profile.id, profile.nickname)"
                         class="btn-action btn-ban"
@@ -121,7 +127,7 @@
                       >
                         <Icon icon="mdi:cancel" />
                       </button>
-                      <button 
+                      <button
                         v-if="profile.id !== user?.id && profile.banned"
                         @click="handleUnbanUser(profile.id, profile.nickname)"
                         class="btn-action btn-unban"
@@ -129,7 +135,7 @@
                       >
                         <Icon icon="mdi:check-circle" />
                       </button>
-                      <button 
+                      <button
                         v-if="profile.id !== user?.id"
                         @click="handleDeleteUser(profile.id, profile.nickname)"
                         class="btn-action btn-delete"
@@ -137,7 +143,7 @@
                       >
                         <Icon icon="mdi:delete" />
                       </button>
-                      <span v-else class="text-muted" style="font-size: 0.85rem;">
+                      <span v-else class="text-muted" style="font-size: 0.85rem">
                         <Icon icon="mdi:account-check" /> 当前用户
                       </span>
                     </div>
@@ -158,9 +164,9 @@
                 <option value="published">已发布</option>
                 <option value="draft">草稿</option>
               </select>
-              <input 
-                v-model="postSearch" 
-                type="text" 
+              <input
+                v-model="postSearch"
+                type="text"
                 placeholder="搜索文章..."
                 class="search-input"
               />
@@ -186,7 +192,9 @@
               <tbody>
                 <tr v-for="post in filteredPosts" :key="post.id">
                   <td>{{ post.title }}</td>
-                  <td><small>{{ post.author_id?.substring(0, 8) }}...</small></td>
+                  <td>
+                    <small>{{ post.author_id?.substring(0, 8) }}...</small>
+                  </td>
                   <td>
                     <span :class="['status-badge', post.published ? 'published' : 'draft']">
                       {{ post.published ? '已发布' : '草稿' }}
@@ -194,7 +202,7 @@
                   </td>
                   <td>{{ formatDate(post.created_at) }}</td>
                   <td>
-                    <button 
+                    <button
                       v-if="post.author_id !== user?.id"
                       @click="handleEditPost(post.id)"
                       class="btn-action btn-edit"
@@ -202,7 +210,7 @@
                     >
                       <Icon icon="mdi:pencil" />
                     </button>
-                    <button 
+                    <button
                       v-if="post.author_id !== user?.id"
                       @click="handleDeletePost(post.id, post.title)"
                       class="btn-action btn-delete"
@@ -210,7 +218,11 @@
                     >
                       <Icon icon="mdi:delete" />
                     </button>
-                    <span v-if="post.author_id === user?.id" class="text-muted" style="font-size: 0.85rem;">
+                    <span
+                      v-if="post.author_id === user?.id"
+                      class="text-muted"
+                      style="font-size: 0.85rem"
+                    >
                       <Icon icon="mdi:lock" /> 自己的文章
                     </span>
                   </td>
@@ -224,9 +236,9 @@
         <div v-if="activeTab === 'comments'" class="tab-content">
           <div class="tab-header">
             <h2>评论管理</h2>
-            <input 
-              v-model="commentSearch" 
-              type="text" 
+            <input
+              v-model="commentSearch"
+              type="text"
               placeholder="搜索评论..."
               class="search-input"
             />
@@ -251,11 +263,13 @@
               <tbody>
                 <tr v-for="comment in filteredComments" :key="comment.id">
                   <td class="content-cell">{{ truncateText(comment.content, 50) }}</td>
-                  <td><small>{{ comment.user_id?.substring(0, 8) }}...</small></td>
+                  <td>
+                    <small>{{ comment.user_id?.substring(0, 8) }}...</small>
+                  </td>
                   <td>{{ comment.post_slug }}</td>
                   <td>{{ formatDate(comment.created_at) }}</td>
                   <td>
-                    <button 
+                    <button
                       v-if="comment.user_id !== user?.id"
                       @click="handleDeleteComment(comment.id)"
                       class="btn-action btn-delete"
@@ -263,7 +277,7 @@
                     >
                       <Icon icon="mdi:delete" />
                     </button>
-                    <span v-else class="text-muted" style="font-size: 0.85rem;">
+                    <span v-else class="text-muted" style="font-size: 0.85rem">
                       <Icon icon="mdi:lock" /> 自己的评论
                     </span>
                   </td>
@@ -316,56 +330,56 @@ const commentSearch = ref('')
 const filteredUsers = computed(() => {
   if (!userSearch.value) return users.value
   const search = userSearch.value.toLowerCase()
-  return users.value.filter(u => 
-    u.id?.toLowerCase().includes(search) ||
-    u.nickname?.toLowerCase().includes(search)
+  return users.value.filter(
+    (u) => u.id?.toLowerCase().includes(search) || u.nickname?.toLowerCase().includes(search),
   )
 })
 
 const filteredPosts = computed(() => {
   let result = posts.value
-  
+
   // 状态过滤
   if (postFilter.value === 'published') {
-    result = result.filter(p => p.published)
+    result = result.filter((p) => p.published)
   } else if (postFilter.value === 'draft') {
-    result = result.filter(p => !p.published)
+    result = result.filter((p) => !p.published)
   }
-  
+
   // 搜索过滤
   if (postSearch.value) {
     const search = postSearch.value.toLowerCase()
-    result = result.filter(p => 
-      p.title?.toLowerCase().includes(search)
-    )
+    result = result.filter((p) => p.title?.toLowerCase().includes(search))
   }
-  
+
   return result
 })
 
 const filteredComments = computed(() => {
   if (!commentSearch.value) return comments.value
   const search = commentSearch.value.toLowerCase()
-  return comments.value.filter(c => 
-    c.content?.toLowerCase().includes(search) ||
-    c.post_slug?.toLowerCase().includes(search)
+  return comments.value.filter(
+    (c) => c.content?.toLowerCase().includes(search) || c.post_slug?.toLowerCase().includes(search),
   )
 })
 
 onMounted(async () => {
   console.log('=== AdminView onMounted ===')
-  
+
   // 等待认证状态加载完成
   if (authLoading.value) {
     console.log('等待认证状态加载...')
     // 使用 watch 等待 loading 变为 false
     await new Promise<void>((resolve) => {
-      const stopWatching = watch(authLoading, (newVal) => {
-        if (!newVal) {
-          stopWatching()
-          resolve()
-        }
-      }, { immediate: false })
+      const stopWatching = watch(
+        authLoading,
+        (newVal) => {
+          if (!newVal) {
+            stopWatching()
+            resolve()
+          }
+        },
+        { immediate: false },
+      )
       // 设置超时，最多等待 5 秒
       setTimeout(() => {
         stopWatching()
@@ -374,30 +388,25 @@ onMounted(async () => {
     })
     console.log('认证状态加载完成')
   }
-  
+
   console.log('isAdmin:', isAdmin.value)
   console.log('user:', user.value)
-  
+
   if (!isAdmin.value) {
     console.log('不是管理员或未登录，停止加载')
     loading.value = false
     return
   }
-  
+
   await loadData()
 })
 
 // 加载所有数据
 async function loadData() {
   loading.value = true
-  
+
   try {
-    await Promise.all([
-      loadStats(),
-      loadUsers(),
-      loadPosts(),
-      loadComments(),
-    ])
+    await Promise.all([loadStats(), loadUsers(), loadPosts(), loadComments()])
   } catch (err: any) {
     console.error('加载数据失败:', err)
   } finally {
@@ -407,12 +416,13 @@ async function loadData() {
 
 // 加载统计数据
 async function loadStats() {
-  const [{ count: usersCount }, { count: postsCount }, { count: commentsCount }] = await Promise.all([
-    supabase.from('profiles').select('*', { count: 'exact', head: true }),
-    supabase.from('user_posts').select('*', { count: 'exact', head: true }),
-    supabase.from('comments').select('*', { count: 'exact', head: true }),
-  ])
-  
+  const [{ count: usersCount }, { count: postsCount }, { count: commentsCount }] =
+    await Promise.all([
+      supabase.from('profiles').select('*', { count: 'exact', head: true }),
+      supabase.from('user_posts').select('*', { count: 'exact', head: true }),
+      supabase.from('comments').select('*', { count: 'exact', head: true }),
+    ])
+
   stats.value = {
     totalUsers: usersCount || 0,
     totalPosts: postsCount || 0,
@@ -423,19 +433,19 @@ async function loadStats() {
 // 加载用户列表
 async function loadUsers() {
   console.log('=== 开始加载用户列表 ===')
-  
+
   const { data, error } = await supabase
     .from('profiles')
     .select('id, nickname, created_at, banned')
     .order('created_at', { ascending: false })
-  
+
   console.log('用户列表查询结果:', { data, error })
-  
+
   if (error) {
     console.error('加载用户列表失败:', error)
     throw error
   }
-  
+
   users.value = data || []
   console.log('用户列表加载完成，共', users.value.length, '个用户')
 }
@@ -443,19 +453,19 @@ async function loadUsers() {
 // 加载文章列表
 async function loadPosts() {
   console.log('=== 开始加载文章列表 ===')
-  
+
   const { data, error } = await supabase
     .from('user_posts')
     .select('*')
     .order('created_at', { ascending: false })
-  
+
   console.log('文章列表查询结果:', { data, error })
-  
+
   if (error) {
     console.error('加载文章列表失败:', error)
     throw error
   }
-  
+
   posts.value = data || []
   console.log('文章列表加载完成，共', posts.value.length, '篇文章')
 }
@@ -463,20 +473,20 @@ async function loadPosts() {
 // 加载评论列表
 async function loadComments() {
   console.log('=== 开始加载评论列表 ===')
-  
+
   const { data, error } = await supabase
     .from('comments')
     .select('*')
     .order('created_at', { ascending: false })
     .limit(100)
-  
+
   console.log('评论列表查询结果:', { data, error })
-  
+
   if (error) {
     console.error('加载评论列表失败:', error)
     throw error
   }
-  
+
   comments.value = data || []
   console.log('评论列表加载完成，共', comments.value.length, '条评论')
 }
@@ -487,36 +497,40 @@ function handleViewProfile(userId: string) {
 }
 
 async function handleDeleteUser(userId: string, nickname: string) {
-  if (!confirm(`确定要删除用户 "${nickname || userId}" 吗？\n此操作将永久删除该用户及其所有数据，且不可恢复！`)) {
+  if (
+    !confirm(
+      `确定要删除用户 "${nickname || userId}" 吗？\n此操作将永久删除该用户及其所有数据，且不可恢复！`,
+    )
+  ) {
     return
   }
-  
+
   try {
     console.log('=== 开始删除用户 ===')
     console.log('用户ID:', userId)
     console.log('昵称:', nickname)
-    
+
     // 调用 Edge Function 删除用户
     console.log('调用 Edge Function...')
     const { data, error } = await supabase.functions.invoke('delete-user', {
-      body: { userId }
+      body: { userId },
     })
-    
+
     if (error) {
       console.error('Edge Function 调用失败:', error)
       throw new Error(error.message || '删除失败')
     }
-    
+
     if (!data.success) {
       throw new Error(data.error || '删除失败')
     }
-    
+
     console.log('用户删除成功')
-    
+
     // 从列表中移除
-    users.value = users.value.filter(u => u.id !== userId)
+    users.value = users.value.filter((u) => u.id !== userId)
     stats.value.totalUsers--
-    
+
     alert('用户已完全删除（包括认证账户和所有相关数据）')
     console.log('=== 删除完成 ===')
   } catch (err: any) {
@@ -529,36 +543,33 @@ async function handleBanUser(userId: string, nickname: string) {
   console.log('=== 开始封禁用户 ===')
   console.log('用户ID:', userId)
   console.log('昵称:', nickname)
-  
+
   if (!confirm(`确定要封禁用户 "${nickname || userId}" 吗？\n封禁后该用户将无法登录。`)) {
     console.log('用户取消封禁操作')
     return
   }
-  
+
   try {
     console.log('正在更新数据库...')
     // 在 profiles 表中添加封禁标记（不使用 select，避免 RLS 限制）
-    const { error } = await supabase
-      .from('profiles')
-      .update({ banned: true })
-      .eq('id', userId)
-    
+    const { error } = await supabase.from('profiles').update({ banned: true }).eq('id', userId)
+
     console.log('Supabase 响应:', { error })
-    
+
     if (error) {
       console.error('数据库更新失败:', error)
       throw error
     }
-    
+
     console.log('数据库更新成功')
-    
+
     // 更新本地数据
-    const user = users.value.find(u => u.id === userId)
+    const user = users.value.find((u) => u.id === userId)
     if (user) {
       user.banned = true
       console.log('本地状态已更新')
     }
-    
+
     alert('用户已封禁')
     console.log('=== 封禁完成 ===')
   } catch (err: any) {
@@ -571,36 +582,33 @@ async function handleUnbanUser(userId: string, nickname: string) {
   console.log('=== 开始解封用户 ===')
   console.log('用户ID:', userId)
   console.log('昵称:', nickname)
-  
+
   if (!confirm(`确定要解封用户 "${nickname || userId}" 吗？\n解封后该用户可以正常登录。`)) {
     console.log('用户取消解封操作')
     return
   }
-  
+
   try {
     console.log('正在更新数据库...')
     // 在 profiles 表中移除封禁标记（不使用 select，避免 RLS 限制）
-    const { error } = await supabase
-      .from('profiles')
-      .update({ banned: false })
-      .eq('id', userId)
-    
+    const { error } = await supabase.from('profiles').update({ banned: false }).eq('id', userId)
+
     console.log('Supabase 响应:', { error })
-    
+
     if (error) {
       console.error('数据库更新失败:', error)
       throw error
     }
-    
+
     console.log('数据库更新成功')
-    
+
     // 更新本地数据
-    const user = users.value.find(u => u.id === userId)
+    const user = users.value.find((u) => u.id === userId)
     if (user) {
       user.banned = false
       console.log('本地状态已更新')
     }
-    
+
     alert('用户已解封')
     console.log('=== 解封完成 ===')
   } catch (err: any) {
@@ -615,19 +623,16 @@ function handleEditPost(postId: string) {
 
 async function handleDeletePost(postId: string, title: string) {
   if (!confirm(`确定要删除文章 "${title}" 吗？`)) return
-  
+
   try {
-    const { error } = await supabase
-      .from('user_posts')
-      .delete()
-      .eq('id', postId)
-    
+    const { error } = await supabase.from('user_posts').delete().eq('id', postId)
+
     if (error) throw error
-    
+
     // 从列表中移除
-    posts.value = posts.value.filter(p => p.id !== postId)
+    posts.value = posts.value.filter((p) => p.id !== postId)
     stats.value.totalPosts--
-    
+
     alert('文章已删除')
   } catch (err: any) {
     console.error('删除文章失败:', err)
@@ -637,19 +642,16 @@ async function handleDeletePost(postId: string, title: string) {
 
 async function handleDeleteComment(commentId: string) {
   if (!confirm('确定要删除这条评论吗？')) return
-  
+
   try {
-    const { error } = await supabase
-      .from('comments')
-      .delete()
-      .eq('id', commentId)
-    
+    const { error } = await supabase.from('comments').delete().eq('id', commentId)
+
     if (error) throw error
-    
+
     // 从列表中移除
-    comments.value = comments.value.filter(c => c.id !== commentId)
+    comments.value = comments.value.filter((c) => c.id !== commentId)
     stats.value.totalComments--
-    
+
     alert('评论已删除')
   } catch (err: any) {
     console.error('删除评论失败:', err)
@@ -807,7 +809,7 @@ function truncateText(text: string, maxLength: number) {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(25, 118, 210, 0.2);
+  border: 4px solid rgba(59, 130, 246, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -815,7 +817,9 @@ function truncateText(text: string, maxLength: number) {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .data-table {
@@ -919,20 +923,21 @@ td {
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .filter-group {
     flex-direction: column;
   }
-  
+
   .search-input {
     min-width: auto;
   }
-  
+
   table {
     font-size: 0.85rem;
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: 0.75rem 0.5rem;
   }
 }

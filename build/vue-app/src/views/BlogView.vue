@@ -4,17 +4,29 @@
     <section class="blog-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
-            <h1 class="blog-title mb-4 animate-slide-up" :class="{ 'visible': isVisible }">
+          <div class="col-lg-8" style="padding-left: 5%">
+            <h1 class="blog-title mb-4 animate-slide-up" :class="{ visible: isVisible }">
               我们的技术博客
             </h1>
-            <p class="blog-subtitle mb-4 animate-slide-up" :class="{ 'visible': isVisible }" style="animation-delay: 0.2s">
+            <p
+              class="blog-subtitle mb-4 animate-slide-up"
+              :class="{ visible: isVisible }"
+              style="animation-delay: 0.2s"
+            >
               记录编程历程，分享开发心得，探索技术世界
             </p>
           </div>
           <div class="col-lg-4">
-            <div class="hero-illustration animate-float" :class="{ 'visible': isVisible }" style="animation-delay: 0.4s">
-              <Icon icon="mdi:newspaper-variant" size="64" style="color: var(--color-primary); opacity: 0.3;" />
+            <div
+              class="hero-illustration animate-float"
+              :class="{ visible: isVisible }"
+              style="animation-delay: 0.4s"
+            >
+              <Icon
+                icon="mdi:newspaper-variant"
+                size="64"
+                style="color: var(--color-primary); opacity: 0.3"
+              />
             </div>
           </div>
         </div>
@@ -43,7 +55,9 @@
           >
             <Icon :icon="cat.icon" class="me-1" />
             {{ cat.label }}
-            <span v-if="cat.value !== 'all'" class="category-count">{{ getCategoryCount(cat.value) }}</span>
+            <span v-if="cat.value !== 'all'" class="category-count">{{
+              getCategoryCount(cat.value)
+            }}</span>
           </button>
         </div>
 
@@ -58,15 +72,20 @@
 
             <!-- 文章列表 -->
             <div v-else>
-              <div class="blog-post card mb-4 border-0 shadow-sm card-hover animate-slide-up" 
-                   v-for="(post, index) in filteredPosts" 
-                   :key="post.id"
-                   :class="{ 'visible': isVisible }" 
-                   :style="`animation-delay: ${index * 0.15}s`">
+              <div
+                class="blog-post card mb-4 border-0 shadow-sm card-hover animate-slide-up"
+                v-for="(post, index) in filteredPosts"
+                :key="post.id"
+                :class="{ visible: isVisible }"
+                :style="`animation-delay: ${index * 0.15}s`"
+              >
                 <div class="card-body p-4">
                   <div class="blog-header mb-3">
-                    <div class="blog-category-badge mb-2" :style="`background-color: ${post.color}20; color: ${post.color}`">
-                      <Icon icon="mdi:tag" style="margin-right: 4px;" />{{ post.category }}
+                    <div
+                      class="blog-category-badge mb-2"
+                      :style="`background-color: ${post.color}20; color: ${post.color}`"
+                    >
+                      <Icon icon="mdi:tag" style="margin-right: 4px" />{{ post.category }}
                     </div>
                     <h5 class="card-title fw-bold">{{ post.title }}</h5>
                   </div>
@@ -74,22 +93,35 @@
                   <div class="blog-footer d-flex justify-content-between align-items-center">
                     <div class="blog-meta">
                       <small class="text-muted">
-                        <Icon icon="mdi:calendar" style="margin-right: 4px;" />{{ post.date }} · 
-                        <Icon icon="mdi:account" style="margin-left: 8px; margin-right: 4px;" />{{ post.author }}
+                        <Icon icon="mdi:calendar" style="margin-right: 4px" />{{ post.date }} ·
+                        <Icon icon="mdi:account" style="margin-left: 8px; margin-right: 4px" />{{
+                          post.author
+                        }}
                       </small>
                     </div>
                     <div class="blog-actions">
-                      <RouterLink v-if="post.isEditable" :to="`/blog/edit/${post.originalId}`" class="btn btn-sm btn-outline-secondary me-2">
+                      <RouterLink
+                        v-if="post.isEditable"
+                        :to="`/blog/edit/${post.originalId}`"
+                        class="btn btn-sm btn-outline-secondary me-2"
+                      >
                         <Icon icon="mdi:pencil" />
                         编辑
                       </RouterLink>
-                      <button v-if="post.isDeletable" @click="handleDeletePost(post.originalId, post.title)" class="btn btn-sm btn-outline-danger me-2">
+                      <button
+                        v-if="post.isDeletable"
+                        @click="handleDeletePost(post.originalId, post.title)"
+                        class="btn btn-sm btn-outline-danger me-2"
+                      >
                         <Icon icon="mdi:delete" />
                         删除
                       </button>
-                      <RouterLink :to="post.link" class="btn btn-sm btn-animate"
-                         style="border: 1.5px solid var(--color-border); color: var(--color-text);">
-                        阅读全文 <Icon icon="mdi:arrow-right" style="margin-left: 4px;" />
+                      <RouterLink
+                        :to="post.link"
+                        class="btn btn-sm btn-animate"
+                        style="border: 1.5px solid var(--color-border); color: var(--color-text)"
+                      >
+                        阅读全文 <Icon icon="mdi:arrow-right" style="margin-left: 4px" />
                       </RouterLink>
                     </div>
                   </div>
@@ -150,38 +182,41 @@ const staticPosts = ref([
     id: 'static-1',
     originalId: null,
     title: 'C++完全入门指南：从Hello World到结构体',
-    excerpt: '这是一篇详细的C++入门指南，从最基础的Hello World程序开始，逐步讲解变量、数据类型、控制流、函数、指针到结构体等核心概念，适合初学者系统学习C++编程。',
+    excerpt:
+      '这是一篇详细的C++入门指南，从最基础的Hello World程序开始，逐步讲解变量、数据类型、控制流、函数、指针到结构体等核心概念，适合初学者系统学习C++编程。',
     date: '2026-12-24',
     author: 'JetCPP Team',
     link: '/blog/cpp-guide',
     color: '#FF6B6B',
     category: '编程教程',
-    isEditable: false
+    isEditable: false,
   },
   {
     id: 'static-2',
     originalId: null,
     title: 'C# 从入门到精通（零基础到进阶）',
-    excerpt: '一份全面的C#学习指南，涵盖从基础语法到高级特性的完整知识体系。包括变量、数据类型、控制流、方法、数组、面向对象编程、泛型、委托事件、LINQ查询和异步编程等核心内容，附带完整的学生管理系统实战项目。',
+    excerpt:
+      '一份全面的C#学习指南，涵盖从基础语法到高级特性的完整知识体系。包括变量、数据类型、控制流、方法、数组、面向对象编程、泛型、委托事件、LINQ查询和异步编程等核心内容，附带完整的学生管理系统实战项目。',
     date: '2026-03-04',
     author: 'JetCPP Team',
     link: '/blog/csharp-guide',
     color: '#dc2f02',
     category: '编程教程',
-    isEditable: false
+    isEditable: false,
   },
   {
     id: 'static-3',
     originalId: null,
     title: 'XAML 从入门到精通（零基础到进阶）',
-    excerpt: 'WPF界面开发完全指南，从XAML基础语法到MVVM架构模式。涵盖布局系统、常用控件、资源管理、数据绑定、样式模板、动画系统和自定义控件等内容，最后通过一个完整的待办事项应用项目展示实战技巧。',
+    excerpt:
+      'WPF界面开发完全指南，从XAML基础语法到MVVM架构模式。涵盖布局系统、常用控件、资源管理、数据绑定、样式模板、动画系统和自定义控件等内容，最后通过一个完整的待办事项应用项目展示实战技巧。',
     date: '2026-03-04',
     author: 'JetCPP Team',
     link: '/blog/xaml-guide',
     color: '#52b788',
     category: '编程教程',
-    isEditable: false
-  }
+    isEditable: false,
+  },
 ])
 
 // 用户文章数据
@@ -190,7 +225,7 @@ const userPosts = ref<any[]>([])
 // 合并所有文章
 const allPosts = computed(() => {
   // 转换用户文章格式
-  const formattedUserPosts = userPosts.value.map(post => ({
+  const formattedUserPosts = userPosts.value.map((post) => ({
     id: `user-${post.id}`,
     originalId: post.id,
     title: post.title,
@@ -201,9 +236,9 @@ const allPosts = computed(() => {
     color: post.color || '#FF6B6B',
     category: post.category || '个人文章',
     isEditable: user.value?.id === post.author_id,
-    isDeletable: user.value?.id === post.author_id
+    isDeletable: user.value?.id === post.author_id,
   }))
-  
+
   // 用户文章在前，静态文章在后
   return [...formattedUserPosts, ...staticPosts.value]
 })
@@ -211,12 +246,12 @@ const allPosts = computed(() => {
 // 按分类筛选文章
 const filteredPosts = computed(() => {
   if (activeCategory.value === 'all') return allPosts.value
-  return allPosts.value.filter(post => post.category === activeCategory.value)
+  return allPosts.value.filter((post) => post.category === activeCategory.value)
 })
 
 // 获取分类文章数量
 const getCategoryCount = (category: string) => {
-  return allPosts.value.filter(post => post.category === category).length
+  return allPosts.value.filter((post) => post.category === category).length
 }
 
 // 处理标签点击
@@ -232,7 +267,7 @@ onMounted(async () => {
 // 加载用户文章
 async function loadUserPosts() {
   loading.value = true
-  
+
   try {
     // 第一步：查询文章数据
     const { data: postsData, error: postsError } = await supabase
@@ -240,14 +275,14 @@ async function loadUserPosts() {
       .select('*')
       .eq('published', true)
       .order('created_at', { ascending: false })
-    
+
     if (postsError) throw postsError
-    
+
     const posts = postsData || []
-    
+
     // 第二步：获取所有作者 ID
-    const authorIds = [...new Set(posts.map(p => p.author_id).filter(Boolean))]
-    
+    const authorIds = [...new Set(posts.map((p) => p.author_id).filter(Boolean))]
+
     // 第三步：批量查询作者资料
     let authorMap = new Map()
     if (authorIds.length > 0) {
@@ -255,22 +290,22 @@ async function loadUserPosts() {
         .from('profiles')
         .select('id, nickname')
         .in('id', authorIds)
-      
+
       if (profilesData) {
-        profilesData.forEach(profile => {
+        profilesData.forEach((profile) => {
           authorMap.set(profile.id, profile.nickname)
         })
       }
     }
-    
+
     // 第四步：合并数据
-    userPosts.value = posts.map(post => ({
+    userPosts.value = posts.map((post) => ({
       ...post,
-      author_nickname: authorMap.get(post.author_id) || null
+      author_nickname: authorMap.get(post.author_id) || null,
     }))
   } catch (err: any) {
     console.error('加载用户文章失败:', err)
-    
+
     // 如果关联查询失败，尝试简单查询
     try {
       const { data, error } = await supabase
@@ -278,12 +313,12 @@ async function loadUserPosts() {
         .select('*')
         .eq('published', true)
         .order('created_at', { ascending: false })
-      
+
       if (error) throw error
-      
-      userPosts.value = (data || []).map(post => ({
+
+      userPosts.value = (data || []).map((post) => ({
         ...post,
-        author_nickname: null
+        author_nickname: null,
       }))
     } catch (fallbackErr: any) {
       console.error('备用查询也失败:', fallbackErr)
@@ -299,18 +334,15 @@ async function handleDeletePost(postId: string, title: string) {
   if (!confirm(`确定要删除文章 "${title}" 吗？此操作不可恢复！`)) {
     return
   }
-  
+
   try {
-    const { error } = await supabase
-      .from('user_posts')
-      .delete()
-      .eq('id', postId)
-    
+    const { error } = await supabase.from('user_posts').delete().eq('id', postId)
+
     if (error) throw error
-    
+
     // 从列表中移除
-    userPosts.value = userPosts.value.filter(p => p.id !== postId)
-    
+    userPosts.value = userPosts.value.filter((p) => p.id !== postId)
+
     alert('文章已删除')
   } catch (err: any) {
     console.error('删除文章失败:', err)
@@ -351,14 +383,16 @@ async function handleDeletePost(postId: string, title: string) {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(25, 118, 210, 0.2);
+  border: 4px solid rgba(59, 130, 246, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .blog-actions {

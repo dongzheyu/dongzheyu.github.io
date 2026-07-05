@@ -6,7 +6,7 @@ const { observe } = useScrollAnimation()
 
 onMounted(() => {
   requestAnimationFrame(() => {
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
       observe(el as HTMLElement)
     })
   })
@@ -20,7 +20,8 @@ onMounted(() => {
         <h1 class="privacy-title">隐私政策</h1>
         <p class="privacy-update">最后更新时间：2026年5月21日</p>
         <p class="privacy-intro">
-          JetCPP Website（以下简称"我们"）尊重和保护用户的隐私权。本隐私政策说明我们如何收集、使用、存储和保护您的个人信息。
+          JetCPP
+          Website（以下简称"我们"）尊重和保护用户的隐私权。本隐私政策说明我们如何收集、使用、存储和保护您的个人信息。
           请您在使用我们的服务前仔细阅读本隐私政策。
         </p>
       </div>
@@ -29,13 +30,15 @@ onMounted(() => {
         <!-- 1. 信息收集 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">一、信息的收集与使用</h2>
-          
+
           <div class="privacy-item">
             <h3>1.1 注册与登录</h3>
             <p>当我们提供用户注册功能时，我们会收集以下信息：</p>
             <ul>
               <li><strong>邮箱地址</strong>：用于创建账号、登录验证、密码重置以及发送重要通知</li>
-              <li><strong>密码</strong>：您的密码会以加密形式存储，我们不会查看或记录您的明文密码</li>
+              <li>
+                <strong>密码</strong>：您的密码会以加密形式存储，我们不会查看或记录您的明文密码
+              </li>
             </ul>
             <p>您提供的信息仅用于改善您的使用体验和我们的服务质量。</p>
           </div>
@@ -65,7 +68,7 @@ onMounted(() => {
         <!-- 2. 信息的使用 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">二、信息的使用方式</h2>
-          
+
           <div class="privacy-item">
             <p>我们收集的信息仅用于以下目的：</p>
             <ul>
@@ -75,14 +78,16 @@ onMounted(() => {
               <li>✓ 改进网站功能和使用体验</li>
               <li>✓ 发送重要的系统通知和安全提醒</li>
             </ul>
-            <p class="highlight"><strong>我们承诺：不会将您的个人信息出售给第三方，不会用于商业营销目的。</strong></p>
+            <p class="highlight">
+              <strong>我们承诺：不会将您的个人信息出售给第三方，不会用于商业营销目的。</strong>
+            </p>
           </div>
         </div>
 
         <!-- 3. 信息的存储 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">三、信息的存储与保护</h2>
-          
+
           <div class="privacy-item">
             <h3>3.1 数据存储</h3>
             <ul>
@@ -116,7 +121,7 @@ onMounted(() => {
         <!-- 4. 信息共享 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">四、信息的共享与披露</h2>
-          
+
           <div class="privacy-item">
             <p>我们绝不会主动与任何第三方分享您的个人信息，除非：</p>
             <ul>
@@ -130,9 +135,30 @@ onMounted(() => {
             <h3>第三方服务说明</h3>
             <p>本网站使用了以下第三方服务，这些服务可能会有有限的信息收集：</p>
             <ul>
-              <li><strong>Supabase</strong>：提供数据库和认证服务，详见其<a href="https://supabase.com/terms/of-sale" target="_blank" rel="noopener noreferrer">隐私政策</a></li>
-              <li><strong>GitHub Pages</strong>：提供静态页面托管服务，详见其<a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">隐私政策</a></li>
-              <li><strong>Cloudflare</strong>：提供CDN和安全服务，详见其<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">隐私政策</a></li>
+              <li>
+                <strong>Supabase</strong>：提供数据库和认证服务，详见其<a
+                  href="https://supabase.com/terms/of-sale"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >隐私政策</a
+                >
+              </li>
+              <li>
+                <strong>GitHub Pages</strong>：提供静态页面托管服务，详见其<a
+                  href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >隐私政策</a
+                >
+              </li>
+              <li>
+                <strong>Cloudflare</strong>：提供CDN和安全服务，详见其<a
+                  href="https://www.cloudflare.com/privacypolicy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >隐私政策</a
+                >
+              </li>
             </ul>
             <p class="note">我们建议您了解这些第三方服务的安全策略，以做出明智的决定。</p>
           </div>
@@ -141,15 +167,19 @@ onMounted(() => {
         <!-- 5. 您的权利 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">五、您的权利</h2>
-          
+
           <div class="privacy-item">
             <p>根据相关法律法规，您享有以下权利：</p>
             <ul>
               <li><strong>访问权</strong>：您可以查看我们存储的您的个人信息</li>
-              <li><strong>更正权</strong>：您可以要求更正不准确的个人信息（通过修改个人资料实现）</li>
+              <li>
+                <strong>更正权</strong>：您可以要求更正不准确的个人信息（通过修改个人资料实现）
+              </li>
               <li><strong>删除权</strong>：您可以随时删除自己的账号和发布的内容</li>
               <li><strong>撤回同意权</strong>：您可以撤回之前给予的同意（登出并删除本地缓存）</li>
-              <li><strong>投诉权</strong>：如果您认为我们的数据处理侵害了您的权益，可以向监管部门投诉</li>
+              <li>
+                <strong>投诉权</strong>：如果您认为我们的数据处理侵害了您的权益，可以向监管部门投诉
+              </li>
             </ul>
           </div>
         </div>
@@ -157,11 +187,14 @@ onMounted(() => {
         <!-- 6. Cookie 和技术 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">六、Cookie 和技术</h2>
-          
+
           <div class="privacy-item">
             <p>本网站可能使用以下技术：</p>
             <ul>
-              <li><strong>Local Storage</strong>：用于存储用户的登录状态和界面偏好设置（仅保存在您的浏览器中）</li>
+              <li>
+                <strong>Local Storage</strong
+                >：用于存储用户的登录状态和界面偏好设置（仅保存在您的浏览器中）
+              </li>
               <li><strong>Session Storage</strong>：临时存储会话数据，关闭浏览器后自动清除</li>
             </ul>
             <p>这些技术仅用于提升用户体验，不会追踪您的浏览行为或收集敏感信息。</p>
@@ -171,7 +204,7 @@ onMounted(() => {
         <!-- 7. 未成年人保护 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">七、未成年人保护</h2>
-          
+
           <div class="privacy-item">
             <p>本网站面向所有年龄层的用户开放，但我们非常重视未成年人的隐私保护：</p>
             <ul>
@@ -185,13 +218,34 @@ onMounted(() => {
         <!-- 8. 联系方式 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">八、联系我们</h2>
-          
+
           <div class="privacy-item">
             <p>如果您对本隐私政策有任何疑问、建议或投诉，请通过以下方式联系我们：</p>
             <ul>
-              <li><strong>GitHub</strong>：<a href="https://github.com/dongzheyu" target="_blank" rel="noopener noreferrer">https://github.com/dongzheyu</a></li>
-              <li><strong>Gitee</strong>：<a href="https://gitee.com/jetcpp" target="_blank" rel="noopener noreferrer">https://gitee.com/jetcpp</a></li>
-              <li><strong>哔哩哔哩</strong>：<a href="https://space.bilibili.com/3546730880567808" target="_blank" rel="noopener noreferrer">https://space.bilibili.com/3546730880567808</a></li>
+              <li>
+                <strong>GitHub</strong>：<a
+                  href="https://github.com/dongzheyu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >https://github.com/dongzheyu</a
+                >
+              </li>
+              <li>
+                <strong>Gitee</strong>：<a
+                  href="https://gitee.com/jetcpp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >https://gitee.com/jetcpp</a
+                >
+              </li>
+              <li>
+                <strong>哔哩哔哩</strong>：<a
+                  href="https://space.bilibili.com/3546730880567808"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >https://space.bilibili.com/3546730880567808</a
+                >
+              </li>
             </ul>
             <p>我们会在收到您的请求后 7 个工作日内予以回复。</p>
           </div>
@@ -200,7 +254,7 @@ onMounted(() => {
         <!-- 9. 政策更新 -->
         <div class="privacy-section animate-on-scroll">
           <h2 class="privacy-subtitle">九、政策的更新</h2>
-          
+
           <div class="privacy-item">
             <p>我们可能会适时更新本隐私政策。更新后的政策会在本网站公布，恕不另行个别通知。</p>
             <p>当政策发生重大变化时，我们会通过以下方式通知您：</p>
@@ -320,7 +374,7 @@ onMounted(() => {
   border-left: 3px solid var(--color-primary);
 }
 
-[data-theme="light"] .highlight {
+[data-theme='light'] .highlight {
   background: rgba(var(--color-primary-rgb), 0.05);
 }
 
@@ -356,19 +410,6 @@ onMounted(() => {
 
 .back-link:hover {
   color: var(--color-primary-light);
-}
-
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 450ms var(--ease-out-expo),
-    transform 450ms var(--ease-out-expo);
-}
-
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 @media (max-width: 768px) {

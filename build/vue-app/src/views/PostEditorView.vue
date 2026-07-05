@@ -69,12 +69,7 @@
 
           <div class="form-group">
             <label for="color">主题色</label>
-            <input
-              id="color"
-              v-model="form.color"
-              type="color"
-              class="form-input color-input"
-            />
+            <input id="color" v-model="form.color" type="color" class="form-input color-input" />
           </div>
         </div>
 
@@ -150,22 +145,27 @@
         <!-- 发布选项 -->
         <div class="form-group">
           <label class="checkbox-label">
-            <input
-              v-model="form.published"
-              type="checkbox"
-              class="checkbox-input"
-            />
+            <input v-model="form.published" type="checkbox" class="checkbox-input" />
             <span>立即发布（取消勾选则保存为草稿）</span>
           </label>
         </div>
 
         <!-- 操作按钮 -->
         <div class="form-actions">
-          <button type="button" @click="handleSaveDraft" class="btn btn-secondary" :disabled="saving">
+          <button
+            type="button"
+            @click="handleSaveDraft"
+            class="btn btn-secondary"
+            :disabled="saving"
+          >
             {{ saving ? '保存中...' : '保存草稿' }}
           </button>
-          <button type="submit" class="btn btn-primary btn-animate" :disabled="saving || !isFormValid">
-            {{ saving ? '发布中...' : (isEditing ? '更新文章' : '发布文章') }}
+          <button
+            type="submit"
+            class="btn btn-primary btn-animate"
+            :disabled="saving || !isFormValid"
+          >
+            {{ saving ? '发布中...' : isEditing ? '更新文章' : '发布文章' }}
           </button>
         </div>
       </form>
@@ -213,9 +213,7 @@ const form = ref({
 
 // 表单验证
 const isFormValid = computed(() => {
-  return form.value.title.trim() && 
-         form.value.slug.trim() && 
-         form.value.content.trim()
+  return form.value.title.trim() && form.value.slug.trim() && form.value.content.trim()
 })
 
 onMounted(async () => {
@@ -234,7 +232,7 @@ onMounted(async () => {
 async function loadPost() {
   try {
     const postId = route.params.id as string
-    
+
     const { data, error: fetchError } = await supabase
       .from('user_posts')
       .select('*')
@@ -242,12 +240,12 @@ async function loadPost() {
       .single()
 
     if (fetchError) throw fetchError
-    
+
     if (data.author_id !== user.value?.id) {
       error.value = '你没有权限编辑这篇文章'
       return
     }
-    
+
     form.value = {
       title: data.title,
       slug: data.slug,
@@ -267,15 +265,15 @@ async function loadPost() {
 function insertMarkdown(before: string, after: string) {
   const textarea = document.getElementById('content') as HTMLTextAreaElement
   if (!textarea) return
-  
+
   const start = textarea.selectionStart
   const end = textarea.selectionEnd
   const text = form.value.content
   const selectedText = text.substring(start, end)
-  
+
   const newText = text.substring(0, start) + before + selectedText + after + text.substring(end)
   form.value.content = newText
-  
+
   // 恢复光标位置
   setTimeout(() => {
     textarea.focus()
@@ -291,29 +289,29 @@ function handleImageUpload() {
 async function handleFileSelect(event: Event) {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
-  
+
   if (!file) return
-  
+
   // 验证文件类型
   if (!file.type.startsWith('image/')) {
     error.value = '只支持图片文件'
     return
   }
-  
+
   // 验证文件大小（5MB）
   if (file.size > 5 * 1024 * 1024) {
     error.value = '图片大小不能超过 5MB'
     return
   }
-  
+
   uploading.value = true
   error.value = ''
-  
+
   try {
     // 生成文件名
     const fileExt = file.name.split('.').pop()
     const fileName = `${user.value?.id}/${Date.now()}.${fileExt}`
-    
+
     // 上传到 Supabase Storage
     const { error: uploadError } = await supabase.storage
       .from('blog-images')
@@ -321,24 +319,21 @@ async function handleFileSelect(event: Event) {
         cacheControl: '3600',
         upsert: true,
       })
-    
+
     if (uploadError) throw uploadError
-    
+
     // 获取公开 URL
-    const { data } = supabase.storage
-      .from('blog-images')
-      .getPublicUrl(fileName)
-    
+    const { data } = supabase.storage.from('blog-images').getPublicUrl(fileName)
+
     const imageUrl = data.publicUrl
-    
+
     // 插入 Markdown 图片语法
     insertMarkdown(`![图片](${imageUrl})`, '')
-    
+
     successMessage.value = '图片上传成功！'
     setTimeout(() => {
       successMessage.value = ''
     }, 3000)
-    
   } catch (err: any) {
     console.error('上传图片失败:', err)
     error.value = '上传图片失败: ' + (err.message || '请稍后重试')
@@ -358,11 +353,11 @@ async function handleSaveDraft() {
 // 提交表单
 async function handleSubmit() {
   if (!isFormValid.value || !user.value) return
-  
+
   saving.value = true
   error.value = ''
   successMessage.value = ''
-  
+
   try {
     const postData = {
       title: form.value.title.trim(),
@@ -374,9 +369,9 @@ async function handleSubmit() {
       published: form.value.published,
       author_id: user.value.id,
     }
-    
+
     let result
-    
+
     if (isEditing.value) {
       // 更新文章
       const postId = route.params.id as string
@@ -389,25 +384,20 @@ async function handleSubmit() {
         .single()
     } else {
       // 创建新文章
-      result = await supabase
-        .from('user_posts')
-        .insert(postData)
-        .select()
-        .single()
+      result = await supabase.from('user_posts').insert(postData).select().single()
     }
-    
+
     if (result.error) throw result.error
-    
+
     successMessage.value = form.value.published ? '文章发布成功！' : '草稿保存成功！'
-    
+
     // 2秒后跳转到文章页面
     setTimeout(() => {
       router.push(`/blog/${form.value.slug}`)
     }, 2000)
-    
   } catch (err: any) {
     console.error('保存文章失败:', err)
-    
+
     if (err.code === '23505') {
       error.value = '文章标识已存在，请使用其他标识'
     } else {
@@ -609,11 +599,11 @@ async function handleSubmit() {
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .form-actions {
     flex-direction: column-reverse;
   }
-  
+
   .form-actions button {
     width: 100%;
   }

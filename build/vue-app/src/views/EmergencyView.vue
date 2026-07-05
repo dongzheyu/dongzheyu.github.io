@@ -2,16 +2,16 @@
   <div class="emergency-page">
     <!-- 阅读进度条 -->
     <ReadingProgress />
-    
+
     <!-- Hero 区域 -->
     <section class="emergency-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
+          <div class="col-lg-8" style="padding-left: 5%">
             <h1 class="emergency-title mb-3">紧急求助</h1>
             <p class="emergency-subtitle mb-2">报警电话 · 心理援助 · 自救指南</p>
             <p class="emergency-desc">
-              当你或身边的人遇到紧急情况时，请立即拨打相应电话求助。<br>
+              当你或身边的人遇到紧急情况时，请立即拨打相应电话求助。<br />
               本页面提供常用紧急联系电话和基本自救方法，建议收藏并分享给需要的人。
             </p>
           </div>
@@ -24,7 +24,7 @@
       <div class="container">
         <h2 class="section-title mb-4">紧急联系电话</h2>
         <p class="section-subtitle mb-5">以下电话均为 24 小时服务，请根据实际情况拨打相应号码。</p>
-        
+
         <div class="row g-4">
           <!-- 报警电话 -->
           <div class="col-lg-4 col-md-6">
@@ -37,9 +37,7 @@
                 <span class="number-display">110</span>
                 <span class="number-label">（公安报警）</span>
               </div>
-              <p class="card-desc">
-                遇到刑事、治安案件，交通事故，火灾等紧急情况时拨打。
-              </p>
+              <p class="card-desc">遇到刑事、治安案件，交通事故，火灾等紧急情况时拨打。</p>
               <div class="card-tips">
                 <strong>拨打须知：</strong>
                 <ul>
@@ -65,9 +63,7 @@
                 <span class="number-display">120</span>
                 <span class="number-label">（医疗急救）</span>
               </div>
-              <p class="card-desc">
-                突发疾病、意外受伤、需要紧急医疗救助时拨打。
-              </p>
+              <p class="card-desc">突发疾病、意外受伤、需要紧急医疗救助时拨打。</p>
               <div class="card-tips">
                 <strong>拨打须知：</strong>
                 <ul>
@@ -93,9 +89,7 @@
                 <span class="number-display">119</span>
                 <span class="number-label">（消防报警）</span>
               </div>
-              <p class="card-desc">
-                发生火灾、燃气泄漏、危险化学品事故等时拨打。
-              </p>
+              <p class="card-desc">发生火灾、燃气泄漏、危险化学品事故等时拨打。</p>
               <div class="card-tips">
                 <strong>拨打须知：</strong>
                 <ul>
@@ -114,7 +108,7 @@
           <div class="col-12">
             <div class="emergency-table-card">
               <h3 class="table-section-title">
-                <Icon icon="mdi:view-grid" style="margin-right: 8px;" />完整报警电话速查
+                <Icon icon="mdi:view-grid" style="margin-right: 8px" />完整报警电话速查
               </h3>
 
               <!-- 核心报警 -->
@@ -124,12 +118,16 @@
                   <div class="phone-row">
                     <span class="phone-num police-num">110</span>
                     <span class="phone-name">公安报警电话</span>
-                    <span class="phone-desc">受理刑事、治安案件，个人处于危难、需要紧急救助的情况</span>
+                    <span class="phone-desc"
+                      >受理刑事、治安案件，个人处于危难、需要紧急救助的情况</span
+                    >
                   </div>
                   <div class="phone-row">
                     <span class="phone-num fire-num">119</span>
                     <span class="phone-name">火警报警电话</span>
-                    <span class="phone-desc">受理火灾、爆炸、危险化学品泄漏等灾害事故的救援报警</span>
+                    <span class="phone-desc"
+                      >受理火灾、爆炸、危险化学品泄漏等灾害事故的救援报警</span
+                    >
                   </div>
                   <div class="phone-row">
                     <span class="phone-num medical-num">120</span>
@@ -151,7 +149,9 @@
                   <div class="phone-row">
                     <span class="phone-num special-num">12110</span>
                     <span class="phone-name">短信报警号码</span>
-                    <span class="phone-desc">不便语音通话时使用（聋哑人士、身处危险环境等），需写清事由和具体地址</span>
+                    <span class="phone-desc"
+                      >不便语音通话时使用（聋哑人士、身处危险环境等），需写清事由和具体地址</span
+                    >
                   </div>
                 </div>
               </div>
@@ -163,7 +163,9 @@
                   <div class="phone-row">
                     <span class="phone-num water-num">12395</span>
                     <span class="phone-name">水上遇险求救</span>
-                    <span class="phone-desc">船舶遇险、人员落水等水上突发事件，谐音"要岸上救我"</span>
+                    <span class="phone-desc"
+                      >船舶遇险、人员落水等水上突发事件，谐音"要岸上救我"</span
+                    >
                   </div>
                   <div class="phone-row">
                     <span class="phone-num forest-num">12119</span>
@@ -178,7 +180,9 @@
                   <div class="phone-row">
                     <span class="phone-num sos-num">112</span>
                     <span class="phone-name">紧急呼叫中心</span>
-                    <span class="phone-desc">部分手机的紧急呼叫功能，某些情况下无SIM卡也可拨打</span>
+                    <span class="phone-desc"
+                      >部分手机的紧急呼叫功能，某些情况下无SIM卡也可拨打</span
+                    >
                   </div>
                 </div>
               </div>
@@ -213,9 +217,7 @@
                 <span class="number-display">12320</span>
                 <span class="number-label">（心理卫生热线）</span>
               </div>
-              <p class="card-desc">
-                情绪困扰、心理危机、自杀意念等心理问题求助。
-              </p>
+              <p class="card-desc">情绪困扰、心理危机、自杀意念等心理问题求助。</p>
               <div class="additional-numbers">
                 <div class="additional-number">
                   <span class="add-number">400-161-9995</span>
@@ -243,9 +245,7 @@
                 <span class="number-display">12338</span>
                 <span class="number-label">（妇女维权热线）</span>
               </div>
-              <p class="card-desc">
-                家庭暴力、性别歧视、妇女儿童权益侵害等求助。
-              </p>
+              <p class="card-desc">家庭暴力、性别歧视、妇女儿童权益侵害等求助。</p>
               <div class="additional-numbers">
                 <div class="additional-number">
                   <span class="add-number">12355</span>
@@ -270,13 +270,18 @@
       <div class="container">
         <h2 class="section-title mb-4">常用自救方法</h2>
         <p class="section-subtitle mb-5">在等待救援的过程中，正确的自救措施可能挽救生命。</p>
-        
+
         <div class="accordion" id="selfHelpAccordion">
           <!-- 心肺复苏 -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                <Icon icon="mdi:heart-pulse" style="margin-right: 12px;" /> 心肺复苏（CPR）基本步骤
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+              >
+                <Icon icon="mdi:heart-pulse" style="margin-right: 12px" /> 心肺复苏（CPR）基本步骤
               </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show">
@@ -285,7 +290,8 @@
                   <li><strong>判断意识：</strong>轻拍双肩，大声呼唤</li>
                   <li><strong>呼叫急救：</strong>立即拨打120或请他人拨打</li>
                   <li><strong>检查呼吸：</strong>观察胸腹部有无起伏（5-10秒）</li>
-                  <li><strong>胸外按压：</strong>
+                  <li>
+                    <strong>胸外按压：</strong>
                     <ul>
                       <li>位置：两乳头连线中点</li>
                       <li>深度：5-6厘米</li>
@@ -303,8 +309,13 @@
           <!-- 止血方法 -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                <Icon icon="mdi:water" style="margin-right: 12px;" /> 外伤止血方法
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+              >
+                <Icon icon="mdi:water" style="margin-right: 12px" /> 外伤止血方法
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse">
@@ -336,8 +347,13 @@
           <!-- 火灾逃生 -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                <Icon icon="mdi:fire" style="margin-right: 12px;" /> 火灾逃生要点
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+              >
+                <Icon icon="mdi:fire" style="margin-right: 12px" /> 火灾逃生要点
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse">
@@ -363,8 +379,13 @@
           <!-- 心理危机应对 -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                <Icon icon="mdi:heart" style="margin-right: 12px;" /> 心理危机应对方法
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+              >
+                <Icon icon="mdi:heart" style="margin-right: 12px" /> 心理危机应对方法
               </button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse">
@@ -415,7 +436,9 @@
               </div>
             </div>
             <div class="text-center mt-4">
-              <p class="mb-0"><strong>生命至上，安全第一！</strong> 掌握基本求救知识，关键时刻可能挽救生命。</p>
+              <p class="mb-0">
+                <strong>生命至上，安全第一！</strong> 掌握基本求救知识，关键时刻可能挽救生命。
+              </p>
             </div>
           </div>
         </div>
@@ -431,9 +454,10 @@ import ReadingProgress from '@/components/ReadingProgress.vue'
 
 // 模拟拨打电话
 const simulateCall = (number: string) => {
-  alert(`模拟拨打 ${number}\n\n请注意：这是模拟演示，实际紧急情况请立即拨打相应号码。\n\n手机用户可点击确定后直接拨打。`)
+  alert(
+    `模拟拨打 ${number}\n\n请注意：这是模拟演示，实际紧急情况请立即拨打相应号码。\n\n手机用户可点击确定后直接拨打。`,
+  )
   // 在实际应用中，可以调用 tel: 链接
   // window.location.href = `tel:${number}`
 }
 </script>
-

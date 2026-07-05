@@ -16,10 +16,12 @@ const favorites = ref<FavoriteItem[]>([])
 const favoritesLoading = ref(false)
 
 export function useFavorites() {
-  const isFavorite = (id: string) => favorites.value.some(f => f.id === id)
+  const isFavorite = (id: string) => favorites.value.some((f) => f.id === id)
 
   const loadFavorites = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
     if (!user) return
 
     favoritesLoading.value = true
@@ -32,13 +34,13 @@ export function useFavorites() {
 
       if (error) throw error
 
-      favorites.value = (data || []).map(row => ({
+      favorites.value = (data || []).map((row) => ({
         id: row.item_id,
         title: row.item_title,
         description: row.item_description,
         icon: row.item_icon,
         color: row.item_color,
-        type: row.item_type
+        type: row.item_type,
       }))
     } catch (e) {
       console.error('加载收藏夹失败:', e)
@@ -48,10 +50,12 @@ export function useFavorites() {
   }
 
   const toggleFavorite = async (item: FavoriteItem) => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
     if (!user) return
 
-    const existing = favorites.value.find(f => f.id === item.id)
+    const existing = favorites.value.find((f) => f.id === item.id)
 
     if (existing) {
       // 移除收藏
@@ -65,20 +69,18 @@ export function useFavorites() {
         console.error('移除收藏失败:', error)
         return
       }
-      favorites.value = favorites.value.filter(f => f.id !== item.id)
+      favorites.value = favorites.value.filter((f) => f.id !== item.id)
     } else {
       // 添加收藏
-      const { error } = await supabase
-        .from('user_favorites')
-        .insert({
-          user_id: user.id,
-          item_id: item.id,
-          item_title: item.title,
-          item_description: item.description || null,
-          item_icon: item.icon || null,
-          item_color: item.color || null,
-          item_type: item.type
-        })
+      const { error } = await supabase.from('user_favorites').insert({
+        user_id: user.id,
+        item_id: item.id,
+        item_title: item.title,
+        item_description: item.description || null,
+        item_icon: item.icon || null,
+        item_color: item.color || null,
+        item_type: item.type,
+      })
 
       if (error) {
         console.error('添加收藏失败:', error)
@@ -93,7 +95,7 @@ export function useFavorites() {
     favoritesLoading,
     isFavorite,
     toggleFavorite,
-    loadFavorites
+    loadFavorites,
   }
 }
 
@@ -114,7 +116,9 @@ const historyLoading = ref(false)
 
 export function useHistory() {
   const loadHistory = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
     if (!user) return
 
     historyLoading.value = true
@@ -128,13 +132,13 @@ export function useHistory() {
 
       if (error) throw error
 
-      history.value = (data || []).map(row => ({
+      history.value = (data || []).map((row) => ({
         testId: row.test_id,
         testTitle: row.test_title,
         score: row.score,
         maxScore: row.max_score,
         level: row.level,
-        completedAt: row.completed_at
+        completedAt: row.completed_at,
       }))
     } catch (e) {
       console.error('加载历史记录失败:', e)
@@ -144,7 +148,9 @@ export function useHistory() {
   }
 
   const addToHistory = async (item: HistoryItem) => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
     if (!user) return
 
     // 检查是否已存在，存在则更新
@@ -163,7 +169,7 @@ export function useHistory() {
           score: item.score,
           max_score: item.maxScore,
           level: item.level,
-          completed_at: item.completedAt
+          completed_at: item.completedAt,
         })
         .eq('id', existing.id)
 
@@ -172,17 +178,15 @@ export function useHistory() {
         return
       }
     } else {
-      const { error } = await supabase
-        .from('user_test_history')
-        .insert({
-          user_id: user.id,
-          test_id: item.testId,
-          test_title: item.testTitle,
-          score: item.score,
-          max_score: item.maxScore,
-          level: item.level,
-          completed_at: item.completedAt
-        })
+      const { error } = await supabase.from('user_test_history').insert({
+        user_id: user.id,
+        test_id: item.testId,
+        test_title: item.testTitle,
+        score: item.score,
+        max_score: item.maxScore,
+        level: item.level,
+        completed_at: item.completedAt,
+      })
 
       if (error) {
         console.error('添加历史记录失败:', error)
@@ -191,7 +195,7 @@ export function useHistory() {
     }
 
     // 本地同步：更新或插入，保持最近50条
-    const idx = history.value.findIndex(h => h.testId === item.testId)
+    const idx = history.value.findIndex((h) => h.testId === item.testId)
     if (idx >= 0) {
       history.value.splice(idx, 1, item)
     } else {
@@ -205,13 +209,12 @@ export function useHistory() {
   const getTestHistory = () => history.value
 
   const clearHistory = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
     if (!user) return
 
-    const { error } = await supabase
-      .from('user_test_history')
-      .delete()
-      .eq('user_id', user.id)
+    const { error } = await supabase.from('user_test_history').delete().eq('user_id', user.id)
 
     if (error) {
       console.error('清空历史记录失败:', error)
@@ -226,7 +229,7 @@ export function useHistory() {
     loadHistory,
     addToHistory,
     getTestHistory,
-    clearHistory
+    clearHistory,
   }
 }
 
@@ -250,7 +253,7 @@ const defaultCategories: Category[] = [
   { name: '编程教程', icon: 'mdi:code-braces', color: '#FF6B6B' },
   { name: '心理测试', icon: 'mdi:brain', color: '#6C63FF' },
   { name: '技术分享', icon: 'mdi:lightbulb-on', color: '#FFB347' },
-  { name: '团队动态', icon: 'mdi:account-group', color: '#4ECDC4' }
+  { name: '团队动态', icon: 'mdi:account-group', color: '#4ECDC4' },
 ]
 
 export function useTags() {
@@ -307,7 +310,7 @@ export function useTags() {
     loadTags,
     getPopularTags,
     incrementTag,
-    getCategories
+    getCategories,
   }
 }
 
@@ -331,7 +334,7 @@ export function useTestProgress() {
       testId,
       answers,
       lastQuestion,
-      savedAt: new Date().toISOString()
+      savedAt: new Date().toISOString(),
     }
     localStorage.setItem(`test_progress_${testId}`, JSON.stringify(progress))
   }
@@ -358,6 +361,6 @@ export function useTestProgress() {
     getProgress,
     saveProgress,
     clearProgress,
-    getAllProgress
+    getAllProgress,
   }
 }

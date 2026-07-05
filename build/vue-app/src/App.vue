@@ -31,9 +31,12 @@ const setTheme = (theme: Theme) => {
 }
 
 const applyTheme = (theme: Theme) => {
-  const resolved = theme === 'system'
-    ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    : theme
+  const resolved =
+    theme === 'system'
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      : theme
   document.documentElement.setAttribute('data-theme', resolved)
 }
 
@@ -47,7 +50,7 @@ mediaQuery.addEventListener('change', handleSystemThemeChange)
 // ---- 关闭动画开关 ----
 const reducedMotion = ref(false)
 const reducedMotionIcon = computed(() =>
-  reducedMotion.value ? 'mdi:lightning-bolt' : 'mdi:lightning-bolt-outline'
+  reducedMotion.value ? 'mdi:lightning-bolt' : 'mdi:lightning-bolt-outline',
 )
 
 const toggleReducedMotion = () => {
@@ -63,12 +66,12 @@ const glowElement = ref<HTMLElement | null>(null)
 
 const handleMouseMove = (e: MouseEvent) => {
   if (reducedMotion.value || !glowElement.value) return
-  
+
   // 使用 requestAnimationFrame 优化性能
   requestAnimationFrame(() => {
     mouseX.value = e.clientX
     mouseY.value = e.clientY
-    
+
     if (glowElement.value) {
       glowElement.value.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`
     }
@@ -107,7 +110,7 @@ watch(() => route.path, updateAppClass, { immediate: true })
 onMounted(() => {
   // 鼠标移动事件
   document.addEventListener('mousemove', handleMouseMove)
-  
+
   // 按钮波纹事件委托
   document.addEventListener('mousemove', addRipple)
 
@@ -174,7 +177,7 @@ const handleSignOut = async () => {
     // 超时保护：最多等 3 秒，确保即使 supabase 请求挂起也能跳转
     await Promise.race([
       signOut(),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('退出登录超时')), 3000))
+      new Promise((_, reject) => setTimeout(() => reject(new Error('退出登录超时')), 3000)),
     ])
   } catch (error: any) {
     console.warn('退出登录（已清除本地状态）:', error.message)
@@ -187,20 +190,21 @@ const handleSignOut = async () => {
 <template>
   <div id="app">
     <!-- 鼠标光晕效果 -->
-    <div 
-      ref="glowElement"
-      class="mouse-glow"
-      :style="{ opacity: reducedMotion ? 0 : 1 }"
-    ></div>
-    
+    <div ref="glowElement" class="mouse-glow" :style="{ opacity: reducedMotion ? 0 : 1 }"></div>
+
     <nav class="navbar navbar-expand-lg shadow-sm sticky-top">
       <div class="container-fluid px-4">
         <RouterLink to="/" class="navbar-brand d-flex align-items-center">
-          <img v-lazy src="/logo.png" alt="JetCPP Logo" width="38" height="38" class="me-2">
+          <img v-lazy src="/logo.png" alt="JetCPP Logo" width="38" height="38" class="me-2" />
           <span>JetCPP</span>
         </RouterLink>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -219,12 +223,12 @@ const handleSignOut = async () => {
               <RouterLink to="/about" class="nav-link">关于我们</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/tests" class="nav-link" :class="{ 'active': isTestsRoute }">
+              <RouterLink to="/tests" class="nav-link" :class="{ active: isTestsRoute }">
                 心理评估
               </RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/emergency" class="nav-link" :class="{ 'active': isEmergencyRoute }">
+              <RouterLink to="/emergency" class="nav-link" :class="{ active: isEmergencyRoute }">
                 紧急求助
               </RouterLink>
             </li>
@@ -255,22 +259,39 @@ const handleSignOut = async () => {
 
             <!-- 主题切换下拉菜单 -->
             <div class="dropdown">
-              <button class="theme-toggle-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button
+                class="theme-toggle-btn dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 <Icon :icon="themeIcon" />
               </button>
               <ul class="dropdown-menu dropdown-menu-end theme-dropdown">
                 <li>
-                  <button class="dropdown-item d-flex align-items-center gap-2" :class="{ active: currentTheme === 'light' }" @click="setTheme('light')">
+                  <button
+                    class="dropdown-item d-flex align-items-center gap-2"
+                    :class="{ active: currentTheme === 'light' }"
+                    @click="setTheme('light')"
+                  >
                     <Icon icon="mdi:weather-sunny" /> 浅色
                   </button>
                 </li>
                 <li>
-                  <button class="dropdown-item d-flex align-items-center gap-2" :class="{ active: currentTheme === 'dark' }" @click="setTheme('dark')">
+                  <button
+                    class="dropdown-item d-flex align-items-center gap-2"
+                    :class="{ active: currentTheme === 'dark' }"
+                    @click="setTheme('dark')"
+                  >
                     <Icon icon="mdi:weather-night" /> 深色
                   </button>
                 </li>
                 <li>
-                  <button class="dropdown-item d-flex align-items-center gap-2" :class="{ active: currentTheme === 'system' }" @click="setTheme('system')">
+                  <button
+                    class="dropdown-item d-flex align-items-center gap-2"
+                    :class="{ active: currentTheme === 'system' }"
+                    @click="setTheme('system')"
+                  >
                     <Icon icon="mdi:brightness-auto" /> 跟随系统
                   </button>
                 </li>
@@ -279,26 +300,51 @@ const handleSignOut = async () => {
 
             <!-- 关注我 -->
             <div class="dropdown">
-              <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              <button
+                class="btn btn-outline-light dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
                 关注我
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="https://github.com/dongzheyu" target="_blank" rel="noopener noreferrer">
-                  <Icon icon="mdi:github" style="margin-right: 8px;" /> Github
-                </a></li>
-                <li><a class="dropdown-item" href="https://gitee.com/jetcpp" target="_blank" rel="noopener noreferrer">
-                  <Icon icon="mdi:git" style="margin-right: 8px;" /> Gitee
-                </a></li>
-                <li><a class="dropdown-item" href="https://space.bilibili.com/3546730880567808" target="_blank" rel="noopener noreferrer">
-                  <Icon icon="mdi:youtube" style="margin-right: 8px;" /> 哔哩哔哩
-                </a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://github.com/dongzheyu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon icon="mdi:github" style="margin-right: 8px" /> Github
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://gitee.com/jetcpp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon icon="mdi:git" style="margin-right: 8px" /> Gitee
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://space.bilibili.com/3546730880567808"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon icon="mdi:youtube" style="margin-right: 8px" /> 哔哩哔哩
+                  </a>
+                </li>
               </ul>
             </div>
 
             <!-- 个人主页 / 登录状态 -->
             <div v-if="isAuthenticated && user" class="d-flex align-items-center gap-2">
               <RouterLink :to="`/user/${user.id}`" class="btn btn-outline-light">
-                <Icon icon="mdi:account-circle" style="margin-right: 4px;" />
+                <Icon icon="mdi:account-circle" style="margin-right: 4px" />
                 个人主页
               </RouterLink>
               <button @click="handleSignOut" class="btn btn-outline-light" title="退出登录">
@@ -307,14 +353,19 @@ const handleSignOut = async () => {
             </div>
             <div v-else>
               <RouterLink to="/auth" class="btn btn-outline-light">
-                <Icon icon="mdi:login" style="margin-right: 4px;" />
+                <Icon icon="mdi:login" style="margin-right: 4px" />
                 登录
               </RouterLink>
             </div>
 
             <!-- 赞助 -->
-            <a href="https://afdian.com/a/JetCPP" target="_blank" rel="noopener noreferrer" class="btn btn-warning ms-1">
-              <Icon icon="mdi:heart" style="margin-right: 4px;" /> 赞助
+            <a
+              href="https://afdian.com/a/JetCPP"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-warning ms-1"
+            >
+              <Icon icon="mdi:heart" style="margin-right: 4px" /> 赞助
             </a>
           </div>
         </div>
@@ -338,22 +389,44 @@ const handleSignOut = async () => {
           </div>
           <div class="col-md-6 text-md-end mt-3 mt-md-0">
             <div class="mb-3">
-              <a href="https://github.com/dongzheyu" class="me-3" target="_blank" rel="noopener noreferrer">
-                <Icon icon="mdi:github" style="font-size: 24px;" />
+              <a
+                href="https://github.com/dongzheyu"
+                class="me-3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon icon="mdi:github" style="font-size: 24px" />
               </a>
-              <a href="https://gitee.com/jetcpp" class="me-3" target="_blank" rel="noopener noreferrer">
-                <Icon icon="mdi:git" style="font-size: 24px;" />
+              <a
+                href="https://gitee.com/jetcpp"
+                class="me-3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon icon="mdi:git" style="font-size: 24px" />
               </a>
-              <a href="https://space.bilibili.com/3546730880567808" target="_blank" rel="noopener noreferrer">
-                <Icon icon="mdi:youtube" style="font-size: 24px;" />
+              <a
+                href="https://space.bilibili.com/3546730880567808"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon icon="mdi:youtube" style="font-size: 24px" />
               </a>
             </div>
             <p class="text-muted mb-0">&copy; 2026 JetCPP. All rights reserved.</p>
             <div class="footer-links mt-2">
-              <RouterLink to="/privacy" class="text-muted me-3" style="font-size: 0.8rem; text-decoration: none;">
+              <RouterLink
+                to="/privacy"
+                class="text-muted me-3"
+                style="font-size: 0.8rem; text-decoration: none"
+              >
                 隐私政策
               </RouterLink>
-              <RouterLink to="/terms" class="text-muted" style="font-size: 0.8rem; text-decoration: none;">
+              <RouterLink
+                to="/terms"
+                class="text-muted"
+                style="font-size: 0.8rem; text-decoration: none"
+              >
                 服务条款
               </RouterLink>
             </div>
@@ -363,7 +436,12 @@ const handleSignOut = async () => {
         <!-- Powered by 卡片 -->
         <div class="powered-by-row mt-4 pt-3 d-flex flex-wrap justify-content-center gap-3">
           <!-- DigitalPlat 域名 -->
-          <a href="https://dash.domain.digitalplat.org/signup?ref=TZRrkCdFjm" target="_blank" rel="noopener noreferrer" class="powered-card">
+          <a
+            href="https://dash.domain.digitalplat.org/signup?ref=TZRrkCdFjm"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="powered-card"
+          >
             <span class="powered-badge powered-badge--blue">DigitalPlat</span>
             <span class="powered-info">
               <span class="powered-title">This Website is Powered by DigitalPlat FreeDomain</span>
@@ -371,7 +449,12 @@ const handleSignOut = async () => {
             </span>
           </a>
           <!-- Cloudflare -->
-          <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer" class="powered-card">
+          <a
+            href="https://www.cloudflare.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="powered-card"
+          >
             <span class="powered-badge powered-badge--orange">Cloudflare</span>
             <span class="powered-info">
               <span class="powered-title">This Website is Powered by Cloudflare</span>
@@ -393,11 +476,15 @@ const handleSignOut = async () => {
 <style scoped>
 /* 页面过渡动画 */
 .page-fade-enter-active {
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
 }
 
 .page-fade-leave-active {
-  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+  transition:
+    opacity 0.3s ease-in,
+    transform 0.3s ease-in;
   position: absolute;
   width: 100%;
 }
@@ -422,13 +509,13 @@ const handleSignOut = async () => {
   transform: translateY(-30px);
 }
 
-[data-motion="off"] .page-fade-enter-active,
-[data-motion="off"] .page-fade-leave-active {
+[data-motion='off'] .page-fade-enter-active,
+[data-motion='off'] .page-fade-leave-active {
   transition: none;
 }
 
-[data-motion="off"] .page-fade-enter-from,
-[data-motion="off"] .page-fade-leave-to {
+[data-motion='off'] .page-fade-enter-from,
+[data-motion='off'] .page-fade-leave-to {
   opacity: 1;
   transform: none;
 }
@@ -450,7 +537,7 @@ const handleSignOut = async () => {
 }
 
 .search-trigger-btn:hover {
-  background: rgba(25, 118, 210, 0.08);
+  background: rgba(59, 130, 246, 0.08);
   border-color: var(--color-primary);
   color: var(--color-primary);
   transform: translateY(-1px);
@@ -466,9 +553,9 @@ const handleSignOut = async () => {
   z-index: 0;
   background: radial-gradient(
     circle,
-    rgba(25, 118, 210, 0.15) 0%,
-    rgba(25, 118, 210, 0.08) 30%,
-    rgba(25, 118, 210, 0.03) 60%,
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(59, 130, 246, 0.08) 30%,
+    rgba(59, 130, 246, 0.03) 60%,
     transparent 70%
   );
   filter: blur(40px);
@@ -478,18 +565,18 @@ const handleSignOut = async () => {
 }
 
 /* 深色主题下调整光晕颜色 */
-[data-theme="dark"] .mouse-glow {
+[data-theme='dark'] .mouse-glow {
   background: radial-gradient(
     circle,
-    rgba(25, 118, 210, 0.2) 0%,
-    rgba(25, 118, 210, 0.1) 30%,
-    rgba(25, 118, 210, 0.05) 60%,
+    rgba(59, 130, 246, 0.2) 0%,
+    rgba(59, 130, 246, 0.1) 30%,
+    rgba(59, 130, 246, 0.05) 60%,
     transparent 70%
   );
 }
 
 /* 关闭动画模式时隐藏光晕 */
-[data-motion="off"] .mouse-glow {
+[data-motion='off'] .mouse-glow {
   display: none;
 }
 

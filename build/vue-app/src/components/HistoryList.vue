@@ -1,14 +1,8 @@
 <template>
   <div class="history-container">
     <div class="history-header">
-      <h3 class="history-title">
-        <Icon icon="mdi:history" /> 历史记录
-      </h3>
-      <button
-        v-if="history.length > 0"
-        class="clear-btn"
-        @click="$emit('clear')"
-      >
+      <h3 class="history-title"><Icon icon="mdi:history" /> 历史记录</h3>
+      <button v-if="history.length > 0" class="clear-btn" @click="$emit('clear')">
         <Icon icon="mdi:delete-outline" /> 清空
       </button>
     </div>
@@ -20,11 +14,7 @@
     </div>
 
     <template v-else>
-      <div
-        v-for="group in groupedHistory"
-        :key="group.label"
-        class="history-group"
-      >
+      <div v-for="group in groupedHistory" :key="group.label" class="history-group">
         <h4 class="group-label">{{ group.label }}</h4>
         <div class="group-items">
           <div
@@ -34,12 +24,20 @@
             @click="$emit('itemClick', item)"
           >
             <div class="item-icon" :class="`item-type-${item.type}`">
-              <Icon :icon="item.type === 'test' ? 'mdi:clipboard-check-outline' : 'mdi:book-open-variant'" />
+              <Icon
+                :icon="
+                  item.type === 'test' ? 'mdi:clipboard-check-outline' : 'mdi:book-open-variant'
+                "
+              />
             </div>
             <div class="item-content">
               <h4 class="item-title">{{ item.title }}</h4>
               <div class="item-meta">
-                <span v-if="item.type === 'test'" class="item-score" :class="getLevelClass(item.level)">
+                <span
+                  v-if="item.type === 'test'"
+                  class="item-score"
+                  :class="getLevelClass(item.level)"
+                >
                   <Icon icon="mdi:star-outline" :size="14" />
                   {{ item.score }}分 · {{ item.level }}
                 </span>
@@ -97,7 +95,7 @@ const groupedHistory = computed(() => {
   ]
 
   const sorted = [...props.history].sort(
-    (a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
+    (a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime(),
   )
 
   for (const item of sorted) {
@@ -118,10 +116,14 @@ const groupedHistory = computed(() => {
 
 const getLevelClass = (level?: string) => {
   if (!level) return ''
-  if (level.includes('优秀') || level.includes('良好') || level.includes('正常') || level.includes('轻度'))
+  if (
+    level.includes('优秀') ||
+    level.includes('良好') ||
+    level.includes('正常') ||
+    level.includes('轻度')
+  )
     return 'level-good'
-  if (level.includes('中度') || level.includes('一般'))
-    return 'level-moderate'
+  if (level.includes('中度') || level.includes('一般')) return 'level-moderate'
   return 'level-severe'
 }
 

@@ -1,8 +1,6 @@
 <template>
   <div class="history-chart">
-    <h3 class="chart-title">
-      <Icon icon="mdi:chart-bar" /> 测试历史
-    </h3>
+    <h3 class="chart-title"><Icon icon="mdi:chart-bar" /> 测试历史</h3>
 
     <div v-if="history.length === 0" class="empty-history">
       <Icon icon="mdi:clipboard-text-clock-outline" class="empty-icon" />
@@ -20,11 +18,7 @@
           <span>0%</span>
         </div>
         <div class="chart-bars">
-          <div
-            v-for="(item, index) in history"
-            :key="item.testId + '-' + index"
-            class="bar-group"
-          >
+          <div v-for="(item, index) in history" :key="item.testId + '-' + index" class="bar-group">
             <div class="bar-wrapper">
               <div
                 class="bar"
@@ -34,7 +28,9 @@
                 <span class="bar-value">{{ getScorePercent(item.score, item.maxScore) }}%</span>
               </div>
             </div>
-            <span class="bar-label" :title="item.testTitle">{{ truncateTitle(item.testTitle) }}</span>
+            <span class="bar-label" :title="item.testTitle">{{
+              truncateTitle(item.testTitle)
+            }}</span>
           </div>
         </div>
       </div>
@@ -60,9 +56,7 @@
             </div>
           </div>
           <div class="item-bar-mini">
-            <div
-              class="mini-bar-track"
-            >
+            <div class="mini-bar-track">
               <div
                 class="mini-bar-fill"
                 :class="getLevelClass(item.level)"
@@ -103,7 +97,13 @@ const getBarHeight = (score: number, maxScore: number) => {
 }
 
 const getLevelClass = (level: string) => {
-  if (level.includes('优秀') || level.includes('良好') || level.includes('正常') || level.includes('轻度')) return 'level-good'
+  if (
+    level.includes('优秀') ||
+    level.includes('良好') ||
+    level.includes('正常') ||
+    level.includes('轻度')
+  )
+    return 'level-good'
   if (level.includes('中度') || level.includes('一般')) return 'level-moderate'
   return 'level-severe'
 }
@@ -232,7 +232,7 @@ const formatDate = (date: string | Date) => {
   font-size: 0.6rem;
   font-weight: 700;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .bar-label {
@@ -292,9 +292,15 @@ const formatDate = (date: string | Date) => {
   flex-shrink: 0;
 }
 
-.item-score-ring.level-good { border-color: #4caf50; }
-.item-score-ring.level-moderate { border-color: #ff9800; }
-.item-score-ring.level-severe { border-color: #f44336; }
+.item-score-ring.level-good {
+  border-color: #4caf50;
+}
+.item-score-ring.level-moderate {
+  border-color: #ff9800;
+}
+.item-score-ring.level-severe {
+  border-color: #f44336;
+}
 
 .item-score-num {
   font-size: 0.95rem;
@@ -302,9 +308,15 @@ const formatDate = (date: string | Date) => {
   line-height: 1;
 }
 
-.item-score-ring.level-good .item-score-num { color: #4caf50; }
-.item-score-ring.level-moderate .item-score-num { color: #ff9800; }
-.item-score-ring.level-severe .item-score-num { color: #f44336; }
+.item-score-ring.level-good .item-score-num {
+  color: #4caf50;
+}
+.item-score-ring.level-moderate .item-score-num {
+  color: #ff9800;
+}
+.item-score-ring.level-severe .item-score-num {
+  color: #f44336;
+}
 
 .item-score-total {
   font-size: 0.55rem;
@@ -338,9 +350,15 @@ const formatDate = (date: string | Date) => {
   font-weight: 600;
 }
 
-.item-level.level-good { color: #4caf50; }
-.item-level.level-moderate { color: #ff9800; }
-.item-level.level-severe { color: #f44336; }
+.item-level.level-good {
+  color: #4caf50;
+}
+.item-level.level-moderate {
+  color: #ff9800;
+}
+.item-level.level-severe {
+  color: #f44336;
+}
 
 .item-date {
   display: flex;
@@ -372,9 +390,15 @@ const formatDate = (date: string | Date) => {
   transition: width 0.5s ease;
 }
 
-.mini-bar-fill.level-good { background: #4caf50; }
-.mini-bar-fill.level-moderate { background: #ff9800; }
-.mini-bar-fill.level-severe { background: #f44336; }
+.mini-bar-fill.level-good {
+  background: #4caf50;
+}
+.mini-bar-fill.level-moderate {
+  background: #ff9800;
+}
+.mini-bar-fill.level-severe {
+  background: #f44336;
+}
 
 .mini-bar-pct {
   font-size: 0.7rem;

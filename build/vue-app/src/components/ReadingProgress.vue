@@ -38,7 +38,7 @@ onUnmounted(() => {
   border-radius: 2px;
   z-index: 999;
   transition: height 0.1s ease-out;
-  box-shadow: 0 0 10px rgba(25, 118, 210, 0.4);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,7 +61,7 @@ onUnmounted(() => {
   opacity: 1;
 }
 
-[data-motion="off"] .reading-progress-vertical {
+[data-motion='off'] .reading-progress-vertical {
   transition: none;
 }
 
@@ -72,7 +72,7 @@ onUnmounted(() => {
     width: 3px;
     max-height: 150px;
   }
-  
+
   .progress-label {
     font-size: 10px;
   }

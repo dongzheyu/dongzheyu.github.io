@@ -1,8 +1,6 @@
 <template>
   <div class="tag-cloud-container">
-    <h3 class="tag-cloud-title">
-      <Icon icon="mdi:tag-multiple" /> 标签云
-    </h3>
+    <h3 class="tag-cloud-title"><Icon icon="mdi:tag-multiple" /> 标签云</h3>
     <div class="tag-cloud">
       <span
         v-for="(count, name) in tags"
@@ -10,7 +8,7 @@
         class="tag-item"
         :style="{
           fontSize: `${getSize(count)}rem`,
-          opacity: 0.6 + (count / maxCount) * 0.4
+          opacity: 0.6 + (count / maxCount) * 0.4,
         }"
         @click="$emit('tagClick', name as string)"
       >
@@ -87,13 +85,13 @@ const getSize = (count: number) => {
   color: white;
   border-color: var(--color-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .tag-count {
   font-size: 0.7rem;
   padding: 0.1rem 0.4rem;
-  background: rgba(25, 118, 210, 0.15);
+  background: rgba(59, 130, 246, 0.15);
   border-radius: 10px;
   color: var(--color-primary);
 }

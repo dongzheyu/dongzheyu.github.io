@@ -46,38 +46,61 @@ interface Result {
 
 const calculateResult = (answers: Record<number, number>): Result => {
   const score = Object.values(answers).reduce((sum, val) => sum + val, 0)
-  
+
   if (score <= 2) {
     return {
       level: '低风险',
       color: '#52b788',
       description: '你的边缘型人格障碍风险很低，属于正常情绪调节范围。',
-      analysis: 'MSI-BPD 得分 ≤2 分表明你的情绪调节和人际关系模式基本健康。你不太可能出现边缘型人格障碍。',
-      suggestions: ['继续保持健康的情绪调节方式', '如未来出现情绪困扰，可重新评估', '学习情绪管理和人际沟通技巧'],
+      analysis:
+        'MSI-BPD 得分 ≤2 分表明你的情绪调节和人际关系模式基本健康。你不太可能出现边缘型人格障碍。',
+      suggestions: [
+        '继续保持健康的情绪调节方式',
+        '如未来出现情绪困扰，可重新评估',
+        '学习情绪管理和人际沟通技巧',
+      ],
     }
   } else if (score <= 4) {
     return {
       level: '中等风险',
       color: '#f48c06',
       description: '你有一些边缘型特征，值得关注但可能未达到障碍水平。',
-      analysis: 'MSI-BPD 得分 3-4 分表明存在一些边缘型特征。你可能在情绪调节或人际关系方面遇到一些挑战，但尚未构成障碍。',
-      suggestions: ['学习正念和情绪调节技巧', '记录情绪波动和触发因素', '考虑心理咨询改善人际关系', '阅读辩证行为疗法（DBT）自助书籍'],
+      analysis:
+        'MSI-BPD 得分 3-4 分表明存在一些边缘型特征。你可能在情绪调节或人际关系方面遇到一些挑战，但尚未构成障碍。',
+      suggestions: [
+        '学习正念和情绪调节技巧',
+        '记录情绪波动和触发因素',
+        '考虑心理咨询改善人际关系',
+        '阅读辩证行为疗法（DBT）自助书籍',
+      ],
     }
   } else if (score <= 6) {
     return {
       level: '高风险',
       color: '#ff8c42',
       description: '你的边缘型特征表现较高，建议寻求专业人格障碍评估。',
-      analysis: 'MSI-BPD 得分 5-6 分达到高风险范围。在这个水平，你很可能存在显著的情绪调节和人际关系困难。边缘型人格障碍是可通过专门治疗（如DBT）有效改善的障碍。',
-      suggestions: ['建议预约精神科医生或心理治疗师', '了解辩证行为疗法（DBT）的治疗原理', '寻找人格障碍专科治疗师', '参加DBT技能训练小组'],
+      analysis:
+        'MSI-BPD 得分 5-6 分达到高风险范围。在这个水平，你很可能存在显著的情绪调节和人际关系困难。边缘型人格障碍是可通过专门治疗（如DBT）有效改善的障碍。',
+      suggestions: [
+        '建议预约精神科医生或心理治疗师',
+        '了解辩证行为疗法（DBT）的治疗原理',
+        '寻找人格障碍专科治疗师',
+        '参加DBT技能训练小组',
+      ],
     }
   } else {
     return {
       level: '极高风险',
       color: '#ef233c',
       description: '你的边缘型特征表现非常高，很可能符合边缘型人格障碍诊断，建议立即寻求专业帮助。',
-      analysis: 'MSI-BPD 得分 ≥7 分属于极高风险范围。在这个水平，边缘型人格障碍的可能性很高。边缘型人格障碍是严重但可治疗的精神障碍，通过系统的DBT治疗通常能够显著改善功能和生活质量。',
-      suggestions: ['请尽快就诊精神科或人格障碍专科', '如实告诉医生你的症状严重程度和自伤风险', '考虑住院治疗或强化门诊治疗选项', '危机时刻请拨打心理危机干预热线 400-161-9995'],
+      analysis:
+        'MSI-BPD 得分 ≥7 分属于极高风险范围。在这个水平，边缘型人格障碍的可能性很高。边缘型人格障碍是严重但可治疗的精神障碍，通过系统的DBT治疗通常能够显著改善功能和生活质量。',
+      suggestions: [
+        '请尽快就诊精神科或人格障碍专科',
+        '如实告诉医生你的症状严重程度和自伤风险',
+        '考虑住院治疗或强化门诊治疗选项',
+        '危机时刻请拨打心理危机干预热线 400-161-9995',
+      ],
     }
   }
 }
@@ -89,5 +112,7 @@ const calculateResult = (answers: Record<number, number>): Result => {
   --test-accent: #7b2cbf;
   --test-accent-rgb: 123, 44, 191;
 }
-.bpd-page :deep(.test-hero-sub) { color: #7b2cbf; }
+.bpd-page :deep(.test-hero-sub) {
+  color: #7b2cbf;
+}
 </style>

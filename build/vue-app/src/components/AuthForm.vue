@@ -2,7 +2,7 @@
   <div class="auth-container">
     <div class="auth-card">
       <h2 class="auth-title">{{ isLogin ? '登录' : '注册' }}</h2>
-      
+
       <form @submit.prevent="handleSubmit" class="auth-form">
         <div class="form-group">
           <label for="email">邮箱</label>
@@ -50,12 +50,22 @@
         <div v-if="!isLogin" class="terms-consent">
           <label class="consent-label">
             <input type="checkbox" v-model="agreeTerms" />
-            <span>我已阅读并同意<a href="/terms" target="_blank">服务条款</a>和<a href="/privacy" target="_blank">隐私政策</a></span>
+            <span
+              >我已阅读并同意<a href="/terms" target="_blank">服务条款</a>和<a
+                href="/privacy"
+                target="_blank"
+                >隐私政策</a
+              ></span
+            >
           </label>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-animate btn-block" :disabled="loading || ( !isLogin && !agreeTerms)">
-          {{ loading ? '处理中...' : (isLogin ? '登录' : '注册') }}
+        <button
+          type="submit"
+          class="btn btn-primary btn-animate btn-block"
+          :disabled="loading || (!isLogin && !agreeTerms)"
+        >
+          {{ loading ? '处理中...' : isLogin ? '登录' : '注册' }}
         </button>
       </form>
 
@@ -77,9 +87,7 @@
       </div>
 
       <div v-if="isLogin" class="forgot-password-link">
-        <RouterLink to="/reset-password" class="link-btn">
-          忘记密码？
-        </RouterLink>
+        <RouterLink to="/reset-password" class="link-btn"> 忘记密码？ </RouterLink>
       </div>
 
       <!-- 第三方登录 -->
@@ -88,15 +96,30 @@
           <span>或使用第三方账号登录</span>
         </div>
         <div class="social-buttons">
-          <button type="button" class="social-btn google-btn" @click="loginWithOAuth('google')" :disabled="loading">
+          <button
+            type="button"
+            class="social-btn google-btn"
+            @click="loginWithOAuth('google')"
+            :disabled="loading"
+          >
             <Icon icon="mdi:google" :size="20" />
             <span>Google</span>
           </button>
-          <button type="button" class="social-btn github-btn" @click="loginWithOAuth('github')" :disabled="loading">
+          <button
+            type="button"
+            class="social-btn github-btn"
+            @click="loginWithOAuth('github')"
+            :disabled="loading"
+          >
             <Icon icon="mdi:github" :size="20" />
             <span>GitHub</span>
           </button>
-          <button type="button" class="social-btn microsoft-btn" @click="loginWithOAuth('azure')" :disabled="loading">
+          <button
+            type="button"
+            class="social-btn microsoft-btn"
+            @click="loginWithOAuth('azure')"
+            :disabled="loading"
+          >
             <Icon icon="mdi:microsoft" :size="20" />
             <span>Microsoft</span>
           </button>
@@ -137,8 +160,8 @@ const loginWithOAuth = async (provider: 'google' | 'github' | 'azure') => {
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: siteUrl + '/auth/callback'
-      }
+        redirectTo: siteUrl + '/auth/callback',
+      },
     })
     if (oauthError) throw oauthError
   } catch (err: any) {
@@ -157,7 +180,7 @@ const handleSubmit = async () => {
     if (isLogin.value) {
       // 登录
       console.log('尝试登录:', { email: email.value })
-      
+
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email: email.value,
         password: password.value,
@@ -167,9 +190,9 @@ const handleSubmit = async () => {
         console.error('登录错误:', signInError)
         throw signInError
       }
-      
+
       console.log('登录成功:', data)
-      
+
       // 检查用户是否被封禁
       if (data.user) {
         const { data: profile, error: profileError } = await supabase
@@ -177,7 +200,7 @@ const handleSubmit = async () => {
           .select('banned')
           .eq('id', data.user.id)
           .single()
-        
+
         if (profileError) {
           console.error('获取用户资料失败:', profileError)
         } else if (profile?.banned) {
@@ -188,9 +211,9 @@ const handleSubmit = async () => {
           return
         }
       }
-      
+
       successMessage.value = '登录成功！'
-      
+
       // 这里可以添加登录成功后的跳转逻辑
       // 例如：router.push('/')
     } else {
@@ -202,7 +225,7 @@ const handleSubmit = async () => {
       }
 
       console.log('尝试注册:', { email: email.value })
-      
+
       const { data, error: signUpError } = await supabase.auth.signUp({
         email: email.value,
         password: password.value,
@@ -220,7 +243,7 @@ const handleSubmit = async () => {
     }
   } catch (err: any) {
     console.error('操作失败:', err)
-    
+
     // 提供更友好的错误提示
     if (err.message?.includes('Invalid login credentials')) {
       error.value = '邮箱或密码错误，请检查后重试'
@@ -403,7 +426,7 @@ const handleSubmit = async () => {
   margin-top: 0.5rem;
 }
 
-[data-theme="light"] .data-consent-info {
+[data-theme='light'] .data-consent-info {
   background: rgba(var(--color-primary-rgb), 0.05);
 }
 
@@ -441,7 +464,7 @@ const handleSubmit = async () => {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.consent-label input[type="checkbox"] {
+.consent-label input[type='checkbox'] {
   width: 18px;
   height: 18px;
   margin-top: 2px;
@@ -518,7 +541,7 @@ const handleSubmit = async () => {
 }
 
 .google-btn:hover:not(:disabled) {
-  border-color: #4285F4;
+  border-color: #4285f4;
 }
 
 .github-btn:hover:not(:disabled) {
@@ -526,6 +549,6 @@ const handleSubmit = async () => {
 }
 
 .microsoft-btn:hover:not(:disabled) {
-  border-color: #00A4EF;
+  border-color: #00a4ef;
 }
 </style>

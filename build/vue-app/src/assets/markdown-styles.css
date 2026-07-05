@@ -28,7 +28,7 @@
   font-size: 1.875rem;
   margin: 2rem 0 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(25, 118, 210, 0.3);
+  border-bottom: 2px solid rgba(59, 130, 246, 0.3);
   color: var(--color-text);
   font-weight: 700;
   position: relative;
@@ -115,20 +115,20 @@
 
 /* ========== 行内代码 - 添加光晕效果 ========== */
 .markdown-content :deep(code) {
-  background: linear-gradient(135deg, rgba(25, 118, 210, 0.15) 0%, rgba(25, 118, 210, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%);
   padding: 0.25em 0.5em;
   border-radius: 6px;
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 0.875em;
   color: var(--color-primary);
-  border: 1px solid rgba(25, 118, 210, 0.2);
-  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
   transition: all 0.2s ease;
 }
 
 .markdown-content :deep(code:hover) {
-  background: linear-gradient(135deg, rgba(25, 118, 210, 0.2) 0%, rgba(25, 118, 210, 0.12) 100%);
-  box-shadow: 0 3px 6px rgba(25, 118, 210, 0.15);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.12) 100%);
+  box-shadow: 0 3px 6px rgba(59, 130, 246, 0.15);
 }
 
 /* ========== 代码块 - 现代化设计 ========== */
@@ -141,7 +141,7 @@
   position: absolute;
   top: 0.75rem;
   left: 1rem;
-  background: rgba(25, 118, 210, 0.2);
+  background: rgba(59, 130, 246, 0.2);
   color: var(--color-primary-light);
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
@@ -174,11 +174,11 @@
 }
 
 .markdown-content :deep(.code-copy-btn:hover) {
-  background: rgba(25, 118, 210, 0.2);
+  background: rgba(59, 130, 246, 0.2);
   border-color: var(--color-primary);
   color: var(--color-primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .markdown-content :deep(.code-copy-btn.copied) {
@@ -204,8 +204,10 @@
   border-radius: 12px;
   overflow-x: auto;
   margin: 0;
-  border: 1px solid rgba(25, 118, 210, 0.2);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
 }
 
@@ -216,7 +218,12 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-light),
+    var(--color-primary)
+  );
   border-radius: 12px 12px 0 0;
 }
 
@@ -277,11 +284,11 @@
   border-image: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)) 1;
   padding: 1.25rem 1.75rem;
   margin: 2rem 0;
-  background: linear-gradient(135deg, rgba(25, 118, 210, 0.08) 0%, rgba(25, 118, 210, 0.03) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0.03) 100%);
   border-radius: 0 12px 12px 0;
   color: var(--color-text-secondary);
   position: relative;
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.08);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
 }
 
 .markdown-content :deep(blockquote)::before {
@@ -333,12 +340,12 @@
 }
 
 .markdown-content :deep(th) {
-  background: linear-gradient(135deg, rgba(25, 118, 210, 0.2) 0%, rgba(25, 118, 210, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
   padding: 1rem 1.25rem;
   text-align: left;
   font-weight: 700;
   color: var(--color-text);
-  border-bottom: 2px solid rgba(25, 118, 210, 0.3);
+  border-bottom: 2px solid rgba(59, 130, 246, 0.3);
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 0.05em;
@@ -356,7 +363,7 @@
 }
 
 .markdown-content :deep(tr:hover td) {
-  background: rgba(25, 118, 210, 0.05);
+  background: rgba(59, 130, 246, 0.05);
 }
 
 /* ========== 分隔线 - 渐变效果 ========== */
@@ -369,7 +376,7 @@
 }
 
 /* ========== 任务列表 ========== */
-.markdown-content :deep(input[type="checkbox"]) {
+.markdown-content :deep(input[type='checkbox']) {
   margin-right: 0.5rem;
   accent-color: var(--color-primary);
 }
@@ -443,14 +450,14 @@ html {
 }
 
 /* 目录链接样式 */
-.markdown-content :deep(a[href^="#"]) {
+.markdown-content :deep(a[href^='#']) {
   color: var(--color-primary);
   text-decoration: none;
   border-bottom: 1px dashed var(--color-primary);
   transition: all 0.2s ease;
 }
 
-.markdown-content :deep(a[href^="#"]):hover {
+.markdown-content :deep(a[href^='#']):hover {
   color: var(--color-primary-light);
   border-bottom-style: solid;
 }

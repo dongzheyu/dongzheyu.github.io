@@ -10,8 +10,17 @@
       <!-- 用户信息卡片 -->
       <div v-else-if="profile" class="profile-card">
         <div class="profile-header">
-          <div class="user-avatar-large" :class="{ 'is-own-profile': isOwnProfile }" @click="isOwnProfile && triggerFileInput()">
-            <img v-if="profile.avatar_url" :src="profile.avatar_url" alt="头像" class="avatar-image" />
+          <div
+            class="user-avatar-large"
+            :class="{ 'is-own-profile': isOwnProfile }"
+            @click="isOwnProfile && triggerFileInput()"
+          >
+            <img
+              v-if="profile.avatar_url"
+              :src="profile.avatar_url"
+              alt="头像"
+              class="avatar-image"
+            />
             <Icon v-else icon="mdi:account-circle" />
             <div v-if="isOwnProfile" class="avatar-overlay">
               <Icon icon="mdi:camera" />
@@ -130,9 +139,7 @@
         <div class="modal-body">
           <div class="warning-box">
             <Icon icon="mdi:alert" />
-            <div>
-              <strong>警告：</strong>此操作不可恢复！
-            </div>
+            <div><strong>警告：</strong>此操作不可恢复！</div>
           </div>
 
           <p>注销账户将：</p>
@@ -160,11 +167,9 @@
         </div>
 
         <div class="modal-footer">
-          <button @click="showDeleteModal = false" class="btn btn-secondary">
-            取消
-          </button>
-          <button 
-            @click="handleDeleteAccount" 
+          <button @click="showDeleteModal = false" class="btn btn-secondary">取消</button>
+          <button
+            @click="handleDeleteAccount"
             class="btn btn-danger btn-animate"
             :disabled="deleteConfirmText !== 'DELETE' || deleting"
           >
@@ -213,7 +218,7 @@ onMounted(async () => {
 // 获取用户资料
 async function fetchProfile() {
   loading.value = true
-  
+
   try {
     const { data, error: fetchError } = await supabase
       .from('profiles')
@@ -222,13 +227,12 @@ async function fetchProfile() {
       .single()
 
     if (fetchError) throw fetchError
-    
+
     profile.value = data
-    
+
     // 填充编辑表单
     editForm.value.nickname = data.nickname || ''
     editForm.value.gender = data.gender || ''
-
   } catch (err: any) {
     console.error('获取资料失败:', err)
     profile.value = null
@@ -257,7 +261,6 @@ async function handleUpdateProfile() {
     // 更新成功，关闭模态框并刷新数据
     showEditModal.value = false
     await fetchProfile()
-
   } catch (err: any) {
     console.error('更新失败:', err)
     error.value = err.message || '更新失败，请稍后重试'
@@ -279,7 +282,7 @@ function getGenderText(gender?: string) {
     female: '女',
     other: '其他',
   }
-  return gender ? (map[gender] || '未设置') : '未设置'
+  return gender ? map[gender] || '未设置' : '未设置'
 }
 
 // 触发文件选择
@@ -291,47 +294,43 @@ function triggerFileInput() {
 async function handleAvatarUpload(event: Event) {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
-  
+
   if (!file) return
-  
+
   // 验证文件类型
   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif']
   if (!allowedTypes.includes(file.type)) {
     error.value = '只支持 PNG、JPG、WEBP、GIF 格式的图片'
     return
   }
-  
+
   // 验证文件大小（2MB）
   if (file.size > 2 * 1024 * 1024) {
     error.value = '图片大小不能超过 2MB'
     return
   }
-  
+
   uploading.value = true
   error.value = ''
-  
+
   try {
     // 生成文件名：用户ID/时间戳.扩展名
     const fileExt = file.name.split('.').pop()
     const fileName = `${userId.value}/${Date.now()}.${fileExt}`
-    
+
     // 上传到 Supabase Storage
-    const { error: uploadError } = await supabase.storage
-      .from('avatars')
-      .upload(fileName, file, {
-        cacheControl: '3600',
-        upsert: true,
-      })
-    
+    const { error: uploadError } = await supabase.storage.from('avatars').upload(fileName, file, {
+      cacheControl: '3600',
+      upsert: true,
+    })
+
     if (uploadError) throw uploadError
-    
+
     // 获取公开 URL
-    const { data } = supabase.storage
-      .from('avatars')
-      .getPublicUrl(fileName)
-    
+    const { data } = supabase.storage.from('avatars').getPublicUrl(fileName)
+
     const avatarUrl = data.publicUrl
-    
+
     // 更新数据库中的 avatar_url
     const { error: updateError } = await supabase
       .from('profiles')
@@ -340,12 +339,11 @@ async function handleAvatarUpload(event: Event) {
         updated_at: new Date().toISOString(),
       })
       .eq('id', userId.value)
-    
+
     if (updateError) throw updateError
-    
+
     // 刷新资料
     await fetchProfile()
-    
   } catch (err: any) {
     console.error('上传失败:', err)
     error.value = err.message || '上传失败，请稍后重试'
@@ -362,37 +360,27 @@ async function handleDeleteAccount() {
     deleteError.value = '请输入 DELETE 以确认'
     return
   }
-  
+
   deleting.value = true
   deleteError.value = ''
-  
+
   try {
     // 1. 删除用户的所有评论
-    await supabase
-      .from('comments')
-      .delete()
-      .eq('user_id', userId.value)
-    
+    await supabase.from('comments').delete().eq('user_id', userId.value)
+
     // 2. 删除用户的所有文章
-    await supabase
-      .from('user_posts')
-      .delete()
-      .eq('author_id', userId.value)
-    
+    await supabase.from('user_posts').delete().eq('author_id', userId.value)
+
     // 3. 删除用户资料
-    await supabase
-      .from('profiles')
-      .delete()
-      .eq('id', userId.value)
-    
+    await supabase.from('profiles').delete().eq('id', userId.value)
+
     // 4. 退出登录
     await supabase.auth.signOut()
-    
+
     alert('账户已注销')
-    
+
     // 5. 跳转到首页
     window.location.href = '/'
-    
   } catch (err: any) {
     console.error('注销失败:', err)
     deleteError.value = err.message || '注销失败，请稍后重试'
@@ -420,14 +408,16 @@ async function handleDeleteAccount() {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(25, 118, 210, 0.2);
+  border: 4px solid rgba(59, 130, 246, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .profile-card {
@@ -458,7 +448,7 @@ async function handleDeleteAccount() {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(25, 118, 210, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   overflow: hidden;
 }
 
@@ -736,7 +726,10 @@ async function handleDeleteAccount() {
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow:
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .btn-danger:disabled {

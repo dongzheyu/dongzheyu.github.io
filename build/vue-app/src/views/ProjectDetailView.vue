@@ -20,7 +20,7 @@
 
         <footer class="project-footer">
           <RouterLink to="/projects" class="btn btn-outline-light">
-            <Icon icon="mdi:arrow-left" size="16" style="margin-right: 4px;" />
+            <Icon icon="mdi:arrow-left" size="16" style="margin-right: 4px" />
             返回项目列表
           </RouterLink>
         </footer>
@@ -31,9 +31,7 @@
         <Icon icon="mdi:folder-remove" size="64" class="icon-large" />
         <h2>项目不存在</h2>
         <p>该项目可能已被删除或移动</p>
-        <RouterLink to="/projects" class="btn btn-primary btn-animate">
-          返回项目列表
-        </RouterLink>
+        <RouterLink to="/projects" class="btn btn-primary btn-animate"> 返回项目列表 </RouterLink>
       </div>
     </div>
   </div>
@@ -57,25 +55,24 @@ onMounted(async () => {
 
 async function loadProject() {
   loading.value = true
-  
+
   try {
     const slug = route.params.slug as string
-    
+
     // 从 public/project 目录加载 Markdown 文件
     const response = await fetch(`/project/${slug}.md`)
-    
+
     if (!response.ok) {
       throw new Error('项目不存在')
     }
-    
+
     const content = await response.text()
-    
+
     // 解析 Front Matter（如果有的话）
     const { title, body } = parseFrontMatter(content)
-    
+
     projectTitle.value = title || slug
     projectContent.value = body
-    
   } catch (err: any) {
     console.error('加载项目失败:', err)
     projectContent.value = ''
@@ -88,25 +85,25 @@ async function loadProject() {
 function parseFrontMatter(content: string) {
   const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/
   const match = content.match(frontMatterRegex)
-  
+
   if (match) {
     const [, frontMatterStr = '', body = ''] = match
     const frontMatter: Record<string, string> = {}
-    
+
     // 解析 YAML front matter
-    frontMatterStr.split('\n').forEach(line => {
+    frontMatterStr.split('\n').forEach((line) => {
       const [key, ...valueParts] = line.split(':')
       if (key && valueParts.length > 0) {
         frontMatter[key.trim()] = valueParts.join(':').trim()
       }
     })
-    
+
     return {
       title: frontMatter.title || '',
       body: body.trim(),
     }
   }
-  
+
   // 没有 front matter，直接返回内容
   return {
     title: '',
@@ -134,14 +131,16 @@ function parseFrontMatter(content: string) {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(25, 118, 210, 0.2);
+  border: 4px solid rgba(59, 130, 246, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .project-detail {
@@ -197,7 +196,7 @@ function parseFrontMatter(content: string) {
   .project-detail {
     padding: 2rem 1.5rem;
   }
-  
+
   .project-title {
     font-size: 2rem;
   }

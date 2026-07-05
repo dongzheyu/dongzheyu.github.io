@@ -37,21 +37,23 @@ md.renderer.rules.heading_open = (tokens, idx) => {
 }
 
 // 自定义代码块渲染，添加复制按钮
-const defaultRender = md.renderer.rules.fence || function(tokens, idx, options, env, self) {
-  return self.renderToken(tokens, idx, options)
-}
+const defaultRender =
+  md.renderer.rules.fence ||
+  function (tokens, idx, options, env, self) {
+    return self.renderToken(tokens, idx, options)
+  }
 
 md.renderer.rules.fence = (tokens, idx, options, env, self) => {
   const token = tokens[idx]
   const code = token.content
   const lang = token.info.trim()
-  
+
   // 生成唯一ID
   const codeId = `code-${Math.random().toString(36).substr(2, 9)}`
-  
+
   // 原始代码块HTML
   const originalHtml = defaultRender(tokens, idx, options, env, self)
-  
+
   // 包裹在带有复制按钮的容器中
   return `
     <div class="code-block-wrapper">
@@ -79,12 +81,12 @@ onMounted(() => {
   ;(window as any).copyCode = async (elementId: string) => {
     const codeElement = document.getElementById(elementId)?.querySelector('code')
     if (!codeElement) return
-    
+
     const code = codeElement.textContent || ''
-    
+
     try {
       await navigator.clipboard.writeText(code)
-      
+
       // 显示成功提示
       const btn = document.querySelector(`button[onclick="copyCode('${elementId}')"]`)
       if (btn) {
@@ -93,7 +95,7 @@ onMounted(() => {
           const originalText = copyText.textContent
           copyText.textContent = '已复制!'
           btn.classList.add('copied')
-          
+
           setTimeout(() => {
             copyText.textContent = originalText
             btn.classList.remove('copied')

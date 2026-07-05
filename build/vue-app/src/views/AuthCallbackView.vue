@@ -10,9 +10,7 @@
         <Icon icon="mdi:alert" class="error-icon" />
         <h2>验证失败</h2>
         <p>{{ error }}</p>
-        <RouterLink to="/auth" class="btn btn-primary btn-animate">
-          返回登录页面
-        </RouterLink>
+        <RouterLink to="/auth" class="btn btn-primary btn-animate"> 返回登录页面 </RouterLink>
       </div>
 
       <div v-else-if="success" class="success-state">
@@ -43,7 +41,7 @@ onMounted(async () => {
   try {
     // Supabase 会自动从 URL 中提取 session
     // 等待 Supabase 处理完成
-    await new Promise(resolve => setTimeout(resolve, 500))
+    await new Promise((resolve) => setTimeout(resolve, 500))
 
     const { data, error: sessionError } = await supabase.auth.getSession()
 
@@ -69,7 +67,6 @@ onMounted(async () => {
 
     // 如果没有 session 也没有错误，跳转到首页
     router.push('/')
-
   } catch (err: any) {
     console.error('验证失败:', err)
     error.value = err.message || '验证过程中发生错误，请重试'
@@ -108,14 +105,16 @@ onMounted(async () => {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(25, 118, 210, 0.2);
+  border: 4px solid rgba(59, 130, 246, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-state p {

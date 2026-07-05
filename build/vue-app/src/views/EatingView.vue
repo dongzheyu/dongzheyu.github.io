@@ -2,12 +2,12 @@
   <div class="eating-page">
     <!-- 阅读进度条 -->
     <ReadingProgress />
-    
+
     <!-- Hero -->
     <section class="test-hero eating-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%;">
+          <div class="col-lg-8" style="padding-left: 5%">
             <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
               <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
@@ -39,9 +39,9 @@
                   :key="optIndex"
                   type="button"
                   class="option-btn"
-                  :class="{ 
-                    'selected': userAnswers[index] === optIndex,
-                    'gradient-border': userAnswers[index] === optIndex
+                  :class="{
+                    selected: userAnswers[index] === optIndex,
+                    'gradient-border': userAnswers[index] === optIndex,
                   }"
                   @click="selectAnswer(index, optIndex)"
                 >
@@ -55,7 +55,11 @@
           <!-- 提交按钮 -->
           <div class="submit-section">
             <button type="submit" class="btn btn-animate submit-btn" :disabled="!allAnswered">
-              {{ allAnswered ? '查看评估结果' : `请完成所有题目 (${answeredCount}/${questions.length})` }}
+              {{
+                allAnswered
+                  ? '查看评估结果'
+                  : `请完成所有题目 (${answeredCount}/${questions.length})`
+              }}
             </button>
           </div>
         </form>
@@ -84,7 +88,10 @@
           <Icon icon="mdi:alert" class="notice-icon" />
           <div>
             <strong>重要说明</strong>
-            <p>EAT-26 是筛查工具，不能替代专业诊断。进食障碍是一种严重的精神健康问题，可能对身体健康造成严重危害。如果你对自己的进食行为或身体形象感到持续困扰，请务必寻求专业医生或心理治疗师的帮助。进食障碍是可以治疗的，早期干预效果更好。</p>
+            <p>
+              EAT-26
+              是筛查工具，不能替代专业诊断。进食障碍是一种严重的精神健康问题，可能对身体健康造成严重危害。如果你对自己的进食行为或身体形象感到持续困扰，请务必寻求专业医生或心理治疗师的帮助。进食障碍是可以治疗的，早期干预效果更好。
+            </p>
           </div>
         </div>
       </div>
@@ -124,7 +131,7 @@ const questions = ref([
   { text: '我觉得自己超重，即使别人说我不胖', hint: '体重感知偏差' },
   { text: '我喜欢空腹的感觉', hint: '空腹偏好' },
   { text: '我有冲动的进食行为', hint: '冲动进食' },
-  { text: '我会在感到饱之前停止进食', hint: '提前停止' }
+  { text: '我会在感到饱之前停止进食', hint: '提前停止' },
 ])
 
 // 评分选项 (EAT-26标准：总是/经常/经常/有时/很少/从不，对应3-0分)
@@ -132,7 +139,7 @@ const options = ref([
   { label: '总是', desc: '3分', value: 3 },
   { label: '经常', desc: '2分', value: 2 },
   { label: '有时', desc: '1分', value: 1 },
-  { label: '很少', desc: '0分', value: 0 }
+  { label: '很少', desc: '0分', value: 0 },
 ])
 
 const userAnswers = ref<number[]>(Array(questions.value.length).fill(-1))
@@ -140,12 +147,12 @@ const showResult = ref(false)
 
 // 计算已答题目数量
 const answeredCount = computed(() => {
-  return userAnswers.value.filter(answer => answer !== -1).length
+  return userAnswers.value.filter((answer) => answer !== -1).length
 })
 
 // 检查是否全部答完
 const allAnswered = computed(() => {
-  return userAnswers.value.every(answer => answer !== -1)
+  return userAnswers.value.every((answer) => answer !== -1)
 })
 
 // 总分
@@ -159,7 +166,7 @@ const totalScore = computed(() => {
 // 结果解读
 const resultInterpretation = computed(() => {
   const score = totalScore.value
-  
+
   if (score < 20) {
     return '<strong>进食态度正常范围</strong><br>您的分数表明您的进食态度和饮食行为在正常范围内，没有明显的进食障碍风险。'
   } else {
@@ -191,11 +198,11 @@ const resetTest = () => {
 
 <style scoped>
 .eating-hero {
-  background: linear-gradient(135deg, rgba(255,93,143,0.15) 0%, rgba(255,113,163,0.08) 100%);
+  background: linear-gradient(135deg, rgba(255, 93, 143, 0.15) 0%, rgba(255, 113, 163, 0.08) 100%);
 }
 
 .eating-hero::before {
-  background: radial-gradient(ellipse at 30% 50%, rgba(255,93,143,0.25) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(255, 93, 143, 0.25) 0%, transparent 70%);
 }
 
 .test-hero-title {
@@ -203,7 +210,7 @@ const resetTest = () => {
 }
 
 .test-hero-sub {
-  color: rgba(255,93,143,0.7);
+  color: rgba(255, 93, 143, 0.7);
 }
 
 .question-card {
@@ -212,7 +219,7 @@ const resetTest = () => {
 }
 
 .option-btn.selected {
-  background: linear-gradient(135deg, rgba(255,93,143,0.1) 0%, rgba(255,113,163,0.05) 100%);
+  background: linear-gradient(135deg, rgba(255, 93, 143, 0.1) 0%, rgba(255, 113, 163, 0.05) 100%);
   border-color: #ff5d8f;
   color: #ff5d8f;
 }
@@ -231,8 +238,30 @@ const resetTest = () => {
 }
 
 /* 免责声明 */
-.important-notice { display: flex; gap: 1rem; padding: 1.5rem; background: rgba(255, 140, 66, 0.1); border-left: 4px solid #ff8c42; border-radius: 8px; margin-bottom: 1.5rem; }
-.notice-icon { font-size: 1.5rem; color: #ff8c42; flex-shrink: 0; }
-.important-notice strong { display: block; font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 6px; }
-.important-notice p { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.7; margin: 0; }
+.important-notice {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 140, 66, 0.1);
+  border-left: 4px solid #ff8c42;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.notice-icon {
+  font-size: 1.5rem;
+  color: #ff8c42;
+  flex-shrink: 0;
+}
+.important-notice strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+.important-notice p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
 </style>

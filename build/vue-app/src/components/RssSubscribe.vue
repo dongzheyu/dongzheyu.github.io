@@ -6,13 +6,7 @@
     </div>
     <p class="rss-description">订阅我的博客，获取最新文章更新</p>
     <div class="rss-url-container">
-      <input
-        type="text"
-        :value="feedUrl"
-        readonly
-        class="rss-url-input"
-        @click="selectUrl"
-      />
+      <input type="text" :value="feedUrl" readonly class="rss-url-input" @click="selectUrl" />
       <button class="rss-copy-btn" @click="copyUrl" :class="{ copied: isCopied }">
         <Icon :icon="isCopied ? 'mdi:check' : 'mdi:content-copy'" />
         <span>{{ isCopied ? '已复制' : '复制' }}</span>

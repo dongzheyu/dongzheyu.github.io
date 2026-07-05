@@ -37,9 +37,7 @@
         <Icon icon="mdi:text-box-outline" class="icon-large" />
         <h2>文章不存在</h2>
         <p>该文章可能已被删除或移动</p>
-        <RouterLink to="/blog" class="btn btn-primary btn-animate">
-          返回博客列表
-        </RouterLink>
+        <RouterLink to="/blog" class="btn btn-primary btn-animate"> 返回博客列表 </RouterLink>
       </div>
     </div>
   </div>
@@ -66,17 +64,17 @@ onMounted(async () => {
 
 async function loadPost() {
   loading.value = true
-  
+
   try {
     const slug = route.params.slug as string
-    
+
     // 第一步：尝试从 Supabase 加载用户文章
     const { data: userPost, error: userPostError } = await supabase
       .from('user_posts')
       .select('*')
       .eq('slug', slug)
       .maybeSingle()
-    
+
     if (userPost && !userPostError) {
       // 找到用户文章
       isUserPost.value = true
@@ -85,24 +83,23 @@ async function loadPost() {
       postContent.value = userPost.content
       return
     }
-    
+
     // 第二步：从 public/blog 目录加载 markdown 文件
     const response = await fetch(`/blog/${slug}.md`)
-    
+
     if (!response.ok) {
       throw new Error('文章不存在')
     }
-    
+
     const content = await response.text()
-    
+
     // 解析 Front Matter（如果有的话）
     const { title, date, body } = parseFrontMatter(content)
-    
+
     isUserPost.value = false
     postTitle.value = title || slug
     postDate.value = date || ''
     postContent.value = body
-    
   } catch (err: any) {
     console.error('加载文章失败:', err)
     postContent.value = ''
@@ -115,26 +112,26 @@ async function loadPost() {
 function parseFrontMatter(content: string) {
   const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/
   const match = content.match(frontMatterRegex)
-  
+
   if (match) {
     const [, frontMatterStr = '', body = ''] = match
     const frontMatter: Record<string, string> = {}
-    
+
     // 解析 YAML front matter
-    frontMatterStr.split('\n').forEach(line => {
+    frontMatterStr.split('\n').forEach((line) => {
       const [key, ...valueParts] = line.split(':')
       if (key && valueParts.length > 0) {
         frontMatter[key.trim()] = valueParts.join(':').trim()
       }
     })
-    
+
     return {
       title: frontMatter.title || '',
       date: frontMatter.date || '',
       body: body.trim(),
     }
   }
-  
+
   // 没有 front matter，直接返回内容
   return {
     title: '',
@@ -163,14 +160,16 @@ function parseFrontMatter(content: string) {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(25, 118, 210, 0.2);
+  border: 4px solid rgba(59, 130, 246, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .blog-post {

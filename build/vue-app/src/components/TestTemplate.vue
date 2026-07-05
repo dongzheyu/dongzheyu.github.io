@@ -2,7 +2,7 @@
   <div class="test-page-wrapper" :class="themeClass">
     <!-- 阅读进度条 -->
     <ReadingProgress />
-    
+
     <section class="test-hero">
       <div class="container-fluid px-4">
         <div class="row align-items-center">
@@ -46,7 +46,9 @@
 
       <!-- 答题区域 -->
       <div v-if="!showResult">
-        <p class="freq-instruction mb-5" :style="{ paddingLeft: instructionPadding }">{{ instruction }}</p>
+        <p class="freq-instruction mb-5" :style="{ paddingLeft: instructionPadding }">
+          {{ instruction }}
+        </p>
         <div
           v-for="(q, index) in questions"
           :key="q.id"
@@ -69,10 +71,12 @@
           </div>
         </div>
         <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">还有 {{ questions.length - answeredCount }} 道题未作答</p>
-          <button 
-            class="btn btn-primary btn-animate btn-lg" 
-            :disabled="answeredCount < questions.length" 
+          <p v-if="answeredCount < questions.length" class="submit-hint">
+            还有 {{ questions.length - answeredCount }} 道题未作答
+          </p>
+          <button
+            class="btn btn-primary btn-animate btn-lg"
+            :disabled="answeredCount < questions.length"
             @click="calculateResult"
           >
             查看结果
@@ -189,24 +193,27 @@ const props = defineProps({
   instruction: { type: String, required: true },
   testId: { type: String, required: true },
   testTitle: { type: String, required: true },
-  
+
   // 题目和选项
   questions: { type: Array as PropType<Question[]>, required: true },
   options: { type: Array as PropType<Option[]>, required: true },
-  
+
   // 结果计算函数
-  calculateResultFn: { type: Function as PropType<(answers: Record<number, number>) => Result>, required: true },
-  
+  calculateResultFn: {
+    type: Function as PropType<(answers: Record<number, number>) => Result>,
+    required: true,
+  },
+
   // 样式配置
   themeClass: { type: String, default: '' },
   heroPadding: { type: String, default: '' },
   instructionPadding: { type: String, default: '' },
   buttonAlign: { type: String, default: 'left' },
-  
+
   // 免责声明
   disclaimerTitle: { type: String, default: '重要说明' },
   disclaimer: { type: String, required: true },
-  
+
   // 维度分析（可选）
   dimensions: { type: Array as PropType<Dimension[]>, default: () => [] },
 })
@@ -221,16 +228,16 @@ const { isFavorite, toggleFavorite, loadFavorites } = useFavorites()
 const { addToHistory } = useHistory()
 const { getProgress, saveProgress, clearProgress } = useTestProgress()
 
-const answeredCount = computed(() => 
-  props.questions.filter(q => answers.value[q.id] !== undefined).length
+const answeredCount = computed(
+  () => props.questions.filter((q) => answers.value[q.id] !== undefined).length,
 )
 
-const totalScore = computed(() => 
-  props.questions.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
+const totalScore = computed(() =>
+  props.questions.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0),
 )
 
 const maxScore = computed(() => {
-  const maxOptionValue = Math.max(...props.options.map(o => o.value))
+  const maxOptionValue = Math.max(...props.options.map((o) => o.value))
   return props.questions.length * maxOptionValue
 })
 
@@ -250,7 +257,7 @@ const calculateResult = () => {
     score: totalScore.value,
     maxScore: maxScore.value,
     level: result.value.level,
-    completedAt: new Date().toISOString()
+    completedAt: new Date().toISOString(),
   })
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
@@ -385,7 +392,7 @@ defineExpose({
 }
 
 .submit-hint {
-  color: #1976D2;
+  color: #3b82f6;
   margin-bottom: 1rem;
 }
 
@@ -507,14 +514,14 @@ defineExpose({
   display: flex;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(25, 118, 210, 0.1);
-  border-left: 4px solid #1976D2;
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid #3b82f6;
   border-radius: 8px;
 }
 
 .notice-icon {
   font-size: 1.5rem;
-  color: #1976D2;
+  color: #3b82f6;
 }
 
 /* 收藏按钮 */
@@ -524,7 +531,9 @@ defineExpose({
   cursor: pointer;
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.5);
-  transition: color 0.3s, transform 0.2s;
+  transition:
+    color 0.3s,
+    transform 0.2s;
   vertical-align: middle;
   margin-left: 0.5rem;
   padding: 0;

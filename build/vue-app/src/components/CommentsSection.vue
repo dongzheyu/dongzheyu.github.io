@@ -9,18 +9,16 @@
     <div v-if="!isAuthenticated" class="login-prompt">
       <Icon icon="mdi:lock" />
       <p>请登录后发表评论</p>
-      <RouterLink to="/auth" class="btn btn-primary btn-animate">
-        去登录
-      </RouterLink>
+      <RouterLink to="/auth" class="btn btn-primary btn-animate"> 去登录 </RouterLink>
     </div>
 
     <!-- 评论输入框 -->
     <div v-else class="comment-form">
       <div class="user-info">
-        <img 
-          v-if="currentUserProfile?.avatar_url" 
-          :src="currentUserProfile.avatar_url" 
-          alt="头像" 
+        <img
+          v-if="currentUserProfile?.avatar_url"
+          :src="currentUserProfile.avatar_url"
+          alt="头像"
           class="avatar-small"
         />
         <Icon v-else icon="mdi:account-circle" class="avatar-small" />
@@ -35,8 +33,8 @@
       ></textarea>
       <div class="form-actions">
         <span class="char-count">{{ newComment.length }}/500</span>
-        <button 
-          @click="handleSubmitComment" 
+        <button
+          @click="handleSubmitComment"
           class="btn btn-primary btn-animate"
           :disabled="!newComment.trim() || submitting || newComment.length > 500"
         >
@@ -57,24 +55,17 @@
     </div>
 
     <div v-else class="comments-list">
-      <div 
-        v-for="comment in sortedComments" 
-        :key="comment.id" 
-        class="comment-item"
-      >
+      <div v-for="comment in sortedComments" :key="comment.id" class="comment-item">
         <div class="comment-header">
           <div class="comment-user">
-            <img 
-              v-if="comment.profiles?.avatar_url" 
-              :src="comment.profiles.avatar_url" 
-              alt="头像" 
+            <img
+              v-if="comment.profiles?.avatar_url"
+              :src="comment.profiles.avatar_url"
+              alt="头像"
               class="avatar-small"
             />
             <Icon v-else icon="mdi:account-circle" class="avatar-small" />
-            <RouterLink 
-              :to="`/user/${comment.user_id}`" 
-              class="comment-username"
-            >
+            <RouterLink :to="`/user/${comment.user_id}`" class="comment-username">
               {{ comment.profiles?.nickname || '匿名用户' }}
             </RouterLink>
           </div>
@@ -117,8 +108,8 @@ const currentUserProfile = ref<any>(null)
 
 // 按时间倒序排列评论
 const sortedComments = computed(() => {
-  return [...comments.value].sort((a, b) => 
-    new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  return [...comments.value].sort(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
   )
 })
 
@@ -133,7 +124,7 @@ onMounted(async () => {
 watch(isAuthenticated, async (newValue) => {
   // 登录或登出时都重新加载评论
   await loadComments()
-  
+
   if (newValue) {
     // 登录时加载当前用户资料
     await loadCurrentUserProfile()
@@ -146,7 +137,7 @@ watch(isAuthenticated, async (newValue) => {
 // 加载评论
 async function loadComments() {
   loading.value = true
-  
+
   try {
     // 第一步：获取评论列表
     const { data: commentsData, error: commentsError } = await supabase
@@ -156,30 +147,30 @@ async function loadComments() {
       .order('created_at', { ascending: false })
 
     if (commentsError) throw commentsError
-    
+
     if (!commentsData || commentsData.length === 0) {
       comments.value = []
       return
     }
-    
+
     // 第二步：获取所有评论用户的资料
-    const userIds = [...new Set(commentsData.map(c => c.user_id))]
+    const userIds = [...new Set(commentsData.map((c) => c.user_id))]
     const { data: profilesData, error: profilesError } = await supabase
       .from('profiles')
       .select('id, nickname, avatar_url')
       .in('id', userIds)
-    
+
     if (profilesError) throw profilesError
-    
+
     // 第三步：合并评论和用户资料
     const profilesMap = new Map()
-    profilesData?.forEach(profile => {
+    profilesData?.forEach((profile) => {
       profilesMap.set(profile.id, profile)
     })
-    
-    comments.value = commentsData.map(comment => ({
+
+    comments.value = commentsData.map((comment) => ({
       ...comment,
-      profiles: profilesMap.get(comment.user_id) || null
+      profiles: profilesMap.get(comment.user_id) || null,
     }))
   } catch (err: any) {
     console.error('加载评论失败:', err)
@@ -191,7 +182,7 @@ async function loadComments() {
 // 加载当前用户资料
 async function loadCurrentUserProfile() {
   if (!currentUser.value) return
-  
+
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -200,7 +191,7 @@ async function loadCurrentUserProfile() {
       .single()
 
     if (error) throw error
-    
+
     currentUserProfile.value = data
   } catch (err: any) {
     console.error('加载用户资料失败:', err)
@@ -210,9 +201,9 @@ async function loadCurrentUserProfile() {
 // 提交评论
 async function handleSubmitComment() {
   if (!newComment.value.trim() || !currentUser.value) return
-  
+
   submitting.value = true
-  
+
   try {
     // 第一步：插入评论
     const { data: commentData, error: insertError } = await supabase
@@ -226,24 +217,24 @@ async function handleSubmitComment() {
       .single()
 
     if (insertError) throw insertError
-    
+
     if (!commentData) return
-    
+
     // 第二步：获取当前用户资料
     const { data: profileData, error: profileError } = await supabase
       .from('profiles')
       .select('nickname, avatar_url')
       .eq('id', currentUser.value.id)
       .single()
-    
+
     if (profileError) throw profileError
-    
+
     // 第三步：合并数据并添加到列表
     const newCommentObj = {
       ...commentData,
-      profiles: profileData
+      profiles: profileData,
     }
-    
+
     comments.value.unshift(newCommentObj)
     newComment.value = ''
   } catch (err: any) {
@@ -257,17 +248,14 @@ async function handleSubmitComment() {
 // 删除评论
 async function handleDeleteComment(commentId: string) {
   if (!confirm('确定要删除这条评论吗？')) return
-  
+
   try {
-    const { error } = await supabase
-      .from('comments')
-      .delete()
-      .eq('id', commentId)
+    const { error } = await supabase.from('comments').delete().eq('id', commentId)
 
     if (error) throw error
-    
+
     // 从列表中移除
-    comments.value = comments.value.filter(c => c.id !== commentId)
+    comments.value = comments.value.filter((c) => c.id !== commentId)
   } catch (err: any) {
     console.error('删除评论失败:', err)
     alert('删除评论失败: ' + (err.message || '请稍后重试'))
@@ -284,7 +272,7 @@ function formatDate(dateString: string) {
   const date = new Date(dateString)
   const now = new Date()
   const diff = now.getTime() - date.getTime()
-  
+
   // 小于1分钟
   if (diff < 60000) {
     return '刚刚'
@@ -301,7 +289,7 @@ function formatDate(dateString: string) {
   if (diff < 604800000) {
     return `${Math.floor(diff / 86400000)}天前`
   }
-  
+
   // 超过7天显示具体日期
   return date.toLocaleDateString('zh-CN', {
     year: 'numeric',
@@ -330,9 +318,9 @@ function formatDate(dateString: string) {
 .login-prompt {
   text-align: center;
   padding: 2rem;
-  background: rgba(25, 118, 210, 0.05);
+  background: rgba(59, 130, 246, 0.05);
   border-radius: 12px;
-  border: 1px dashed rgba(25, 118, 210, 0.3);
+  border: 1px dashed rgba(59, 130, 246, 0.3);
 }
 
 .login-prompt i {
@@ -502,7 +490,7 @@ function formatDate(dateString: string) {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(25, 118, 210, 0.2);
+  border: 3px solid rgba(59, 130, 246, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -510,6 +498,8 @@ function formatDate(dateString: string) {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
