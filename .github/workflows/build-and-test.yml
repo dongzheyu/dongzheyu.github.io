@@ -8,8 +8,8 @@ on:
 
 # 设置 GITHUB_TOKEN 权限
 permissions:
-  contents: write  # 允许推送代码
-  actions: read    # 允许读取工作流状态
+  contents: write
+  pull-requests: write
 
 jobs:
   build-and-test:
