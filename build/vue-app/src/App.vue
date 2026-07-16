@@ -537,7 +537,7 @@ const handleSignOut = async () => {
 }
 
 .search-trigger-btn:hover {
-  background: rgba(59, 130, 246, 0.08);
+  background: rgba(27, 217, 106, 0.08);
   border-color: var(--color-primary);
   color: var(--color-primary);
   transform: translateY(-1px);
@@ -553,9 +553,9 @@ const handleSignOut = async () => {
   z-index: 0;
   background: radial-gradient(
     circle,
-    rgba(59, 130, 246, 0.15) 0%,
-    rgba(59, 130, 246, 0.08) 30%,
-    rgba(59, 130, 246, 0.03) 60%,
+    rgba(27, 217, 106, 0.15) 0%,
+    rgba(27, 217, 106, 0.08) 30%,
+    rgba(27, 217, 106, 0.03) 60%,
     transparent 70%
   );
   filter: blur(40px);
@@ -568,9 +568,9 @@ const handleSignOut = async () => {
 [data-theme='dark'] .mouse-glow {
   background: radial-gradient(
     circle,
-    rgba(59, 130, 246, 0.2) 0%,
-    rgba(59, 130, 246, 0.1) 30%,
-    rgba(59, 130, 246, 0.05) 60%,
+    rgba(27, 217, 106, 0.2) 0%,
+    rgba(27, 217, 106, 0.1) 30%,
+    rgba(27, 217, 106, 0.05) 60%,
     transparent 70%
   );
 }

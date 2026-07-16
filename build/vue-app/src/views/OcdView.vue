@@ -198,43 +198,43 @@ const resetTest = () => {
 
 <style scoped>
 .ocd-hero {
-  background: linear-gradient(135deg, rgba(58, 12, 163, 0.15) 0%, rgba(88, 42, 193, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(52, 211, 153, 0.08) 100%);
 }
 
 .ocd-hero::before {
-  background: radial-gradient(ellipse at 30% 50%, rgba(58, 12, 163, 0.25) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
 }
 
 .test-hero-title {
-  color: #3a0ca3;
+  color: #10b981;
 }
 
 .test-hero-sub {
-  color: rgba(58, 12, 163, 0.7);
+  color: rgba(16, 185, 129, 0.7);
 }
 
 .question-card {
   background: var(--color-bg-card);
-  border-left: 4px solid #3a0ca3;
+  border-left: 4px solid #10b981;
 }
 
 .option-btn.selected {
-  background: linear-gradient(135deg, rgba(58, 12, 163, 0.1) 0%, rgba(88, 42, 193, 0.05) 100%);
-  border-color: #3a0ca3;
-  color: #3a0ca3;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+  border-color: #10b981;
+  color: #10b981;
 }
 
 .submit-btn {
-  --btn-color: #3a0ca3;
+  --btn-color: #10b981;
 }
 
 .score-value {
-  color: #3a0ca3;
+  color: #10b981;
   font-size: 3rem;
 }
 
 .result-card {
-  border-left: 6px solid #3a0ca3;
+  border-left: 6px solid #10b981;
 }
 
 /* 免责声明 */
@@ -242,14 +242,14 @@ const resetTest = () => {
   display: flex;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(255, 140, 66, 0.1);
-  border-left: 4px solid #ff8c42;
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 4px solid #10b981;
   border-radius: 8px;
   margin-bottom: 1.5rem;
 }
 .notice-icon {
   font-size: 1.5rem;
-  color: #ff8c42;
+  color: #10b981;
   flex-shrink: 0;
 }
 .important-notice strong {

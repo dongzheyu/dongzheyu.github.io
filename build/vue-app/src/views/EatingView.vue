@@ -198,43 +198,43 @@ const resetTest = () => {
 
 <style scoped>
 .eating-hero {
-  background: linear-gradient(135deg, rgba(255, 93, 143, 0.15) 0%, rgba(255, 113, 163, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.15) 0%, rgba(110, 231, 183, 0.08) 100%);
 }
 
 .eating-hero::before {
-  background: radial-gradient(ellipse at 30% 50%, rgba(255, 93, 143, 0.25) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(52, 211, 153, 0.25) 0%, transparent 70%);
 }
 
 .test-hero-title {
-  color: #ff5d8f;
+  color: #34d399;
 }
 
 .test-hero-sub {
-  color: rgba(255, 93, 143, 0.7);
+  color: rgba(52, 211, 153, 0.7);
 }
 
 .question-card {
   background: var(--color-bg-card);
-  border-left: 4px solid #ff5d8f;
+  border-left: 4px solid #34d399;
 }
 
 .option-btn.selected {
-  background: linear-gradient(135deg, rgba(255, 93, 143, 0.1) 0%, rgba(255, 113, 163, 0.05) 100%);
-  border-color: #ff5d8f;
-  color: #ff5d8f;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.1) 0%, rgba(110, 231, 183, 0.05) 100%);
+  border-color: #34d399;
+  color: #34d399;
 }
 
 .submit-btn {
-  --btn-color: #ff5d8f;
+  --btn-color: #34d399;
 }
 
 .score-value {
-  color: #ff5d8f;
+  color: #34d399;
   font-size: 3rem;
 }
 
 .result-card {
-  border-left: 6px solid #ff5d8f;
+  border-left: 6px solid #34d399;
 }
 
 /* 免责声明 */
@@ -242,14 +242,14 @@ const resetTest = () => {
   display: flex;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(255, 140, 66, 0.1);
-  border-left: 4px solid #ff8c42;
+  background: rgba(52, 211, 153, 0.1);
+  border-left: 4px solid #34d399;
   border-radius: 8px;
   margin-bottom: 1.5rem;
 }
 .notice-icon {
   font-size: 1.5rem;
-  color: #ff8c42;
+  color: #34d399;
   flex-shrink: 0;
 }
 .important-notice strong {

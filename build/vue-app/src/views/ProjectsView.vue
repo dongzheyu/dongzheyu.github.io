@@ -156,7 +156,7 @@ const projects = ref([
     description: '专业英语听写训练工具，基于C++和Qt6开发的现代化听写软件',
     category: '教育',
     link: '/project/english-listen',
-    color: '#52b788',
+    color: 'var(--color-brand)',
   },
 ])
 </script>

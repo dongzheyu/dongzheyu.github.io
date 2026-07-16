@@ -154,7 +154,7 @@ const staticData = [
     description: '专业英语听写训练工具，基于C++和Qt6开发',
     category: '技术分享',
     icon: 'mdi:book-open-page-variant',
-    color: '#52b788',
+    color: 'var(--color-brand)',
     path: '/project/english-listen',
     content: '',
   },

@@ -7,39 +7,39 @@ const features = ref([
     icon: 'bi bi-controller',
     title: 'Minecraft 工具开发',
     description:
-      '专注于我的世界相关工具开发，包括启动器管理、整合包优化、基岩版操作等，让游戏体验更流畅。',
-    color: '#3b82f6',
+      '专注于我的世界工具开发，包括启动器管理、整合包优化、基岩版操作等，让游戏体验更流畅。',
+    color: '#1bd96a',
   },
   {
     icon: 'bi bi-wrench-adjustable-circle',
     title: '实用系统工具',
     description:
       '开发各类实用的系统工具，如编译器安装器、环境配置工具等，帮助开发者和玩家简化操作。',
-    color: '#60a5fa',
+    color: '#42e686',
   },
   {
     icon: 'bi bi-journal-richtext',
     title: '技术博客分享',
     description: '定期更新技术文章，分享C++编程经验、项目开发心得和实用工具使用技巧。',
-    color: '#2563eb',
+    color: '#0faa4f',
   },
   {
     icon: 'bi bi-globe2',
     title: '网站与文档',
     description: '创建个人网站和项目文档，分享技术成果，帮助更多人学习和使用开源项目。',
-    color: '#1d4ed8',
+    color: '#00af5c',
   },
   {
     icon: 'bi bi-mortarboard-fill',
     title: '教育编程',
     description: '开发教育类编程工具和练习程序，帮助初学者更好地学习编程和英语等技能。',
-    color: '#93c5fd',
+    color: '#81f4af',
   },
   {
     icon: 'bi bi-rocket-takeoff-fill',
     title: '持续学习',
     description: '不断学习新技术，从用户需求出发，开发更实用、更高效的工具和应用。',
-    color: '#3b82f6',
+    color: '#1bd96a',
   },
 ])
 

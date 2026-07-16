@@ -242,7 +242,7 @@ const calculateResult = () => {
   if (score <= 20) {
     result.value = {
       level: '低度恐惧',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的恐惧水平在正常范围内，当前恐惧症状对你的困扰较小。',
       analysis:
         '总得分 ≤20 分表明你的恐惧症状轻微。适度的恐惧是正常的适应性反应，有助于我们避开真正的危险。你目前的恐惧水平不太可能影响日常生活功能。',
@@ -309,19 +309,13 @@ const resetTest = () => {
 </script>
 
 <style scoped>
-/* 恐惧症测试主色调：深青色 */
+/* 恐惧症测试主色调 */
 .phobia-page {
   min-height: 100vh;
-  --test-accent: #168aad;
-  --test-accent-rgb: 22, 138, 173;
+  --test-accent: var(--color-primary);
+  --test-accent-rgb: 27, 217, 106;
 }
 .test-hero-sub {
   color: var(--test-accent);
-}
-
-/* 深色主题下的特殊处理 */
-[data-theme='dark'] .test-hero-sub,
-:root .test-hero-sub {
-  color: #5acce6; /* 更浅的蓝绿色确保在深色背景上可读 */
 }
 </style>

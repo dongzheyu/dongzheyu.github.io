@@ -1,0 +1,39 @@
+{
+  "endpoints": [
+    "service",
+    "web"
+  ],
+  "pipeline": [
+    "product-manager",
+    "architect",
+    "designer",
+    "developer",
+    "qa"
+  ],
+  "docs": {
+    "prd": "docs/prd",
+    "architecture": "docs/architecture",
+    "design": "docs/design",
+    "acceptance": "docs/acceptance"
+  },
+  "codeRoots": {},
+  "cli": "npx -y @dawipong/opcflow",
+  "machineChecks": {
+    "enabled": false
+  },
+  "protocolLints": [],
+  "moduleMapping": {},
+  "feedbackHalfLifeDays": 15,
+  "gates": {
+    "approvalMode": "warn",
+    "writeGate": "observe"
+  },
+  "git": {
+    "taskTrailer": "off",
+    "trailerKey": "Task"
+  },
+  "platforms": [
+    "opencode"
+  ],
+  "language": "zh"
+}

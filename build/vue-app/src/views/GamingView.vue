@@ -65,7 +65,7 @@ const calculateResult = (answers: Record<number, number>): Result => {
   if (score <= 30) {
     return {
       level: '健康游戏习惯',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的游戏习惯基本健康，没有出现游戏障碍风险。',
       analysis:
         '总得分 ≤30 分表明你的游戏习惯在健康范围内。你能够控制游戏时间，游戏不太可能影响你的生活。',
@@ -118,13 +118,13 @@ const calculateResult = (answers: Record<number, number>): Result => {
 </script>
 
 <style scoped>
-/* 游戏障碍测试主色调：青色 */
+/* 游戏障碍测试主色调：浅翠绿 */
 .gaming-page {
   min-height: 100vh;
-  --test-accent: #06d6a0;
-  --test-accent-rgb: 6, 214, 160;
+  --test-accent: #6ee7b7;
+  --test-accent-rgb: 110, 231, 183;
 }
 .test-hero-sub {
-  color: #06d6a0;
+  color: #059669;
 }
 </style>

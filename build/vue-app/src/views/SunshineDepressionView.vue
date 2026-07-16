@@ -245,7 +245,7 @@ const calculateResult = () => {
   if (score <= 15) {
     result.value = {
       level: '特征不明显',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的得分较低，目前阳光抑郁症的典型特征并不明显。你的内外状态相对一致。',
       analysis:
         '阳光抑郁症的核心是内外极大的落差——表面积极，内心痛苦。你目前的得分表明这种落差程度较低，这是一个积极的信号。当然，每个人都可能有情绪起伏，保持对自己内心的关注仍然重要。',
@@ -324,14 +324,14 @@ const hotlines = [
 </script>
 
 <style scoped>
-/* 阳光抑郁症测试主色调：暖橙 */
+/* 阳光抑郁症测试主色调：Modrinth亮绿 */
 .sunshine-page {
   min-height: 100vh;
-  --test-accent: #f48c06;
-  --test-accent-rgb: 244, 140, 6;
+  --test-accent: #42e686;
+  --test-accent-rgb: 66, 230, 134;
 }
 .test-hero-sub {
-  color: #f48c06;
+  color: #42e686;
 }
 
 /* agree-btn 样式（5级量表，与公共 freq-btn 类似但标签不同） */
@@ -363,8 +363,8 @@ const hotlines = [
   background: var(--color-bg-elevated);
 }
 .agree-btn.selected {
-  border-color: #f48c06;
-  background: rgba(244, 140, 6, 0.1);
+  border-color: #42e686;
+  background: rgba(66, 230, 134, 0.1);
 }
 .agree-score {
   font-size: 1.1rem;
@@ -372,7 +372,7 @@ const hotlines = [
   color: var(--color-text-muted);
 }
 .agree-btn.selected .agree-score {
-  color: #f48c06;
+  color: #42e686;
 }
 .agree-label {
   font-size: 0.67rem;
@@ -410,7 +410,7 @@ const hotlines = [
 }
 .dim-low {
   background: rgba(82, 183, 136, 0.15);
-  color: #52b788;
+  color: var(--color-brand);
 }
 .dim-mid {
   background: rgba(244, 140, 6, 0.15);
@@ -433,7 +433,7 @@ const hotlines = [
   transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .dim-low.dim-bar-fill {
-  background: #52b788 !important;
+  background: var(--color-brand) !important;
 }
 .dim-mid.dim-bar-fill {
   background: #f48c06 !important;

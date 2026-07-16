@@ -213,7 +213,7 @@ const staticPosts = ref([
     date: '2026-03-04',
     author: 'JetCPP Team',
     link: '/blog/xaml-guide',
-    color: '#52b788',
+    color: 'var(--color-brand)',
     category: '编程教程',
     isEditable: false,
   },

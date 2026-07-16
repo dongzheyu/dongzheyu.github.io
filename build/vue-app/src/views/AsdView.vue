@@ -51,7 +51,7 @@ const calculateResult = (answers: Record<number, number>): Result => {
   if (score <= 3) {
     return {
       level: '低特征表现',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的自闭症谱系特征表现很低，属于典型神经发育模式。',
       analysis:
         'AQ-10 得分 ≤3 分表明你的社会交往和行为模式与典型神经发育人群相似。你不太可能有显著的自闭症谱系特征。',
@@ -94,12 +94,12 @@ const calculateResult = (answers: Record<number, number>): Result => {
 </script>
 
 <style scoped>
-/* 自闭症谱系测试主色调：淡蓝色 */
+/* 自闭症谱系测试主色调：Modrinth暗绿 */
 .asd-page {
-  --test-accent: #4cc9f0;
-  --test-accent-rgb: 76, 201, 240;
+  --test-accent: #0faa4f;
+  --test-accent-rgb: 15, 170, 79;
 }
 .asd-page :deep(.test-hero-sub) {
-  color: #4cc9f0;
+  color: #0faa4f;
 }
 </style>

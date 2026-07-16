@@ -1,10 +1,24 @@
 /* ========================================================
-   蔚蓝主题 — Azure Blue Theme System
-   暗 slate + 冰晶蓝 | 浅色/深色双主题
-   设计哲学：简洁、优雅、有呼吸感
+   Modrinth 绿主题 — Modrinth Green Theme System
+   基于 Modrinth 官方设计语言 | 浅色/深色双主题
+   主色: #1BD96A (亮色) / #00AF5C (暗色)
+   设计哲学：简洁、清晰、有呼吸感
    ======================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ========== 绿色色阶（测试页区分用） ========== */
+:root {
+  --green-900: #022c22;
+  --green-800: #064e3b;
+  --green-700: #047857;
+  --green-600: #059669;
+  --green-500: #10b981;
+  --green-400: #34d399;
+  --green-300: #6ee7b7;
+  --green-200: #a7f3d0;
+  --green-100: #d1fae5;
+}
 
 /* ========== 设计令牌（全局共享） ========== */
 :root {
@@ -38,132 +52,144 @@
   --noise-opacity: 0.25;
 }
 
-/* ========== 深色主题（默认） ========== */
+/* ========== 深色主题（默认）— Modrinth Dark ========== */
 :root,
-[data-theme='dark'] {
+[data-theme='dark'],
+.dark-mode {
   color-scheme: dark;
 
-  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-  --gradient-accent: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
-  --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  --gradient-mute: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --gradient-primary: linear-gradient(135deg, #1bd96a 0%, #0faa4f 100%);
+  --gradient-secondary: linear-gradient(135deg, #42e686 0%, #1bd96a 100%);
+  --gradient-accent: linear-gradient(135deg, #81f4af 0%, #42e686 100%);
+  --gradient-success: linear-gradient(135deg, #1bd96a 0%, #0faa4f 100%);
+  --gradient-warning: linear-gradient(135deg, #fe7e11 0%, #ef6307 100%);
+  --gradient-danger: linear-gradient(135deg, #ff496e 0%, #ed1148 100%);
+  --gradient-mute: linear-gradient(135deg, #1d1f23 0%, #16181c 100%);
 
-  --gradient-hero: linear-gradient(165deg, #0f172a 0%, #1e3a5f 35%, #0f172a 65%, #020617 100%);
-  --gradient-warm: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #0f172a 100%);
-  --gradient-ember: linear-gradient(135deg, #1e3a5f 0%, #172554 40%, #0f172a 100%);
-  --gradient-section: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.03) 50%, transparent 100%);
-  --gradient-dark: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+  --gradient-hero: linear-gradient(165deg, #16181c 0%, #1a2e1f 35%, #16181c 65%, #0f1114 100%);
+  --gradient-warm: linear-gradient(135deg, #1a2e1f 0%, #1d3d24 50%, #16181c 100%);
+  --gradient-ember: linear-gradient(135deg, #1a2e1f 0%, #0f8642 40%, #16181c 100%);
+  --gradient-section: linear-gradient(180deg, transparent 0%, rgba(27, 217, 106, 0.04) 50%, transparent 100%);
+  --gradient-dark: linear-gradient(135deg, #0f1114 0%, #16181c 100%);
 
-  --color-bg: #0f172a;
-  --color-bg-soft: #1e293b;
-  --color-bg-mute: #334155;
-  --color-bg-card: #1e293b;
-  --color-bg-elevated: #334155;
-  --color-bg-overlay: rgba(15, 23, 42, 0.9);
+  /* Modrinth surface colors */
+  --color-bg: #16181c;
+  --color-bg-soft: #1d1f23;
+  --color-bg-mute: #27292e;
+  --color-bg-card: #1d1f23;
+  --color-bg-elevated: #27292e;
+  --color-bg-overlay: rgba(22, 24, 28, 0.92);
 
-  --color-text: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
-  --color-heading: #f8fafc;
+  --color-text: #b0bac5;
+  --color-text-secondary: #96a2b0;
+  --color-text-muted: #777b8b;
+  --color-heading: #ffffff;
 
-  --color-border: rgba(59, 130, 246, 0.15);
-  --color-border-hover: rgba(59, 130, 246, 0.35);
-  --color-border-focus: #3b82f6;
+  --color-border: rgba(27, 217, 106, 0.12);
+  --color-border-hover: rgba(27, 217, 106, 0.3);
+  --color-border-focus: #1bd96a;
 
-  --color-primary: #3b82f6;
-  --color-primary-light: #60a5fa;
-  --color-primary-dark: #2563eb;
-  --color-secondary: #60a5fa;
-  --color-accent: #93c5fd;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
+  --color-primary: #1bd96a;
+  --color-primary-light: #42e686;
+  --color-primary-dark: #0faa4f;
+  --color-secondary: #42e686;
+  --color-accent: #81f4af;
+  --color-success: #1bd96a;
+  --color-warning: #fe7e11;
+  --color-danger: #ff496e;
 
-  --glow-primary: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 60px rgba(59, 130, 246, 0.1);
-  --glow-warm: 0 0 30px rgba(96, 165, 250, 0.25);
-  --glow-subtle: 0 0 15px rgba(147, 197, 253, 0.15);
+  --color-brand: #1bd96a;
+  --color-brand-highlight: rgba(27, 217, 106, 0.25);
+  --color-brand-shadow: rgba(27, 217, 106, 0.35);
 
-  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.45);
-  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.2);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-warm: 0 8px 30px rgba(59, 130, 246, 0.15);
+  --glow-primary: 0 0 20px rgba(27, 217, 106, 0.2), 0 0 60px rgba(27, 217, 106, 0.08);
+  --glow-warm: 0 0 30px rgba(66, 230, 134, 0.15);
+  --glow-subtle: 0 0 15px rgba(129, 244, 175, 0.1);
 
-  --glass-bg: rgba(15, 23, 42, 0.75);
-  --glass-border: rgba(59, 130, 246, 0.12);
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 40px rgba(27, 217, 106, 0.15);
+  --shadow-card: rgba(0, 0, 0, 0.3) 0px 2px 6px 0px;
+  --shadow-warm: 0 8px 30px rgba(27, 217, 106, 0.1);
+
+  --glass-bg: rgba(22, 24, 28, 0.8);
+  --glass-border: rgba(27, 217, 106, 0.08);
   --glass-blur: blur(16px);
 
-  --navbar-bg: rgba(15, 23, 42, 0.85);
+  --navbar-bg: rgba(22, 24, 28, 0.88);
   --navbar-blur: blur(20px);
 }
 
-/* ========== 浅色主题 ========== */
-[data-theme='light'] {
+/* ========== 浅色主题 — Modrinth Light ========== */
+[data-theme='light'],
+.light-mode {
   color-scheme: light;
 
-  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-  --gradient-accent: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
-  --gradient-success: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  --gradient-warning: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
-  --gradient-danger: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-  --gradient-mute: linear-gradient(135deg, #f1f5f9 0%, #f8fafc 100%);
+  --gradient-primary: linear-gradient(135deg, #00af5c 0%, #04914f 100%);
+  --gradient-secondary: linear-gradient(135deg, #33f598 0%, #09de78 100%);
+  --gradient-accent: linear-gradient(135deg, #76ffbc 0%, #33f598 100%);
+  --gradient-success: linear-gradient(135deg, #00af5c 0%, #0a7141 100%);
+  --gradient-warning: linear-gradient(135deg, #e08325 0%, #c66019 100%);
+  --gradient-danger: linear-gradient(135deg, #ed4661 0%, #cb2245 100%);
+  --gradient-mute: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
 
-  --gradient-hero: linear-gradient(165deg, #f8fafc 0%, #eff6ff 35%, #f8fafc 65%, #ffffff 100%);
-  --gradient-warm: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #f8fafc 100%);
-  --gradient-ember: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 40%, #eff6ff 100%);
-  --gradient-section: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.04) 50%, transparent 100%);
-  --gradient-dark: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
+  --gradient-hero: linear-gradient(165deg, #f8f8f8 0%, #eefff6 35%, #f8f8f8 65%, #ffffff 100%);
+  --gradient-warm: linear-gradient(135deg, #eefff6 0%, #d7ffeb 50%, #f8fafc 100%);
+  --gradient-ember: linear-gradient(135deg, #d7ffeb 0%, #b2ffd9 40%, #eefff6 100%);
+  --gradient-section: linear-gradient(180deg, transparent 0%, rgba(0, 175, 92, 0.04) 50%, transparent 100%);
+  --gradient-dark: linear-gradient(135deg, #dddddd 0%, #ebebeb 100%);
 
-  --color-bg: #f8fafc;
-  --color-bg-soft: #f1f5f9;
-  --color-bg-mute: #e2e8f0;
+  /* Modrinth surface colors */
+  --color-bg: #ebebeb;
+  --color-bg-soft: #f5f5f5;
+  --color-bg-mute: #eef1f5;
   --color-bg-card: #ffffff;
-  --color-bg-elevated: #f8fafc;
-  --color-bg-overlay: rgba(248, 250, 252, 0.92);
+  --color-bg-elevated: #f8f8f8;
+  --color-bg-overlay: rgba(235, 235, 235, 0.92);
 
-  --color-text: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
-  --color-heading: #020617;
+  --color-text: #2c2e31;
+  --color-text-secondary: #484d54;
+  --color-text-muted: #83868d;
+  --color-heading: #1a202c;
 
-  --color-border: rgba(59, 130, 246, 0.15);
-  --color-border-hover: rgba(59, 130, 246, 0.3);
-  --color-border-focus: #3b82f6;
+  --color-border: rgba(0, 175, 92, 0.15);
+  --color-border-hover: rgba(0, 175, 92, 0.3);
+  --color-border-focus: #00af5c;
 
-  --color-primary: #3b82f6;
-  --color-primary-light: #60a5fa;
-  --color-primary-dark: #2563eb;
-  --color-secondary: #60a5fa;
-  --color-accent: #93c5fd;
-  --color-success: #059669;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
+  --color-primary: #00af5c;
+  --color-primary-light: #33f598;
+  --color-primary-dark: #04914f;
+  --color-secondary: #33f598;
+  --color-accent: #76ffbc;
+  --color-success: #00af5c;
+  --color-warning: #e08325;
+  --color-danger: #ed4661;
 
-  --glow-primary: 0 0 20px rgba(59, 130, 246, 0.15), 0 0 60px rgba(59, 130, 246, 0.06);
-  --glow-warm: 0 0 30px rgba(96, 165, 250, 0.12);
-  --glow-subtle: 0 0 15px rgba(147, 197, 253, 0.08);
+  --color-brand: #00af5c;
+  --color-brand-highlight: rgba(0, 175, 92, 0.15);
+  --color-brand-shadow: rgba(0, 175, 92, 0.25);
 
-  --shadow-xs: 0 1px 3px rgba(15, 23, 42, 0.06);
-  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.08);
-  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.1);
-  --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
-  --shadow-xl: 0 20px 50px rgba(15, 23, 42, 0.15);
-  --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.1);
-  --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.07);
-  --shadow-warm: 0 8px 30px rgba(59, 130, 246, 0.08);
+  --glow-primary: 0 0 20px rgba(0, 175, 92, 0.12), 0 0 60px rgba(0, 175, 92, 0.05);
+  --glow-warm: 0 0 30px rgba(51, 245, 152, 0.1);
+  --glow-subtle: 0 0 15px rgba(118, 255, 188, 0.08);
 
-  --glass-bg: rgba(248, 250, 252, 0.8);
-  --glass-border: rgba(59, 130, 246, 0.1);
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 40px rgba(0, 175, 92, 0.08);
+  --shadow-card: rgba(50, 50, 100, 0.08) 0px 2px 4px 0px;
+  --shadow-warm: 0 8px 30px rgba(0, 175, 92, 0.06);
+
+  --glass-bg: rgba(248, 248, 248, 0.82);
+  --glass-border: rgba(0, 175, 92, 0.08);
   --glass-blur: blur(16px);
 
-  --navbar-bg: rgba(248, 250, 252, 0.88);
+  --navbar-bg: rgba(248, 248, 248, 0.88);
   --navbar-blur: blur(20px);
 }
 
@@ -253,16 +279,16 @@ body::before {
 [data-theme='dark'] body,
 :root body {
   background:
-    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(96, 165, 250, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(27, 217, 106, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(66, 230, 134, 0.04) 0%, transparent 60%),
     var(--color-bg);
 }
 
 /* 浅色背景微暖 */
 [data-theme='light'] body {
   background:
-    radial-gradient(ellipse 80% 60% at 15% 25%, rgba(37, 99, 235, 0.04) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 85% 75%, rgba(59, 130, 246, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 15% 25%, rgba(0, 175, 92, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 75%, rgba(51, 245, 152, 0.03) 0%, transparent 60%),
     var(--color-bg);
 }
 
@@ -278,174 +304,121 @@ a:hover {
   color: var(--color-primary-light);
 }
 
-/* ========== 按钮系统（Vuetify 风格） ========== */
+/* ========== Modrinth 按钮系统 ========== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 11px 24px;
+  padding: 10px 20px;
   font-size: 14px;
-  font-weight: 500;
-  border-radius: 4px;
-  border: none;
+  font-weight: 600;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid transparent;
   cursor: pointer;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
-  text-transform: uppercase;
-  letter-spacing: 0.089em;
   isolation: isolate;
   min-width: 64px;
-  transition:
-    transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 按钮悬停光晕层 */
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
-    rgba(255, 255, 255, 0.15) 0%,
-    transparent 70%
-  );
-  opacity: 0;
-  /* 优化过渡性能 - 只动画必要的属性 */
-  transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.btn:hover::before {
-  opacity: 1;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .btn:active {
-  transform: scale(0.95) !important;
-  transition-duration: 80ms;
+  transform: scale(0.97);
 }
 
-/* 主按钮 */
+/* 主按钮 — Modrinth Green */
 .btn-primary {
-  background: var(--gradient-primary);
-  color: #fff;
-  box-shadow:
-    0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background: var(--color-brand);
+  color: #000 !important;
+  border-color: transparent;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: scale(0.97) !important;
 }
 
 /* 轮廓按钮 */
 .btn-outline,
 .btn-outline-light,
 .btn-outline-primary {
-  background: transparent;
-  border: thin solid var(--color-border);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-button-border, var(--color-border));
   color: var(--color-text) !important;
-  box-shadow: none;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 .btn-outline:hover,
 .btn-outline-light:hover,
 .btn-outline-primary:hover {
-  border-color: var(--color-primary) !important;
-  color: var(--color-primary) !important;
-  background: rgba(59, 130, 246, 0.06) !important;
+  border-color: var(--color-brand) !important;
+  color: var(--color-brand) !important;
+  background: transparent !important;
   transform: translateY(-1px);
 }
 
-/* 警告/赞助按钮 */
+/* 赞助/高亮按钮 */
 .btn-warning,
 .btn-outline-warning {
   background: var(--gradient-accent);
-  color: #1a1410 !important;
+  color: #000 !important;
   border: none;
-  box-shadow:
-    0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 .btn-warning:hover,
 .btn-outline-warning:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
-  color: #1a1410 !important;
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+  color: #000 !important;
 }
 
 /* 危险按钮 */
 .btn-danger {
-  background: var(--gradient-danger);
+  background: var(--color-danger);
   color: white;
-  box-shadow:
-    0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .btn-danger:hover {
+  filter: brightness(1.1);
   transform: translateY(-1px);
-  box-shadow:
-    0 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 /* 浅色按钮 */
 .btn-light {
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-card);
   color: var(--color-heading) !important;
-  border: 1px solid var(--color-border);
-  box-shadow:
-    0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-[data-theme='dark'] .btn-light {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-heading) !important;
+  border: 1px solid var(--color-button-border, var(--color-border));
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 .btn-light:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
-  background: var(--color-bg-card);
+  border-color: var(--color-brand) !important;
+  color: var(--color-brand) !important;
+  transform: translateY(-1px);
 }
 
 /* 按钮尺寸 */
 .btn-sm {
-  padding: 6px 16px;
-  font-size: 13px;
-  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: var(--radius-sm, 8px);
 }
 .btn-lg {
-  padding: 14px 32px;
+  padding: 14px 28px;
   font-size: 16px;
-  border-radius: 4px;
+  border-radius: var(--radius-lg, 16px);
 }
 .btn-rounded {
-  border-radius: var(--radius-full) !important;
+  border-radius: var(--radius-max, 9999px) !important;
 }
 
 /* ========== 卡片（有质感） ========== */
@@ -494,7 +467,7 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  box-shadow: 0 0 0 3px var(--color-brand-shadow);
   background: var(--color-bg-card);
 }
 
@@ -571,11 +544,15 @@ select:focus {
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: var(--color-brand);
 }
 
 ::selection {
-  background: var(--color-primary);
+  background: var(--color-brand);
+  color: #000;
+}
+
+[data-theme='dark'] ::selection {
   color: #fff;
 }
 
@@ -879,7 +856,7 @@ select:focus {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(27, 217, 106, 0.15);
   transform: translate(-50%, -50%);
   transition:
     width 400ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -1072,82 +1049,80 @@ footer {
   transition-timing-function: var(--ease-out-expo);
 }
 
-/* ========== 测试页面按钮颜色定义 ========== */
+/* ========== 测试页面按钮颜色定义 — Modrinth 绿色系 ========== */
 .btn-test-mbti {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: white !important;
+  background: linear-gradient(135deg, #00af5c 0%, #04914f 100%);
+  color: #000 !important;
 }
 .btn-test-depression {
-  background: linear-gradient(135deg, #e63946 0%, #d90429 100%);
+  background: linear-gradient(135deg, #047857 0%, #022c22 100%);
   color: white !important;
 }
 .btn-test-sunshine {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: white !important;
+  background: linear-gradient(135deg, #42e686 0%, #1bd96a 100%);
+  color: #000 !important;
 }
 .btn-test-anxiety {
-  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-  color: white !important;
+  background: linear-gradient(135deg, #1bd96a 0%, #0faa4f 100%);
+  color: #000 !important;
 }
 .btn-test-bipolar {
-  background: linear-gradient(135deg, #c9184a 0%, #a4161a 100%);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: white !important;
 }
 .btn-test-phobia {
-  background: linear-gradient(135deg, #52b788 0%, #40916c 100%);
-  color: white !important;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-primary-dark) 100%);
+  color: #000 !important;
 }
 .btn-test-ptsd {
-  background: linear-gradient(135deg, #9d0208 0%, #6a040f 100%);
+  background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
   color: white !important;
 }
 .btn-test-ocd {
-  background: linear-gradient(135deg, #d00000 0%, #9d0208 100%);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white !important;
 }
 .btn-test-eating {
-  background: linear-gradient(135deg, #8ac926 0%, #52b788 100%);
-  color: #1a1410 !important;
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  color: #000 !important;
 }
 .btn-test-substance {
-  background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
   color: white !important;
 }
 .btn-test-gambling {
-  background: linear-gradient(135deg, #6d4c41 0%, #5a3727 100%);
+  background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
   color: white !important;
 }
 .btn-test-gaming {
-  background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%);
-  color: white !important;
+  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
+  color: #000 !important;
 }
 .btn-test-adhd {
-  background: linear-gradient(135deg, #00838f 0%, #006064 100%);
-  color: white !important;
+  background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+  color: #000 !important;
 }
 .btn-test-asd {
-  background: linear-gradient(135deg, #4a4e69 0%, #22223b 100%);
+  background: linear-gradient(135deg, #0faa4f 0%, #04914f 100%);
   color: white !important;
 }
 .btn-test-bpd {
-  background: linear-gradient(135deg, #37474f 0%, #263238 100%);
+  background: linear-gradient(135deg, #04914f 0%, #047857 100%);
   color: white !important;
 }
 .btn-test-somatic {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #059669 0%, #022c22 100%);
   color: white !important;
 }
 
-/* 提高测试页面按钮在深色主题下的可见性 */
-[data-theme='dark'] .btn-test-bipolar,
+/* 深色主题下深色按钮保持可读 */
+[data-theme='dark'] .btn-test-depression,
 [data-theme='dark'] .btn-test-ptsd,
-[data-theme='dark'] .btn-test-ocd,
-[data-theme='dark'] .btn-test-substance,
 [data-theme='dark'] .btn-test-gambling,
-[data-theme='dark'] .btn-test-somatic,
-[data-theme='dark'] .btn-test-adhd {
-  background: var(--gradient-primary) !important;
-  color: white !important;
+[data-theme='dark'] .btn-test-asd,
+[data-theme='dark'] .btn-test-bpd {
+  background: var(--green-600) !important;
+  color: #fff !important;
 }
 
 /* 紧急求助页面自救方法深色文字修复 */

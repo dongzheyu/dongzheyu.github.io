@@ -253,7 +253,7 @@ const calculateResult = () => {
   if (score <= 20) {
     result.value = {
       level: '极轻微症状',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的PTSD症状水平很低，创伤事件可能未对你造成持久影响。',
       analysis:
         '总得分 ≤20 分表明创伤后应激症状极轻微。许多人经历创伤事件后会自然恢复，你的得分显示你可能已经较好地适应或处理了创伤经历。',
@@ -326,13 +326,13 @@ const resetTest = () => {
 </script>
 
 <style scoped>
-/* PTSD测试主色调：深红色系 */
+/* PTSD测试主色调：深墨绿 */
 .ptsd-page {
   min-height: 100vh;
-  --test-accent: #9d0208;
-  --test-accent-rgb: 157, 2, 8;
+  --test-accent: #064e3b;
+  --test-accent-rgb: 6, 78, 59;
 }
 .test-hero-sub {
-  color: #9d0208;
+  color: #064e3b;
 }
 </style>

@@ -809,7 +809,7 @@ function truncateText(text: string, maxLength: number) {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(59, 130, 246, 0.2);
+  border: 4px solid rgba(27, 217, 106, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -894,7 +894,7 @@ td {
 }
 
 .btn-view {
-  color: #3b82f6;
+  color: var(--color-brand);
 }
 
 .btn-edit {

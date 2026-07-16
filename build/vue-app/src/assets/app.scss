@@ -1,0 +1,66 @@
+// Modrinth/Omorphia Design System — Dark-only entry point
+
+// Forward all modules so their CSS is global
+@forward 'modrinth-styles/variables';
+@forward 'modrinth-styles/normalize';
+@forward 'modrinth-styles/defaults';
+@forward 'modrinth-styles/classes';
+
+// Dark-only: apply dark mode globally on html
+html {
+  @extend .dark-mode !optional;
+}
+
+// Override Bootstrap text-muted
+:root {
+  --bs-text-muted: var(--color-secondary);
+}
+
+.text-muted {
+  color: var(--color-secondary) !important;
+}
+
+// Font Definitions
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PingFangSC';
+  src: url('/PingFangSC-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+// Layout tokens
+html {
+  --size-rounded-xs: 0.5rem;
+  --size-rounded-sm: 0.75rem;
+  --size-rounded-md: 1rem;
+  --size-rounded-lg: 1.25rem;
+  --size-rounded-max: 999999999px;
+  --size-rounded-card: 1rem;
+  --size-rounded-icon: 1rem;
+  --size-rounded-control: 0.25rem;
+  --size-rounded-tooltip: 0.25rem;
+
+  --size-navbar-height: 3.5rem;
+  --size-mobile-navbar-height: 3.5rem;
+  --size-mobile-navbar-height-expanded: 26.5rem;
+
+  --spacing-card-lg: 1.5rem;
+  --spacing-card-bg: 1rem;
+  --spacing-card-md: 0.75rem;
+  --spacing-card-sm: 0.5rem;
+  --spacing-card-xs: 0.25rem;
+
+  interpolate-size: allow-keywords;
+  scrollbar-gutter: stable;
+}
+
+@media screen and (min-width: 354px) {
+  :root {
+    --size-mobile-navbar-height-expanded: 15.5rem;
+  }
+}

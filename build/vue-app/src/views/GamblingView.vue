@@ -52,7 +52,7 @@ const calculateResult = (answers: Record<number, number>): Result => {
   if (score === 0) {
     return {
       level: '无赌博问题',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的赌博行为在正常范围内，没有出现赌博问题。',
       analysis: 'PGSI 得分 0 分表明你没有出现赌博问题。保持健康的娱乐方式，避免赌博即可。',
       suggestions: [
@@ -108,12 +108,12 @@ const calculateResult = (answers: Record<number, number>): Result => {
 </script>
 
 <style scoped>
-/* 赌博障碍测试主色调：深棕色 */
+/* 赌博障碍测试主色调：墨绿 */
 .gambling-page {
-  --test-accent: #6d4c41;
-  --test-accent-rgb: 109, 76, 65;
+  --test-accent: #022c22;
+  --test-accent-rgb: 2, 44, 34;
 }
 .gambling-page :deep(.test-hero-sub) {
-  color: #6d4c41;
+  color: #059669;
 }
 </style>

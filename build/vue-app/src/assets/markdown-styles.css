@@ -183,8 +183,8 @@
 
 .markdown-content :deep(.code-copy-btn.copied) {
   background: rgba(82, 183, 136, 0.2);
-  border-color: #52b788;
-  color: #52b788;
+border-color: var(--color-brand);
+    color: var(--color-brand);
 }
 
 .markdown-content :deep(.code-copy-btn svg) {

@@ -168,7 +168,7 @@ const calculateResult = () => {
   if (score <= 4) {
     result.value = {
       level: '无或极轻微焦虑',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你目前的焦虑水平在正常范围内，过去两周内你很少或几乎没有体验到明显的焦虑症状。',
       analysis:
         '得分 0–4 分表示当前焦虑症状极轻微或不存在。适度的焦虑是正常的情绪反应，帮助我们应对日常挑战。你目前的焦虑水平不会对生活产生负面影响。保持现有的生活习惯和自我关怀即可。',
@@ -238,13 +238,13 @@ const resetTest = () => {
 </script>
 
 <style scoped>
-/* 焦虑症测试主色调：琥珀橙 */
+/* 焦虑症测试主色调：Modrinth 绿 */
 .anxiety-page {
   min-height: 100vh;
-  --test-accent: #f48c06;
-  --test-accent-rgb: 244, 140, 6;
+  --test-accent: #1bd96a;
+  --test-accent-rgb: 27, 217, 106;
 }
 .test-hero-sub {
-  color: #f48c06;
+  color: #1bd96a;
 }
 </style>

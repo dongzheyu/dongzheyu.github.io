@@ -85,13 +85,13 @@ const getSize = (count: number) => {
   color: white;
   border-color: var(--color-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(27, 217, 106, 0.3);
 }
 
 .tag-count {
   font-size: 0.7rem;
   padding: 0.1rem 0.4rem;
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(27, 217, 106, 0.15);
   border-radius: 10px;
   color: var(--color-primary);
 }

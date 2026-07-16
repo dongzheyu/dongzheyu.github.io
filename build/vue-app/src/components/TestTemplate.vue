@@ -392,7 +392,7 @@ defineExpose({
 }
 
 .submit-hint {
-  color: #3b82f6;
+  color: var(--test-accent, var(--color-brand));
   margin-bottom: 1rem;
 }
 
@@ -515,13 +515,13 @@ defineExpose({
   gap: 1rem;
   padding: 1.5rem;
   background: rgba(59, 130, 246, 0.1);
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid var(--test-accent, var(--color-brand));
   border-radius: 8px;
 }
 
 .notice-icon {
   font-size: 1.5rem;
-  color: #3b82f6;
+  color: var(--test-accent, var(--color-brand));
 }
 
 /* 收藏按钮 */

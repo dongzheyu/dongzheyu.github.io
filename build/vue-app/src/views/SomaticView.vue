@@ -58,7 +58,7 @@ const calculateResult = (answers: Record<number, number>): Result => {
   if (score <= 4) {
     return {
       level: '极轻微躯体症状',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的躯体症状水平很低，属于正常范围。',
       analysis:
         'PHQ-15 得分 0-4 分表明躯体症状极轻微。大多数人都有一些轻微的身体不适，这是正常的。你的得分显示躯体症状不太可能影响你的生活。',
@@ -116,13 +116,13 @@ const calculateResult = (answers: Record<number, number>): Result => {
 </script>
 
 <style scoped>
-/* 躯体症状障碍测试主色调：土黄色 */
+/* 躯体症状障碍测试主色调：翡翠绿 */
 .somatic-page {
   min-height: 100vh;
-  --test-accent: #bc6c25;
-  --test-accent-rgb: 188, 108, 37;
+  --test-accent: #059669;
+  --test-accent-rgb: 5, 150, 105;
 }
 .test-hero-sub {
-  color: #bc6c25;
+  color: #059669;
 }
 </style>

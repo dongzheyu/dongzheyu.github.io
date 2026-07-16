@@ -50,7 +50,7 @@ const calculateResult = (answers: Record<number, number>): Result => {
   if (score <= 2) {
     return {
       level: '低风险',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的边缘型人格障碍风险很低，属于正常情绪调节范围。',
       analysis:
         'MSI-BPD 得分 ≤2 分表明你的情绪调节和人际关系模式基本健康。你不太可能出现边缘型人格障碍。',
@@ -107,12 +107,12 @@ const calculateResult = (answers: Record<number, number>): Result => {
 </script>
 
 <style scoped>
-/* 边缘型人格障碍测试主色调：深紫色 */
+/* 边缘型人格障碍测试主色调：深翡翠绿 */
 .bpd-page {
-  --test-accent: #7b2cbf;
-  --test-accent-rgb: 123, 44, 191;
+  --test-accent: #04914f;
+  --test-accent-rgb: 4, 145, 79;
 }
 .bpd-page :deep(.test-hero-sub) {
-  color: #7b2cbf;
+  color: #04914f;
 }
 </style>

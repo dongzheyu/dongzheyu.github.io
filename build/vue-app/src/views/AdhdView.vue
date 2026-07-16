@@ -209,7 +209,7 @@ const calculateResult = () => {
   if (score <= 20) {
     result.value = {
       level: '极轻微症状',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你的ADHD症状水平很低，属于正常范围。',
       analysis:
         '总得分 ≤20 分表明ADHD症状极轻微。大多数人都有一些注意力不集中或冲动的时刻，这是正常的。你的得分显示ADHD不太可能影响你的生活。',
@@ -277,13 +277,13 @@ const resetTest = () => {
 </script>
 
 <style scoped>
-/* ADHD测试主色调：亮黄色 */
+/* ADHD测试主色调：浅薄荷绿 */
 .adhd-page {
   min-height: 100vh;
-  --test-accent: #ffd166;
-  --test-accent-rgb: 255, 209, 102;
+  --test-accent: #a7f3d0;
+  --test-accent-rgb: 167, 243, 208;
 }
 .test-hero-sub {
-  color: #ffd166;
+  color: #059669;
 }
 </style>

@@ -408,7 +408,7 @@ async function handleDeleteAccount() {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(59, 130, 246, 0.2);
+  border: 4px solid rgba(27, 217, 106, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -448,7 +448,7 @@ async function handleDeleteAccount() {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(27, 217, 106, 0.1);
   overflow: hidden;
 }
 

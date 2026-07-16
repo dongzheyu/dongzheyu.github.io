@@ -341,25 +341,25 @@
                   <li>
                     <Icon
                       icon="mdi:check-circle"
-                      style="margin-right: 8px; color: #52b788"
+                      style="margin-right: 8px; color: var(--color-brand)"
                     />解决了玩家们的实际痛点
                   </li>
                   <li>
                     <Icon
                       icon="mdi:check-circle"
-                      style="margin-right: 8px; color: #52b788"
+                      style="margin-right: 8px; color: var(--color-brand)"
                     />采用了简洁高效的设计
                   </li>
                   <li>
                     <Icon
                       icon="mdi:check-circle"
-                      style="margin-right: 8px; color: #52b788"
+                      style="margin-right: 8px; color: var(--color-brand)"
                     />支持正版游戏体验
                   </li>
                   <li>
                     <Icon
                       icon="mdi:check-circle"
-                      style="margin-right: 8px; color: #52b788"
+                      style="margin-right: 8px; color: var(--color-brand)"
                     />完全开源，让每个人都能受益
                   </li>
                 </ul>

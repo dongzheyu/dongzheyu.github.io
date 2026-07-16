@@ -200,7 +200,7 @@ const calculateResult = () => {
   if (score <= 4) {
     result.value = {
       level: '无或极轻微抑郁',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description: '你目前的得分处于正常范围。过去两周内，你很少或几乎没有经历上述抑郁相关症状。',
       analysis:
         '得分 0–4 分表示当前抑郁症状在正常波动范围内。每个人偶尔都会有情绪低落的时候，这是正常的情绪反应，并不代表存在心理健康问题。保持规律的作息、运动和社交活动有助于维持良好的心理状态。',
@@ -321,13 +321,13 @@ const resources = [
 </script>
 
 <style scoped>
-/* 抑郁症测试主色调：危险红 */
+/* 抑郁症测试主色调：森林绿 */
 .depression-page {
   min-height: 100vh;
-  --test-accent: #ef233c;
-  --test-accent-rgb: 239, 35, 60;
+  --test-accent: #047857;
+  --test-accent-rgb: 4, 120, 87;
 }
 .test-hero-sub {
-  color: var(--color-danger, #ef233c);
+  color: var(--color-primary, #047857);
 }
 </style>

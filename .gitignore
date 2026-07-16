@@ -1,17 +1,8 @@
 # Dependencies
-/build/node_modules
 /node_modules
-
-# Build outputs (需要提交)
-# /dist
-# /.vitepress/dist
-# /assets
 
 # Executables
 *.exe
-*.dll
-*.so
-*.dylib
 
 # Logs
 *.log
@@ -22,12 +13,10 @@
 
 # System files
 .DS_Store
-Thumbs.dbbuild/
-build/docs/.vitepress/dist
-build\vue-app\.workbuddy
+Thumbs.db
 
-#Other
-复制构建产物.bat
+# Build artifacts managed by build/vue-app/scripts/deploy.js
+build/vue-app/dist/
 
 # SniShaperWeb 独立仓库（避免被识别为子模块）
 build/vue-app/snishaperweb/

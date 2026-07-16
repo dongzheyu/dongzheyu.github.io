@@ -179,7 +179,7 @@ const calculateResult = () => {
   if (!hasQ12Q13) {
     result.value = {
       level: '阴性',
-      color: '#52b788',
+      color: 'var(--color-brand)',
       description:
         '你的回答显示你可能未经历过典型的躁狂/轻躁狂发作，或者这些表现未被他人注意到或未导致明显问题。',
       analysis:
@@ -248,13 +248,13 @@ const resetTest = () => {
 </script>
 
 <style scoped>
-/* 双相情感障碍测试主色调：紫色系 */
+/* 双相情感障碍测试主色调：翡翠绿 */
 .bipolar-page {
   min-height: 100vh;
-  --test-accent: #7209b7;
-  --test-accent-rgb: 114, 9, 183;
+  --test-accent: #059669;
+  --test-accent-rgb: 5, 150, 105;
 }
 .test-hero-sub {
-  color: #7209b7;
+  color: #059669;
 }
 </style>
