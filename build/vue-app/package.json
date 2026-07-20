@@ -15,20 +15,20 @@
     "add-blog": "bun scripts/add-content.js blog"
   },
   "dependencies": {
+    "@iconify-json/mdi": "^1.2.3",
     "@iconify/vue": "^4.3.0",
     "@supabase/supabase-js": "^2.105.1",
-    "@types/markdown-it": "^14.1.2",
-    "@vue/tsconfig": "^0.8.1",
     "bootstrap": "^5.3.8",
-    "bootstrap-icons": "^1.13.1",
     "markdown-it": "^14.1.1",
     "vue": "^3.2.0",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.5",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.6.0",
     "@vitejs/plugin-vue": "^6.0.3",
+    "@vue/tsconfig": "^0.8.1",
     "esbuild": "^0.28.0",
     "prettier": "^3.9.4",
     "vite": "^8.0.10",

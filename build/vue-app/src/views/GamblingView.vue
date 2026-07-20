@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import TestTemplate from '@/components/TestTemplate.vue'
 
 const freqOptions = [
@@ -110,10 +110,10 @@ const calculateResult = (answers: Record<number, number>): Result => {
 <style scoped>
 /* 赌博障碍测试主色调：墨绿 */
 .gambling-page {
-  --test-accent: #022c22;
-  --test-accent-rgb: 2, 44, 34;
+  --test-accent: #34d399;
+  --test-accent-rgb: 52, 211, 153;
 }
 .gambling-page :deep(.test-hero-sub) {
-  color: #059669;
+  color: #34d399;
 }
 </style>

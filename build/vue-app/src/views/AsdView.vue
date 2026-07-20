@@ -96,10 +96,10 @@ const calculateResult = (answers: Record<number, number>): Result => {
 <style scoped>
 /* 自闭症谱系测试主色调：Modrinth暗绿 */
 .asd-page {
-  --test-accent: #0faa4f;
-  --test-accent-rgb: 15, 170, 79;
+  --test-accent: #34d399;
+  --test-accent-rgb: 52, 211, 153;
 }
 .asd-page :deep(.test-hero-sub) {
-  color: #0faa4f;
+  color: #34d399;
 }
 </style>

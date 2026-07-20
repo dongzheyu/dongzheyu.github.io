@@ -1,253 +1,144 @@
-/**
- * Markdown 统一样式库
- * 用于博客文章和项目详情页的 Markdown 内容渲染
- */
-
 .markdown-content {
   line-height: 1.8;
   color: var(--color-text);
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
-/* ========== 标题样式 - 添加渐变和动画 ========== */
 .markdown-content :deep(h1) {
-  font-size: 2.25rem;
-  margin: 2.5rem 0 1.25rem;
+  font-size: 2rem;
+  margin: 3rem 0 1.25rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.88);
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   padding-bottom: 0.75rem;
-  border-bottom: 3px solid transparent;
-  border-image: linear-gradient(90deg, var(--color-primary), transparent) 1;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 800;
-  letter-spacing: -0.02em;
 }
 
 .markdown-content :deep(h2) {
-  font-size: 1.875rem;
-  margin: 2rem 0 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(59, 130, 246, 0.3);
-  color: var(--color-text);
-  font-weight: 700;
-  position: relative;
-}
-
-.markdown-content :deep(h2)::before {
-  content: '';
-  position: absolute;
-  left: -1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 70%;
-  background: var(--color-primary);
-  border-radius: 2px;
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.82);
+  padding-left: 12px;
+  border-left: 1px solid rgba(255,255,255,0.25);
 }
 
 .markdown-content :deep(h3) {
-  font-size: 1.5rem;
-  margin: 1.75rem 0 0.875rem;
-  color: var(--color-text);
-  font-weight: 600;
-  padding-left: 0.75rem;
-  border-left: 3px solid var(--color-primary);
+  font-size: 1.2rem;
+  margin: 2rem 0 0.875rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.78);
 }
 
-.markdown-content :deep(h4) {
-  font-size: 1.25rem;
-  margin: 1.5rem 0 0.75rem;
-  color: var(--color-text);
-  font-weight: 600;
-}
-
-.markdown-content :deep(h5) {
-  font-size: 1.125rem;
-  margin: 1.25rem 0 0.625rem;
-  color: var(--color-text-secondary);
-  font-weight: 600;
-}
-
-.markdown-content :deep(h6) {
+.markdown-content :deep(h4), :deep(h5), :deep(h6) {
   font-size: 1rem;
-  margin: 1rem 0 0.5rem;
-  color: var(--color-text-secondary);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  margin: 1.5rem 0 0.75rem;
+  color: rgba(255,255,255,0.72);
 }
 
-/* ========== 段落 - 优化间距 ========== */
 .markdown-content :deep(p) {
   margin: 1.25rem 0;
   line-height: 1.9;
-  text-align: justify;
 }
 
-/* ========== 链接 - 添加下划线动画 ========== */
 .markdown-content :deep(a) {
-  color: var(--color-primary);
+  color: rgba(255,255,255,0.8);
   text-decoration: none;
-  position: relative;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.markdown-content :deep(a)::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--color-primary);
-  transition: width 0.3s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  transition: border-color 0.2s;
 }
 
 .markdown-content :deep(a:hover) {
-  color: var(--color-primary-light);
+  color: rgba(255,255,255,1);
+  border-bottom-color: rgba(255,255,255,0.4);
 }
 
-.markdown-content :deep(a:hover)::after {
-  width: 100%;
-}
-
-/* ========== 行内代码 - 添加光晕效果 ========== */
 .markdown-content :deep(code) {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%);
-  padding: 0.25em 0.5em;
-  border-radius: 6px;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-  font-size: 0.875em;
-  color: var(--color-primary);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
-  transition: all 0.2s ease;
+  background: rgba(255,255,255,0.06);
+  padding: 0.15em 0.5em;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: rgba(255,255,255,0.85);
 }
 
 .markdown-content :deep(code:hover) {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.12) 100%);
-  box-shadow: 0 3px 6px rgba(59, 130, 246, 0.15);
+  background: rgba(255,255,255,0.1);
 }
 
-/* ========== 代码块 - 现代化设计 ========== */
+.markdown-content :deep(pre) {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  padding-top: 2.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.markdown-content :deep(pre code) {
+  background: none;
+  padding: 0;
+  border: none;
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
 .markdown-content :deep(.code-block-wrapper) {
   position: relative;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 .markdown-content :deep(.code-lang-badge) {
   position: absolute;
-  top: 0.75rem;
+  top: 0.5rem;
   left: 1rem;
-  background: rgba(59, 130, 246, 0.2);
-  color: var(--color-primary-light);
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  color: var(--color-text-faint);
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   z-index: 2;
   pointer-events: none;
 }
 
 .markdown-content :deep(.code-copy-btn) {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--color-text-secondary);
-  padding: 0.5rem 0.875rem;
-  border-radius: 8px;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--color-text-dim);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  gap: 0.4rem;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  transition: all 0.2s;
   z-index: 2;
-  backdrop-filter: blur(10px);
 }
 
 .markdown-content :deep(.code-copy-btn:hover) {
-  background: rgba(59, 130, 246, 0.2);
-  border-color: var(--color-primary);
-  color: var(--color-primary-light);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  border-color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.8);
 }
 
 .markdown-content :deep(.code-copy-btn.copied) {
-  background: rgba(82, 183, 136, 0.2);
-border-color: var(--color-brand);
-    color: var(--color-brand);
+  border-color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.7);
 }
 
-.markdown-content :deep(.code-copy-btn svg) {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
-
-.markdown-content :deep(.code-content) {
-  /* 保持原有的 pre 样式 */
-}
-
-.markdown-content :deep(pre) {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%);
-  padding: 1.75rem;
-  padding-top: 3rem;
-  border-radius: 12px;
-  overflow-x: auto;
-  margin: 0;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  position: relative;
-}
-
-.markdown-content :deep(pre)::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-primary-light),
-    var(--color-primary)
-  );
-  border-radius: 12px 12px 0 0;
-}
-
-.markdown-content :deep(pre code) {
-  background: none;
-  padding: 0;
-  color: var(--color-text);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  border: none;
-  box-shadow: none;
-}
-
-/* ========== 列表 - 自定义标记 ========== */
-.markdown-content :deep(ul),
-.markdown-content :deep(ol) {
+.markdown-content :deep(ul), :deep(ol) {
   margin: 1.25rem 0;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
 }
 
 .markdown-content :deep(li) {
-  margin: 0.625rem 0;
-  line-height: 1.9;
-  position: relative;
+  margin: 0.5rem 0;
+  line-height: 1.8;
 }
 
 .markdown-content :deep(ul li) {
@@ -256,208 +147,91 @@ border-color: var(--color-brand);
 }
 
 .markdown-content :deep(ul li)::before {
-  content: '▸';
+  content: '—';
   position: absolute;
-  left: -1.5rem;
-  color: var(--color-primary);
-  font-weight: bold;
-  transition: transform 0.2s ease;
-}
-
-.markdown-content :deep(ul li:hover)::before {
-  transform: translateX(4px);
-}
-
-.markdown-content :deep(ol li) {
-  list-style-type: decimal;
-  padding-left: 0.5rem;
+  left: -1.2rem;
+  color: var(--color-text-dim);
 }
 
 .markdown-content :deep(ol li::marker) {
-  color: var(--color-primary);
-  font-weight: 600;
+  color: var(--color-text-dim);
 }
 
-/* ========== 引用块 - 增强视觉效果 ========== */
 .markdown-content :deep(blockquote) {
-  border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)) 1;
-  padding: 1.25rem 1.75rem;
-  margin: 2rem 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0.03) 100%);
-  border-radius: 0 12px 12px 0;
-  color: var(--color-text-secondary);
-  position: relative;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
-}
-
-.markdown-content :deep(blockquote)::before {
-  content: '"';
-  position: absolute;
-  top: -0.5rem;
-  left: 0.5rem;
-  font-size: 4rem;
-  color: var(--color-primary);
-  opacity: 0.2;
-  font-family: Georgia, serif;
-  line-height: 1;
+  border-left: 2px solid rgba(255,255,255,0.18);
+  padding: 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--color-text-dim);
 }
 
 .markdown-content :deep(blockquote p) {
-  margin: 0.5rem 0;
-  position: relative;
-  z-index: 1;
+  margin: 0.25rem 0;
 }
 
-/* ========== 图片 - 添加悬停效果 ========== */
 .markdown-content :deep(img) {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
-  margin: 2rem 0;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: opacity 0.3s;
 }
 
 .markdown-content :deep(img:hover) {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-  border-color: var(--color-primary);
+  opacity: 0.85;
 }
 
-/* ========== 表格 - 现代化设计 ========== */
 .markdown-content :deep(table) {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 2rem 0;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: var(--font-size-xs);
 }
 
 .markdown-content :deep(th) {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
-  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.04);
+  padding: 0.75rem 1rem;
   text-align: left;
-  font-weight: 700;
-  color: var(--color-text);
-  border-bottom: 2px solid rgba(59, 130, 246, 0.3);
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  color: rgba(255,255,255,0.78);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  letter-spacing: 0.02em;
 }
 
 .markdown-content :deep(td) {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
   color: var(--color-text);
-  transition: background 0.2s ease;
 }
 
 .markdown-content :deep(tr:last-child td) {
   border-bottom: none;
 }
 
-.markdown-content :deep(tr:hover td) {
-  background: rgba(59, 130, 246, 0.05);
-}
-
-/* ========== 分隔线 - 渐变效果 ========== */
 .markdown-content :deep(hr) {
   border: none;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-  margin: 3rem 0;
-  opacity: 0.5;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 2rem 0;
 }
 
-/* ========== 任务列表 ========== */
 .markdown-content :deep(input[type='checkbox']) {
   margin-right: 0.5rem;
-  accent-color: var(--color-primary);
+  accent-color: rgba(255,255,255,0.5);
 }
 
-/* ========== 标题锚点跳转 ========== */
-html {
-  scroll-behavior: smooth;
-}
-
-.markdown-content :deep(h1),
-.markdown-content :deep(h2),
-.markdown-content :deep(h3),
-.markdown-content :deep(h4),
-.markdown-content :deep(h5),
-.markdown-content :deep(h6) {
+.markdown-content :deep(h1), :deep(h2), :deep(h3), :deep(h4), :deep(h5), :deep(h6) {
   scroll-margin-top: 80px;
-  scroll-snap-align: start;
-}
-
-/* 标题悬浮时显示锚点链接图标 */
-.markdown-content :deep(h1[id]),
-.markdown-content :deep(h2[id]),
-.markdown-content :deep(h3[id]),
-.markdown-content :deep(h4[id]),
-.markdown-content :deep(h5[id]),
-.markdown-content :deep(h6[id]) {
-  position: relative;
-  cursor: pointer;
-}
-
-.markdown-content :deep(h1[id])::after,
-.markdown-content :deep(h2[id])::after,
-.markdown-content :deep(h3[id])::after,
-.markdown-content :deep(h4[id])::after,
-.markdown-content :deep(h5[id])::after,
-.markdown-content :deep(h6[id])::after {
-  content: '#';
-  position: absolute;
-  left: -1.5rem;
-  color: var(--color-primary);
-  opacity: 0;
-  font-weight: 400;
-  transition: opacity 0.2s ease;
 }
 
 .markdown-content :deep(h1[id]):hover::after,
-.markdown-content :deep(h2[id]):hover::after,
-.markdown-content :deep(h3[id]):hover::after,
-.markdown-content :deep(h4[id]):hover::after,
-.markdown-content :deep(h5[id]):hover::after,
-.markdown-content :deep(h6[id]):hover::after {
-  opacity: 0.6;
-}
-
-/* 标题内锚点链接样式 */
-.markdown-content :deep(.header-anchor) {
-  color: var(--color-primary);
-  text-decoration: none;
-  margin-left: 0.5rem;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.markdown-content :deep(h1:hover .header-anchor),
-.markdown-content :deep(h2:hover .header-anchor),
-.markdown-content :deep(h3:hover .header-anchor),
-.markdown-content :deep(h4:hover .header-anchor),
-.markdown-content :deep(h5:hover .header-anchor),
-.markdown-content :deep(h6:hover .header-anchor) {
-  opacity: 0.6;
-}
-
-/* 目录链接样式 */
-.markdown-content :deep(a[href^='#']) {
-  color: var(--color-primary);
-  text-decoration: none;
-  border-bottom: 1px dashed var(--color-primary);
-  transition: all 0.2s ease;
-}
-
-.markdown-content :deep(a[href^='#']):hover {
-  color: var(--color-primary-light);
-  border-bottom-style: solid;
+:deep(h2[id]):hover::after,
+:deep(h3[id]):hover::after,
+:deep(h4[id]):hover::after {
+  content: '#';
+  position: absolute;
+  left: -1.2rem;
+  color: var(--color-text-faint);
+  font-weight: 400;
 }

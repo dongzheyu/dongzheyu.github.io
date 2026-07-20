@@ -1,157 +1,24 @@
 <template>
-  <div class="depression-page">
-    <!-- 阅读进度条 -->
-    <ReadingProgress />
-
-    <!-- Hero -->
-    <section class="test-hero depression-hero">
-      <div class="container-fluid px-4">
-        <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%">
-            <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <Icon icon="mdi:arrow-left" /> 返回评估列表
-            </RouterLink>
-            <h1 class="test-hero-title mb-3">抑郁症自评测试</h1>
-            <p class="test-hero-sub mb-2">PHQ-9 患者健康问卷 · 9 道题 · 约 5 分钟</p>
-            <p class="test-hero-desc">
-              PHQ-9（Patient Health Questionnaire-9）是国际上广泛使用的抑郁症筛查工具，
-              已被翻译为多种语言并在临床环境中广泛验证。请根据过去两周内你的真实感受作答。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container-fluid px-4 test-body">
-      <!-- 测试题目 -->
-      <div v-if="!showResult">
-        <p class="freq-instruction mb-5" style="padding-left: 5%">
-          在过去两周内，以下问题出现的频率如何？
-        </p>
-
-        <div
-          v-for="(q, index) in questions"
-          :key="q.id"
-          class="question-card mb-4"
-          :class="{ answered: answers[q.id] !== undefined }"
-        >
-          <div class="question-number">{{ index + 1 }} / {{ questions.length }}</div>
-          <p class="question-text">{{ q.text }}</p>
-          <div class="freq-options">
-            <button
-              v-for="opt in freqOptions"
-              :key="opt.value"
-              class="freq-btn"
-              :class="{ selected: answers[q.id] === opt.value }"
-              @click="answers[q.id] = opt.value; answers = { ...answers }"
-            >
-              <span class="freq-score">{{ opt.value }}</span>
-              <span class="freq-label">{{ opt.label }}</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">
-            还有 {{ questions.length - answeredCount }} 道题未作答
-          </p>
-          <button
-            class="btn btn-primary btn-animate btn-lg"
-            :disabled="answeredCount < questions.length"
-            @click="calculateResult"
-          >
-            查看结果
-          </button>
-        </div>
-      </div>
-
-      <!-- 结果 -->
-      <div v-if="showResult" class="result-section">
-        <!-- 总分展示 -->
-        <div class="score-card mb-5">
-          <div class="score-circle" :style="`--score-color: ${result.color}`">
-            <span class="score-num">{{ totalScore }}</span>
-            <span class="score-total">/ 27</span>
-          </div>
-          <div class="score-info">
-            <div class="score-level" :style="`color: ${result.color}`">{{ result.level }}</div>
-            <p class="score-desc">{{ result.description }}</p>
-          </div>
-        </div>
-
-        <!-- 各题得分 -->
-        <div class="answer-review mb-5">
-          <h3 class="review-title">各项得分详情</h3>
-          <div class="review-grid">
-            <div v-for="(q, index) in questions" :key="q.id" class="review-item">
-              <div class="review-q-num">Q{{ index + 1 }}</div>
-              <div class="review-q-text">{{ q.text }}</div>
-              <div class="review-score" :class="getScoreClass(answers[q.id])">
-                {{ freqOptions.find((o) => o.value === answers[q.id])?.label }}
-                <span class="review-score-num">+{{ answers[q.id] }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 功能损害评估 -->
-        <div class="impairment-section mb-5">
-          <h3 class="review-title">详细分析</h3>
-          <div class="detail-grid">
-            <div class="detail-block">
-              <h4 class="detail-block-title">测试说明</h4>
-              <p class="detail-block-text">{{ result.analysis }}</p>
-            </div>
-            <div class="detail-block">
-              <h4 class="detail-block-title">建议行动</h4>
-              <ul class="detail-list">
-                <li v-for="s in result.suggestions" :key="s">{{ s }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- 心理健康资源 -->
-        <div class="resources-section mb-5">
-          <h3 class="review-title">心理健康求助资源</h3>
-          <p class="resources-intro">
-            无论测试结果如何，当你感到心理上的困扰时，都可以联系以下专业资源：
-          </p>
-          <div class="resources-grid">
-            <div v-for="r in resources" :key="r.name" class="resource-card">
-              <div class="resource-name">{{ r.name }}</div>
-              <div class="resource-contact">{{ r.contact }}</div>
-              <div class="resource-desc">{{ r.desc }}</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 重要免责声明 -->
-        <div class="important-notice mb-5">
-          <Icon icon="mdi:alert" class="notice-icon" />
-          <div>
-            <strong>重要说明</strong>
-            <p>
-              PHQ-9
-              是筛查工具，不是诊断工具。测试结果不能替代精神科医生或心理咨询师的专业评估。如果你对自己的心理健康状况感到担忧，请务必寻求专业帮助。如果你有伤害自己的想法，请立即拨打危机热线或前往最近的急诊室。
-            </p>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
-          <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
-        </div>
-      </div>
-    </div>
-  </div>
+  <TestTemplate
+    title="抑郁症自评测试"
+    subtitle="PHQ-9 患者健康问卷 · 9 道题 · 约 5 分钟"
+    description="PHQ-9（Patient Health Questionnaire-9）是国际上广泛使用的抑郁症筛查工具，已被翻译为多种语言并在临床环境中广泛验证。请根据过去两周内你的真实感受作答。"
+    instruction="在过去两周内，以下问题出现的频率如何？"
+    test-id="phq9"
+    test-title="抑郁症自评测试"
+    :questions="questions"
+    :options="freqOptions"
+    :calculate-result-fn="calculateResult"
+    theme-class="depression-page"
+    hero-padding="5%"
+    show-answer-review
+    disclaimer="PHQ-9 是筛查工具，不是诊断工具。测试结果不能替代精神科医生或心理咨询师的专业评估。如果你对自己的心理健康状况感到担忧，请务必寻求专业帮助。如果你有伤害自己的想法，请立即拨打危机热线或前往最近的急诊室。"
+  />
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
-import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from '@/components/Icon.vue'
+import { ref } from 'vue'
+import TestTemplate from '@/components/TestTemplate.vue'
 
 const freqOptions = [
   { value: 0, label: '完全没有' },
@@ -175,30 +42,19 @@ const questions = ref([
   { id: 9, text: '有不如死掉或用某种方式伤害自己的念头' },
 ])
 
-const answers = ref<Record<number, number>>({})
-const showResult = ref(false)
-const result = ref<any>(null)
-
-const answeredCount = computed(
-  () => questions.value.filter((q) => answers.value[q.id] !== undefined).length,
-)
-
-const totalScore = computed(() =>
-  questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0),
-)
-
-const getScoreClass = (score: number) => {
-  if (score === 0) return 'score-none'
-  if (score === 1) return 'score-low'
-  if (score === 2) return 'score-mid'
-  return 'score-high'
+interface Result {
+  level: string
+  color: string
+  description: string
+  analysis: string
+  suggestions: string[]
 }
 
-const calculateResult = () => {
-  const score = totalScore.value
+const calculateResult = (answers: Record<number, number>): Result => {
+  const score = Object.values(answers).reduce((sum, val) => sum + val, 0)
 
   if (score <= 4) {
-    result.value = {
+    return {
       level: '无或极轻微抑郁',
       color: 'var(--color-brand)',
       description: '你目前的得分处于正常范围。过去两周内，你很少或几乎没有经历上述抑郁相关症状。',
@@ -212,7 +68,7 @@ const calculateResult = () => {
       ],
     }
   } else if (score <= 9) {
-    result.value = {
+    return {
       level: '轻度抑郁',
       color: '#f48c06',
       description: '你的得分表明存在轻度抑郁症状。这些症状可能对日常生活产生一定影响，值得关注。',
@@ -227,7 +83,7 @@ const calculateResult = () => {
       ],
     }
   } else if (score <= 14) {
-    result.value = {
+    return {
       level: '中度抑郁',
       color: '#ff8c42',
       description: '你的得分表明存在中度抑郁症状，这些症状可能正在明显影响你的日常功能和生活质量。',
@@ -242,7 +98,7 @@ const calculateResult = () => {
       ],
     }
   } else if (score <= 19) {
-    result.value = {
+    return {
       level: '中重度抑郁',
       color: '#ef233c',
       description: '你的得分表明存在中重度抑郁症状。请认真对待这一结果，并尽快寻求专业帮助。',
@@ -258,7 +114,7 @@ const calculateResult = () => {
       ],
     }
   } else {
-    result.value = {
+    return {
       level: '重度抑郁',
       color: '#d90429',
       description: '你的得分表明存在重度抑郁症状。请立即寻求专业帮助，这非常重要。',
@@ -274,60 +130,15 @@ const calculateResult = () => {
       ],
     }
   }
-
-  showResult.value = true
-  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
-
-const resetTest = () => {
-  answers.value = {}
-  showResult.value = false
-  result.value = null
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const resources = [
-  {
-    name: '北京心理危机研究与干预中心',
-    contact: '010-82951332',
-    desc: '24小时心理援助热线，提供心理危机干预服务',
-  },
-  {
-    name: '全国心理援助热线',
-    contact: '400-161-9995',
-    desc: '由中国心理卫生协会主办的全国性心理援助热线',
-  },
-  {
-    name: '北京大学第六医院',
-    contact: '010-82801984',
-    desc: '专业精神科/心理科门诊，提供专业诊断和治疗',
-  },
-  {
-    name: '生命热线',
-    contact: '400-821-1215',
-    desc: '专门为有自杀倾向人群提供危机干预',
-  },
-  {
-    name: '希望24热线',
-    contact: '400-161-9995',
-    desc: '为情绪困扰、心理危机人群提供情感支持',
-  },
-  {
-    name: '青少年心理援助',
-    contact: '12320-5',
-    desc: '针对青少年群体的专业心理援助服务',
-  },
-]
 </script>
 
 <style scoped>
-/* 抑郁症测试主色调：森林绿 */
 .depression-page {
-  min-height: 100vh;
-  --test-accent: #047857;
-  --test-accent-rgb: 4, 120, 87;
+  --test-accent: #34d399;
+  --test-accent-rgb: 52, 211, 153;
 }
-.test-hero-sub {
-  color: var(--color-primary, #047857);
+.depression-page :deep(.test-hero-sub) {
+  color: #34d399;
 }
 </style>

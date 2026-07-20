@@ -61,7 +61,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 
 const router = useRouter()
 
@@ -102,8 +102,9 @@ const goBack = () => {
   display: flex;
   justify-content: center;
   gap: 10px;
-  /* 深色模式：白色，浅色模式：黑色 */
+  font-family: var(--font-mono);
   color: var(--color-heading);
+  text-shadow: 0 0 40px rgba(108, 60, 225, 0.3), 0 0 80px rgba(108, 60, 225, 0.1);
 }
 
 .digit {
@@ -130,6 +131,7 @@ const goBack = () => {
 .error-title {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 800;
+  font-family: var(--font-mono);
   color: var(--color-heading);
   margin-bottom: 16px;
   letter-spacing: -0.02em;
@@ -154,9 +156,10 @@ const goBack = () => {
   position: absolute;
   font-size: 3rem;
   color: var(--color-primary);
-  opacity: 0.1;
+  opacity: 0.15;
   animation: drift 8s ease-in-out infinite;
   animation-delay: var(--delay);
+  filter: drop-shadow(0 0 12px var(--color-primary));
 }
 
 .floating-icon:nth-child(1) {
@@ -235,8 +238,9 @@ const goBack = () => {
 .suggestion-link:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: rgba(27, 217, 106, 0.08);
+  background: rgba(108, 60, 225, 0.08);
   transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(108, 60, 225, 0.15);
 }
 
 .suggestion-link i {

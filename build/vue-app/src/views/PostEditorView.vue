@@ -184,7 +184,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import { useRouter, useRoute } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'

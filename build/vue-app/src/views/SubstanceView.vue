@@ -102,7 +102,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 
 // 物质使用障碍题目 (AUDIT + DAST-10)
 const questions = ref([

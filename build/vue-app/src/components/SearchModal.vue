@@ -67,7 +67,7 @@
       </div>
 
       <div class="search-empty" v-else-if="query.length > 0 && !isLoading">
-        <Icon icon="mdi:inbox" size="48" />
+        <Icon icon="mdi:inbox" width="48" />
         <p>未找到相关内容</p>
       </div>
 
@@ -107,7 +107,7 @@ import { ref, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import { useTags } from '@/composables/useStore'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 const router = useRouter()
 const { getCategories } = useTags()

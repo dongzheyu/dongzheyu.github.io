@@ -1,140 +1,23 @@
 <template>
-  <div class="adhd-page">
-    <!-- 阅读进度条 -->
-    <ReadingProgress />
-
-    <section class="test-hero">
-      <div class="container-fluid px-4">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
-            <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <Icon icon="mdi:arrow-left" /> 返回评估列表
-            </RouterLink>
-            <h1 class="test-hero-title mb-3">注意力缺陷多动障碍（ADHD）自评测试</h1>
-            <p class="test-hero-sub mb-2">成人 ADHD 自评量表（ASRS-v1.1） · 18 道题 · 约 5 分钟</p>
-            <p class="test-hero-desc">
-              成人 ADHD 自评量表（Adult ADHD Self-Report Scale v1.1）是根据 DSM-5
-              标准开发的自评工具，用于筛查成人 ADHD 症状。 请根据过去六个月的情况回答。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container-fluid px-4 test-body">
-      <div v-if="!showResult">
-        <p class="freq-instruction mb-5">请评估以下情况在过去六个月中发生的频率：</p>
-        <div
-          v-for="(q, index) in questions"
-          :key="q.id"
-          class="question-card mb-4"
-          :class="{ answered: answers[q.id] !== undefined }"
-        >
-          <div class="question-number">{{ index + 1 }} / {{ questions.length }}</div>
-          <p class="question-text">{{ q.text }}</p>
-          <div class="freq-options">
-            <button
-              v-for="opt in freqOptions"
-              :key="opt.value"
-              class="freq-btn"
-              :class="{ selected: answers[q.id] === opt.value }"
-              @click="answers[q.id] = opt.value; answers = { ...answers }"
-            >
-              <span class="freq-score">{{ opt.value }}</span>
-              <span class="freq-label">{{ opt.label }}</span>
-            </button>
-          </div>
-        </div>
-        <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">
-            还有 {{ questions.length - answeredCount }} 道题未作答
-          </p>
-          <button
-            class="btn btn-primary btn-animate btn-lg"
-            :disabled="answeredCount < questions.length"
-            @click="calculateResult"
-          >
-            查看结果
-          </button>
-        </div>
-      </div>
-
-      <div v-if="showResult" class="result-section">
-        <div class="score-card mb-5">
-          <div class="score-circle" :style="`--score-color: ${result.color}`">
-            <span class="score-num">{{ totalScore }}</span>
-            <span class="score-total">/ 72</span>
-          </div>
-          <div class="score-info">
-            <div class="score-level" :style="`color: ${result.color}`">{{ result.level }}</div>
-            <p class="score-desc">{{ result.description }}</p>
-          </div>
-        </div>
-
-        <div class="dimension-section mb-5">
-          <h3 class="review-title">症状维度分析</h3>
-          <div class="dimension-grid">
-            <div class="dim-card">
-              <div class="dim-icon"><Icon icon="mdi:lightbulb-on" /></div>
-              <div class="dim-content">
-                <h4 class="dim-title">注意缺陷</h4>
-                <p class="dim-score">{{ inattentionScore }} / 36</p>
-                <p class="dim-desc">注意力不集中、容易分心、健忘</p>
-              </div>
-            </div>
-            <div class="dim-card">
-              <div class="dim-icon"><Icon icon="mdi:lightning-bolt" /></div>
-              <div class="dim-content">
-                <h4 class="dim-title">多动冲动</h4>
-                <p class="dim-score">{{ hyperactivityScore }} / 36</p>
-                <p class="dim-desc">坐立不安、难以等待、打断他人</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="impairment-section mb-5">
-          <h3 class="review-title">详细分析</h3>
-          <div class="detail-grid">
-            <div class="detail-block">
-              <h4 class="detail-block-title">测试说明</h4>
-              <p class="detail-block-text">{{ result.analysis }}</p>
-            </div>
-            <div class="detail-block">
-              <h4 class="detail-block-title">建议行动</h4>
-              <ul class="detail-list">
-                <li v-for="s in result.suggestions" :key="s">{{ s }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="important-notice mb-5">
-          <Icon icon="mdi:alert" class="notice-icon" />
-          <div>
-            <strong>重要说明</strong>
-            <p>
-              ASRS 是筛查工具，不能替代专业诊断。ADHD
-              是一种神经发育障碍，通过药物治疗、行为治疗和技能训练通常能够显著改善功能。如果你怀疑自己可能有
-              ADHD，建议寻求专业的神经精神科评估。
-            </p>
-          </div>
-        </div>
-
-        <div class="text-center text-left">
-          <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
-          <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
-        </div>
-      </div>
-    </div>
-  </div>
+  <TestTemplate
+    title="注意力缺陷多动障碍（ADHD）自评测试"
+    subtitle="成人 ADHD 自评量表（ASRS-v1.1） · 18 道题 · 约 5 分钟"
+    description="成人 ADHD 自评量表（Adult ADHD Self-Report Scale v1.1）是根据 DSM-5 标准开发的自评工具，用于筛查成人 ADHD 症状。请根据过去六个月的情况回答。"
+    instruction="请评估以下情况在过去六个月中发生的频率："
+    test-id="asrs"
+    test-title="ADHD自评测试"
+    :questions="questions"
+    :options="freqOptions"
+    :calculate-result-fn="calculateResult"
+    theme-class="adhd-page"
+    :dimensions="dimensionData"
+    disclaimer="ASRS 是筛查工具，不能替代专业诊断。ADHD 是一种神经发育障碍，通过药物治疗、行为治疗和技能训练通常能够显著改善功能。如果你怀疑自己可能有 ADHD，建议寻求专业的神经精神科评估。"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
-import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from '@/components/Icon.vue'
+import TestTemplate from '@/components/TestTemplate.vue'
 
 const freqOptions = [
   { value: 0, label: '从不' },
@@ -165,49 +48,55 @@ const questions = ref([
   { id: 18, text: '你打断或侵扰他人吗？', dimension: 'hyperactivity' },
 ])
 
-const answers = ref<Record<number, number>>({})
-const showResult = ref(false)
-const result = ref<any>(null)
-
-const answeredCount = computed(
-  () => questions.value.filter((q) => answers.value[q.id] !== undefined).length,
-)
-const totalScore = computed(() =>
-  questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0),
-)
-
-const inattentionScore = computed(() => {
-  return questions.value
-    .filter((q) => q.dimension === 'inattention')
-    .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
-})
-
-const hyperactivityScore = computed(() => {
-  return questions.value
-    .filter((q) => q.dimension === 'hyperactivity')
-    .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
-})
-
-const getScoreClass = (score: number) => {
-  if (score === 0) return 'score-none'
-  if (score <= 1) return 'score-low'
-  if (score <= 2) return 'score-mid'
-  return 'score-high'
+interface Result {
+  level: string
+  color: string
+  description: string
+  analysis: string
+  suggestions: string[]
 }
 
-const calculateResult = () => {
-  const score = totalScore.value
-  const inattention = inattentionScore.value
-  const hyperactivity = hyperactivityScore.value
+const dimensionData = computed(() => {
+  const inattention = questions.value
+    .filter((q) => q.dimension === 'inattention')
+    .reduce((sum, q) => sum + (currentAnswers.value[q.id] ?? 0), 0)
+  const hyperactivity = questions.value
+    .filter((q) => q.dimension === 'hyperactivity')
+    .reduce((sum, q) => sum + (currentAnswers.value[q.id] ?? 0), 0)
+  return [
+    {
+      name: '注意缺陷',
+      icon: 'mdi:lightbulb-on',
+      description: '注意力不集中、容易分心、健忘',
+      score: inattention,
+      maxScore: 36,
+    },
+    {
+      name: '多动冲动',
+      icon: 'mdi:lightning-bolt',
+      description: '坐立不安、难以等待、打断他人',
+      score: hyperactivity,
+      maxScore: 36,
+    },
+  ]
+})
 
-  // ASRS 筛查算法：前6题（注意缺陷）≥4 阳性
+const currentAnswers = ref<Record<number, number>>({})
+
+const calculateResult = (answers: Record<number, number>): Result => {
+  currentAnswers.value = answers
+  const score = Object.values(answers).reduce((sum, val) => sum + val, 0)
+  const inattention = questions.value
+    .filter((q) => q.dimension === 'inattention')
+    .reduce((sum, q) => sum + (answers[q.id] ?? 0), 0)
+
   const part1Score = questions.value
     .slice(0, 6)
-    .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
+    .reduce((sum, q) => sum + (answers[q.id] ?? 0), 0)
   const isPositive = part1Score >= 4
 
   if (score <= 20) {
-    result.value = {
+    return {
       level: '极轻微症状',
       color: 'var(--color-brand)',
       description: '你的ADHD症状水平很低，属于正常范围。',
@@ -216,7 +105,7 @@ const calculateResult = () => {
       suggestions: ['继续保持现有的生活习惯', '如症状加重，可重新评估', '了解ADHD的正常表现范围'],
     }
   } else if (score <= 40) {
-    result.value = {
+    return {
       level: '轻度症状',
       color: '#f48c06',
       description: '你存在一定程度的ADHD症状，但可能未达到临床水平。',
@@ -230,7 +119,7 @@ const calculateResult = () => {
       ],
     }
   } else if (score <= 60) {
-    result.value = {
+    return {
       level: '中度症状',
       color: '#ff8c42',
       description: '你的ADHD症状已达到临床显著水平，建议寻求专业评估。',
@@ -244,7 +133,7 @@ const calculateResult = () => {
       ],
     }
   } else {
-    result.value = {
+    return {
       level: '重度症状',
       color: '#ef233c',
       description: '你的ADHD症状非常严重，很可能显著损害你的功能，建议立即寻求专业帮助。',
@@ -258,32 +147,15 @@ const calculateResult = () => {
       ],
     }
   }
-
-  // 补充ASRS筛查算法信息
-  if (isPositive) {
-    result.value.analysis += ' 根据ASRS筛查算法（前6题≥4），你的结果提示可能需要专业ADHD评估。'
-  }
-
-  showResult.value = true
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const resetTest = () => {
-  answers.value = {}
-  showResult.value = false
-  result.value = null
-  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>
 
 <style scoped>
-/* ADHD测试主色调：浅薄荷绿 */
 .adhd-page {
-  min-height: 100vh;
   --test-accent: #a7f3d0;
   --test-accent-rgb: 167, 243, 208;
 }
-.test-hero-sub {
-  color: #059669;
+.adhd-page :deep(.test-hero-sub) {
+  color: #34d399;
 }
 </style>

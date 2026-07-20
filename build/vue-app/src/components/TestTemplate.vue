@@ -97,6 +97,21 @@
           </div>
         </div>
 
+        <!-- 各题得分详情（可选） -->
+        <div v-if="showAnswerReview" class="answer-review mb-5">
+          <h3 class="review-title">各项得分详情</h3>
+          <div class="review-grid">
+            <div v-for="(q, index) in questions" :key="q.id" class="review-item">
+              <div class="review-q-num">Q{{ index + 1 }}</div>
+              <div class="review-q-text">{{ q.text }}</div>
+              <div class="review-score" :class="getScoreClass(answers[q.id])">
+                {{ options.find((o) => o.value === answers[q.id])?.label }}
+                <span class="review-score-num">+{{ answers[q.id] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- 维度分析（可选） -->
         <div v-if="dimensions && dimensions.length > 0" class="dimension-section mb-5">
           <h3 class="review-title">症状维度分析</h3>
@@ -155,7 +170,7 @@
 import { ref, computed, onMounted, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 import { useFavorites, useHistory, useTestProgress } from '@/composables/useStore'
 
 interface Question {
@@ -216,6 +231,9 @@ const props = defineProps({
 
   // 维度分析（可选）
   dimensions: { type: Array as PropType<Dimension[]>, default: () => [] },
+
+  // 各题得分详情（可选）
+  showAnswerReview: { type: Boolean, default: false },
 })
 
 const answers = ref<Record<number, number>>({})
@@ -245,6 +263,13 @@ const selectAnswer = (questionId: number, value: number) => {
   answers.value[questionId] = value
   answers.value = { ...answers.value }
   saveProgress(props.testId, answers.value, questionId)
+}
+
+const getScoreClass = (score: number) => {
+  if (score === 0) return 'score-none'
+  if (score <= 1) return 'score-low'
+  if (score <= 2) return 'score-mid'
+  return 'score-high'
 }
 
 const calculateResult = () => {

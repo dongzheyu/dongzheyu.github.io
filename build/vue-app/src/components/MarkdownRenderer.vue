@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, nextTick } from 'vue'
+import { computed, onMounted } from 'vue'
 import MarkdownIt from 'markdown-it'
 
 const props = defineProps<{
@@ -77,56 +77,24 @@ const renderedHtml = computed(() => {
 
 // 挂载后添加复制功能
 onMounted(() => {
-  // 将复制函数挂载到 window 对象
   ;(window as any).copyCode = async (elementId: string) => {
     const codeElement = document.getElementById(elementId)?.querySelector('code')
     if (!codeElement) return
-
     const code = codeElement.textContent || ''
-
     try {
       await navigator.clipboard.writeText(code)
-
-      // 显示成功提示
-      const btn = document.querySelector(`button[onclick="copyCode('${elementId}')"]`)
-      if (btn) {
-        const copyText = btn.querySelector('.copy-text')
-        if (copyText) {
-          const originalText = copyText.textContent
-          copyText.textContent = '已复制!'
-          btn.classList.add('copied')
-
-          setTimeout(() => {
-            copyText.textContent = originalText
-            btn.classList.remove('copied')
-          }, 2000)
-        }
-      }
-    } catch (err) {
-      console.error('复制失败:', err)
-      // 降级方案：使用传统方法
-      const textarea = document.createElement('textarea')
-      textarea.value = code
-      textarea.style.position = 'fixed'
-      textarea.style.opacity = '0'
-      document.body.appendChild(textarea)
-      textarea.select()
-      try {
-        document.execCommand('copy')
-        const btn = document.querySelector(`button[onclick="copyCode('${elementId}')"]`)
-        if (btn) {
-          const copyText = btn.querySelector('.copy-text')
-          if (copyText) {
-            copyText.textContent = '已复制!'
-            setTimeout(() => {
-              copyText.textContent = '复制'
-            }, 2000)
-          }
-        }
-      } catch (e) {
-        console.error('复制失败:', e)
-      }
-      document.body.removeChild(textarea)
+    } catch {
+      return
+    }
+    const btn = document.querySelector(`button[onclick="copyCode('${elementId}')"]`)
+    const copyText = btn?.querySelector('.copy-text')
+    if (copyText) {
+      copyText.textContent = '已复制!'
+      btn.classList.add('copied')
+      setTimeout(() => {
+        copyText.textContent = '复制'
+        btn.classList.remove('copied')
+      }, 2000)
     }
   }
 })

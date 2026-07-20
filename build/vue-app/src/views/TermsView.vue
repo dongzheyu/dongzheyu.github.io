@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
 import { useScrollAnimation } from '@/composables/useAnimations'
 
 const { observe } = useScrollAnimation()
@@ -262,7 +263,7 @@ onMounted(() => {
           本服务条款依据《中华人民共和国民法典》《中华人民共和国网络安全法》《中华人民共和国数据安全法》等相关法律法规制定。
         </p>
         <RouterLink to="/" class="back-link">
-          <i class="bi bi-arrow-left"></i> 返回首页
+          <Icon icon="mdi:arrow-left" /> 返回首页
         </RouterLink>
       </div>
     </div>

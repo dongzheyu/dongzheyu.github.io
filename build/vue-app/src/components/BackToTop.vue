@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 const isVisible = ref(false)
 const scrollThreshold = 300 // 滚动超过300px显示按钮

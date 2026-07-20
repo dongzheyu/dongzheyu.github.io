@@ -1,6 +1,6 @@
 <template>
   <div class="auth-container">
-    <div class="auth-card">
+    <div class="cp-card auth-card">
       <h2 class="auth-title">{{ isLogin ? '登录' : '注册' }}</h2>
 
       <form @submit.prevent="handleSubmit" class="auth-form">
@@ -102,7 +102,7 @@
             @click="loginWithOAuth('google')"
             :disabled="loading"
           >
-            <Icon icon="mdi:google" :size="20" />
+            <Icon icon="mdi:google" :width="20" />
             <span>Google</span>
           </button>
           <button
@@ -111,7 +111,7 @@
             @click="loginWithOAuth('github')"
             :disabled="loading"
           >
-            <Icon icon="mdi:github" :size="20" />
+            <Icon icon="mdi:github" :width="20" />
             <span>GitHub</span>
           </button>
           <button
@@ -120,7 +120,7 @@
             @click="loginWithOAuth('azure')"
             :disabled="loading"
           >
-            <Icon icon="mdi:microsoft" :size="20" />
+            <Icon icon="mdi:microsoft" :width="20" />
             <span>Microsoft</span>
           </button>
         </div>
@@ -132,7 +132,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { supabase } from '@/supabase/client'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 const isLogin = ref(true)
 const email = ref('')
@@ -268,12 +268,8 @@ const handleSubmit = async () => {
 }
 
 .auth-card {
-  background: var(--color-bg-card);
-  border-radius: 16px;
-  padding: 2.5rem;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .auth-title {
@@ -545,7 +541,7 @@ const handleSubmit = async () => {
 }
 
 .github-btn:hover:not(:disabled) {
-  border-color: #333;
+  border-color: rgba(255,255,255,0.3);
 }
 
 .microsoft-btn:hover:not(:disabled) {

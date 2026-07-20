@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import TestTemplate from '@/components/TestTemplate.vue'
 
 const freqOptions = [
@@ -125,6 +125,6 @@ const calculateResult = (answers: Record<number, number>): Result => {
   --test-accent-rgb: 110, 231, 183;
 }
 .test-hero-sub {
-  color: #059669;
+  color: #34d399;
 }
 </style>

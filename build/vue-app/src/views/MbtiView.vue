@@ -175,7 +175,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 
 // ---- 题目数据 ----
 // dimension: EI | SN | TF | JP

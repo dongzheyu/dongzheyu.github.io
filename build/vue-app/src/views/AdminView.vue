@@ -21,25 +21,31 @@
       <div v-else class="admin-content">
         <!-- 统计卡片 -->
         <div class="stats-grid">
-          <div class="stat-card">
-            <Icon icon="mdi:account-group" />
-            <div class="stat-info">
-              <h3>{{ stats.totalUsers }}</h3>
-              <p>总用户数</p>
+          <div class="cp-card stat-card">
+            <div class="cp-card__inner">
+              <Icon icon="mdi:account-group" />
+              <div class="stat-info">
+                <h3 class="cp-card__title">{{ stats.totalUsers }}</h3>
+                <p class="cp-card__text">总用户数</p>
+              </div>
             </div>
           </div>
-          <div class="stat-card">
-            <Icon icon="mdi:text-box-outline" />
-            <div class="stat-info">
-              <h3>{{ stats.totalPosts }}</h3>
-              <p>文章总数</p>
+          <div class="cp-card stat-card">
+            <div class="cp-card__inner">
+              <Icon icon="mdi:text-box-outline" />
+              <div class="stat-info">
+                <h3 class="cp-card__title">{{ stats.totalPosts }}</h3>
+                <p class="cp-card__text">文章总数</p>
+              </div>
             </div>
           </div>
-          <div class="stat-card">
-            <Icon icon="mdi:comment" />
-            <div class="stat-info">
-              <h3>{{ stats.totalComments }}</h3>
-              <p>评论总数</p>
+          <div class="cp-card stat-card">
+            <div class="cp-card__inner">
+              <Icon icon="mdi:comment" />
+              <div class="stat-info">
+                <h3 class="cp-card__title">{{ stats.totalComments }}</h3>
+                <p class="cp-card__text">评论总数</p>
+              </div>
             </div>
           </div>
         </div>
@@ -293,15 +299,21 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
-import { useAdmin } from '@/composables/useAdmin'
 import { useAuth } from '@/composables/useAuth'
 
 const router = useRouter()
-const { isAdmin } = useAdmin()
 const { user, loading: authLoading } = useAuth()
+
+const isAdmin = computed(() => {
+  if (!authLoading.value && user.value) {
+    const adminEmail = import.meta.env.VITE_ADMIN_EMAIL
+    return !!adminEmail && user.value.email?.toLowerCase() === adminEmail.toLowerCase()
+  }
+  return false
+})
 
 const activeTab = ref('users')
 const loading = ref(true)
@@ -710,30 +722,14 @@ function truncateText(text: string, maxLength: number) {
   margin-bottom: 2rem;
 }
 
-.stat-card {
-  background: var(--color-bg-card);
-  border-radius: 12px;
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
 .stat-card i {
   font-size: 2.5rem;
   color: var(--color-primary);
 }
 
-.stat-info h3 {
-  margin: 0;
-  font-size: 2rem;
-  color: var(--color-text);
-}
-
-.stat-info p {
-  margin: 0.25rem 0 0 0;
-  color: var(--color-text-secondary);
+.stat-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .admin-tabs {
@@ -809,7 +805,7 @@ function truncateText(text: string, maxLength: number) {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(27, 217, 106, 0.2);
+  border: 4px solid rgba(0, 255, 65, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;

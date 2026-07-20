@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import TestTemplate from '@/components/TestTemplate.vue'
 
 const freqOptions = [
@@ -119,10 +119,10 @@ const calculateResult = (answers: Record<number, number>): Result => {
 /* 躯体症状障碍测试主色调：翡翠绿 */
 .somatic-page {
   min-height: 100vh;
-  --test-accent: #059669;
-  --test-accent-rgb: 5, 150, 105;
+  --test-accent: #34d399;
+  --test-accent-rgb: 52, 211, 153;
 }
 .test-hero-sub {
-  color: #059669;
+  color: #34d399;
 }
 </style>

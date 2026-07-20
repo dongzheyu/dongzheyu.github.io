@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 
@@ -105,7 +105,7 @@ onMounted(async () => {
 .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(27, 217, 106, 0.2);
+  border: 4px solid rgba(0, 255, 65, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;

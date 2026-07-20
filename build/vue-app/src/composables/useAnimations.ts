@@ -1,16 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue'
-
-export function useAnimations() {
-  const isVisible = ref(false)
-
-  onMounted(() => {
-    setTimeout(() => {
-      isVisible.value = true
-    }, 80)
-  })
-
-  return { isVisible }
-}
+import { onMounted, onUnmounted } from 'vue'
 
 export function useScrollAnimation(options: { threshold?: number; rootMargin?: string; once?: boolean } = {}) {
   const { threshold = 0.1, rootMargin = '-50px', once = true } = options

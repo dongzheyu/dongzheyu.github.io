@@ -8,7 +8,7 @@
             <div class="mb-3">
               <span
                 class="badge me-2"
-                style="background-color: rgba(27, 217, 106, 0.15); color: var(--color-brand)"
+                style="background-color: rgba(0, 255, 65, 0.15); color: var(--color-brand)"
                 >教育</span
               >
               <span

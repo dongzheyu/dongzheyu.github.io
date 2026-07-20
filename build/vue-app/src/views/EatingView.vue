@@ -28,7 +28,7 @@
         <form @submit.prevent="calculateScore">
           <!-- 题目列表 -->
           <div class="questions-list">
-            <div v-for="(question, index) in questions" :key="index" class="question-card">
+            <div v-for="(question, index) in questions" :key="index" class="cp-card question-card">
               <div class="question-header">
                 <h3 class="question-number">{{ index + 1 }}. {{ question.text }}</h3>
                 <div class="question-hint">{{ question.hint }}</div>
@@ -67,7 +67,7 @@
         <!-- 结果部分 -->
         <div v-if="showResult" class="result-section">
           <h2 class="result-title">评估结果</h2>
-          <div class="result-card">
+          <div class="cp-card result-card">
             <div class="score-display">
               <span class="score-label">您的总分</span>
               <div class="score-value">{{ totalScore }}</div>
@@ -102,7 +102,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 
 // 进食障碍 EAT-26 题目
 const questions = ref([
@@ -214,7 +214,6 @@ const resetTest = () => {
 }
 
 .question-card {
-  background: var(--color-bg-card);
   border-left: 4px solid #34d399;
 }
 

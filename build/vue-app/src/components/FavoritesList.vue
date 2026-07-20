@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 export interface FavoriteItem {
   id: string

@@ -102,7 +102,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 
 // 强迫症 OCI-R 题目
 const questions = ref([

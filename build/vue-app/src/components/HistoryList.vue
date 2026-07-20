@@ -38,15 +38,15 @@
                   class="item-score"
                   :class="getLevelClass(item.level)"
                 >
-                  <Icon icon="mdi:star-outline" :size="14" />
+                  <Icon icon="mdi:star-outline" :width="14" />
                   {{ item.score }}分 · {{ item.level }}
                 </span>
                 <span v-else class="item-read">
-                  <Icon icon="mdi:check-circle" :size="14" />
+                  <Icon icon="mdi:check-circle" :width="14" />
                   已读
                 </span>
                 <span class="item-date">
-                  <Icon icon="mdi:clock-outline" :size="14" />
+                  <Icon icon="mdi:clock-outline" :width="14" />
                   {{ formatTime(item.completedAt) }}
                 </span>
               </div>
@@ -60,7 +60,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 export interface HistoryRecord {
   id: string

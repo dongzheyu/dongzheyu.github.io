@@ -93,7 +93,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 const props = defineProps<{
   postSlug: string
@@ -318,9 +318,9 @@ function formatDate(dateString: string) {
 .login-prompt {
   text-align: center;
   padding: 2rem;
-  background: rgba(27, 217, 106, 0.05);
+  background: rgba(0, 255, 65, 0.05);
   border-radius: 12px;
-  border: 1px dashed rgba(27, 217, 106, 0.3);
+  border: 1px dashed rgba(0, 255, 65, 0.3);
 }
 
 .login-prompt i {
@@ -490,7 +490,7 @@ function formatDate(dateString: string) {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(27, 217, 106, 0.2);
+  border: 3px solid rgba(0, 255, 65, 0.2);
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;

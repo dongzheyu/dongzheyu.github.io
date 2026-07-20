@@ -109,10 +109,10 @@ const calculateResult = (answers: Record<number, number>): Result => {
 <style scoped>
 /* 边缘型人格障碍测试主色调：深翡翠绿 */
 .bpd-page {
-  --test-accent: #04914f;
-  --test-accent-rgb: 4, 145, 79;
+  --test-accent: #34d399;
+  --test-accent-rgb: 52, 211, 153;
 }
 .bpd-page :deep(.test-hero-sub) {
-  color: #04914f;
+  color: #34d399;
 }
 </style>

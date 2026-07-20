@@ -1,163 +1,25 @@
 <template>
-  <div class="phobia-page">
-    <!-- 阅读进度条 -->
-    <ReadingProgress />
-
-    <section class="test-hero">
-      <div class="container-fluid px-4">
-        <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%">
-            <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <Icon icon="mdi:arrow-left" /> 返回评估列表
-            </RouterLink>
-            <h1 class="test-hero-title mb-3">恐惧症自评测试</h1>
-            <p class="test-hero-sub mb-2">社交恐惧量表（SPIN）+ 特定恐惧症 · 22 道题 · 约 7 分钟</p>
-            <p class="test-hero-desc">
-              本测试结合社交恐惧量表（Social Phobia
-              Inventory）和特定恐惧症筛查，用于评估社交恐惧、广场恐惧及多种特定恐惧症状。
-              请根据过去一周的情况，评估每种恐惧对你的困扰程度。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container-fluid px-4 test-body">
-      <div v-if="!showResult">
-        <p class="freq-instruction mb-5" style="padding-left: 5%">
-          以下描述了各种恐惧情境，请评估在过去一周内，这种恐惧对你的困扰程度：
-        </p>
-        <div
-          v-for="(q, index) in questions"
-          :key="q.id"
-          class="question-card mb-4"
-          :class="{ answered: answers[q.id] !== undefined }"
-        >
-          <div class="question-number">{{ index + 1 }} / {{ questions.length }}</div>
-          <p class="question-text">{{ q.text }}</p>
-          <div class="freq-options">
-            <button
-              v-for="opt in freqOptions"
-              :key="opt.value"
-              class="freq-btn"
-              :class="{ selected: answers[q.id] === opt.value }"
-              @click="answers[q.id] = opt.value; answers = { ...answers }"
-            >
-              <span class="freq-score">{{ opt.value }}</span>
-              <span class="freq-label">{{ opt.label }}</span>
-            </button>
-          </div>
-        </div>
-        <div class="submit-section mt-4">
-          <p v-if="answeredCount < questions.length" class="submit-hint">
-            还有 {{ questions.length - answeredCount }} 道题未作答
-          </p>
-          <button
-            class="btn btn-primary btn-animate btn-lg"
-            :disabled="answeredCount < questions.length"
-            @click="calculateResult"
-          >
-            查看结果
-          </button>
-        </div>
-      </div>
-
-      <div v-if="showResult" class="result-section">
-        <div class="score-card mb-5">
-          <div class="score-circle" :style="`--score-color: ${result.color}`">
-            <span class="score-num">{{ totalScore }}</span>
-            <span class="score-total">/ 88</span>
-          </div>
-          <div class="score-info">
-            <div class="score-level" :style="`color: ${result.color}`">{{ result.level }}</div>
-            <p class="score-desc">{{ result.description }}</p>
-          </div>
-        </div>
-
-        <div class="answer-review mb-5">
-          <h3 class="review-title">各项得分详情</h3>
-          <div class="review-grid">
-            <div v-for="(q, index) in questions" :key="q.id" class="review-item">
-              <div class="review-q-num">Q{{ index + 1 }}</div>
-              <div class="review-q-text">{{ q.text }}</div>
-              <div class="review-score" :class="getScoreClass(answers[q.id])">
-                {{ freqOptions.find((o) => o.value === answers[q.id])?.label }}
-                <span class="review-score-num">+{{ answers[q.id] }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="dimension-section mb-5">
-          <h3 class="review-title">维度分析</h3>
-          <div class="dimension-grid">
-            <div class="dim-card">
-              <div class="dim-icon"><Icon icon="mdi:account-group" /></div>
-              <div class="dim-content">
-                <h4 class="dim-title">社交恐惧</h4>
-                <p class="dim-score">{{ socialScore }} / 32</p>
-                <p class="dim-desc">害怕被他人观察、评价或羞辱</p>
-              </div>
-            </div>
-            <div class="dim-card">
-              <div class="dim-icon"><Icon icon="mdi:map-marker" /></div>
-              <div class="dim-content">
-                <h4 class="dim-title">广场恐惧</h4>
-                <p class="dim-score">{{ agoraphobiaScore }} / 12</p>
-                <p class="dim-desc">害怕无法逃离或获得帮助的环境</p>
-              </div>
-            </div>
-            <div class="dim-card">
-              <div class="dim-icon"><Icon icon="mdi:bug" /></div>
-              <div class="dim-content">
-                <h4 class="dim-title">特定恐惧</h4>
-                <p class="dim-score">{{ specificScore }} / 28</p>
-                <p class="dim-desc">对特定物体或情境的过度恐惧</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="impairment-section mb-5">
-          <h3 class="review-title">详细分析</h3>
-          <div class="detail-grid">
-            <div class="detail-block">
-              <h4 class="detail-block-title">测试说明</h4>
-              <p class="detail-block-text">{{ result.analysis }}</p>
-            </div>
-            <div class="detail-block">
-              <h4 class="detail-block-title">建议行动</h4>
-              <ul class="detail-list">
-                <li v-for="s in result.suggestions" :key="s">{{ s }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="important-notice mb-5">
-          <Icon icon="mdi:alert" class="notice-icon" />
-          <div>
-            <strong>重要说明</strong>
-            <p>
-              恐惧症测试是筛查工具，不能替代专业诊断。恐惧症通常可以通过暴露疗法、认知行为疗法等有效治疗。如果你的恐惧已经严重影响日常生活，建议寻求专业帮助。
-            </p>
-          </div>
-        </div>
-
-        <div class="text-center" style="text-align: left !important">
-          <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
-          <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
-        </div>
-      </div>
-    </div>
-  </div>
+  <TestTemplate
+    title="恐惧症自评测试"
+    subtitle="社交恐惧量表（SPIN）+ 特定恐惧症 · 22 道题 · 约 7 分钟"
+    description="本测试结合社交恐惧量表（Social Phobia Inventory）和特定恐惧症筛查，用于评估社交恐惧、广场恐惧及多种特定恐惧症状。请根据过去一周的情况，评估每种恐惧对你的困扰程度。"
+    instruction="以下描述了各种恐惧情境，请评估在过去一周内，这种恐惧对你的困扰程度："
+    test-id="spin"
+    test-title="恐惧症自评测试"
+    :questions="questions"
+    :options="freqOptions"
+    :calculate-result-fn="calculateResult"
+    theme-class="phobia-page"
+    hero-padding="5%"
+    show-answer-review
+    :dimensions="dimensionData"
+    disclaimer="恐惧症测试是筛查工具，不能替代专业诊断。恐惧症通常可以通过暴露疗法、认知行为疗法等有效治疗。如果你的恐惧已经严重影响日常生活，建议寻求专业帮助。"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
-import ReadingProgress from '@/components/ReadingProgress.vue'
-import Icon from '@/components/Icon.vue'
+import TestTemplate from '@/components/TestTemplate.vue'
 
 const freqOptions = [
   { value: 0, label: '一点也不' },
@@ -192,55 +54,62 @@ const questions = ref([
   { id: 22, text: '害怕黑暗或夜晚', category: 'specific' },
 ])
 
-const answers = ref<Record<number, number>>({})
-const showResult = ref(false)
-const result = ref<any>(null)
-
-const answeredCount = computed(
-  () => questions.value.filter((q) => answers.value[q.id] !== undefined).length,
-)
-const totalScore = computed(() =>
-  questions.value.reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0),
-)
-
-const socialScore = computed(() => {
-  return questions.value
-    .filter((q) => q.category === 'social')
-    .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
-})
-
-const agoraphobiaScore = computed(() => {
-  return questions.value
-    .filter((q) => q.category === 'agoraphobia')
-    .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
-})
-
-const specificScore = computed(() => {
-  return questions.value
-    .filter((q) => q.category === 'specific')
-    .reduce((sum, q) => sum + (answers.value[q.id] ?? 0), 0)
-})
-
-const getScoreClass = (score: number) => {
-  if (score === 0) return 'score-none'
-  if (score <= 2) return 'score-low'
-  if (score === 3) return 'score-mid'
-  return 'score-high'
+interface Result {
+  level: string
+  color: string
+  description: string
+  analysis: string
+  suggestions: string[]
 }
 
-const calculateResult = () => {
-  const score = totalScore.value
-  const social = socialScore.value
-  const agora = agoraphobiaScore.value
-  const specific = specificScore.value
+const currentAnswers = ref<Record<number, number>>({})
 
-  // SPIN 社交恐惧阈值：≥19 为临床显著
-  const isSocialSignificant = social >= 19
-  const isAgoraSignificant = agora >= 8
-  const isSpecificSignificant = specific >= 14
+const socialScore = computed(() =>
+  questions.value
+    .filter((q) => q.category === 'social')
+    .reduce((sum, q) => sum + (currentAnswers.value[q.id] ?? 0), 0),
+)
+const agoraphobiaScore = computed(() =>
+  questions.value
+    .filter((q) => q.category === 'agoraphobia')
+    .reduce((sum, q) => sum + (currentAnswers.value[q.id] ?? 0), 0),
+)
+const specificScore = computed(() =>
+  questions.value
+    .filter((q) => q.category === 'specific')
+    .reduce((sum, q) => sum + (currentAnswers.value[q.id] ?? 0), 0),
+)
+
+const dimensionData = computed(() => [
+  {
+    name: '社交恐惧',
+    icon: 'mdi:account-group',
+    description: '害怕被他人观察、评价或羞辱',
+    score: socialScore.value,
+    maxScore: 32,
+  },
+  {
+    name: '广场恐惧',
+    icon: 'mdi:map-marker',
+    description: '害怕无法逃离或获得帮助的环境',
+    score: agoraphobiaScore.value,
+    maxScore: 12,
+  },
+  {
+    name: '特定恐惧',
+    icon: 'mdi:bug',
+    description: '对特定物体或情境的过度恐惧',
+    score: specificScore.value,
+    maxScore: 28,
+  },
+])
+
+const calculateResult = (answers: Record<number, number>): Result => {
+  currentAnswers.value = answers
+  const score = Object.values(answers).reduce((sum, val) => sum + val, 0)
 
   if (score <= 20) {
-    result.value = {
+    return {
       level: '低度恐惧',
       color: 'var(--color-brand)',
       description: '你的恐惧水平在正常范围内，当前恐惧症状对你的困扰较小。',
@@ -254,7 +123,7 @@ const calculateResult = () => {
       ],
     }
   } else if (score <= 45) {
-    result.value = {
+    return {
       level: '中度恐惧',
       color: '#f48c06',
       description: '你存在一定程度的恐惧症状，这些恐惧可能在某些情境下给你带来困扰。',
@@ -268,7 +137,7 @@ const calculateResult = () => {
       ],
     }
   } else if (score <= 70) {
-    result.value = {
+    return {
       level: '高度恐惧',
       color: '#ff8c42',
       description: '你的恐惧症状较为明显，很可能已经对你的生活产生实质性影响。',
@@ -282,7 +151,7 @@ const calculateResult = () => {
       ],
     }
   } else {
-    result.value = {
+    return {
       level: '极度恐惧',
       color: '#ef233c',
       description: '你的恐惧症状非常严重，很可能显著损害你的生活质量，建议立即寻求专业帮助。',
@@ -296,26 +165,15 @@ const calculateResult = () => {
       ],
     }
   }
-  showResult.value = true
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const resetTest = () => {
-  answers.value = {}
-  showResult.value = false
-  result.value = null
-  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>
 
 <style scoped>
-/* 恐惧症测试主色调 */
 .phobia-page {
-  min-height: 100vh;
   --test-accent: var(--color-primary);
   --test-accent-rgb: 27, 217, 106;
 }
-.test-hero-sub {
+.phobia-page :deep(.test-hero-sub) {
   color: var(--test-accent);
 }
 </style>

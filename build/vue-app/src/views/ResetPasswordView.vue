@@ -73,7 +73,7 @@
                   @click="showNewPassword = !showNewPassword"
                   :title="showNewPassword ? '隐藏密码' : '显示密码'"
                 >
-                  <i :class="showNewPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                  <Icon :icon="showNewPassword ? 'mdi:eye-off' : 'mdi:eye'" />
                 </button>
               </div>
             </div>
@@ -96,7 +96,7 @@
                   @click="showConfirmPassword = !showConfirmPassword"
                   :title="showConfirmPassword ? '隐藏密码' : '显示密码'"
                 >
-                  <i :class="showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                  <Icon :icon="showConfirmPassword ? 'mdi:eye-off' : 'mdi:eye'" />
                 </button>
               </div>
             </div>
@@ -123,7 +123,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 

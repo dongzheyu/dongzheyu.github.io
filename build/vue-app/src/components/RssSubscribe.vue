@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 const feedUrl = 'https://jetcpp.dpdns.org/feed.xml'
 const isCopied = ref(false)

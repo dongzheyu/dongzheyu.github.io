@@ -1,51 +1,6 @@
-<template>
-  <div class="blog-post-page">
-    <div class="container">
-      <!-- 加载中 -->
-      <div v-if="loading" class="loading-container">
-        <div class="spinner"></div>
-        <p>加载文章中...</p>
-      </div>
-
-      <!-- 文章内容 -->
-      <article v-else-if="postContent" class="blog-post">
-        <header class="post-header">
-          <h1 class="post-title">{{ postTitle }}</h1>
-          <div class="post-meta">
-            <span class="post-date" v-if="postDate">
-              <Icon icon="mdi:calendar" />
-              {{ postDate }}
-            </span>
-          </div>
-        </header>
-
-        <MarkdownRenderer :content="postContent" />
-
-        <!-- 评论区 -->
-        <CommentsSection :post-slug="route.params.slug as string" />
-
-        <footer class="post-footer">
-          <RouterLink to="/blog" class="btn btn-outline-light">
-            <Icon icon="mdi:arrow-left" />
-            返回博客列表
-          </RouterLink>
-        </footer>
-      </article>
-
-      <!-- 文章不存在 -->
-      <div v-else class="not-found">
-        <Icon icon="mdi:text-box-outline" class="icon-large" />
-        <h2>文章不存在</h2>
-        <p>该文章可能已被删除或移动</p>
-        <RouterLink to="/blog" class="btn btn-primary btn-animate"> 返回博客列表 </RouterLink>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import Icon from '@/components/Icon.vue'
+import { Icon } from '@iconify/vue'
 import { useRoute } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
@@ -56,7 +11,6 @@ const loading = ref(true)
 const postContent = ref('')
 const postTitle = ref('')
 const postDate = ref('')
-const isUserPost = ref(false)
 
 onMounted(async () => {
   await loadPost()
@@ -64,173 +18,66 @@ onMounted(async () => {
 
 async function loadPost() {
   loading.value = true
-
   try {
     const slug = route.params.slug as string
-
-    // 第一步：尝试从 Supabase 加载用户文章
-    const { data: userPost, error: userPostError } = await supabase
-      .from('user_posts')
-      .select('*')
-      .eq('slug', slug)
-      .maybeSingle()
-
-    if (userPost && !userPostError) {
-      // 找到用户文章
-      isUserPost.value = true
+    const { data: userPost } = await supabase
+      .from('user_posts').select('*').eq('slug', slug).maybeSingle()
+    if (userPost) {
       postTitle.value = userPost.title
       postDate.value = new Date(userPost.created_at).toLocaleDateString('zh-CN')
       postContent.value = userPost.content
       return
     }
-
-    // 第二步：从 public/blog 目录加载 markdown 文件
     const response = await fetch(`/blog/${slug}.md`)
-
-    if (!response.ok) {
-      throw new Error('文章不存在')
-    }
-
+    if (!response.ok) throw new Error('not found')
     const content = await response.text()
-
-    // 解析 Front Matter（如果有的话）
     const { title, date, body } = parseFrontMatter(content)
-
-    isUserPost.value = false
     postTitle.value = title || slug
     postDate.value = date || ''
     postContent.value = body
-  } catch (err: any) {
-    console.error('加载文章失败:', err)
+  } catch {
     postContent.value = ''
-  } finally {
-    loading.value = false
-  }
+  } finally { loading.value = false }
 }
 
-// 解析 Front Matter
 function parseFrontMatter(content: string) {
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/
-  const match = content.match(frontMatterRegex)
-
-  if (match) {
-    const [, frontMatterStr = '', body = ''] = match
-    const frontMatter: Record<string, string> = {}
-
-    // 解析 YAML front matter
-    frontMatterStr.split('\n').forEach((line) => {
-      const [key, ...valueParts] = line.split(':')
-      if (key && valueParts.length > 0) {
-        frontMatter[key.trim()] = valueParts.join(':').trim()
-      }
+  const m = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/)
+  if (m) {
+    const fm: Record<string, string> = {}
+    m[1].split('\n').forEach(l => {
+      const [k, ...v] = l.split(':'); if (k) fm[k.trim()] = v.join(':').trim()
     })
-
-    return {
-      title: frontMatter.title || '',
-      date: frontMatter.date || '',
-      body: body.trim(),
-    }
+    return { title: fm.title || '', date: fm.date || '', body: m[2].trim() }
   }
-
-  // 没有 front matter，直接返回内容
-  return {
-    title: '',
-    date: '',
-    body: content.trim(),
-  }
+  return { title: '', date: '', body: content.trim() }
 }
 </script>
 
-<style scoped>
-.blog-post-page {
-  min-height: calc(100vh - 200px);
-  padding-top: 80px; /* 为 sticky 导航栏留出空间 */
-  padding-bottom: 3rem;
-}
+<template>
+  <div>
+    <div v-if="loading" class="flex items-center gap-12 page-head text-dim">
+      <span class="text-faint">加载中...</span>
+    </div>
 
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: 4rem 0;
-}
+    <article v-else-if="postContent" class="page-head">
+      <h1 style="font-size:var(--font-size-xl); font-weight:400; color:rgba(255,255,255,0.85); margin-bottom:8px;">{{ postTitle }}</h1>
+      <span v-if="postDate" class="text-faint" style="font-size:var(--font-size-xs); display:block; margin-bottom:40px;">
+        <Icon icon="mdi:calendar" width="14" /> {{ postDate }}
+      </span>
+      <MarkdownRenderer :content="postContent" />
+      <CommentsSection :post-slug="route.params.slug as string" class="mt-60" />
+      <footer class="mt-40" style="padding-top:24px; border-top:1px solid var(--color-border);">
+        <RouterLink to="/blog" class="btn-geek" style="font-size:var(--font-size-xs);">
+          <Icon icon="mdi:arrow-left" width="14" /> 返回博客
+        </RouterLink>
+      </footer>
+    </article>
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(27, 217, 106, 0.2);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.blog-post {
-  max-width: 900px;
-  margin: 0 auto;
-  background: var(--color-bg-card);
-  border-radius: 16px;
-  padding: 3rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.post-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.post-title {
-  font-size: 2.5rem;
-  margin: 0 0 1rem 0;
-  color: var(--color-text);
-  line-height: 1.3;
-}
-
-.post-meta {
-  display: flex;
-  gap: 1.5rem;
-  color: var(--color-text-secondary);
-  font-size: 0.9rem;
-}
-
-.post-date {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.post-footer {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.not-found {
-  text-align: center;
-  padding: 4rem 0;
-}
-
-.not-found .icon-large {
-  font-size: 5rem;
-  color: var(--color-text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.not-found h2 {
-  margin: 0 0 1rem 0;
-  color: var(--color-text);
-}
-
-.not-found p {
-  color: var(--color-text-secondary);
-  margin-bottom: 2rem;
-}
-</style>
+    <div v-else class="page-head">
+      <Icon icon="mdi:file-remove" width="48" style="color:var(--color-text-faint); margin-bottom:16px;" />
+      <h2 style="font-size:var(--font-size-lg);">未找到</h2>
+      <p class="text-dim">这篇文章不存在或已被移除。</p>
+      <RouterLink to="/blog" class="btn-geek mt-20">返回博客</RouterLink>
+    </div>
+  </div>
+</template>

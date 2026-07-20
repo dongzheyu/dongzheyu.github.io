@@ -38,7 +38,7 @@ onUnmounted(() => {
   border-radius: 2px;
   z-index: 999;
   transition: height 0.1s ease-out;
-  box-shadow: 0 0 10px rgba(27, 217, 106, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;

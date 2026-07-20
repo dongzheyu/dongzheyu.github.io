@@ -50,7 +50,7 @@
             <div class="item-meta">
               <span class="item-level" :class="getLevelClass(item.level)">{{ item.level }}</span>
               <span class="item-date">
-                <Icon icon="mdi:calendar-outline" :size="14" />
+                <Icon icon="mdi:calendar-outline" :width="14" />
                 {{ formatDate(item.completedAt) }}
               </span>
             </div>
@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import Icon from './Icon.vue'
+import { Icon } from '@iconify/vue'
 
 interface HistoryItem {
   testId: string

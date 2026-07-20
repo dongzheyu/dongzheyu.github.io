@@ -7,31 +7,33 @@
       <AuthForm v-if="!isAuthenticated" />
 
       <!-- 已登录时显示用户信息 -->
-      <div v-else class="user-info-card">
-        <div class="user-header">
-          <Icon icon="mdi:account-circle" class="user-icon" />
-          <h2>欢迎回来！</h2>
-        </div>
+      <div v-else class="cp-card user-info-card">
+        <div class="cp-card__inner">
+          <div class="user-header">
+            <Icon icon="mdi:account-circle" class="user-icon" />
+            <h2>欢迎回来！</h2>
+          </div>
 
-        <div class="user-details">
-          <div class="detail-item">
-            <span class="detail-label">邮箱：</span>
-            <span class="detail-value">{{ user?.email }}</span>
+          <div class="user-details">
+            <div class="detail-item">
+              <span class="detail-label">邮箱：</span>
+              <span class="detail-value">{{ user?.email }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">用户ID：</span>
+              <span class="detail-value user-id">{{ user?.id }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">注册时间：</span>
+              <span class="detail-value">{{ formatDate(user?.created_at) }}</span>
+            </div>
           </div>
-          <div class="detail-item">
-            <span class="detail-label">用户ID：</span>
-            <span class="detail-value user-id">{{ user?.id }}</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">注册时间：</span>
-            <span class="detail-value">{{ formatDate(user?.created_at) }}</span>
-          </div>
-        </div>
 
-        <button @click="handleSignOut" class="btn btn-secondary btn-animate">
-          <Icon icon="mdi:logout" />
-          退出登录
-        </button>
+          <button @click="handleSignOut" class="btn btn-secondary btn-animate">
+            <Icon icon="mdi:logout" />
+            退出登录
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -75,12 +77,8 @@ const formatDate = (dateString?: string) => {
 }
 
 .user-info-card {
-  background: var(--color-bg-card);
-  border-radius: 16px;
-  padding: 2.5rem;
   max-width: 600px;
   margin: 0 auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .user-header {
