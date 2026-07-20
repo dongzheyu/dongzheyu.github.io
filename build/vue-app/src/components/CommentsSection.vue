@@ -9,7 +9,7 @@
     <div v-if="!isAuthenticated" class="login-prompt">
       <Icon icon="mdi:lock" />
       <p>请登录后发表评论</p>
-      <RouterLink to="/auth" class="btn btn-primary btn-animate"> 去登录 </RouterLink>
+      <RouterLink to="/auth" class="btn-geek" style="font-size:var(--font-size-xs);"> 去登录 </RouterLink>
     </div>
 
     <!-- 评论输入框 -->
@@ -35,7 +35,8 @@
         <span class="char-count">{{ newComment.length }}/500</span>
         <button
           @click="handleSubmitComment"
-          class="btn btn-primary btn-animate"
+          class="btn-geek"
+          style="font-size:var(--font-size-xs);"
           :disabled="!newComment.trim() || submitting || newComment.length > 500"
         >
           {{ submitting ? '发送中...' : '发表评论' }}
@@ -319,7 +320,7 @@ function formatDate(dateString: string) {
   text-align: center;
   padding: 2rem;
   background: rgba(0, 255, 65, 0.05);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px dashed rgba(0, 255, 65, 0.3);
 }
 
@@ -336,7 +337,7 @@ function formatDate(dateString: string) {
 
 .comment-form {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -350,7 +351,7 @@ function formatDate(dateString: string) {
 
 .username {
   color: var(--color-text);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .comment-input {
@@ -358,7 +359,7 @@ function formatDate(dateString: string) {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   color: var(--color-text);
   font-size: 1rem;
   resize: vertical;
@@ -414,7 +415,7 @@ function formatDate(dateString: string) {
 
 .comment-item {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 1.25rem;
   transition: all 0.3s ease;
 }
@@ -438,7 +439,7 @@ function formatDate(dateString: string) {
 
 .comment-username {
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -469,7 +470,7 @@ function formatDate(dateString: string) {
 }
 
 .delete-btn:hover {
-  color: #ff4757;
+  color: #ff5f57;
   opacity: 1;
 }
 

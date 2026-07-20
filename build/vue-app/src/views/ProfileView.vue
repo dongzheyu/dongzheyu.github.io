@@ -3,7 +3,7 @@
     <div class="container">
       <!-- 加载中 -->
       <div v-if="loading" class="loading-container">
-        <div class="spinner"></div>
+        <div class="skeleton skeleton-card" style="width:200px;height:200px;margin:0 auto;"></div>
         <p>加载中...</p>
       </div>
 
@@ -50,11 +50,11 @@
 
         <!-- 编辑按钮（仅本人可见） -->
         <div v-if="isOwnProfile" class="profile-actions">
-          <button @click="showEditModal = true" class="btn btn-primary btn-animate">
+          <button @click="showEditModal = true" class="btn-geek" style="font-size:var(--font-size-xs);">
             <Icon icon="mdi:pencil" />
             编辑资料
           </button>
-          <button @click="showDeleteModal = true" class="btn btn-danger btn-animate">
+          <button @click="showDeleteModal = true" class="btn-geek" style="font-size:var(--font-size-xs);color:#ff5f57;">
             <Icon icon="mdi:delete" />
             注销账户
           </button>
@@ -66,7 +66,7 @@
         <Icon icon="mdi:account-remove" class="icon-large" />
         <h2>用户不存在</h2>
         <p>该用户可能已被删除或禁用</p>
-        <RouterLink to="/" class="btn btn-primary btn-animate">返回首页</RouterLink>
+        <RouterLink to="/" class="btn-geek" style="font-size:var(--font-size-xs);">返回首页</RouterLink>
       </div>
     </div>
 
@@ -115,10 +115,10 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" @click="showEditModal = false" class="btn btn-secondary">
+            <button type="button" @click="showEditModal = false" class="btn-geek" style="font-size:var(--font-size-xs);">
               取消
             </button>
-            <button type="submit" class="btn btn-primary btn-animate" :disabled="saving">
+            <button type="submit" class="btn-geek" style="font-size:var(--font-size-xs);" :disabled="saving">
               {{ saving ? '保存中...' : '保存' }}
             </button>
           </div>
@@ -167,10 +167,10 @@
         </div>
 
         <div class="modal-footer">
-          <button @click="showDeleteModal = false" class="btn btn-secondary">取消</button>
+          <button @click="showDeleteModal = false" class="btn-geek" style="font-size:var(--font-size-xs);">取消</button>
           <button
             @click="handleDeleteAccount"
-            class="btn btn-danger btn-animate"
+            class="btn-geek" style="font-size:var(--font-size-xs);color:#ff5f57;"
             :disabled="deleteConfirmText !== 'DELETE' || deleting"
           >
             {{ deleting ? '注销中...' : '确认注销' }}
@@ -405,28 +405,12 @@ async function handleDeleteAccount() {
   padding: 4rem 0;
 }
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(0, 255, 65, 0.2);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .profile-card {
   background: var(--color-bg-card);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 2.5rem;
   max-width: 700px;
   margin: 0 auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .profile-header {
@@ -435,7 +419,7 @@ async function handleDeleteAccount() {
   gap: 2rem;
   margin-bottom: 2rem;
   padding-bottom: 2rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user-avatar-large {
@@ -522,12 +506,12 @@ async function handleDeleteAccount() {
   align-items: center;
   padding: 1rem;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 
 .detail-label {
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .detail-value {
@@ -577,7 +561,7 @@ async function handleDeleteAccount() {
 
 .modal-content {
   background: var(--color-bg-card);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   width: 100%;
   max-width: 500px;
   max-height: 90vh;
@@ -623,14 +607,14 @@ async function handleDeleteAccount() {
   display: block;
   margin-bottom: 0.5rem;
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-text);
   font-size: 1rem;
@@ -653,9 +637,9 @@ async function handleDeleteAccount() {
 .error-message {
   margin-bottom: 1rem;
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: rgba(255, 71, 87, 0.1);
-  color: #ff4757;
+  color: #ff5f57;
   border: 1px solid rgba(255, 71, 87, 0.3);
   display: flex;
   align-items: center;
@@ -672,7 +656,7 @@ async function handleDeleteAccount() {
 
 /* 注销模态框特殊样式 */
 .modal-danger .modal-header h3 {
-  color: #ff4757;
+  color: #ff5f57;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -681,9 +665,9 @@ async function handleDeleteAccount() {
 .warning-box {
   padding: 1rem;
   background: rgba(255, 71, 87, 0.1);
-  border: 2px solid #ff4757;
-  border-radius: 8px;
-  color: #ff4757;
+  border: 1px solid #ff5f57;
+  border-radius: var(--radius-sm);
+  color: #ff5f57;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -709,7 +693,7 @@ async function handleDeleteAccount() {
 }
 
 .delete-info li i {
-  color: #ff4757;
+  color: #ff5f57;
 }
 
 .confirm-section {
@@ -719,21 +703,19 @@ async function handleDeleteAccount() {
 }
 
 .btn-danger {
-  background: var(--gradient-danger);
-  color: white;
-  border: none;
+  background: transparent;
+  color: #ff5f57;
+  border: 1px solid rgba(255, 95, 87, 0.3);
   padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-weight: 600;
-  box-shadow:
-    0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  transition: all 0.3s ease;
 }
 
 .btn-danger:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 </style>

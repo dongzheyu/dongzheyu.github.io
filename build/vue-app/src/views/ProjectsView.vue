@@ -82,6 +82,10 @@ const { visible } = useStaggeredFade(projects.length, 120)
       </div>
     </section>
 
+    <div class="divider-geek mb-40">
+      <span>{{ filteredProjects.length }} results</span>
+    </div>
+
     <section class="mb-60">
       <div class="grid-2">
         <div
@@ -89,15 +93,15 @@ const { visible } = useStaggeredFade(projects.length, 120)
           class="card-geek stagger-item" :class="{ visible: visible[i] }"
         >
           <div class="flex items-center justify-between mb-20">
-            <span class="tag-pill" style="font-size:var(--font-size-xs);">{{ p.category }}</span>
+            <span class="badge-geek">{{ p.category }}</span>
           </div>
           <h3 style="font-size:var(--font-size-base); font-weight:400; color:rgba(255,255,255,0.82);">{{ p.title }}</h3>
           <p class="text-dim" style="margin:12px 0 20px;">{{ p.description }}</p>
           <a v-if="p.external" :href="p.link" target="_blank" class="btn-geek" style="font-size:var(--font-size-xs);">
-            查看 &#8599;
+            <Icon icon="mdi:open-in-new" width="14" /> 查看
           </a>
           <RouterLink v-else :to="p.link" class="btn-geek" style="font-size:var(--font-size-xs);">
-            查看 &#8594;
+            <Icon icon="mdi:arrow-right" width="14" /> 查看
           </RouterLink>
         </div>
       </div>

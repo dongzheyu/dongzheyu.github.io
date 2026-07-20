@@ -139,7 +139,7 @@ const formatTime = (date: string | Date) => {
 .history-container {
   padding: 1.5rem;
   background: var(--color-bg-soft);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
@@ -152,7 +152,7 @@ const formatTime = (date: string | Date) => {
 
 .history-title {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-heading);
   margin: 0;
   display: flex;
@@ -165,7 +165,7 @@ const formatTime = (date: string | Date) => {
   color: var(--color-text-muted);
   background: none;
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   padding: 0.3rem 0.6rem;
   cursor: pointer;
   display: flex;
@@ -175,9 +175,8 @@ const formatTime = (date: string | Date) => {
 }
 
 .clear-btn:hover {
-  color: #ef233c;
-  border-color: #ef233c;
-  background: rgba(239, 35, 60, 0.05);
+  color: var(--color-text);
+  border-color: var(--color-border);
 }
 
 .empty-history {
@@ -202,7 +201,7 @@ const formatTime = (date: string | Date) => {
 
 .group-label {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -223,20 +222,19 @@ const formatTime = (date: string | Date) => {
   padding: 0.75rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .history-item:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .item-icon {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -245,13 +243,12 @@ const formatTime = (date: string | Date) => {
 }
 
 .item-icon.item-type-test {
-  background: rgba(76, 175, 80, 0.1);
-  color: #4caf50;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary);
 }
-
 .item-icon.item-type-blog {
-  background: rgba(33, 150, 243, 0.1);
-  color: #2196f3;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-secondary);
 }
 
 .item-content {
@@ -261,7 +258,7 @@ const formatTime = (date: string | Date) => {
 
 .item-title {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-heading);
   margin: 0;
   white-space: nowrap;
@@ -284,23 +281,17 @@ const formatTime = (date: string | Date) => {
   font-weight: 600;
 }
 
-.item-score.level-good {
-  color: #4caf50;
-}
-
-.item-score.level-moderate {
-  color: #ff9800;
-}
-
+.item-score.level-good,
+.item-score.level-moderate,
 .item-score.level-severe {
-  color: #f44336;
+  color: var(--color-text-secondary);
 }
 
 .item-read {
   display: flex;
   align-items: center;
   gap: 0.2rem;
-  color: #2196f3;
+  color: var(--color-text-secondary);
 }
 
 .item-date {

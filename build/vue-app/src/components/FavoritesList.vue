@@ -79,13 +79,13 @@ const groupedItems = computed(() => {
 .favorites-container {
   padding: 1.5rem;
   background: var(--color-bg-soft);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
 .favorites-title {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-heading);
   margin-bottom: 1rem;
   display: flex;
@@ -115,7 +115,7 @@ const groupedItems = computed(() => {
 
 .group-label {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -146,20 +146,19 @@ const groupedItems = computed(() => {
   padding: 0.75rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .favorite-item:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .fav-icon {
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,7 +173,7 @@ const groupedItems = computed(() => {
 
 .fav-title {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-heading);
   margin: 0;
   white-space: nowrap;

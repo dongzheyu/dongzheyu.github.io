@@ -1,101 +1,113 @@
 <template>
-  <div class="substance-page">
-    <!-- 阅读进度条 -->
+  <div class="term-page">
     <ReadingProgress />
 
-    <!-- Hero -->
-    <section class="test-hero substance-hero">
-      <div class="container-fluid px-4">
-        <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%">
-            <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
-              <Icon icon="mdi:arrow-left" /> 返回评估列表
-            </RouterLink>
-            <h1 class="test-hero-title mb-3">物质使用障碍测试</h1>
-            <p class="test-hero-sub mb-2">AUDIT + DAST-10 综合筛查 · 20 道题 · 约 5 分钟</p>
-            <p class="test-hero-desc">
-              本测试结合酒精使用障碍测试（AUDIT）和药物滥用筛查（DAST-10），
-              综合评估酒精和药物使用相关问题。请根据过去一年内你的真实情况作答。
-            </p>
-          </div>
-        </div>
+    <div class="term-window">
+      <div class="term-bar">
+        <span class="term-dot"></span>
+        <span class="term-dot"></span>
+        <span class="term-dot"></span>
+        <span class="term-title">assessment: audit-dast</span>
       </div>
-    </section>
 
-    <!-- 测试部分 -->
-    <section class="test-section">
-      <div class="container">
-        <form @submit.prevent="calculateScore">
-          <!-- 题目列表 -->
-          <div class="questions-list">
-            <div v-for="(question, index) in questions" :key="index" class="question-card">
-              <div class="question-header">
-                <h3 class="question-number">{{ index + 1 }}. {{ question.text }}</h3>
-                <div class="question-hint">{{ question.hint }}</div>
+      <div class="term-body">
+        <div class="term-cmd">
+          <span class="prompt">$</span> <span class="cmd">cat assessments/substance-20.yaml</span>
+        </div>
+
+        <header class="page-head">
+          <h1 class="page-title">物质使用障碍测试</h1>
+          <p class="page-meta">AUDIT + DAST-10 综合筛查 · 6 道题 · 约 3 分钟</p>
+          <p class="page-desc">
+            本测试结合酒精使用障碍测试（AUDIT）和药物滥用筛查（DAST-10），
+            综合评估酒精和药物使用相关问题。请根据过去一年内你的真实情况作答。
+          </p>
+          <RouterLink to="/tests" class="back">
+            <Icon icon="mdi:arrow-left" /> 返回评估列表
+          </RouterLink>
+        </header>
+
+        <div v-if="!showResult" class="test-area">
+          <div class="prog-bar">
+            <div class="prog-fill" :style="{ width: progressPct + '%' }"></div>
+            <span class="prog-label">{{ answeredCount }}/{{ questions.length }}</span>
+          </div>
+
+          <form @submit.prevent="calculateScore">
+            <div
+              v-for="(question, index) in questions"
+              :key="index"
+              class="q-block"
+              :class="{ 'q-done': userAnswers[index] !== -1 }"
+            >
+              <div class="q-head">
+                <span class="q-num">{{ index + 1 }}</span>
+                <span class="q-text">{{ question.text }}</span>
+                <span class="q-tag">{{ question.hint }}</span>
               </div>
-              <div class="options-grid">
+              <div class="q-opts">
                 <button
                   v-for="(option, optIndex) in question.options"
                   :key="optIndex"
                   type="button"
-                  class="option-btn"
-                  :class="{
-                    selected: userAnswers[index] === optIndex,
-                    'gradient-border': userAnswers[index] === optIndex,
-                  }"
+                  class="opt"
+                  :class="{ 'opt-on': userAnswers[index] === optIndex }"
                   @click="selectAnswer(index, optIndex)"
                 >
-                  <span class="option-label">{{ option.label }}</span>
-                  <span class="option-desc">{{ option.desc }}</span>
+                  {{ option.label }}
+                  <span class="opt-val">{{ option.desc }}</span>
                 </button>
               </div>
             </div>
+
+            <div class="submit-line">
+              <button type="submit" class="btn-geek" :disabled="!allAnswered">
+                查看结果
+              </button>
+              <span v-if="!allAnswered" class="submit-remind">
+                还有 {{ questions.length - answeredCount }} 题未答
+              </span>
+            </div>
+          </form>
+        </div>
+
+        <div v-if="showResult" class="result-area">
+          <div class="term-cmd">
+            <span class="prompt">$</span> <span class="cmd">./score --id audit-dast --answers {{ answeredCount }}/{{ questions.length }}</span>
           </div>
 
-          <!-- 提交按钮 -->
-          <div class="submit-section">
-            <button type="submit" class="btn btn-animate submit-btn" :disabled="!allAnswered">
-              {{
-                allAnswered
-                  ? '查看评估结果'
-                  : `请完成所有题目 (${answeredCount}/${questions.length})`
-              }}
-            </button>
+          <div class="r-card">
+            <div class="r-score-wrap" style="flex-direction:column;gap:0.5rem;">
+              <div style="display:flex;align-items:baseline;gap:0.25rem;">
+                <span style="font-size:0.8rem;color:var(--color-text-secondary);">酒精:</span>
+                <span class="r-score" style="font-size:2rem;">{{ alcoholScore }}</span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:0.25rem;">
+                <span style="font-size:0.8rem;color:var(--color-text-secondary);">药物:</span>
+                <span class="r-score" style="font-size:2rem;">{{ drugScore }}</span>
+              </div>
+            </div>
+            <div class="r-body">
+              <div class="r-head">结果解读</div>
+              <p class="r-text" v-html="resultInterpretation"></p>
+            </div>
           </div>
-        </form>
 
-        <!-- 结果部分 -->
-        <div v-if="showResult" class="result-section">
-          <h2 class="result-title">评估结果</h2>
-          <div class="result-card">
-            <div class="score-display">
-              <span class="score-label">酒精风险评分</span>
-              <div class="score-value">{{ alcoholScore }}</div>
-              <div class="score-range">药物风险评分: {{ drugScore }}</div>
-            </div>
-            <div class="result-interpretation">
-              <h3>结果解读</h3>
-              <p v-html="resultInterpretation"></p>
-            </div>
-            <div class="result-actions">
-              <button @click="resetTest" class="btn btn-secondary">重新评估</button>
-            </div>
+          <div class="r-actions">
+            <button @click="resetTest" class="btn-geek">重新测试</button>
+            <RouterLink to="/tests" class="btn-geek">其他测试</RouterLink>
           </div>
         </div>
 
-        <!-- 免责声明 -->
-        <div class="important-notice mb-5">
-          <Icon icon="mdi:alert" class="notice-icon" />
+        <div class="notice">
+          <Icon icon="mdi:alert" class="notice-ico" />
           <div>
             <strong>重要说明</strong>
-            <p>
-              AUDIT 和 DAST-10
-              是筛查工具，不能替代专业诊断。物质使用障碍是一种可治疗的精神健康问题，通过专业治疗和支持团体通常能够有效改善。如果你对自己的酒精或药物使用感到担忧，请务必寻求专业医生或成瘾专科的帮助。如果你有戒断症状或紧急情况，请立即就医。
-            </p>
+            <p>AUDIT 和 DAST-10 是筛查工具，不能替代专业诊断。</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -104,7 +116,6 @@ import { ref, computed } from 'vue'
 import ReadingProgress from '@/components/ReadingProgress.vue'
 import { Icon } from '@iconify/vue'
 
-// 物质使用障碍题目 (AUDIT + DAST-10)
 const questions = ref([
   {
     text: '你多久喝一次含酒精的饮料？',
@@ -171,47 +182,36 @@ const questions = ref([
 const userAnswers = ref<number[]>(Array(questions.value.length).fill(-1))
 const showResult = ref(false)
 
-// 计算已答题目数量
-const answeredCount = computed(() => {
-  return userAnswers.value.filter((answer) => answer !== -1).length
-})
+const answeredCount = computed(() => userAnswers.value.filter(a => a !== -1).length)
+const allAnswered = computed(() => userAnswers.value.every(a => a !== -1))
+const progressPct = computed(() => Math.round((answeredCount.value / questions.value.length) * 100))
 
-// 检查是否全部答完
-const allAnswered = computed(() => {
-  return userAnswers.value.every((answer) => answer !== -1)
-})
-
-// 酒精评分 (前4题)
 const alcoholScore = computed(() => {
   let score = 0
   for (let i = 0; i < 4 && i < userAnswers.value.length; i++) {
     const answerIndex = userAnswers.value[i]
     if (answerIndex !== -1) {
       const question = questions.value[i]
-      const options = question?.options
-      const option = options?.[answerIndex]
+      const option = question?.options[answerIndex]
       score += option ? option.value : 0
     }
   }
   return score
 })
 
-// 药物评分 (后2题)
 const drugScore = computed(() => {
   let score = 0
   for (let i = 4; i < userAnswers.value.length; i++) {
     const answerIndex = userAnswers.value[i]
     if (answerIndex !== -1) {
       const question = questions.value[i]
-      const options = question?.options
-      const option = options?.[answerIndex]
+      const option = question?.options[answerIndex]
       score += option ? option.value : 0
     }
   }
   return score
 })
 
-// 结果解读
 const resultInterpretation = computed(() => {
   const alcScore = alcoholScore.value
   const drgScore = drugScore.value
@@ -240,21 +240,18 @@ const resultInterpretation = computed(() => {
   return result
 })
 
-// 选择答案
 const selectAnswer = (questionIndex: number, optionIndex: number) => {
   userAnswers.value[questionIndex] = optionIndex
 }
 
-// 计算分数
 const calculateScore = () => {
   if (allAnswered.value) {
     showResult.value = true
-    const element = document.querySelector('.result-section') as HTMLElement | null
-    window.scrollTo({ top: element?.offsetTop || 0, behavior: 'smooth' })
+    const el = document.querySelector('.result-area') as HTMLElement | null
+    window.scrollTo({ top: el?.offsetTop || 0, behavior: 'smooth' })
   }
 }
 
-// 重置测试
 const resetTest = () => {
   userAnswers.value = Array(questions.value.length).fill(-1)
   showResult.value = false
@@ -263,71 +260,287 @@ const resetTest = () => {
 </script>
 
 <style scoped>
-.substance-hero {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.08) 100%);
-}
-
-.substance-hero::before {
-  background: radial-gradient(ellipse at 30% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
-}
-
-.test-hero-title {
-  color: #10b981;
-}
-
-.test-hero-sub {
-  color: rgba(16, 185, 129, 0.7);
-}
-
-.question-card {
-  background: var(--color-bg-card);
-  border-left: 4px solid #10b981;
-}
-
-.option-btn.selected {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
-  border-color: #10b981;
-  color: #10b981;
-}
-
-.submit-btn {
-  --btn-color: #10b981;
-}
-
-.score-value {
-  color: #10b981;
-  font-size: 3rem;
-}
-
-.result-card {
-  border-left: 6px solid #10b981;
-}
-
-/* 免责声明 */
-.important-notice {
+.term-page {
+  min-height: 100vh;
+  padding: 2rem 1rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.term-window {
+  width: 100%;
+  max-width: 720px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.term-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.term-title {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.term-body {
+  padding: 2rem 1.5rem;
+}
+
+.term-cmd {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+}
+
+.prompt {
+  color: var(--color-text);
+  margin-right: 0.5rem;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.page-meta {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.page-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  opacity: 0.8;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+.back:hover {
+  color: var(--color-text);
+}
+
+.prog-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 24px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0 0.75rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.prog-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: rgba(255,255,255,0.12);
+  transition: width 0.4s ease;
+}
+
+.prog-label {
+  position: relative;
+  z-index: 1;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--color-text);
+  margin-left: auto;
+}
+
+.q-block {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s;
+}
+
+.q-block.q-done {
+  border-color: rgba(255,255,255,0.25);
+}
+
+.q-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.q-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  min-width: 1.5rem;
+}
+
+.q-text {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.q-tag {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.q-opts {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.opt {
+  flex: 1;
+  min-width: 70px;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+}
+
+.opt:hover {
+  border-color: rgba(255,255,255,0.35);
+}
+
+.opt-on {
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.1);
+}
+
+.opt-val {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+}
+
+.submit-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
-  padding: 1.5rem;
-  background: rgba(16, 185, 129, 0.1);
-  border-left: 4px solid #10b981;
-  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.submit-remind {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.r-card {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   margin-bottom: 1.5rem;
 }
-.notice-icon {
-  font-size: 1.5rem;
-  color: #10b981;
+
+.r-score-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
   flex-shrink: 0;
 }
-.important-notice strong {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  margin-bottom: 6px;
+
+.r-score {
+  font-size: 3rem;
+  font-family: var(--font-mono);
+  line-height: 1;
 }
-.important-notice p {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
+
+.r-body {
+  flex: 1;
+}
+
+.r-head {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.r-text {
+  font-size: 0.9rem;
   line-height: 1.7;
+}
+
+.r-text :deep(strong) {
+  display: block;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.r-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.notice {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
+}
+
+.notice-ico {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.notice strong {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.notice p {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
   margin: 0;
 }
 </style>

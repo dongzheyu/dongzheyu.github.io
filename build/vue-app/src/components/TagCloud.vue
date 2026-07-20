@@ -45,13 +45,13 @@ const getSize = (count: number) => {
 .tag-cloud-container {
   padding: 1.5rem;
   background: var(--color-bg-soft);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
 .tag-cloud-title {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-heading);
   margin-bottom: 1rem;
   display: flex;
@@ -77,7 +77,7 @@ const getSize = (count: number) => {
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.25s ease;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .tag-item:hover {
@@ -85,7 +85,6 @@ const getSize = (count: number) => {
   color: white;
   border-color: var(--color-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 255, 65, 0.3);
 }
 
 .tag-count {

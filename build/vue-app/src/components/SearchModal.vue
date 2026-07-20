@@ -584,7 +584,7 @@ defineExpose({ open, close })
 }
 
 .category-btn.active {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .search-results {
@@ -626,7 +626,7 @@ defineExpose({ open, close })
 
 .result-title {
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-heading);
   margin: 0 0 4px 0;
 }
@@ -688,7 +688,7 @@ defineExpose({ open, close })
   color: white;
   padding: 1px 3px;
   border-radius: 2px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* 加载状态 */

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="editor-header">
         <h1>{{ isEditing ? '编辑文章' : '发布新文章' }}</h1>
-        <RouterLink to="/blog" class="btn btn-secondary">
+        <RouterLink to="/blog" class="btn-geek" style="font-size:var(--font-size-xs);">
           <Icon icon="mdi:arrow-left" />
           返回博客
         </RouterLink>
@@ -155,14 +155,16 @@
           <button
             type="button"
             @click="handleSaveDraft"
-            class="btn btn-secondary"
+            class="btn-geek"
+            style="font-size:var(--font-size-xs);"
             :disabled="saving"
           >
             {{ saving ? '保存中...' : '保存草稿' }}
           </button>
           <button
             type="submit"
-            class="btn btn-primary btn-animate"
+            class="btn-geek"
+            style="font-size:var(--font-size-xs);"
             :disabled="saving || !isFormValid"
           >
             {{ saving ? '发布中...' : isEditing ? '更新文章' : '发布文章' }}
@@ -431,7 +433,7 @@ async function handleSubmit() {
 .error-alert,
 .success-alert {
   padding: 1rem 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -440,13 +442,13 @@ async function handleSubmit() {
 
 .error-alert {
   background: rgba(255, 71, 87, 0.1);
-  color: #ff4757;
+  color: #ff5f57;
   border: 1px solid rgba(255, 71, 87, 0.3);
 }
 
 .success-alert {
   background: rgba(46, 213, 115, 0.1);
-  color: #2ed573;
+  color: var(--color-green);
   border: 1px solid rgba(46, 213, 115, 0.3);
 }
 
@@ -467,7 +469,7 @@ async function handleSubmit() {
 
 .editor-form {
   background: var(--color-bg-card);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 2.5rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
@@ -486,7 +488,7 @@ async function handleSubmit() {
   display: block;
   margin-bottom: 0.5rem;
   color: var(--color-text);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .form-input {
@@ -494,7 +496,7 @@ async function handleSubmit() {
   padding: 0.75rem 1rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   color: var(--color-text);
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -527,7 +529,7 @@ async function handleSubmit() {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: none;
-  border-radius: 8px 8px 0 0;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   flex-wrap: wrap;
 }
 
@@ -547,7 +549,7 @@ async function handleSubmit() {
 }
 
 .markdown-editor {
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   font-family: 'Consolas', 'Monaco', monospace;
   line-height: 1.6;
 }
@@ -555,7 +557,7 @@ async function handleSubmit() {
 .preview-container {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 2rem;
   min-height: 200px;
 }

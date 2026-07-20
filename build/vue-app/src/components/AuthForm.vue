@@ -62,7 +62,8 @@
 
         <button
           type="submit"
-          class="btn btn-primary btn-animate btn-block"
+          class="btn-geek"
+          style="width:100%;font-size:var(--font-size-xs);padding:8px 24px;"
           :disabled="loading || (!isLogin && !agreeTerms)"
         >
           {{ loading ? '处理中...' : isLogin ? '登录' : '注册' }}
@@ -294,13 +295,13 @@ const handleSubmit = async () => {
 .form-group label {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .form-input {
   padding: 0.75rem 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-text);
   font-size: 1rem;
@@ -342,16 +343,11 @@ const handleSubmit = async () => {
   color: var(--color-primary);
 }
 
-.btn-block {
-  width: 100%;
-  margin-top: 0.5rem;
-}
-
 .error-message,
 .success-message {
   margin-top: 1rem;
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -360,13 +356,13 @@ const handleSubmit = async () => {
 
 .error-message {
   background: rgba(255, 71, 87, 0.1);
-  color: #ff4757;
+  color: #ff5f57;
   border: 1px solid rgba(255, 71, 87, 0.3);
 }
 
 .success-message {
   background: rgba(46, 213, 115, 0.1);
-  color: #2ed573;
+  color: var(--color-green);
   border: 1px solid rgba(46, 213, 115, 0.3);
 }
 
@@ -415,8 +411,8 @@ const handleSubmit = async () => {
   gap: 8px;
   padding: 12px 16px;
   background: rgba(var(--color-primary-rgb), 0.08);
-  border-radius: 8px;
-  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  border-left: 1px solid var(--color-primary);
   font-size: 0.85rem;
   color: var(--color-text);
   margin-top: 0.5rem;
@@ -429,7 +425,7 @@ const handleSubmit = async () => {
 .data-consent-info a {
   color: var(--color-primary);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
   margin-left: 4px;
 }
 
@@ -451,7 +447,7 @@ const handleSubmit = async () => {
   color: var(--color-text-secondary);
   cursor: pointer;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.02);
   transition: background 0.3s ease;
 }
@@ -471,7 +467,7 @@ const handleSubmit = async () => {
 .consent-label a {
   color: var(--color-primary);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .consent-label a:hover {
@@ -515,12 +511,12 @@ const handleSubmit = async () => {
   justify-content: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-text);
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -537,7 +533,7 @@ const handleSubmit = async () => {
 }
 
 .google-btn:hover:not(:disabled) {
-  border-color: #4285f4;
+  border-color: var(--color-blue);
 }
 
 .github-btn:hover:not(:disabled) {
@@ -545,6 +541,6 @@ const handleSubmit = async () => {
 }
 
 .microsoft-btn:hover:not(:disabled) {
-  border-color: #00a4ef;
+  border-color: var(--color-blue);
 }
 </style>

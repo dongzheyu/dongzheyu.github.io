@@ -2,7 +2,7 @@
   <div class="auth-callback-page">
     <div class="callback-container">
       <div v-if="loading" class="loading-state">
-        <div class="spinner"></div>
+        <div class="skeleton skeleton-card" style="width:200px;height:200px;margin:0 auto;"></div>
         <p>正在验证邮箱...</p>
       </div>
 
@@ -10,14 +10,14 @@
         <Icon icon="mdi:alert" class="error-icon" />
         <h2>验证失败</h2>
         <p>{{ error }}</p>
-        <RouterLink to="/auth" class="btn btn-primary btn-animate"> 返回登录页面 </RouterLink>
+        <RouterLink to="/auth" class="btn-geek" style="font-size:var(--font-size-xs);"> 返回登录页面 </RouterLink>
       </div>
 
       <div v-else-if="success" class="success-state">
         <Icon icon="mdi:check-circle" class="success-icon" />
         <h2>{{ isOAuth ? '登录成功！' : '邮箱验证成功！' }}</h2>
         <p>{{ isOAuth ? '正在跳转到首页...' : '你的邮箱已成功验证，现在可以登录了。' }}</p>
-        <RouterLink v-if="!isOAuth" to="/auth" class="btn btn-primary btn-animate">
+        <RouterLink v-if="!isOAuth" to="/auth" class="btn-geek" style="font-size:var(--font-size-xs);">
           前往登录
         </RouterLink>
       </div>
@@ -87,12 +87,11 @@ onMounted(async () => {
 
 .callback-container {
   background: var(--color-bg-card);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 3rem;
   max-width: 500px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .loading-state {
@@ -102,24 +101,10 @@ onMounted(async () => {
   gap: 1.5rem;
 }
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(0, 255, 65, 0.2);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .loading-state p {
   color: var(--color-text-secondary);
   font-size: 1.1rem;
+  font-family: var(--font-mono);
 }
 
 .error-state,
@@ -137,11 +122,11 @@ onMounted(async () => {
 }
 
 .error-icon {
-  color: #ff4757;
+  color: #ff5f57;
 }
 
 .success-icon {
-  color: #2ed573;
+  color: var(--color-green);
 }
 
 .error-state h2,
@@ -149,6 +134,7 @@ onMounted(async () => {
   margin: 0;
   color: var(--color-text);
   font-size: 1.75rem;
+  font-family: var(--font-mono);
 }
 
 .error-state p,
@@ -157,9 +143,7 @@ onMounted(async () => {
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
 }
 
-.btn {
-  margin-top: 1rem;
-}
 </style>

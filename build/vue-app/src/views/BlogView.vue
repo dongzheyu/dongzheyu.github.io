@@ -138,21 +138,29 @@ const vis = useStaggeredFade(6, 100)
       </div>
     </section>
 
+    <div class="divider-geek mb-40" style="margin-left:40px;">
+      <span>{{ filteredPosts.length }} posts</span>
+    </div>
+
     <section class="mb-60" style="padding-left:40px;">
-      <div v-if="loading" class="text-dim flex gap-12 items-center">
-        <span class="text-faint">加载中...</span>
+      <div v-if="loading" class="flex flex-col gap-16">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
       </div>
       <div v-else class="flex flex-col gap-24">
         <div v-for="(p, i) in filteredPosts" :key="p.id"
           class="card-geek stagger-item" :class="{ visible: vis.visible[i] || i < 6 }">
           <div class="flex items-center justify-between mb-20">
-            <span class="tag-pill" style="font-size:var(--font-size-xs);">{{ p.category }}</span>
+            <span class="badge-geek">{{ p.category }}</span>
             <span class="text-faint" style="font-size:var(--font-size-xs);">{{ p.date }}</span>
           </div>
           <h3 style="font-size:var(--font-size-base); font-weight:400; color:rgba(255,255,255,0.82);">{{ p.title }}</h3>
           <p class="text-dim" style="margin:12px 0 20px;">{{ p.excerpt }}</p>
           <div class="flex items-center gap-12">
-            <RouterLink :to="p.link" class="btn-geek" style="font-size:var(--font-size-xs);">阅读 &#8594;</RouterLink>
+            <RouterLink :to="p.link" class="btn-geek" style="font-size:var(--font-size-xs);">
+              <Icon icon="mdi:book-open" width="14" /> 阅读
+            </RouterLink>
             <span class="text-faint" style="font-size:var(--font-size-xs);">{{ p.author }}</span>
             <template v-if="p.isEditable">
               <RouterLink :to="`/blog/edit/${p.originalId}`" class="nav-icon-btn"><Icon icon="mdi:pencil" width="14" /></RouterLink>

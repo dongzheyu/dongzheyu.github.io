@@ -1,60 +1,55 @@
 <template>
-  <div class="auth-test-page">
-    <div class="container">
-      <h1 class="page-title">JetCPP统一认证</h1>
+  <div>
+    <section class="page-head">
+      <h1>
+        <span>$ auth --login</span><br>
+        <span class="typewriter" style="font-size:var(--font-size-lg);">{{ display }}</span>
+        <span class="typewriter-cursor" :class="{ done }"></span>
+      </h1>
+    </section>
 
-      <!-- 未登录时显示登录表单 -->
+    <section class="mb-60" style="padding-left:40px; max-width:520px;">
       <AuthForm v-if="!isAuthenticated" />
-
-      <!-- 已登录时显示用户信息 -->
-      <div v-else class="cp-card user-info-card">
-        <div class="cp-card__inner">
-          <div class="user-header">
-            <Icon icon="mdi:account-circle" class="user-icon" />
-            <h2>欢迎回来！</h2>
+      <div v-else class="term-block">
+        <div class="term-bar">
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span style="margin-left:8px; opacity:0.5;">session.sh</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line">whoami</div>
+          <div class="term-line-out" style="margin-top:8px;">{{ user?.email }}</div>
+          <div class="term-line-out" style="margin-top:12px;">
+            <span class="pulse-dot"></span> authenticated
           </div>
-
-          <div class="user-details">
-            <div class="detail-item">
-              <span class="detail-label">邮箱：</span>
-              <span class="detail-value">{{ user?.email }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">用户ID：</span>
-              <span class="detail-value user-id">{{ user?.id }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">注册时间：</span>
-              <span class="detail-value">{{ formatDate(user?.created_at) }}</span>
-            </div>
+          <div style="margin-top:16px;">
+            <div class="term-line-out">uid: <span style="color:var(--color-white);">{{ user?.id }}</span></div>
+            <div class="term-line-out">since: <span style="color:var(--color-white);">{{ formatDate(user?.created_at) }}</span></div>
           </div>
-
-          <button @click="handleSignOut" class="btn btn-secondary btn-animate">
-            <Icon icon="mdi:logout" />
-            退出登录
-          </button>
+          <div class="flex gap-12 mt-20">
+            <button @click="handleSignOut" class="btn-geek" style="font-size:var(--font-size-xs);">
+              <Icon icon="mdi:logout" width="14" /> 退出登录
+            </button>
+          </div>
+          <div class="term-line" style="margin-top:16px;">exit 0</div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { Icon } from '@iconify/vue'
+import { useTypewriter } from '@/composables/useTypewriter'
 import AuthForm from '@/components/AuthForm.vue'
 import { useAuth } from '@/composables/useAuth'
 
-const router = useRouter()
+const { display, cursor, done } = useTypewriter('JetCPP 统一认证', 55)
 const { user, isAuthenticated, signOut } = useAuth()
 
 const handleSignOut = async () => {
-  try {
-    await signOut()
-    // 登出后可以跳转到首页或其他页面
-    // router.push('/')
-  } catch (error) {
-    console.error('登出失败:', error)
-  }
+  try { await signOut() } catch (_) {}
 }
 
 const formatDate = (dateString?: string) => {
@@ -64,73 +59,138 @@ const formatDate = (dateString?: string) => {
 </script>
 
 <style scoped>
-.auth-test-page {
-  min-height: calc(100vh - 200px);
-  padding: 3rem 0;
+:deep(.auth-container) { padding: 0; }
+:deep(.cp-card) {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0;
+  overflow: hidden;
 }
-
-.page-title {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: var(--color-text);
-  font-size: 2rem;
+:deep(.cp-card__inner) { padding: 32px; }
+:deep(.auth-title) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  color: var(--color-white);
+  text-align: left;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
 }
-
-.user-info-card {
-  max-width: 600px;
-  margin: 0 auto;
+:deep(.form-input) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-white);
+  width: 100%;
 }
-
-.user-header {
+:deep(.form-input:focus) {
+  outline: none;
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.06);
+}
+:deep(.form-group label) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
+  font-weight: 400;
+}
+:deep(.btn-primary) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-white);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 8px 24px;
+  transition: all 0.25s var(--ease-out-expo);
+  width: 100%;
+}
+:deep(.btn-primary:hover:not(:disabled)) {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.18);
+}
+:deep(.btn-primary:disabled) { opacity: 0.4; cursor: not-allowed; }
+:deep(.error-message) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: #ff5f57;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,95,87,0.2);
+  border-radius: var(--radius-sm);
+  margin-top: 12px;
+}
+:deep(.success-message) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-green);
+  padding: 8px 12px;
+  border: 1px solid rgba(120,220,160,0.2);
+  border-radius: var(--radius-sm);
+  margin-top: 12px;
+}
+:deep(.auth-switch),
+:deep(.forgot-password-link),
+:deep(.switch-btn),
+:deep(.link-btn) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
+}
+:deep(.switch-btn),
+:deep(.link-btn) {
+  color: var(--color-white);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+:deep(.social-btn) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-dim);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+:deep(.social-btn:hover:not(:disabled)) {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+  color: var(--color-white);
+}
+:deep(.data-consent-info),
+:deep(.terms-consent) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
+}
+:deep(.data-consent-info a),
+:deep(.consent-label a) {
+  color: var(--color-white);
+}
+:deep(.divider) {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  gap: 12px;
 }
-
-.user-icon {
-  font-size: 3rem;
-  color: var(--color-primary);
+:deep(.divider::before),
+:deep(.divider::after) {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
 }
-
-.user-header h2 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 1.5rem;
-}
-
-.user-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.detail-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-}
-
-.detail-label {
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  min-width: 100px;
-}
-
-.detail-value {
-  color: var(--color-text);
-  word-break: break-all;
-}
-
-.user-id {
-  font-family: monospace;
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
+:deep(.divider span) { padding: 0; }
+:deep(.password-toggle) { color: var(--color-text-faint); }
 </style>

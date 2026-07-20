@@ -48,7 +48,7 @@ onUnmounted(() => {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   letter-spacing: 1px;

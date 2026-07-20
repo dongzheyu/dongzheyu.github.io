@@ -125,13 +125,13 @@ const formatDate = (date: string | Date) => {
 .history-chart {
   padding: 1.5rem;
   background: var(--color-bg-soft);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
 .chart-title {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-heading);
   margin-bottom: 1.25rem;
   display: flex;
@@ -158,7 +158,7 @@ const formatDate = (date: string | Date) => {
   margin-bottom: 1.5rem;
   padding: 1rem;
   background: var(--color-bg);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
 }
 
@@ -219,7 +219,7 @@ const formatDate = (date: string | Date) => {
 .bar {
   width: 70%;
   max-width: 40px;
-  border-radius: 4px 4px 0 0;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -230,7 +230,7 @@ const formatDate = (date: string | Date) => {
 
 .bar-value {
   font-size: 0.6rem;
-  font-weight: 700;
+  font-weight: 400;
   color: #fff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -247,15 +247,13 @@ const formatDate = (date: string | Date) => {
 
 /* ── level colors ── */
 .level-good {
-  background: linear-gradient(180deg, #4caf50, #388e3c);
+  background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0.2));
 }
-
 .level-moderate {
-  background: linear-gradient(180deg, #ff9800, #f57c00);
+  background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.15));
 }
-
 .level-severe {
-  background: linear-gradient(180deg, #f44336, #c62828);
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.25));
 }
 
 /* ── history list ── */
@@ -272,7 +270,7 @@ const formatDate = (date: string | Date) => {
   padding: 0.75rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   transition: border-color 0.2s;
 }
 
@@ -292,14 +290,11 @@ const formatDate = (date: string | Date) => {
   flex-shrink: 0;
 }
 
-.item-score-ring.level-good {
-  border-color: #4caf50;
-}
-.item-score-ring.level-moderate {
-  border-color: #ff9800;
-}
+/* Score ring borders */
+.item-score-ring.level-good,
+.item-score-ring.level-moderate,
 .item-score-ring.level-severe {
-  border-color: #f44336;
+  border-color: var(--color-border);
 }
 
 .item-score-num {
@@ -308,14 +303,11 @@ const formatDate = (date: string | Date) => {
   line-height: 1;
 }
 
-.item-score-ring.level-good .item-score-num {
-  color: #4caf50;
-}
-.item-score-ring.level-moderate .item-score-num {
-  color: #ff9800;
-}
+/* Score text */
+.item-score-ring.level-good .item-score-num,
+.item-score-ring.level-moderate .item-score-num,
 .item-score-ring.level-severe .item-score-num {
-  color: #f44336;
+  color: var(--color-text);
 }
 
 .item-score-total {
@@ -331,7 +323,7 @@ const formatDate = (date: string | Date) => {
 
 .item-title {
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-heading);
   margin: 0 0 0.2rem;
   white-space: nowrap;
@@ -347,17 +339,14 @@ const formatDate = (date: string | Date) => {
 }
 
 .item-level {
-  font-weight: 600;
+  font-weight: 400;
 }
 
-.item-level.level-good {
-  color: #4caf50;
-}
-.item-level.level-moderate {
-  color: #ff9800;
-}
+/* Item level text */
+.item-level.level-good,
+.item-level.level-moderate,
 .item-level.level-severe {
-  color: #f44336;
+  color: var(--color-text-secondary);
 }
 
 .item-date {
@@ -380,29 +369,26 @@ const formatDate = (date: string | Date) => {
   flex: 1;
   height: 6px;
   background: var(--color-bg-mute);
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
 .mini-bar-fill {
   height: 100%;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   transition: width 0.5s ease;
 }
 
-.mini-bar-fill.level-good {
-  background: #4caf50;
-}
-.mini-bar-fill.level-moderate {
-  background: #ff9800;
-}
+/* Mini bar fills */
+.mini-bar-fill.level-good,
+.mini-bar-fill.level-moderate,
 .mini-bar-fill.level-severe {
-  background: #f44336;
+  background: var(--color-text-secondary);
 }
 
 .mini-bar-pct {
   font-size: 0.7rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-text-secondary);
   min-width: 28px;
   text-align: right;

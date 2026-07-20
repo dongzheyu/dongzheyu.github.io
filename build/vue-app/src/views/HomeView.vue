@@ -25,7 +25,6 @@ const { visible: featVisible } = useStaggeredFade(features.length, 100)
 const tags = ['C++', 'Rust', 'Vue 3', 'TypeScript', 'WebAssembly', '开源']
 const { visible: tagVisible } = useStaggeredFade(tags.length, 80)
 
-// GitHub 统计数据
 const uptime = ref(0)
 const stars = ref(0)
 const repoCount = ref(0)
@@ -61,7 +60,6 @@ onMounted(async () => {
     })
     topLang.value = Object.entries(langCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || '--'
 
-    // 贡献详情: 从 PushEvent 统计近期提交
     const repoSet = new Set<string>()
     let commitCount = 0
     events.forEach((e: any) => {
@@ -81,6 +79,10 @@ onMounted(async () => {
   <div>
     <section class="page-head flex" style="align-items: flex-start;">
       <div style="flex:1">
+        <div class="flex items-center gap-8 mb-20">
+          <span class="pulse-dot"></span>
+          <span class="text-faint" style="font-size:var(--font-size-xs);">system online</span>
+        </div>
         <h1>
           <span class="typewriter">{{ display }}</span>
           <span class="typewriter-cursor" :class="{ done }"></span>
@@ -96,19 +98,45 @@ onMounted(async () => {
           </a>
         </div>
       </div>
-      <div class="undraw-placeholder" style="margin-left:auto; transform: translateY(-8px);">
-        <svg viewBox="0 0 400 200" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.2">
-          <rect x="40" y="100" width="80" height="80" rx="4" stroke-dasharray="6 4"/>
-          <circle cx="280" cy="90" r="50" stroke-dasharray="6 4"/>
-          <path d="M180 40 L220 40 L220 80 L260 80 L260 120 L220 120 L220 160 L180 160 Z" stroke-dasharray="6 4"/>
-          <line x1="60" y1="40" x2="160" y2="40"/>
-          <line x1="100" y1="20" x2="140" y2="20"/>
+      <div class="hero-visual" style="margin-left:auto; transform: translateY(-8px);">
+        <svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="400" height="240" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <circle cx="20" cy="16" r="4" fill="#ff5f57" opacity="0.8"/>
+          <circle cx="36" cy="16" r="4" fill="#ffbd2e" opacity="0.8"/>
+          <circle cx="52" cy="16" r="4" fill="#28c840" opacity="0.8"/>
+          <text x="68" y="20" fill="rgba(255,255,255,0.25)" font-size="10" font-family="monospace">bash — system_info</text>
+          <line x1="0" y1="28" x2="400" y2="28" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+
+          <text x="16" y="50" fill="rgba(120,220,160,0.7)" font-size="11" font-family="monospace">$</text>
+          <text x="28" y="50" fill="rgba(255,255,255,0.6)" font-size="11" font-family="monospace">neofetch</text>
+
+          <text x="16" y="70" fill="rgba(255,255,255,0.35)" font-size="10" font-family="monospace">OS:       JetCPP Linux x86_64</text>
+          <text x="16" y="86" fill="rgba(255,255,255,0.35)" font-size="10" font-family="monospace">Kernel:   custom 6.8.0</text>
+          <text x="16" y="102" fill="rgba(255,255,255,0.35)" font-size="10" font-family="monospace">Shell:    zsh 5.9</text>
+          <text x="16" y="118" fill="rgba(255,255,255,0.35)" font-size="10" font-family="monospace">Uptime:   {{ uptime || '--' }} days</text>
+          <text x="16" y="134" fill="rgba(255,255,255,0.35)" font-size="10" font-family="monospace">Packages: {{ (stars + forks) || '--' }} (aur)</text>
+
+          <text x="16" y="158" fill="rgba(120,220,160,0.7)" font-size="11" font-family="monospace">$</text>
+          <text x="28" y="158" fill="rgba(255,255,255,0.6)" font-size="11" font-family="monospace">ls -la projects/</text>
+
+          <text x="16" y="178" fill="rgba(255,255,255,0.3)" font-size="10" font-family="monospace">drwxr-xr-x</text>
+          <text x="88" y="178" fill="rgba(100,180,240,0.5)" font-size="10" font-family="monospace">SniShaper</text>
+          <text x="16" y="194" fill="rgba(255,255,255,0.3)" font-size="10" font-family="monospace">drwxr-xr-x</text>
+          <text x="88" y="194" fill="rgba(100,180,240,0.5)" font-size="10" font-family="monospace">English-Listen</text>
+          <text x="16" y="210" fill="rgba(255,255,255,0.3)" font-size="10" font-family="monospace">drwxr-xr-x</text>
+          <text x="88" y="210" fill="rgba(100,180,240,0.5)" font-size="10" font-family="monospace">blog</text>
+          <text x="16" y="226" fill="rgba(255,255,255,0.3)" font-size="10" font-family="monospace">-rw-r--r--</text>
+          <text x="88" y="226" fill="rgba(255,255,255,0.4)" font-size="10" font-family="monospace">README.md</text>
         </svg>
       </div>
     </section>
 
-    <section class="mt-60 mb-60">
-      <h2 class="section-title">// 核心能力</h2>
+    <div class="divider-geek mb-60">
+      <span>modules</span>
+    </div>
+
+    <section class="mb-60">
+      <h2 class="section-title-term">// core/capabilities</h2>
       <div class="grid-2" style="padding-left: 40px;">
         <div
           v-for="(f, i) in features" :key="i"
@@ -126,7 +154,7 @@ onMounted(async () => {
     </section>
 
     <section class="mb-60">
-      <h2 class="section-title">// 技术栈</h2>
+      <h2 class="section-title-term">// stack/dependencies</h2>
       <div class="flex gap-12 flex-wrap" style="padding-left: 40px;">
         <span
           v-for="(t, i) in tags" :key="t"
@@ -136,19 +164,44 @@ onMounted(async () => {
     </section>
 
     <section class="mb-60" style="padding-left: 40px;">
-      <h2 class="section-title">// 会话统计</h2>
-      <div class="flex flex-col gap-12 text-dim">
-        <span>&gt; 活跃: <span style="color:rgba(255,255,255,0.82)">{{ uptime }} 天</span> | Star: <span style="color:rgba(255,255,255,0.82)">{{ stars }}</span> | Fork: <span style="color:rgba(255,255,255,0.82)">{{ forks }}</span> | 仓库: <span style="color:rgba(255,255,255,0.82)">{{ repoCount }}</span></span>
-        <span>&gt; 语言种类: <span style="color:rgba(255,255,255,0.82)">{{ langCount }}</span> | 主力语言: <span style="color:rgba(255,255,255,0.82)">{{ topLang }}</span> | 近期提交: <span style="color:rgba(255,255,255,0.82)">{{ recentCommits }}</span></span>
-        <span v-if="activeRepos.length">&gt; 活跃仓库: <span style="color:rgba(255,255,255,0.82)">{{ activeRepos.join(', ') }}</span></span>
+      <h2 class="section-title-term">// metrics/live</h2>
+      <div class="term-block">
+        <div class="term-bar">
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span style="margin-left:8px; opacity:0.5;">github_stats.sh</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line">fetch --remote dongzheyu</div>
+          <div class="term-line-out">
+            <span class="pulse-dot"></span> live &mdash; {{ uptime }}d uptime
+          </div>
+          <div class="term-line-out" style="margin-top:12px;">
+            <span style="color:rgba(255,255,255,0.6);">github stats</span>
+          </div>
+          <div class="term-line-out" style="display:grid; grid-template-columns:1fr 1fr; gap:4px 24px; margin-top:8px;">
+            <span>stars:   <span style="color:var(--color-white);">{{ stars }}</span></span>
+            <span>forks:   <span style="color:var(--color-white);">{{ forks }}</span></span>
+            <span>repos:   <span style="color:var(--color-white);">{{ repoCount }}</span></span>
+            <span>langs:   <span style="color:var(--color-white);">{{ langCount }}</span></span>
+            <span>top:     <span style="color:var(--color-white);">{{ topLang }}</span></span>
+            <span>commits: <span style="color:var(--color-white);">{{ recentCommits }}</span></span>
+          </div>
+          <div v-if="activeRepos.length" class="term-line-out" style="margin-top:12px;">
+            active repos: <span style="color:var(--color-white);">{{ activeRepos.join(', ') }}</span>
+          </div>
+          <div class="term-line" style="margin-top:12px;">exit 0</div>
+          <span class="term-cursor-block"></span>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <style scoped>
-.undraw-placeholder svg { width: 100%; max-width: 340px; }
+.hero-visual svg { width: 100%; max-width: 360px; height: auto; }
 @media (max-width: 768px) {
-  .undraw-placeholder { display: none; }
+  .hero-visual { display: none; }
 }
 </style>

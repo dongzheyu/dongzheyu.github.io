@@ -46,16 +46,16 @@
                   <a
                     href="https://github.com/dongzheyu/english-listen"
                     target="_blank"
-                    class="btn btn-animate me-2"
-                    style="background: var(--gradient-primary); color: #fff"
+                    class="btn-geek"
+                    style="font-size:var(--font-size-xs);"
                   >
                     <Icon icon="mdi:github" /> 查看源码
                   </a>
                 </div>
                 <router-link
                   to="/projects"
-                  class="btn btn-animate"
-                  style="border: 1.5px solid var(--color-border); color: var(--color-text)"
+                  class="btn-geek"
+                  style="font-size:var(--font-size-xs);"
                 >
                   <Icon icon="mdi:arrow-left" /> 返回项目列表
                 </router-link>

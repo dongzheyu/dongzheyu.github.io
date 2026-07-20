@@ -34,8 +34,12 @@ const { visible: valVisible } = useStaggeredFade(values.length, 100)
       <p class="subtitle" style="transform:translateX(40px);">一个小团队，构建系统软件、开发者工具和创意工程项目。</p>
     </section>
 
+    <div class="divider-geek mb-40">
+      <span>about</span>
+    </div>
+
     <section class="mb-60">
-      <h2 class="section-title">// 成员</h2>
+      <h2 class="section-title-term">// members</h2>
       <div class="grid-2">
         <div
           v-for="(m, i) in members" :key="m.name"
@@ -49,19 +53,22 @@ const { visible: valVisible } = useStaggeredFade(values.length, 100)
     </section>
 
     <section class="mb-60">
-      <h2 class="section-title">// 理念</h2>
+      <h2 class="section-title-term">// philosophy</h2>
       <div class="flex flex-col gap-24" style="padding-left:40px;">
-        <p v-for="(v, i) in values" :key="v.title"
+        <div v-for="(v, i) in values" :key="v.title"
           class="stagger-item" :class="{ visible: valVisible[i] }"
         >
-          <span style="color:rgba(255,255,255,0.82);">{{ v.title }}</span><br>
-          <span class="text-dim">{{ v.desc }}</span>
-        </p>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span class="pulse-dot"></span>
+            <span style="color:rgba(255,255,255,0.82);">{{ v.title }}</span>
+          </div>
+          <span class="text-dim" style="padding-left:14px;">{{ v.desc }}</span>
+        </div>
       </div>
     </section>
 
     <section class="mb-60">
-      <h2 class="section-title">// 技能</h2>
+      <h2 class="section-title-term">// stack</h2>
       <div class="flex gap-12 flex-wrap" style="padding-left:40px;">
         <span v-for="(s, i) in skills" :key="s"
           class="tag-pill stagger-item" :class="{ visible: skVisible[i] }"
@@ -70,11 +77,21 @@ const { visible: valVisible } = useStaggeredFade(values.length, 100)
     </section>
 
     <section class="mb-60">
-      <h2 class="section-title">// 联系</h2>
-      <div class="flex flex-col gap-12 text-dim" style="padding-left:40px;">
-        <span>email: <a href="mailto:dongzheyu@outlook.com" style="color:rgba(255,255,255,0.82);">dongzheyu@outlook.com</a></span>
-        <span>github: <a href="https://github.com/dongzheyu" target="_blank" style="color:rgba(255,255,255,0.82);">github.com/dongzheyu</a></span>
-        <span>bilibili: <a href="https://space.bilibili.com/3546730880567808" target="_blank" style="color:rgba(255,255,255,0.82);">JetCPP</a></span>
+      <h2 class="section-title-term">// contact</h2>
+      <div class="term-block" style="margin-left:40px;">
+        <div class="term-bar">
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span style="margin-left:8px; opacity:0.5;">contact.sh</span>
+        </div>
+        <div class="term-body flex flex-col gap-8">
+          <div class="term-line">cat contacts.cfg</div>
+          <div class="term-line-out">email:   <a href="mailto:dongzheyu@outlook.com" style="color:var(--color-white);">dongzheyu@outlook.com</a></div>
+          <div class="term-line-out">github:  <a href="https://github.com/dongzheyu" target="_blank" style="color:var(--color-white);">github.com/dongzheyu</a></div>
+          <div class="term-line-out">bilibili: <a href="https://space.bilibili.com/3546730880567808" target="_blank" style="color:var(--color-white);">JetCPP</a></div>
+          <div class="term-line">exit 0</div>
+        </div>
       </div>
     </section>
 

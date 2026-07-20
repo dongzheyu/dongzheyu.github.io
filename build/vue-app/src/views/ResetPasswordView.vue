@@ -23,7 +23,7 @@
               />
             </div>
 
-            <button type="submit" class="btn btn-primary btn-animate btn-block" :disabled="loading">
+            <button type="submit" class="btn-geek" style="width:100%;font-size:var(--font-size-xs);" :disabled="loading">
               {{ loading ? '发送中...' : '发送重置链接' }}
             </button>
           </form>
@@ -101,7 +101,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-animate btn-block" :disabled="loading">
+            <button type="submit" class="btn-geek" style="width:100%;font-size:var(--font-size-xs);" :disabled="loading">
               {{ loading ? '更新中...' : '更新密码' }}
             </button>
           </form>
@@ -237,11 +237,10 @@ const handleUpdatePassword = async () => {
 
 .reset-card {
   background: var(--color-bg-card);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 2.5rem;
   max-width: 480px;
   width: 100%;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .reset-step {
@@ -289,13 +288,13 @@ const handleUpdatePassword = async () => {
 .form-group label {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .form-input {
   padding: 0.75rem 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-text);
   font-size: 1rem;
@@ -337,15 +336,11 @@ const handleUpdatePassword = async () => {
   color: var(--color-primary);
 }
 
-.btn-block {
-  width: 100%;
-}
-
 .error-message,
 .success-message {
   margin-top: 1rem;
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -354,13 +349,13 @@ const handleUpdatePassword = async () => {
 
 .error-message {
   background: rgba(255, 71, 87, 0.1);
-  color: #ff4757;
+  color: #ff5f57;
   border: 1px solid rgba(255, 71, 87, 0.3);
 }
 
 .success-message {
   background: rgba(46, 213, 115, 0.1);
-  color: #2ed573;
+  color: var(--color-green);
   border: 1px solid rgba(46, 213, 115, 0.3);
 }
 

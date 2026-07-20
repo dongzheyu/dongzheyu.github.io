@@ -13,7 +13,7 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       // 使用动态导入实现懒加载，并添加预取提示
-      component: () => import(/* webpackPrefetch: true */ '../views/ProjectsView.vue'),
+      component: () => import('../views/ProjectsView.vue'),
     },
     {
       path: '/project/:slug',
@@ -23,7 +23,7 @@ const router = createRouter({
     {
       path: '/blog',
       name: 'blog',
-      component: () => import(/* webpackPrefetch: true */ '../views/BlogView.vue'),
+      component: () => import('../views/BlogView.vue'),
     },
     {
       path: '/blog/:slug',
@@ -48,7 +48,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: () => import(/* webpackPrefetch: true */ '../views/AboutView.vue'),
+      component: () => import('../views/AboutView.vue'),
     },
     {
       path: '/tests',
@@ -58,54 +58,12 @@ const router = createRouter({
     {
       path: '/emergency',
       name: 'emergency',
-      // 紧急求助页面需要快速加载，使用预加载
-      component: () => import(/* webpackPreload: true */ '../views/EmergencyView.vue'),
+      component: () => import('../views/EmergencyView.vue'),
     },
     {
       path: '/tests/mbti',
       name: 'mbti',
-      // MBTI 测试页面较大，使用预取
-      component: () => import(/* webpackPrefetch: true */ '../views/MbtiView.vue'),
-    },
-    {
-      path: '/tests/depression',
-      name: 'depression',
-      component: () => import('../views/DepressionView.vue'),
-    },
-    {
-      path: '/tests/sunshine',
-      name: 'sunshine',
-      component: () => import('../views/SunshineDepressionView.vue'),
-    },
-    {
-      path: '/tests/anxiety',
-      name: 'anxiety',
-      component: () => import('../views/AnxietyView.vue'),
-    },
-    {
-      path: '/tests/bipolar',
-      name: 'bipolar',
-      component: () => import('../views/BipolarView.vue'),
-    },
-    {
-      path: '/tests/phobia',
-      name: 'phobia',
-      component: () => import('../views/PhobiaView.vue'),
-    },
-    {
-      path: '/tests/ptsd',
-      name: 'ptsd',
-      component: () => import('../views/PtsdView.vue'),
-    },
-    {
-      path: '/tests/ocd',
-      name: 'ocd',
-      component: () => import('../views/OcdView.vue'),
-    },
-    {
-      path: '/tests/eating',
-      name: 'eating',
-      component: () => import('../views/EatingView.vue'),
+      component: () => import('../views/MbtiView.vue'),
     },
     {
       path: '/tests/substance',
@@ -113,34 +71,9 @@ const router = createRouter({
       component: () => import('../views/SubstanceView.vue'),
     },
     {
-      path: '/tests/gambling',
-      name: 'gambling',
-      component: () => import('../views/GamblingView.vue'),
-    },
-    {
-      path: '/tests/gaming',
-      name: 'gaming',
-      component: () => import('../views/GamingView.vue'),
-    },
-    {
-      path: '/tests/adhd',
-      name: 'adhd',
-      component: () => import('../views/AdhdView.vue'),
-    },
-    {
-      path: '/tests/asd',
-      name: 'asd',
-      component: () => import('../views/AsdView.vue'),
-    },
-    {
-      path: '/tests/bpd',
-      name: 'bpd',
-      component: () => import('../views/BpdView.vue'),
-    },
-    {
-      path: '/tests/somatic',
-      name: 'somatic',
-      component: () => import('../views/SomaticView.vue'),
+      path: '/tests/:testId',
+      name: 'test-page',
+      component: () => import('../views/TestPageView.vue'),
     },
     {
       path: '/auth',
@@ -165,12 +98,12 @@ const router = createRouter({
     {
       path: '/privacy',
       name: 'privacy',
-      component: () => import(/* webpackPrefetch: true */ '../views/PrivacyView.vue'),
+      component: () => import('../views/PrivacyView.vue'),
     },
     {
       path: '/terms',
       name: 'terms',
-      component: () => import(/* webpackPrefetch: true */ '../views/TermsView.vue'),
+      component: () => import('../views/TermsView.vue'),
     },
     // 404 页面 - 必须放在最后
     {

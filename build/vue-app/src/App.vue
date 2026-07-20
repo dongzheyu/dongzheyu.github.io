@@ -57,21 +57,36 @@ onMounted(() => useNoiseOverlay())
   </main>
 
   <footer class="geek-footer">
-    <span>
-      <span class="text-faint">// 2026</span> JetCPP &mdash; 代码重塑世界
-    </span>
-    <span class="flex gap-16">
-      <RouterLink to="/privacy">隐私</RouterLink>
-      <RouterLink to="/terms">条款</RouterLink>
-      <a href="https://github.com/dongzheyu" target="_blank" class="text-faint">Github</a>
-      <a href="https://gitee.com/jetcpp" target="_blank" class="text-faint">Gitee</a>
-    </span>
+    <div class="footer-row">
+      <span>
+        <span class="text-faint">// 2026</span> JetCPP &mdash; 代码重塑世界
+      </span>
+      <span class="flex gap-16">
+        <RouterLink to="/privacy">隐私</RouterLink>
+        <RouterLink to="/terms">条款</RouterLink>
+        <a href="https://github.com/dongzheyu" target="_blank" class="text-faint">Github</a>
+        <a href="https://gitee.com/jetcpp" target="_blank" class="text-faint">Gitee</a>
+      </span>
+    </div>
+    <div class="powered-by">
+      <span class="text-faint">// 由</span>
+      <a href="https://dash.domain.digitalplat.org/signup?ref=TZRrkCdFjm" target="_blank" class="pw-link"><img src="/digitalplat.png" width="14" height="14" style="vertical-align:middle;" /> DigitalPlat Domains</a>
+      <span class="text-faint">、</span>
+      <a href="https://www.cloudflare-cn.com/" target="_blank" class="pw-link"><Icon icon="simple-icons:cloudflare" width="14" /> Cloudflare</a>
+      <span class="text-faint">、</span>
+      <a href="https://vuejs.org/" target="_blank" class="pw-link"><Icon icon="mdi:vuejs" width="14" /> Vue</a>
+      <span class="text-faint">、</span>
+      <a href="https://bun.sh/" target="_blank" class="pw-link"><Icon icon="simple-icons:bun" width="14" /> Bun</a>
+      <span class="text-faint">、</span>
+      <a href="https://github.com/" target="_blank" class="pw-link"><Icon icon="mdi:github" width="14" /> GitHub</a>
+      <span class="text-faint">强力驱动</span>
+    </div>
   </footer>
 </template>
 
 <style>
-.page-fade-enter-active { transition: opacity 0.35s var(--ease-out-expo), transform 0.35s var(--ease-out-expo); }
-.page-fade-leave-active { transition: opacity 0.2s; position: absolute; width: 100%; }
-.page-fade-enter-from { opacity: 0; transform: translateY(16px); }
+.page-fade-enter-active { transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo); }
+.page-fade-leave-active { transition: opacity 0.2s var(--ease-out-expo); position: absolute; width: 100%; }
+.page-fade-enter-from { opacity: 0; transform: translateY(12px); }
 .page-fade-leave-to { opacity: 0; }
 </style>

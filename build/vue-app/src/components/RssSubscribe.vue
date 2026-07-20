@@ -48,7 +48,7 @@ const copyUrl = async () => {
 .rss-subscribe-container {
   padding: 1.5rem;
   background: var(--color-bg-soft);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
 }
 
@@ -66,7 +66,7 @@ const copyUrl = async () => {
 
 .rss-title {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-heading);
   margin: 0;
 }
@@ -89,7 +89,7 @@ const copyUrl = async () => {
   padding: 0.6rem 0.75rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   color: var(--color-heading);
   font-size: 0.85rem;
   font-family: monospace;
@@ -114,9 +114,9 @@ const copyUrl = async () => {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.25s ease;
 }

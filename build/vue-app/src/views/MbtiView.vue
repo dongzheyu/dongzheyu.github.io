@@ -5,14 +5,14 @@
 
     <!-- Hero -->
     <section class="test-hero">
-      <div class="container-fluid px-4">
-        <div class="row align-items-center">
-          <div class="col-lg-8" style="padding-left: 5%">
-            <RouterLink to="/tests" class="back-link mb-4 d-inline-flex align-items-center gap-2">
+      <div class="px-4">
+        <div class="align-items-center">
+          <div style="padding-left: 5%">
+            <RouterLink to="/tests" class="back-link">
               <Icon icon="mdi:arrow-left" /> 返回评估列表
             </RouterLink>
-            <h1 class="test-hero-title mb-3">MBTI 人格测试</h1>
-            <p class="test-hero-sub mb-2">迈尔斯-布里格斯类型指标 · 93 道题 · 约 15 分钟</p>
+            <h1 class="test-hero-title">MBTI 人格测试</h1>
+            <p class="test-hero-sub">迈尔斯-布里格斯类型指标 · 93 道题 · 约 15 分钟</p>
             <p class="test-hero-desc">
               测试你在四个维度上的偏好：能量方向（E/I）、感知方式（S/N）、决策方式（T/F）、生活方式（J/P），
               从而识别 16 种人格类型中的你。请根据第一直觉作答，没有对错之分。
@@ -24,11 +24,11 @@
 
     <!-- 重要免责声明 -->
     <section class="test-disclaimer-banner">
-      <div class="container-fluid px-4">
+      <div class="px-4">
         <div class="disclaimer-banner-inner">
           <Icon icon="mdi:alert-circle" class="banner-icon" />
           <div class="banner-text">
-            <strong>⚠️ 重要声明</strong>
+            <strong>重要声明</strong>
             <p>
               MBTI
               是一种人格类型理论工具，测试结果反映的是个人偏好倾向，<strong>不是医学诊断，也不是绝对的性格定论</strong>。每个人都是复杂而独特的，不应以类型标签来限定自我或他人。本测试仅供自我认知参考，不能替代专业的心理评估。测试结果受答题时的心情、环境和主观理解等因素影响，可能存在偏差。
@@ -38,7 +38,7 @@
       </div>
     </section>
 
-    <div class="container-fluid px-4 test-body">
+    <div class="px-4 test-body">
       <!-- 进度条 -->
       <div v-if="!showResult" class="progress-section mb-5" style="padding-left: 5%">
         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -82,7 +82,8 @@
             还有 {{ questions.length - answeredCount }} 道题未作答
           </p>
           <button
-            class="btn btn-primary btn-animate btn-lg"
+            class="btn-geek"
+            style="font-size:var(--font-size-xs);"
             :disabled="answeredCount < questions.length"
             @click="calculateResult"
           >
@@ -110,7 +111,7 @@
               <div class="dim-bar-wrap">
                 <div
                   class="dim-bar-fill"
-                  :style="`width: ${dim.leftPercent}%; background: var(--color-primary)`"
+                  :style="`width: ${dim.leftPercent}%; background: var(--color-text)`"
                 ></div>
               </div>
               <div class="dim-percent">
@@ -163,8 +164,8 @@
         </div>
 
         <div class="text-center mt-5">
-          <button class="btn btn-animate me-3" @click="resetTest">重新测试</button>
-          <RouterLink to="/tests" class="btn btn-primary btn-animate">查看其他测试</RouterLink>
+          <button class="btn-geek" style="font-size:var(--font-size-xs);" @click="resetTest">重新测试</button>
+          <RouterLink to="/tests" class="btn-geek" style="font-size:var(--font-size-xs);">查看其他测试</RouterLink>
         </div>
       </div>
     </div>
@@ -1525,15 +1526,8 @@ const mbtiProfiles: Record<string, any> = {
 </script>
 
 <style scoped>
-/* MBTI 测试主色调：炽橙 */
-.mbti-page {
-  min-height: 100vh;
-  --test-accent: var(--color-primary);
-  --test-accent-rgb: 255, 140, 66;
-}
-.test-hero-sub {
-  color: var(--color-primary);
-}
+.mbti-page { min-height: 100vh; }
+.test-hero-sub { color: var(--color-text-secondary); }
 
 /* 进度条 */
 .progress-label,
@@ -1544,14 +1538,14 @@ const mbtiProfiles: Record<string, any> = {
 .progress-bar-wrap {
   height: 4px;
   background: var(--color-bg-mute);
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   max-width: 600px;
 }
 .progress-bar-fill {
   height: 100%;
-  background: var(--gradient-primary);
-  border-radius: 2px;
+  background: var(--color-text);
+  border-radius: var(--radius-sm);
   transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -1566,7 +1560,7 @@ const mbtiProfiles: Record<string, any> = {
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   padding: 10px 16px;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   text-align: left;
   font-size: 0.88rem;
   cursor: pointer;
@@ -1578,10 +1572,10 @@ const mbtiProfiles: Record<string, any> = {
   background: var(--color-bg-elevated);
 }
 .option-btn.selected {
-  border-color: var(--color-primary);
-  background: rgba(255, 140, 66, 0.1);
-  color: var(--color-primary);
-  font-weight: 600;
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.1);
+  color: var(--color-text);
+  font-weight: 400;
 }
 .dimension-hint {
   font-size: 0.72rem;
@@ -1593,24 +1587,21 @@ const mbtiProfiles: Record<string, any> = {
 .result-type-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   padding: 40px;
   text-align: center;
 }
 .result-type-badge {
   display: inline-block;
   font-size: 2.5rem;
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: 0.15em;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-text);
   margin-bottom: 8px;
 }
 .result-type-name {
   font-size: 1.6rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--color-heading);
   margin-bottom: 6px;
 }
@@ -1635,24 +1626,24 @@ const mbtiProfiles: Record<string, any> = {
 .dim-left,
 .dim-right {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-text-muted);
   letter-spacing: 0.05em;
 }
 .dim-left.dominant,
 .dim-right.dominant {
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 .dim-bar-wrap {
   height: 6px;
   background: var(--color-bg-mute);
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: 4px;
 }
 .dim-bar-fill {
   height: 100%;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .dim-percent {
@@ -1676,13 +1667,13 @@ const mbtiProfiles: Record<string, any> = {
 .result-block {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 22px 24px;
 }
 .result-block-title {
   font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-weight: 400;
+  color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 10px;
@@ -1709,8 +1700,8 @@ const mbtiProfiles: Record<string, any> = {
   content: '—';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
-  font-weight: 700;
+  color: var(--color-text-secondary);
+  font-weight: 400;
 }
 .result-disclaimer {
   font-size: 0.82rem;
@@ -1718,7 +1709,7 @@ const mbtiProfiles: Record<string, any> = {
   text-align: center;
   padding: 16px 24px;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--color-bg-soft);
   line-height: 1.65;
 }
@@ -1735,14 +1726,14 @@ const mbtiProfiles: Record<string, any> = {
   gap: 16px;
   align-items: flex-start;
   padding: 20px 24px;
-  background: rgba(255, 140, 66, 0.08);
-  border: 1px solid rgba(255, 140, 66, 0.25);
-  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-sm);
   max-width: 900px;
 }
 .banner-icon {
   font-size: 1.5rem;
-  color: #ff8c42;
+  color: var(--color-text-secondary);
   flex-shrink: 0;
   margin-top: 2px;
 }

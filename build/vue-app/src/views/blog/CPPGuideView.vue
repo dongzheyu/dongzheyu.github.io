@@ -654,8 +654,7 @@ int main() {
                 <span class="badge me-1" style="background-color: rgba(244, 140, 6, 0.15); color: #f48c06;">教程</span>
                 <span class="badge" style="background-color: rgba(255, 186, 8, 0.15); color: #ffba08;">编程入门</span>
               </div>
-              <router-link to="/blog" class="btn btn-animate"
-                           style="border: 1.5px solid var(--color-border); color: var(--color-text);">
+              <router-link to="/blog" class="btn-geek" style="font-size:var(--font-size-xs);">
                 <Icon icon="mdi:arrow-left" /> 返回博客列表
               </router-link>
             </div>

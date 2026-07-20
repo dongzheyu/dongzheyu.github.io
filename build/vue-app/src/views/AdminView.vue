@@ -1,298 +1,221 @@
 <template>
-  <div class="admin-page">
-    <div class="container">
-      <div class="admin-header">
-        <h1><Icon icon="mdi:shield-lock" /> 管理员面板</h1>
-        <RouterLink to="/blog" class="btn btn-secondary">
-          <Icon icon="mdi:arrow-left" />
-          返回博客
-        </RouterLink>
-      </div>
+  <div>
+    <section class="page-head">
+      <h1>
+        <span>$ sudo ./admin --panel</span><br>
+        <span class="typewriter" style="font-size:var(--font-size-lg);">{{ display }}</span>
+        <span class="typewriter-cursor" :class="{ done }"></span>
+      </h1>
+    </section>
 
-      <!-- 权限检查 -->
-      <div v-if="!isAdmin" class="access-denied">
-        <Icon icon="mdi:alert" />
-        <h2>访问被拒绝</h2>
-        <p>您没有管理员权限</p>
-        <RouterLink to="/" class="btn btn-primary">返回首页</RouterLink>
+    <div v-if="!isAdmin" class="mb-60" style="padding-left:40px;">
+      <div class="term-block">
+        <div class="term-bar">
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span class="term-dot"></span>
+          <span style="margin-left:8px; opacity:0.5;">access_denied.sh</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line">./admin --panel</div>
+          <div class="term-line-out" style="margin-top:8px; color:#ff5f57;">Error: permission denied</div>
+          <div class="term-line-out">You do not have administrator privileges.</div>
+          <RouterLink to="/" class="btn-geek mt-20" style="display:inline-flex;">
+            <Icon icon="mdi:arrow-left" width="14" /> 返回首页
+          </RouterLink>
+        </div>
       </div>
+    </div>
 
-      <!-- 管理员功能 -->
-      <div v-else class="admin-content">
-        <!-- 统计卡片 -->
-        <div class="stats-grid">
-          <div class="cp-card stat-card">
-            <div class="cp-card__inner">
-              <Icon icon="mdi:account-group" />
-              <div class="stat-info">
-                <h3 class="cp-card__title">{{ stats.totalUsers }}</h3>
-                <p class="cp-card__text">总用户数</p>
+    <div v-else class="mb-60">
+      <section class="mb-40" style="padding-left:40px;">
+        <span class="section-title-term" style="display:inline-block; margin-bottom:16px;">// metrics</span>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;">
+          <div class="card-geek" style="padding:20px 24px;">
+            <div class="flex items-center gap-12">
+              <Icon icon="mdi:account-group" width="24" style="color:var(--color-text-dim);" />
+              <div>
+                <div style="font-size:var(--font-size-lg); color:var(--color-white);">{{ stats.totalUsers }}</div>
+                <div class="text-faint" style="font-size:var(--font-size-xs);">users</div>
               </div>
             </div>
           </div>
-          <div class="cp-card stat-card">
-            <div class="cp-card__inner">
-              <Icon icon="mdi:text-box-outline" />
-              <div class="stat-info">
-                <h3 class="cp-card__title">{{ stats.totalPosts }}</h3>
-                <p class="cp-card__text">文章总数</p>
+          <div class="card-geek" style="padding:20px 24px;">
+            <div class="flex items-center gap-12">
+              <Icon icon="mdi:text-box-outline" width="24" style="color:var(--color-text-dim);" />
+              <div>
+                <div style="font-size:var(--font-size-lg); color:var(--color-white);">{{ stats.totalPosts }}</div>
+                <div class="text-faint" style="font-size:var(--font-size-xs);">posts</div>
               </div>
             </div>
           </div>
-          <div class="cp-card stat-card">
-            <div class="cp-card__inner">
-              <Icon icon="mdi:comment" />
-              <div class="stat-info">
-                <h3 class="cp-card__title">{{ stats.totalComments }}</h3>
-                <p class="cp-card__text">评论总数</p>
+          <div class="card-geek" style="padding:20px 24px;">
+            <div class="flex items-center gap-12">
+              <Icon icon="mdi:comment" width="24" style="color:var(--color-text-dim);" />
+              <div>
+                <div style="font-size:var(--font-size-lg); color:var(--color-white);">{{ stats.totalComments }}</div>
+                <div class="text-faint" style="font-size:var(--font-size-xs);">comments</div>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- 标签页 -->
-        <div class="admin-tabs">
+      <section style="padding-left:40px;">
+        <div class="flex gap-4 mb-20" style="border-bottom:1px solid var(--color-border);">
           <button
-            :class="['tab-btn', { active: activeTab === 'users' }]"
-            @click="activeTab = 'users'"
+            v-for="tab in tabs" :key="tab.key"
+            class="tab-btn-term" :class="{ active: activeTab === tab.key }"
+            @click="activeTab = tab.key"
           >
-            <Icon icon="mdi:account-group" /> 用户管理
-          </button>
-          <button
-            :class="['tab-btn', { active: activeTab === 'posts' }]"
-            @click="activeTab = 'posts'"
-          >
-            <Icon icon="mdi:text-box-outline" /> 文章管理
-          </button>
-          <button
-            :class="['tab-btn', { active: activeTab === 'comments' }]"
-            @click="activeTab = 'comments'"
-          >
-            <Icon icon="mdi:comment" /> 评论管理
+            <Icon :icon="tab.icon" width="14" /> {{ tab.label }}
           </button>
         </div>
 
-        <!-- 用户管理 -->
-        <div v-if="activeTab === 'users'" class="tab-content">
-          <div class="tab-header">
-            <h2>用户管理</h2>
-            <input
-              v-model="userSearch"
-              type="text"
-              placeholder="搜索用户..."
-              class="search-input"
-            />
+        <div v-if="loading" class="flex flex-col gap-16" style="padding-top:16px;">
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
+        </div>
+
+        <div v-else>
+          <!-- Users -->
+          <div v-if="activeTab === 'users'" class="term-block">
+            <div class="term-bar" style="justify-content:space-between;">
+              <div class="flex items-center gap-8">
+                <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+                <span style="opacity:0.5;">users — {{ filteredUsers.length }}</span>
+              </div>
+              <input v-model="userSearch" type="text" placeholder="search..." class="term-search" />
+            </div>
+            <div class="term-body" style="padding:0;">
+              <table class="term-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>nickname</th>
+                    <th>created</th>
+                    <th>actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="profile in filteredUsers" :key="profile.id">
+                    <td><span class="text-faint" style="font-size:var(--font-size-xs);">{{ profile.id.substring(0, 8) }}..</span></td>
+                    <td>
+                      {{ profile.nickname || '--' }}
+                      <span v-if="profile.banned" class="badge-geek" style="border-color:rgba(255,95,87,0.2);color:#ff5f57;margin-left:8px;">banned</span>
+                    </td>
+                    <td class="text-faint" style="font-size:var(--font-size-xs);">{{ formatDate(profile.created_at) }}</td>
+                    <td>
+                      <div class="flex gap-4">
+                        <template v-if="profile.id !== user?.id">
+                          <button @click="handleViewProfile(profile.id)" class="nav-icon-btn" title="view"><Icon icon="mdi:eye" width="14" /></button>
+                          <button v-if="!profile.banned" @click="handleBanUser(profile.id, profile.nickname)" class="nav-icon-btn" title="ban"><Icon icon="mdi:cancel" width="14" /></button>
+                          <button v-if="profile.banned" @click="handleUnbanUser(profile.id, profile.nickname)" class="nav-icon-btn" title="unban"><Icon icon="mdi:check-circle" width="14" style="color:var(--color-green);" /></button>
+                          <button @click="handleDeleteUser(profile.id, profile.nickname)" class="nav-icon-btn" title="delete" style="color:#ff5f57;"><Icon icon="mdi:delete" width="14" /></button>
+                        </template>
+                        <span v-else class="text-faint" style="font-size:var(--font-size-xs);">self</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          <div v-if="loading" class="loading">
-            <div class="spinner"></div>
-            <p>加载中...</p>
-          </div>
-
-          <div v-else class="data-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>昵称</th>
-                  <th>注册时间</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="profile in filteredUsers" :key="profile.id">
-                  <td>
-                    <small>{{ profile.id.substring(0, 8) }}...</small>
-                  </td>
-                  <td>
-                    {{ profile.nickname || '未设置' }}
-                    <span
-                      v-if="profile.banned"
-                      class="status-badge banned"
-                      style="margin-left: 0.5rem"
-                    >
-                      已封禁
-                    </span>
-                  </td>
-                  <td>{{ formatDate(profile.created_at) }}</td>
-                  <td>
-                    <div class="d-flex gap-1">
-                      <button
-                        v-if="profile.id !== user?.id"
-                        @click="handleViewProfile(profile.id)"
-                        class="btn-action btn-view"
-                        title="查看资料"
-                      >
-                        <Icon icon="mdi:eye" />
-                      </button>
-                      <button
-                        v-if="profile.id !== user?.id && !profile.banned"
-                        @click="handleBanUser(profile.id, profile.nickname)"
-                        class="btn-action btn-ban"
-                        title="封禁用户"
-                      >
-                        <Icon icon="mdi:cancel" />
-                      </button>
-                      <button
-                        v-if="profile.id !== user?.id && profile.banned"
-                        @click="handleUnbanUser(profile.id, profile.nickname)"
-                        class="btn-action btn-unban"
-                        title="解封用户"
-                      >
-                        <Icon icon="mdi:check-circle" />
-                      </button>
-                      <button
-                        v-if="profile.id !== user?.id"
-                        @click="handleDeleteUser(profile.id, profile.nickname)"
-                        class="btn-action btn-delete"
-                        title="删除用户"
-                      >
-                        <Icon icon="mdi:delete" />
-                      </button>
-                      <span v-else class="text-muted" style="font-size: 0.85rem">
-                        <Icon icon="mdi:account-check" /> 当前用户
+          <!-- Posts -->
+          <div v-if="activeTab === 'posts'" class="term-block">
+            <div class="term-bar" style="justify-content:space-between;">
+              <div class="flex items-center gap-8">
+                <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+                <span style="opacity:0.5;">posts — {{ filteredPosts.length }}</span>
+              </div>
+              <div class="flex gap-8">
+                <select v-model="postFilter" class="term-search" style="width:auto;cursor:pointer;">
+                  <option value="all">all</option>
+                  <option value="published">published</option>
+                  <option value="draft">draft</option>
+                </select>
+                <input v-model="postSearch" type="text" placeholder="search..." class="term-search" />
+              </div>
+            </div>
+            <div class="term-body" style="padding:0;">
+              <table class="term-table">
+                <thead>
+                  <tr>
+                    <th>title</th>
+                    <th>author</th>
+                    <th>status</th>
+                    <th>date</th>
+                    <th>actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="post in filteredPosts" :key="post.id">
+                    <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ post.title }}</td>
+                    <td><span class="text-faint" style="font-size:var(--font-size-xs);">{{ post.author_id?.substring(0, 8) }}..</span></td>
+                    <td>
+                      <span :class="['badge-geek', post.published ? 'green' : '']">
+                        {{ post.published ? 'published' : 'draft' }}
                       </span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 文章管理 -->
-        <div v-if="activeTab === 'posts'" class="tab-content">
-          <div class="tab-header">
-            <h2>文章管理</h2>
-            <div class="filter-group">
-              <select v-model="postFilter" class="filter-select">
-                <option value="all">全部文章</option>
-                <option value="published">已发布</option>
-                <option value="draft">草稿</option>
-              </select>
-              <input
-                v-model="postSearch"
-                type="text"
-                placeholder="搜索文章..."
-                class="search-input"
-              />
+                    </td>
+                    <td class="text-faint" style="font-size:var(--font-size-xs);">{{ formatDate(post.created_at) }}</td>
+                    <td>
+                      <div class="flex gap-4">
+                        <template v-if="post.author_id !== user?.id">
+                          <button @click="handleEditPost(post.id)" class="nav-icon-btn" title="edit"><Icon icon="mdi:pencil" width="14" /></button>
+                          <button @click="handleDeletePost(post.id, post.title)" class="nav-icon-btn" title="delete" style="color:#ff5f57;"><Icon icon="mdi:delete" width="14" /></button>
+                        </template>
+                        <span v-else class="text-faint" style="font-size:var(--font-size-xs);">self</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
-          <div v-if="loading" class="loading">
-            <div class="spinner"></div>
-            <p>加载中...</p>
-          </div>
-
-          <div v-else class="data-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>标题</th>
-                  <th>作者ID</th>
-                  <th>状态</th>
-                  <th>发布时间</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="post in filteredPosts" :key="post.id">
-                  <td>{{ post.title }}</td>
-                  <td>
-                    <small>{{ post.author_id?.substring(0, 8) }}...</small>
-                  </td>
-                  <td>
-                    <span :class="['status-badge', post.published ? 'published' : 'draft']">
-                      {{ post.published ? '已发布' : '草稿' }}
-                    </span>
-                  </td>
-                  <td>{{ formatDate(post.created_at) }}</td>
-                  <td>
-                    <button
-                      v-if="post.author_id !== user?.id"
-                      @click="handleEditPost(post.id)"
-                      class="btn-action btn-edit"
-                      title="编辑"
-                    >
-                      <Icon icon="mdi:pencil" />
-                    </button>
-                    <button
-                      v-if="post.author_id !== user?.id"
-                      @click="handleDeletePost(post.id, post.title)"
-                      class="btn-action btn-delete"
-                      title="删除"
-                    >
-                      <Icon icon="mdi:delete" />
-                    </button>
-                    <span
-                      v-if="post.author_id === user?.id"
-                      class="text-muted"
-                      style="font-size: 0.85rem"
-                    >
-                      <Icon icon="mdi:lock" /> 自己的文章
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- Comments -->
+          <div v-if="activeTab === 'comments'" class="term-block">
+            <div class="term-bar" style="justify-content:space-between;">
+              <div class="flex items-center gap-8">
+                <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+                <span style="opacity:0.5;">comments — {{ filteredComments.length }}</span>
+              </div>
+              <input v-model="commentSearch" type="text" placeholder="search..." class="term-search" />
+            </div>
+            <div class="term-body" style="padding:0;">
+              <table class="term-table">
+                <thead>
+                  <tr>
+                    <th>content</th>
+                    <th>user</th>
+                    <th>post</th>
+                    <th>date</th>
+                    <th>actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="comment in filteredComments" :key="comment.id">
+                    <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ truncateText(comment.content, 50) }}</td>
+                    <td><span class="text-faint" style="font-size:var(--font-size-xs);">{{ comment.user_id?.substring(0, 8) }}..</span></td>
+                    <td class="text-faint" style="font-size:var(--font-size-xs);">{{ comment.post_slug }}</td>
+                    <td class="text-faint" style="font-size:var(--font-size-xs);">{{ formatDate(comment.created_at) }}</td>
+                    <td>
+                      <div class="flex gap-4">
+                        <template v-if="comment.user_id !== user?.id">
+                          <button @click="handleDeleteComment(comment.id)" class="nav-icon-btn" title="delete" style="color:#ff5f57;"><Icon icon="mdi:delete" width="14" /></button>
+                        </template>
+                        <span v-else class="text-faint" style="font-size:var(--font-size-xs);">self</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-
-        <!-- 评论管理 -->
-        <div v-if="activeTab === 'comments'" class="tab-content">
-          <div class="tab-header">
-            <h2>评论管理</h2>
-            <input
-              v-model="commentSearch"
-              type="text"
-              placeholder="搜索评论..."
-              class="search-input"
-            />
-          </div>
-
-          <div v-if="loading" class="loading">
-            <div class="spinner"></div>
-            <p>加载中...</p>
-          </div>
-
-          <div v-else class="data-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>内容</th>
-                  <th>用户ID</th>
-                  <th>文章</th>
-                  <th>时间</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="comment in filteredComments" :key="comment.id">
-                  <td class="content-cell">{{ truncateText(comment.content, 50) }}</td>
-                  <td>
-                    <small>{{ comment.user_id?.substring(0, 8) }}...</small>
-                  </td>
-                  <td>{{ comment.post_slug }}</td>
-                  <td>{{ formatDate(comment.created_at) }}</td>
-                  <td>
-                    <button
-                      v-if="comment.user_id !== user?.id"
-                      @click="handleDeleteComment(comment.id)"
-                      class="btn-action btn-delete"
-                      title="删除"
-                    >
-                      <Icon icon="mdi:delete" />
-                    </button>
-                    <span v-else class="text-muted" style="font-size: 0.85rem">
-                      <Icon icon="mdi:lock" /> 自己的评论
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   </div>
 </template>
@@ -303,9 +226,17 @@ import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/supabase/client'
 import { useAuth } from '@/composables/useAuth'
+import { useTypewriter } from '@/composables/useTypewriter'
 
 const router = useRouter()
 const { user, loading: authLoading } = useAuth()
+const { display, cursor, done } = useTypewriter('管理员面板 / Admin Panel', 50)
+
+const tabs = [
+  { key: 'users', label: 'users', icon: 'mdi:account-group' },
+  { key: 'posts', label: 'posts', icon: 'mdi:text-box-outline' },
+  { key: 'comments', label: 'comments', icon: 'mdi:comment' },
+]
 
 const isAdmin = computed(() => {
   if (!authLoading.value && user.value) {
@@ -318,364 +249,122 @@ const isAdmin = computed(() => {
 const activeTab = ref('users')
 const loading = ref(true)
 
-// 统计数据
-const stats = ref({
-  totalUsers: 0,
-  totalPosts: 0,
-  totalComments: 0,
-})
-
-// 用户管理
+const stats = ref({ totalUsers: 0, totalPosts: 0, totalComments: 0 })
 const users = ref<any[]>([])
 const userSearch = ref('')
-
-// 文章管理
 const posts = ref<any[]>([])
 const postSearch = ref('')
 const postFilter = ref('all')
-
-// 评论管理
 const comments = ref<any[]>([])
 const commentSearch = ref('')
 
-// 过滤后的数据
 const filteredUsers = computed(() => {
   if (!userSearch.value) return users.value
-  const search = userSearch.value.toLowerCase()
-  return users.value.filter(
-    (u) => u.id?.toLowerCase().includes(search) || u.nickname?.toLowerCase().includes(search),
-  )
+  const q = userSearch.value.toLowerCase()
+  return users.value.filter(u => u.id?.toLowerCase().includes(q) || u.nickname?.toLowerCase().includes(q))
 })
 
 const filteredPosts = computed(() => {
-  let result = posts.value
-
-  // 状态过滤
-  if (postFilter.value === 'published') {
-    result = result.filter((p) => p.published)
-  } else if (postFilter.value === 'draft') {
-    result = result.filter((p) => !p.published)
-  }
-
-  // 搜索过滤
+  let r = posts.value
+  if (postFilter.value === 'published') r = r.filter(p => p.published)
+  else if (postFilter.value === 'draft') r = r.filter(p => !p.published)
   if (postSearch.value) {
-    const search = postSearch.value.toLowerCase()
-    result = result.filter((p) => p.title?.toLowerCase().includes(search))
+    const q = postSearch.value.toLowerCase()
+    r = r.filter(p => p.title?.toLowerCase().includes(q))
   }
-
-  return result
+  return r
 })
 
 const filteredComments = computed(() => {
   if (!commentSearch.value) return comments.value
-  const search = commentSearch.value.toLowerCase()
-  return comments.value.filter(
-    (c) => c.content?.toLowerCase().includes(search) || c.post_slug?.toLowerCase().includes(search),
-  )
+  const q = commentSearch.value.toLowerCase()
+  return comments.value.filter(c => c.content?.toLowerCase().includes(q) || c.post_slug?.toLowerCase().includes(q))
 })
 
 onMounted(async () => {
-  console.log('=== AdminView onMounted ===')
-
-  // 等待认证状态加载完成
   if (authLoading.value) {
-    console.log('等待认证状态加载...')
-    // 使用 watch 等待 loading 变为 false
     await new Promise<void>((resolve) => {
-      const stopWatching = watch(
-        authLoading,
-        (newVal) => {
-          if (!newVal) {
-            stopWatching()
-            resolve()
-          }
-        },
-        { immediate: false },
-      )
-      // 设置超时，最多等待 5 秒
-      setTimeout(() => {
-        stopWatching()
-        resolve()
-      }, 5000)
+      const stop = watch(authLoading, (v) => { if (!v) { stop(); resolve() } }, { immediate: false })
+      setTimeout(() => { stop(); resolve() }, 5000)
     })
-    console.log('认证状态加载完成')
   }
-
-  console.log('isAdmin:', isAdmin.value)
-  console.log('user:', user.value)
-
-  if (!isAdmin.value) {
-    console.log('不是管理员或未登录，停止加载')
-    loading.value = false
-    return
-  }
-
+  if (!isAdmin.value) { loading.value = false; return }
   await loadData()
 })
 
-// 加载所有数据
 async function loadData() {
   loading.value = true
-
-  try {
-    await Promise.all([loadStats(), loadUsers(), loadPosts(), loadComments()])
-  } catch (err: any) {
-    console.error('加载数据失败:', err)
-  } finally {
-    loading.value = false
-  }
+  try { await Promise.all([loadStats(), loadUsers(), loadPosts(), loadComments()]) } catch (_) {}
+  finally { loading.value = false }
 }
 
-// 加载统计数据
 async function loadStats() {
-  const [{ count: usersCount }, { count: postsCount }, { count: commentsCount }] =
-    await Promise.all([
-      supabase.from('profiles').select('*', { count: 'exact', head: true }),
-      supabase.from('user_posts').select('*', { count: 'exact', head: true }),
-      supabase.from('comments').select('*', { count: 'exact', head: true }),
-    ])
-
-  stats.value = {
-    totalUsers: usersCount || 0,
-    totalPosts: postsCount || 0,
-    totalComments: commentsCount || 0,
-  }
+  const [uc, pc, cc] = await Promise.all([
+    supabase.from('profiles').select('*', { count: 'exact', head: true }),
+    supabase.from('user_posts').select('*', { count: 'exact', head: true }),
+    supabase.from('comments').select('*', { count: 'exact', head: true }),
+  ])
+  stats.value = { totalUsers: uc.count || 0, totalPosts: pc.count || 0, totalComments: cc.count || 0 }
 }
 
-// 加载用户列表
 async function loadUsers() {
-  console.log('=== 开始加载用户列表 ===')
-
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('id, nickname, created_at, banned')
-    .order('created_at', { ascending: false })
-
-  console.log('用户列表查询结果:', { data, error })
-
-  if (error) {
-    console.error('加载用户列表失败:', error)
-    throw error
-  }
-
-  users.value = data || []
-  console.log('用户列表加载完成，共', users.value.length, '个用户')
+  const { data } = await supabase.from('profiles').select('id, nickname, created_at, banned').order('created_at', { ascending: false })
+  if (data) users.value = data
 }
 
-// 加载文章列表
 async function loadPosts() {
-  console.log('=== 开始加载文章列表 ===')
-
-  const { data, error } = await supabase
-    .from('user_posts')
-    .select('*')
-    .order('created_at', { ascending: false })
-
-  console.log('文章列表查询结果:', { data, error })
-
-  if (error) {
-    console.error('加载文章列表失败:', error)
-    throw error
-  }
-
-  posts.value = data || []
-  console.log('文章列表加载完成，共', posts.value.length, '篇文章')
+  const { data } = await supabase.from('user_posts').select('*').order('created_at', { ascending: false })
+  if (data) posts.value = data
 }
 
-// 加载评论列表
 async function loadComments() {
-  console.log('=== 开始加载评论列表 ===')
-
-  const { data, error } = await supabase
-    .from('comments')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(100)
-
-  console.log('评论列表查询结果:', { data, error })
-
-  if (error) {
-    console.error('加载评论列表失败:', error)
-    throw error
-  }
-
-  comments.value = data || []
-  console.log('评论列表加载完成，共', comments.value.length, '条评论')
+  const { data } = await supabase.from('comments').select('*').order('created_at', { ascending: false }).limit(100)
+  if (data) comments.value = data
 }
 
-// 操作处理
-function handleViewProfile(userId: string) {
-  window.open(`/user/${userId}`, '_blank')
-}
+function handleViewProfile(userId: string) { window.open(`/user/${userId}`, '_blank') }
 
 async function handleDeleteUser(userId: string, nickname: string) {
-  if (
-    !confirm(
-      `确定要删除用户 "${nickname || userId}" 吗？\n此操作将永久删除该用户及其所有数据，且不可恢复！`,
-    )
-  ) {
-    return
-  }
-
+  if (!confirm(`Delete user "${nickname || userId}"? This cannot be undone.`)) return
   try {
-    console.log('=== 开始删除用户 ===')
-    console.log('用户ID:', userId)
-    console.log('昵称:', nickname)
-
-    // 调用 Edge Function 删除用户
-    console.log('调用 Edge Function...')
-    const { data, error } = await supabase.functions.invoke('delete-user', {
-      body: { userId },
-    })
-
-    if (error) {
-      console.error('Edge Function 调用失败:', error)
-      throw new Error(error.message || '删除失败')
-    }
-
-    if (!data.success) {
-      throw new Error(data.error || '删除失败')
-    }
-
-    console.log('用户删除成功')
-
-    // 从列表中移除
-    users.value = users.value.filter((u) => u.id !== userId)
+    const { data, error } = await supabase.functions.invoke('delete-user', { body: { userId } })
+    if (error || !data.success) throw new Error(error?.message || data.error)
+    users.value = users.value.filter(u => u.id !== userId)
     stats.value.totalUsers--
-
-    alert('用户已完全删除（包括认证账户和所有相关数据）')
-    console.log('=== 删除完成 ===')
-  } catch (err: any) {
-    console.error('删除用户失败:', err)
-    alert('删除失败: ' + (err.message || '未知错误'))
-  }
+  } catch (err: any) { alert('Delete failed: ' + (err.message || 'unknown')) }
 }
 
 async function handleBanUser(userId: string, nickname: string) {
-  console.log('=== 开始封禁用户 ===')
-  console.log('用户ID:', userId)
-  console.log('昵称:', nickname)
-
-  if (!confirm(`确定要封禁用户 "${nickname || userId}" 吗？\n封禁后该用户将无法登录。`)) {
-    console.log('用户取消封禁操作')
-    return
-  }
-
-  try {
-    console.log('正在更新数据库...')
-    // 在 profiles 表中添加封禁标记（不使用 select，避免 RLS 限制）
-    const { error } = await supabase.from('profiles').update({ banned: true }).eq('id', userId)
-
-    console.log('Supabase 响应:', { error })
-
-    if (error) {
-      console.error('数据库更新失败:', error)
-      throw error
-    }
-
-    console.log('数据库更新成功')
-
-    // 更新本地数据
-    const user = users.value.find((u) => u.id === userId)
-    if (user) {
-      user.banned = true
-      console.log('本地状态已更新')
-    }
-
-    alert('用户已封禁')
-    console.log('=== 封禁完成 ===')
-  } catch (err: any) {
-    console.error('封禁用户失败:', err)
-    alert('封禁失败: ' + err.message)
-  }
+  if (!confirm(`Ban user "${nickname || userId}"?`)) return
+  const { error } = await supabase.from('profiles').update({ banned: true }).eq('id', userId)
+  if (!error) { const u = users.value.find(u => u.id === userId); if (u) u.banned = true }
+  else alert('Ban failed: ' + error.message)
 }
 
 async function handleUnbanUser(userId: string, nickname: string) {
-  console.log('=== 开始解封用户 ===')
-  console.log('用户ID:', userId)
-  console.log('昵称:', nickname)
-
-  if (!confirm(`确定要解封用户 "${nickname || userId}" 吗？\n解封后该用户可以正常登录。`)) {
-    console.log('用户取消解封操作')
-    return
-  }
-
-  try {
-    console.log('正在更新数据库...')
-    // 在 profiles 表中移除封禁标记（不使用 select，避免 RLS 限制）
-    const { error } = await supabase.from('profiles').update({ banned: false }).eq('id', userId)
-
-    console.log('Supabase 响应:', { error })
-
-    if (error) {
-      console.error('数据库更新失败:', error)
-      throw error
-    }
-
-    console.log('数据库更新成功')
-
-    // 更新本地数据
-    const user = users.value.find((u) => u.id === userId)
-    if (user) {
-      user.banned = false
-      console.log('本地状态已更新')
-    }
-
-    alert('用户已解封')
-    console.log('=== 解封完成 ===')
-  } catch (err: any) {
-    console.error('解封用户失败:', err)
-    alert('解封失败: ' + err.message)
-  }
+  if (!confirm(`Unban user "${nickname || userId}"?`)) return
+  const { error } = await supabase.from('profiles').update({ banned: false }).eq('id', userId)
+  if (!error) { const u = users.value.find(u => u.id === userId); if (u) u.banned = false }
+  else alert('Unban failed: ' + error.message)
 }
 
-function handleEditPost(postId: string) {
-  router.push(`/blog/edit/${postId}`)
-}
+function handleEditPost(postId: string) { router.push(`/blog/edit/${postId}`) }
 
 async function handleDeletePost(postId: string, title: string) {
-  if (!confirm(`确定要删除文章 "${title}" 吗？`)) return
-
-  try {
-    const { error } = await supabase.from('user_posts').delete().eq('id', postId)
-
-    if (error) throw error
-
-    // 从列表中移除
-    posts.value = posts.value.filter((p) => p.id !== postId)
-    stats.value.totalPosts--
-
-    alert('文章已删除')
-  } catch (err: any) {
-    console.error('删除文章失败:', err)
-    alert('删除失败: ' + err.message)
-  }
+  if (!confirm(`Delete post "${title}"?`)) return
+  const { error } = await supabase.from('user_posts').delete().eq('id', postId)
+  if (!error) { posts.value = posts.value.filter(p => p.id !== postId); stats.value.totalPosts-- }
+  else alert('Delete failed: ' + error.message)
 }
 
 async function handleDeleteComment(commentId: string) {
-  if (!confirm('确定要删除这条评论吗？')) return
-
-  try {
-    const { error } = await supabase.from('comments').delete().eq('id', commentId)
-
-    if (error) throw error
-
-    // 从列表中移除
-    comments.value = comments.value.filter((c) => c.id !== commentId)
-    stats.value.totalComments--
-
-    alert('评论已删除')
-  } catch (err: any) {
-    console.error('删除评论失败:', err)
-    alert('删除失败: ' + err.message)
-  }
+  if (!confirm('Delete this comment?')) return
+  const { error } = await supabase.from('comments').delete().eq('id', commentId)
+  if (!error) { comments.value = comments.value.filter(c => c.id !== commentId); stats.value.totalComments-- }
+  else alert('Delete failed: ' + error.message)
 }
 
-// 工具函数
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('zh-CN')
-}
-
+function formatDate(dateString: string) { return new Date(dateString).toLocaleDateString('zh-CN') }
 function truncateText(text: string, maxLength: number) {
   if (!text) return ''
   return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
@@ -683,258 +372,61 @@ function truncateText(text: string, maxLength: number) {
 </script>
 
 <style scoped>
-.admin-page {
-  min-height: calc(100vh - 200px);
-  padding: 3rem 0;
-}
-
-.admin-header {
-  display: flex;
-  justify-content: space-between;
+.tab-btn-term {
+  display: inline-flex;
   align-items: center;
-  margin-bottom: 2rem;
-}
-
-.admin-header h1 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.access-denied {
-  text-align: center;
-  padding: 4rem 0;
-}
-
-.access-denied i {
-  font-size: 4rem;
-  color: #ff4757;
-  margin-bottom: 1rem;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.stat-card i {
-  font-size: 2.5rem;
-  color: var(--color-primary);
-}
-
-.stat-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.admin-tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.tab-btn {
-  padding: 0.75rem 1.5rem;
+  gap: 6px;
+  padding: 10px 20px;
   background: none;
   border: none;
-  color: var(--color-text-secondary);
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  color: var(--color-text-dim);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
   cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
+  transition: all 0.25s var(--ease-out-expo);
+}
+.tab-btn-term:hover { color: var(--color-white); }
+.tab-btn-term.active {
+  color: var(--color-white);
+  border-bottom-color: var(--color-white);
 }
 
-.tab-btn:hover {
+.term-search {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
   color: var(--color-text);
-}
-
-.tab-btn.active {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
-}
-
-.tab-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.tab-header h2 {
-  margin: 0;
-  color: var(--color-text);
-}
-
-.filter-group {
-  display: flex;
-  gap: 1rem;
-}
-
-.search-input,
-.filter-select {
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: var(--color-text);
-  font-size: 0.9rem;
-}
-
-.search-input {
-  min-width: 250px;
-}
-
-.search-input:focus,
-.filter-select:focus {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  width: 180px;
   outline: none;
-  border-color: var(--color-primary);
 }
+.term-search:focus { border-color: rgba(255,255,255,0.2); }
+.term-search::placeholder { color: var(--color-text-faint); }
 
-.loading {
-  text-align: center;
-  padding: 3rem 0;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(0, 255, 65, 0.2);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 1rem;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.data-table {
-  background: var(--color-bg-card);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-table {
+.term-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: var(--font-size-xs);
 }
-
-thead {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-th {
-  padding: 1rem;
+.term-table th {
   text-align: left;
-  color: var(--color-text-secondary);
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-transform: uppercase;
+  padding: 12px 16px;
+  color: var(--color-text-dim);
+  font-weight: 400;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255,255,255,0.02);
 }
-
-td {
-  padding: 1rem;
+.term-table td {
+  padding: 10px 16px;
   color: var(--color-text);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--color-border);
 }
+.term-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+.term-table tbody tr:last-child td { border-bottom: none; }
 
-.content-cell {
-  max-width: 300px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.status-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-.status-badge.published {
-  background: rgba(46, 213, 115, 0.1);
-  color: #2ed573;
-}
-
-.status-badge.draft {
-  background: rgba(255, 165, 0, 0.1);
-  color: #ffa500;
-}
-
-.status-badge.banned {
-  background: rgba(255, 71, 87, 0.1);
-  color: #ff4757;
-  font-size: 0.75rem;
-  padding: 0.2rem 0.5rem;
-}
-
-.btn-action {
-  padding: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: 0.5rem;
-}
-
-.btn-view {
-  color: var(--color-brand);
-}
-
-.btn-edit {
-  color: #ffa500;
-}
-
-.btn-ban {
-  color: #ff9500;
-}
-
-.btn-unban {
-  color: #2ed573;
-}
-
-.btn-delete {
-  color: #ff4757;
-}
-
-.btn-action:hover {
-  transform: scale(1.2);
-}
-
-@media (max-width: 768px) {
-  .tab-header {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
-  }
-
-  .filter-group {
-    flex-direction: column;
-  }
-
-  .search-input {
-    min-width: auto;
-  }
-
-  table {
-    font-size: 0.85rem;
-  }
-
-  th,
-  td {
-    padding: 0.75rem 0.5rem;
-  }
-}
+select.term-search option { background: #000; color: var(--color-text); }
 </style>

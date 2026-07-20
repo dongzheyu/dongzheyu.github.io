@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --bun vite",
-    "prebuild": "bun scripts/clean-public.js",
+    "prebuild": "bun -e \"import fs from 'fs'; import path from 'path'; const d = path.join(import.meta.dirname, 'public', 'snishaper', 'build', 'node_modules'); if (fs.existsSync(d)) fs.rmSync(d, {recursive:true,force:true})\"",
     "build": "bun run generate-rss && bun run --bun vite build && bun run deploy",
     "deploy": "bun scripts/deploy.js && bun -e \"import fs from 'fs'; fs.copyFileSync('dist/index.html', 'dist/404.html')\"",
     "preview": "bun run --bun vite preview",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.91",
     "@iconify/vue": "^4.3.0",
     "@supabase/supabase-js": "^2.105.1",
     "bootstrap": "^5.3.8",

@@ -212,7 +212,7 @@ const tests = ref([
   font-size: 0.7rem;
   padding: 1px 6px;
   background: rgba(255,255,255,0.06);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   margin-left: 2px;
 }
 
