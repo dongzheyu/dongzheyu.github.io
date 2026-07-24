@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --bun vite",
-    "prebuild": "bun -e \"import fs from 'fs'; import path from 'path'; const d = path.join(import.meta.dirname, 'public', 'snishaper', 'build', 'node_modules'); if (fs.existsSync(d)) fs.rmSync(d, {recursive:true,force:true})\"",
+    "prebuild": "",
     "build": "bun run generate-rss && bun run --bun vite build && bun run deploy",
     "deploy": "bun scripts/deploy.js && bun -e \"import fs from 'fs'; fs.copyFileSync('dist/index.html', 'dist/404.html')\"",
     "preview": "bun run --bun vite preview",

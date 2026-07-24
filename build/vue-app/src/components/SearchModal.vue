@@ -135,7 +135,7 @@ const staticData = [
     category: '编程教程',
     icon: 'mdi:shield-check',
     color: '#00ADD8',
-    path: '/snishaper/index.html',
+    path: '/snishaper',
     content: '',
   },
   {

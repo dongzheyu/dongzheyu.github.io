@@ -22,8 +22,8 @@ const projects = [
     title: 'SniShaper',
     description: '基于 Go + Wails v3 的智能网络代理工具，集成 ECH 注入、TLS-RF 分片、QUIC 重建连接',
     category: '网络',
-    link: '/snishaper/index.html',
-    external: true,
+    link: '/snishaper',
+    external: false,
   },
   {
     id: 2,

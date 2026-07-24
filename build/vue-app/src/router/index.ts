@@ -51,6 +51,11 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
+      path: '/snishaper',
+      name: 'snishaper',
+      component: () => import('../views/SniShaperView.vue'),
+    },
+    {
       path: '/tests',
       name: 'tests',
       component: () => import('../views/TestsView.vue'),
