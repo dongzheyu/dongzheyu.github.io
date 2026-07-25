@@ -1,26 +1,51 @@
-
-name: Supabase Keep Alive
+name: Supabase Keep Alive (Multi-instance)
 
 on:
   schedule:
-    - cron: '30 23 * * *'  # 每天 UTC 23:30 (北京时间次日 07:30)
+    - cron: '30 23 * * *'   # 每天 UTC 23:30（北京时间次日 07:30）
   workflow_dispatch:        # 允许手动触发
 
 jobs:
-  ping:
+  ping-all:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase
+      - name: Ping all Supabase instances
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_URLS: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEYS: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          curl -I \
-            "${SUPABASE_URL}/rest/v1/" \
-            -H "apikey: ${SUPABASE_ANON_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
-            --fail \
-            --output /dev/null \
-            --write-out "HTTP Status: %{http_code}\n"
-          
-          echo "✅ Supabase keep-alive successful"
+          # 将多行内容读入数组（忽略空行）
+          mapfile -t urls < <(echo "$SUPABASE_URLS" | grep -v '^$')
+          mapfile -t keys < <(echo "$SUPABASE_KEYS" | grep -v '^$')
+
+          # 检查数量是否匹配
+          if [ ${#urls[@]} -ne ${#keys[@]} ]; then
+            echo "❌ Error: Number of URLs (${#urls[@]}) does not match number of keys (${#keys[@]})"
+            exit 1
+          fi
+
+          # 循环每个实例
+          for i in "${!urls[@]}"; do
+            url="${urls[$i]}"
+            key="${keys[$i]}"
+            echo "🔹 Pinging instance $((i+1)): ${url}"
+            
+            # 执行 curl（使用 --fail 使非 2xx 响应导致脚本失败）
+            curl -I \
+              "${url}/rest/v1/" \
+              -H "apikey: ${key}" \
+              -H "Authorization: Bearer ${key}" \
+              --fail \
+              --output /dev/null \
+              --write-out "   HTTP Status: %{http_code}\n"
+            
+            if [ $? -eq 0 ]; then
+              echo "   ✅ Instance $((i+1)) keep-alive successful"
+            else
+              echo "   ❌ Instance $((i+1)) failed"
+              exit 1   # 遇到失败立即退出，也可以改为继续但最后统一判断
+            fi
+            echo ""
+          done
+
+          echo "✅ All Supabase instances pinged successfully"
