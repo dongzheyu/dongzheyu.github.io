@@ -39,68 +39,7 @@ jobs:
             key="${keys[$i]}"
             
             echo "🔹 Instance $((i+1))"
-            echo "   URL length: ${#url}"
-            echo "   Key length: ${#key}"
-            
-            prefix="sb_publishable_"
-            if [[ "$key" == "$prefix"* ]]; then
-              echo "   Key preview: ${key:${#prefix}:5}..."
-            else
-              echo "   Key preview: ${key:0:8}..."
-            fi
-            
-            curl -I \
-              "${url}/rest/v1/" \
-              -H "Authorization: Bearer ${key}" \
-              --fail \
-              --connect-timeout 10 \
-              --retry 2 \
-              --output /dev/null \
-              --write-out "   HTTP Status: %{http_code}\n"
-            
-            if [ $? -eq 0 ]; then
-              echo "   ✅ Success"name: Supabase Keep Alive
-
-on:
-  schedule:
-    - cron: '30 23 * * *'
-  workflow_dispatch:
-
-jobs:
-  ping:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Ping all instances
-        env:
-          SUPABASE_URLS: ${{ secrets.SUPABASE_URLS }}
-          SUPABASE_KEYS: ${{ secrets.SUPABASE_KEYS }}
-        run: |
-          mapfile -t raw_urls < <(echo "$SUPABASE_URLS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
-          mapfile -t raw_keys < <(echo "$SUPABASE_KEYS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
-          
-          urls=()
-          for u in "${raw_urls[@]}"; do
-            u_clean=$(echo "$u" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-            urls+=("$u_clean")
-          done
-          
-          keys=()
-          for k in "${raw_keys[@]}"; do
-            k_clean=$(echo "$k" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-            keys+=("$k_clean")
-          done
-          
-          if [ ${#urls[@]} -ne ${#keys[@]} ]; then
-            echo "❌ Count mismatch: URLs ${#urls[@]} vs Keys ${#keys[@]}"
-            exit 1
-          fi
-          
-          for i in "${!urls[@]}"; do
-            url="${urls[$i]}"
-            key="${keys[$i]}"
-            
-            echo "🔹 Instance $((i+1))"
-            echo "   URL length: ${#url}"
+            echo "   URL: ${url}"
             echo "   Key length: ${#key}"
             
             prefix="sb_publishable_"
@@ -121,14 +60,6 @@ jobs:
             
             if [ $? -eq 0 ]; then
               echo "   ✅ Success"
-            else
-              echo "   ❌ Failed"
-              exit 1
-            fi
-            echo ""
-          done
-          
-          echo "✅ All done"
             else
               echo "   ❌ Failed"
               exit 1
