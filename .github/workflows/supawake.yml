@@ -2,8 +2,8 @@ name: Supabase Keep Alive (Multi-instance)
 
 on:
   schedule:
-    - cron: '30 23 * * *'
-  workflow_dispatch:
+    - cron: '30 23 * * *'   # 每天 UTC 23:30（北京时间次日 07:30）
+  workflow_dispatch:        # 允许手动触发
 
 jobs:
   ping-all:
@@ -11,14 +11,14 @@ jobs:
     steps:
       - name: Ping all Supabase instances
         env:
-          SUPABASE_URLS: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEYS: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_URLS: ${{ secrets.SUPABASE_URLS }}
+          SUPABASE_KEYS: ${{ secrets.SUPABASE_KEYS }}   # 这里存放 publishable keys
         run: |
-          # 使用 IFS= 保留空行，用 readarray 逐行读取，同时用 tr 删除 \r
-          IFS=$'\n' readarray -t raw_urls < <(echo "$SUPABASE_URLS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
-          IFS=$'\n' readarray -t raw_keys < <(echo "$SUPABASE_KEYS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
+          # 清理输入：去除 \r 和空行，并去除首尾空格
+          mapfile -t raw_urls < <(echo "$SUPABASE_URLS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
+          mapfile -t raw_keys < <(echo "$SUPABASE_KEYS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
 
-          # 去除每行首尾空格（sed 处理）
+          # 二次 trim
           urls=()
           for u in "${raw_urls[@]}"; do
             u_clean=$(echo "$u" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
@@ -31,23 +31,21 @@ jobs:
             keys+=("$k_clean")
           done
 
-          # 检查数量匹配
+          # 检查数量是否一致
           if [ ${#urls[@]} -ne ${#keys[@]} ]; then
-            echo "❌ Error: URLs count (${#urls[@]}) != Keys count (${#keys[@]})"
+            echo "❌ Error: URLs count (${#urls[@]}) does not match Keys count (${#keys[@]})"
             exit 1
           fi
 
-          # 循环处理每个实例
+          # 循环调用
           for i in "${!urls[@]}"; do
             url="${urls[$i]}"
             key="${keys[$i]}"
             echo "🔹 Pinging instance $((i+1)): ${url}"
+            # 仅显示 key 的前 8 位用于核对（安全）
+            echo "   Key preview: ${key:0:8}..."
 
-            # 脱敏打印 Key 的前8位，方便核对
-            key_preview="${key:0:8}..."
-            echo "   Key preview: ${key_preview}"
-
-            # 执行 curl，如果失败会非0退出
+            # 发送 HEAD 请求（--fail 使非 2xx 状态码导致脚本失败）
             curl -I \
               "${url}/rest/v1/" \
               -H "apikey: ${key}" \
