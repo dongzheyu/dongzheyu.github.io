@@ -185,7 +185,7 @@ onUnmounted(() => {
           </p>
           <div class="flex gap-12 flex-wrap">
             <button class="btn-geek" @click="toggleModal">
-              <Icon icon="mdi:download" width="16" /> 立即下载
+              <Icon icon="mdi:download" width="16" /> <立即下载></立即下载>
             </button>
             <button class="btn-geek" @click="scrollTo('tech')">
               <Icon icon="mdi:chip" width="16" /> 了解技术原理
@@ -275,7 +275,7 @@ onUnmounted(() => {
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
           <Icon icon="mdi:swap-horizontal-circle" width="20" style="color:var(--color-white);" />
           <span style="font-weight:500;">迁移模式</span>
-          <span class="text-dim" style="font-size:var(--font-size-xs);">多种技术组合使用，最大化封锁环境下的可用性。</span>
+          <span class="text-dim" style="font-size:var(--font-size-xs);">利用TLS 1.2的会话恢复，最大化封锁环境下的可用性。</span>
         </div>
       </div>
     </section>
