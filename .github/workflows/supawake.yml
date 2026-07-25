@@ -1,68 +1,139 @@
-name: Supabase Keep Alive (Multi-instance)
+name: Supabase Keep Alive
 
 on:
   schedule:
-    - cron: '30 23 * * *'   # 每天 UTC 23:30（北京时间次日 07:30）
-  workflow_dispatch:        # 允许手动触发
+    - cron: '30 23 * * *'
+  workflow_dispatch:
 
 jobs:
-  ping-all:
+  ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping all Supabase instances
+      - name: Ping all instances
         env:
           SUPABASE_URLS: ${{ secrets.SUPABASE_URLS }}
-          SUPABASE_KEYS: ${{ secrets.SUPABASE_KEYS }}   # 这里存放 publishable keys
+          SUPABASE_KEYS: ${{ secrets.SUPABASE_KEYS }}
         run: |
-          # 清理输入：去除 \r 和空行，并去除首尾空格
           mapfile -t raw_urls < <(echo "$SUPABASE_URLS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
           mapfile -t raw_keys < <(echo "$SUPABASE_KEYS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
-
-          # 二次 trim
+          
           urls=()
           for u in "${raw_urls[@]}"; do
             u_clean=$(echo "$u" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
             urls+=("$u_clean")
           done
-
+          
           keys=()
           for k in "${raw_keys[@]}"; do
             k_clean=$(echo "$k" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
             keys+=("$k_clean")
           done
-
-          # 检查数量是否一致
+          
           if [ ${#urls[@]} -ne ${#keys[@]} ]; then
-            echo "❌ Error: URLs count (${#urls[@]}) does not match Keys count (${#keys[@]})"
+            echo "❌ Count mismatch: URLs ${#urls[@]} vs Keys ${#keys[@]}"
             exit 1
           fi
-
-          # 循环调用
+          
           for i in "${!urls[@]}"; do
             url="${urls[$i]}"
             key="${keys[$i]}"
-            echo "🔹 Pinging instance $((i+1)): ${url}"
-            # 仅显示 key 的前 8 位用于核对（安全）
-            echo "   Key preview: ${key:0:8}..."
-
-            # 发送 HEAD 请求（--fail 使非 2xx 状态码导致脚本失败）
+            
+            echo "🔹 Instance $((i+1))"
+            echo "   URL length: ${#url}"
+            echo "   Key length: ${#key}"
+            
+            prefix="sb_publishable_"
+            if [[ "$key" == "$prefix"* ]]; then
+              echo "   Key preview: ${key:${#prefix}:5}..."
+            else
+              echo "   Key preview: ${key:0:8}..."
+            fi
+            
             curl -I \
               "${url}/rest/v1/" \
-              -H "apikey: ${key}" \
               -H "Authorization: Bearer ${key}" \
               --fail \
               --connect-timeout 10 \
               --retry 2 \
               --output /dev/null \
               --write-out "   HTTP Status: %{http_code}\n"
-
+            
             if [ $? -eq 0 ]; then
-              echo "   ✅ Instance $((i+1)) keep-alive successful"
+              echo "   ✅ Success"name: Supabase Keep Alive
+
+on:
+  schedule:
+    - cron: '30 23 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping all instances
+        env:
+          SUPABASE_URLS: ${{ secrets.SUPABASE_URLS }}
+          SUPABASE_KEYS: ${{ secrets.SUPABASE_KEYS }}
+        run: |
+          mapfile -t raw_urls < <(echo "$SUPABASE_URLS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
+          mapfile -t raw_keys < <(echo "$SUPABASE_KEYS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
+          
+          urls=()
+          for u in "${raw_urls[@]}"; do
+            u_clean=$(echo "$u" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+            urls+=("$u_clean")
+          done
+          
+          keys=()
+          for k in "${raw_keys[@]}"; do
+            k_clean=$(echo "$k" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+            keys+=("$k_clean")
+          done
+          
+          if [ ${#urls[@]} -ne ${#keys[@]} ]; then
+            echo "❌ Count mismatch: URLs ${#urls[@]} vs Keys ${#keys[@]}"
+            exit 1
+          fi
+          
+          for i in "${!urls[@]}"; do
+            url="${urls[$i]}"
+            key="${keys[$i]}"
+            
+            echo "🔹 Instance $((i+1))"
+            echo "   URL length: ${#url}"
+            echo "   Key length: ${#key}"
+            
+            prefix="sb_publishable_"
+            if [[ "$key" == "$prefix"* ]]; then
+              echo "   Key preview: ${key:${#prefix}:5}..."
             else
-              echo "   ❌ Instance $((i+1)) failed"
+              echo "   Key preview: ${key:0:8}..."
+            fi
+            
+            curl -I \
+              "${url}/rest/v1/" \
+              -H "Authorization: Bearer ${key}" \
+              --fail \
+              --connect-timeout 10 \
+              --retry 2 \
+              --output /dev/null \
+              --write-out "   HTTP Status: %{http_code}\n"
+            
+            if [ $? -eq 0 ]; then
+              echo "   ✅ Success"
+            else
+              echo "   ❌ Failed"
               exit 1
             fi
             echo ""
           done
-
-          echo "✅ All Supabase instances pinged successfully"
+          
+          echo "✅ All done"
+            else
+              echo "   ❌ Failed"
+              exit 1
+            fi
+            echo ""
+          done
+          
+          echo "✅ All done"
