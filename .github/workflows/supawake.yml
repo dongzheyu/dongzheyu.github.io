@@ -1,70 +1,34 @@
-name: Supabase Keep Alive
+name: Supabase Keep Alive (Debug)
 
 on:
-  schedule:
-    - cron: '30 23 * * *'
   workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping all instances
+      - name: Debug single instance
         env:
-          SUPABASE_URLS: ${{ secrets.SUPABASE_URLS }}
-          SUPABASE_KEYS: ${{ secrets.SUPABASE_KEYS }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URLS }}   # 仅取第一行
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEYS }}   # 仅取第一行
         run: |
-          mapfile -t raw_urls < <(echo "$SUPABASE_URLS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
-          mapfile -t raw_keys < <(echo "$SUPABASE_KEYS" | tr -d '\r' | sed '/^[[:space:]]*$/d')
+          # 提取第一行
+          url=$(echo "$SUPABASE_URL" | head -n1 | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+          key=$(echo "$SUPABASE_KEY" | head -n1 | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
           
-          urls=()
-          for u in "${raw_urls[@]}"; do
-            u_clean=$(echo "$u" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-            urls+=("$u_clean")
-          done
+          echo "🔹 Testing URL: $url"
+          echo "🔑 Key: $key"
           
-          keys=()
-          for k in "${raw_keys[@]}"; do
-            k_clean=$(echo "$k" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-            keys+=("$k_clean")
-          done
+          # 完整 curl 输出（含 -v）
+          curl -v -X GET \
+            "${url}/rest/v1/" \
+            -H "Authorization: Bearer ${key}" \
+            -H "apikey: ${key}" \
+            --connect-timeout 10 \
+            --retry 0
           
-          if [ ${#urls[@]} -ne ${#keys[@]} ]; then
-            echo "❌ Count mismatch: URLs ${#urls[@]} vs Keys ${#keys[@]}"
+          # 如果失败，打印状态码
+          if [ $? -ne 0 ]; then
+            echo "❌ Curl failed, check above output"
             exit 1
           fi
-          
-          for i in "${!urls[@]}"; do
-            url="${urls[$i]}"
-            key="${keys[$i]}"
-            
-            echo "🔹 Instance $((i+1))"
-            echo "   URL: ${url}"
-            echo "   Key length: ${#key}"
-            
-            prefix="sb_publishable_"
-            if [[ "$key" == "$prefix"* ]]; then
-              echo "   Key preview: ${key:${#prefix}:5}..."
-            else
-              echo "   Key preview: ${key:0:8}..."
-            fi
-            
-            curl -I \
-              "${url}/rest/v1/" \
-              -H "Authorization: Bearer ${key}" \
-              --fail \
-              --connect-timeout 10 \
-              --retry 2 \
-              --output /dev/null \
-              --write-out "   HTTP Status: %{http_code}\n"
-            
-            if [ $? -eq 0 ]; then
-              echo "   ✅ Success"
-            else
-              echo "   ❌ Failed"
-              exit 1
-            fi
-            echo ""
-          done
-          
-          echo "✅ All done"
