@@ -20,7 +20,10 @@ jobs:
           for i in "${!urls[@]}"; do
             url="${urls[$i]}"; key="${keys[$i]}"
             echo "🔹 Instance $((i+1))"
-            echo "   Key prefix: ${key:0:10}..."   # 仅显示前 10 字符
+            echo "   Key length: ${#key}"
+            echo "   Key prefix: ${key:0:10}..."
+            # 可选：打印密钥末尾几个字符，帮助确认是否完整
+            echo "   Key suffix: ...${key: -6}"
             curl -I "${url}/rest/v1/" -H "Authorization: Bearer ${key}" --fail --connect-timeout 10 --retry 2 --output /dev/null --write-out "HTTP %{http_code}\n" || { echo "❌ Failed"; exit 1; }
           done
           echo "✅ All done"
